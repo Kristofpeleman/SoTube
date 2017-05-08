@@ -12,9 +12,11 @@
 		2F91E93D1EC0571E004A2E99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E93B1EC0571E004A2E99 /* Main.storyboard */; };
 		2F91E93F1EC0571E004A2E99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E93E1EC0571E004A2E99 /* Assets.xcassets */; };
 		2F91E9421EC0571E004A2E99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E9401EC0571E004A2E99 /* LaunchScreen.storyboard */; };
+		599072BA7E0EBDDF41ABDD93 /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0ABDEAD415BACF5138757979 /* Pods-SoTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.debug.xcconfig"; sourceTree = "<group>"; };
 		2F91E9341EC0571E004A2E99 /* SoTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F91E9371EC0571E004A2E99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F91E9391EC0571E004A2E99 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -22,6 +24,8 @@
 		2F91E93E1EC0571E004A2E99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F91E9411EC0571E004A2E99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F91E9431EC0571E004A2E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		FF68D940F44C872C8192EC57 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -29,6 +33,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				599072BA7E0EBDDF41ABDD93 /* Pods_SoTube.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -40,6 +45,8 @@
 			children = (
 				2F91E9361EC0571E004A2E99 /* SoTube */,
 				2F91E9351EC0571E004A2E99 /* Products */,
+				D0085C98079E9C614477BDD1 /* Pods */,
+				9429930D4C6551792C405DE9 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -64,6 +71,23 @@
 			path = SoTube;
 			sourceTree = "<group>";
 		};
+		9429930D4C6551792C405DE9 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		D0085C98079E9C614477BDD1 /* Pods */ = {
+			isa = PBXGroup;
+			children = (
+				0ABDEAD415BACF5138757979 /* Pods-SoTube.debug.xcconfig */,
+				FF68D940F44C872C8192EC57 /* Pods-SoTube.release.xcconfig */,
+			);
+			name = Pods;
+			sourceTree = "<group>";
+		};
 /* End PBXGroup section */
 
 /* Begin PBXNativeTarget section */
@@ -71,9 +95,12 @@
 			isa = PBXNativeTarget;
 			buildConfigurationList = 2F91E9461EC0571E004A2E99 /* Build configuration list for PBXNativeTarget "SoTube" */;
 			buildPhases = (
+				E1CF0B2080ECD534B1A72ADF /* [CP] Check Pods Manifest.lock */,
 				2F91E9301EC0571D004A2E99 /* Sources */,
 				2F91E9311EC0571D004A2E99 /* Frameworks */,
 				2F91E9321EC0571D004A2E99 /* Resources */,
+				B199DF7CFDDC53C8786E3DCD /* [CP] Embed Pods Frameworks */,
+				80DDD027357AAB0DF80E45AB /* [CP] Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -130,6 +157,54 @@
 			runOnlyForDeploymentPostprocessing = 0;
 		};
 /* End PBXResourcesBuildPhase section */
+
+/* Begin PBXShellScriptBuildPhase section */
+		80DDD027357AAB0DF80E45AB /* [CP] Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoTube/Pods-SoTube-resources.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		B199DF7CFDDC53C8786E3DCD /* [CP] Embed Pods Frameworks */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Embed Pods Frameworks";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Target Support Files/Pods-SoTube/Pods-SoTube-frameworks.sh\"\n";
+			showEnvVarsInLog = 0;
+		};
+		E1CF0B2080ECD534B1A72ADF /* [CP] Check Pods Manifest.lock */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "[CP] Check Pods Manifest.lock";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "diff \"${PODS_PODFILE_DIR_PATH}/Podfile.lock\" \"${PODS_ROOT}/Manifest.lock\" > /dev/null\nif [ $? != 0 ] ; then\n    # print error to STDERR\n    echo \"error: The sandbox is not in sync with the Podfile.lock. Run 'pod install' or update your CocoaPods installation.\" >&2\n    exit 1\nfi\n";
+			showEnvVarsInLog = 0;
+		};
+/* End PBXShellScriptBuildPhase section */
 
 /* Begin PBXSourcesBuildPhase section */
 		2F91E9301EC0571D004A2E99 /* Sources */ = {
@@ -256,6 +331,7 @@
 		};
 		2F91E9471EC0571E004A2E99 /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = 0ABDEAD415BACF5138757979 /* Pods-SoTube.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SoTube/Info.plist;
@@ -268,6 +344,7 @@
 		};
 		2F91E9481EC0571E004A2E99 /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = FF68D940F44C872C8192EC57 /* Pods-SoTube.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				INFOPLIST_FILE = SoTube/Info.plist;
