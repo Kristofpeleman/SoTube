@@ -16,6 +16,7 @@ class ViewController: UIViewController {
         print("Hallo")
         print("This is Fatma calling!")
         print("FireBase connected")
+        print("moet van Kristof")
     }
 
     override func didReceiveMemoryWarning() {
