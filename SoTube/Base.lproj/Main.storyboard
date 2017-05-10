@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5cm-du-jW8">
-                                <rect key="frame" x="16" y="109" width="288" height="400"/>
+                                <rect key="frame" x="16" y="139" width="288" height="370"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fN2-l4-Q9r">
@@ -80,7 +80,11 @@
                                 <items>
                                     <navigationItem id="fBQ-je-4H0">
                                         <barButtonItem key="leftBarButtonItem" title="Genres" id="59z-5K-80b"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="lw8-bn-E9Q"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Log in" id="lw8-bn-E9Q">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="Xlf-MO-3sR"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -88,18 +92,35 @@
                                 <rect key="frame" x="0.0" y="55" width="320" height="44"/>
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tG-DK-Rpe">
+                                <rect key="frame" x="79" y="99" width="80" height="35"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="8tG-DK-Rpe" secondAttribute="height" multiplier="2.3:1" id="yub-LT-gSq"/>
+                                </constraints>
+                            </pickerView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMR-6X-fhy">
+                                <rect key="frame" x="16" y="109" width="58" height="18"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="id9-Xv-COs" firstAttribute="top" secondItem="pj7-ZH-o6R" secondAttribute="top" id="0EW-vB-GUW"/>
                             <constraint firstAttribute="trailing" secondItem="id9-Xv-COs" secondAttribute="trailing" id="0RR-Nb-w3R"/>
                             <constraint firstItem="D3Z-jY-RCg" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leading" id="3uh-U2-TOn"/>
+                            <constraint firstItem="8tG-DK-Rpe" firstAttribute="leading" secondItem="lMR-6X-fhy" secondAttribute="trailing" constant="5" id="7SJ-s0-eVc"/>
+                            <constraint firstItem="lMR-6X-fhy" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leadingMargin" id="9vB-L5-cFF"/>
+                            <constraint firstItem="8tG-DK-Rpe" firstAttribute="width" secondItem="pj7-ZH-o6R" secondAttribute="width" multiplier="1:4" id="IhZ-04-7Rp"/>
+                            <constraint firstItem="lMR-6X-fhy" firstAttribute="top" secondItem="D3Z-jY-RCg" secondAttribute="bottom" constant="10" id="Oc6-uY-Eci"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5cm-du-jW8" secondAttribute="trailing" id="QoO-uy-Tsy"/>
                             <constraint firstItem="id9-Xv-COs" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leading" id="ViJ-vK-mh4"/>
                             <constraint firstAttribute="trailing" secondItem="D3Z-jY-RCg" secondAttribute="trailing" id="aeX-yB-Ik4"/>
-                            <constraint firstItem="5cm-du-jW8" firstAttribute="top" secondItem="D3Z-jY-RCg" secondAttribute="bottom" constant="10" id="aee-P1-1Sw"/>
                             <constraint firstItem="5cm-du-jW8" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leadingMargin" id="cpL-4V-W7k"/>
                             <constraint firstItem="D3Z-jY-RCg" firstAttribute="top" secondItem="id9-Xv-COs" secondAttribute="bottom" id="dSk-dI-SWV"/>
+                            <constraint firstItem="5cm-du-jW8" firstAttribute="top" secondItem="8tG-DK-Rpe" secondAttribute="bottom" constant="5" id="jhT-wm-iKy"/>
+                            <constraint firstItem="8tG-DK-Rpe" firstAttribute="top" secondItem="D3Z-jY-RCg" secondAttribute="bottom" id="nPK-Su-J8a"/>
                             <constraint firstItem="TY1-4m-eLT" firstAttribute="top" secondItem="5cm-du-jW8" secondAttribute="bottom" constant="10" id="ykj-oN-JwI"/>
                         </constraints>
                     </view>
@@ -107,7 +128,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOX-Lj-dF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1230" y="-1604.5774647887324"/>
+            <point key="canvasLocation" x="-1230" y="-1068"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1Tx-r3-G53">
@@ -124,12 +145,11 @@
                         <segue destination="3H4-op-HcZ" kind="relationship" relationship="viewControllers" id="S8r-90-cXM"/>
                         <segue destination="3sM-JY-iPi" kind="relationship" relationship="viewControllers" id="O8u-ak-YOK"/>
                         <segue destination="wbl-Tl-2rj" kind="relationship" relationship="viewControllers" id="c01-k0-WP0"/>
-                        <segue destination="BYZ-38-t0r" kind="relationship" relationship="viewControllers" id="hcr-Jd-L74"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AE6-dg-T9q" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-3542" y="348"/>
+            <point key="canvasLocation" x="-3542" y="1824"/>
         </scene>
         <!--MySongs-->
         <scene sceneID="HLg-jS-l3b">
@@ -199,7 +219,11 @@
                                 <items>
                                     <navigationItem id="7hw-bG-RjH">
                                         <barButtonItem key="leftBarButtonItem" title="Genres" id="cFG-rw-yte"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="2BL-xo-b3a"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Log in" id="2BL-xo-b3a">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="DJc-7M-zPS"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -226,7 +250,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P17-DX-9cc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1230" y="-954"/>
+            <point key="canvasLocation" x="-1230" y="-386"/>
         </scene>
         <!--Filtered-->
         <scene sceneID="bMi-DE-iLM">
@@ -296,7 +320,11 @@
                                 <items>
                                     <navigationItem id="sGd-30-N1O">
                                         <barButtonItem key="leftBarButtonItem" title="Genres" id="ofq-eM-y3V"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="R9s-c9-SHI"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Log in" id="R9s-c9-SHI">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="AXG-LY-ZYN"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -323,7 +351,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GG6-Qf-CxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1230" y="-306"/>
+            <point key="canvasLocation" x="-1230" y="348"/>
         </scene>
         <!--Favorite-->
         <scene sceneID="Tix-ZK-GVS">
@@ -393,7 +421,11 @@
                                 <items>
                                     <navigationItem id="efY-ry-8QE">
                                         <barButtonItem key="leftBarButtonItem" title="Genres" id="J3q-kH-lnR"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="r1Z-SV-ysc"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Log in" id="r1Z-SV-ysc">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" id="Yyy-cB-Q5z"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -420,7 +452,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eaz-Ou-tn9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1230" y="348"/>
+            <point key="canvasLocation" x="-1230" y="1090"/>
         </scene>
         <!--Login-->
         <scene sceneID="tne-QT-ifu">
@@ -445,7 +477,7 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
-                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Username or Email-address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Byb-c7-85f">
+                            <textField opaque="NO" clipsSubviews="YES" contentMode="scaleToFill" contentHorizontalAlignment="left" contentVerticalAlignment="center" borderStyle="roundedRect" placeholder="Email-address" textAlignment="natural" minimumFontSize="17" translatesAutoresizingMaskIntoConstraints="NO" id="Byb-c7-85f">
                                 <rect key="frame" x="16" y="331" width="288" height="30"/>
                                 <color key="textColor" red="0.4148284313725491" green="0.4148284313725491" blue="0.4148284313725491" alpha="1" colorSpace="calibratedRGB"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="15"/>
@@ -461,13 +493,16 @@
                                 <rect key="frame" x="16" y="407" width="288" height="29.5"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Log In"/>
+                                <connections>
+                                    <action selector="login:" destination="BYZ-38-t0r" eventType="touchUpInside" id="N2Z-af-kH3"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="ogR-oJ-2Xa">
                                 <rect key="frame" x="16" y="439.5" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Sign up"/>
                                 <connections>
-                                    <segue destination="2aH-Ph-16Z" kind="show" identifier="createAccountSegue" id="bQZ-MM-YGL"/>
+                                    <segue destination="2aH-Ph-16Z" kind="presentation" identifier="createAccountSegue" id="bQZ-MM-YGL"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="2lB-BZ-szU">
@@ -475,7 +510,7 @@
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <state key="normal" title="Forgot password?"/>
                                 <connections>
-                                    <segue destination="ZLX-mZ-xRe" kind="show" identifier="resetPasswordSegue" id="WeJ-dg-q4P"/>
+                                    <segue destination="ZLX-mZ-xRe" kind="presentation" identifier="resetPasswordSegue" id="WeJ-dg-q4P"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="qfa-HV-a6e">
@@ -516,10 +551,15 @@
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Item" id="ZAP-AM-5dA"/>
+                    <connections>
+                        <outlet property="emailAddressTextField" destination="Byb-c7-85f" id="gDo-Nq-0CM"/>
+                        <outlet property="loginImageView" destination="qfa-HV-a6e" id="64a-8D-UKf"/>
+                        <outlet property="passwordTextField" destination="gde-V5-aGC" id="N73-L9-Q4a"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="dkx-z0-nzr" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-2106" y="1746"/>
+            <point key="canvasLocation" x="1003" y="-1069"/>
         </scene>
         <!--Create Account View Controller-->
         <scene sceneID="bOI-lA-pTd">
@@ -555,6 +595,9 @@
                                 <rect key="frame" x="16" y="481" width="288" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="20"/>
                                 <state key="normal" title="Sign up"/>
+                                <connections>
+                                    <action selector="createAccount:" destination="2aH-Ph-16Z" eventType="touchUpInside" id="5Ax-yi-JN1"/>
+                                </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="EWL-fS-26E">
                                 <rect key="frame" x="32" y="65" width="256" height="256"/>
@@ -569,7 +612,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Create account" id="eZE-Ds-R48">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ntI-Be-kWP"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="ntI-Be-kWP">
+                                            <connections>
+                                                <action selector="cancel:" destination="2aH-Ph-16Z" id="Coz-7d-Gmb"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -611,10 +658,17 @@
                             <constraint firstAttribute="trailing" secondItem="heR-DW-xuQ" secondAttribute="trailing" id="zuU-tg-eD7"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="createAccountImageView" destination="EWL-fS-26E" id="u4X-CS-1NQ"/>
+                        <outlet property="emailAddressTextField" destination="tKW-I5-y4p" id="fzg-js-HiS"/>
+                        <outlet property="passwordControlTextField" destination="4yz-Q1-imG" id="x08-6N-3A4"/>
+                        <outlet property="passwordTextField" destination="4j9-26-JrB" id="8fF-P0-V15"/>
+                        <outlet property="userNameTextField" destination="jgD-vz-7qN" id="j0d-on-cSk"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="o3o-9J-aVa" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-506" y="1745"/>
+            <point key="canvasLocation" x="2334" y="-1407"/>
         </scene>
         <!--Forgot Password View Controller-->
         <scene sceneID="YaA-ra-QBv">
@@ -679,7 +733,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="hWZ-dY-Mda" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-506" y="2534"/>
+            <point key="canvasLocation" x="2334" y="-754"/>
         </scene>
         <!--Wishlist-->
         <scene sceneID="aa8-XY-cpP">
@@ -749,7 +803,11 @@
                                 <items>
                                     <navigationItem id="oBh-Ew-EpM">
                                         <barButtonItem key="leftBarButtonItem" title="Genres" id="eeq-vX-QEY"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Item" id="isI-v4-E5s"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Log in" id="isI-v4-E5s">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="Def-eb-XHu"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -776,7 +834,10 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7D2-af-O0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1230" y="1141"/>
+            <point key="canvasLocation" x="-1230" y="1825"/>
         </scene>
     </scenes>
+    <inferredMetricsTieBreakers>
+        <segue reference="Def-eb-XHu"/>
+    </inferredMetricsTieBreakers>
 </document>
