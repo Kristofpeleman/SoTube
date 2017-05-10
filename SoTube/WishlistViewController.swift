@@ -13,16 +13,8 @@ class WishlistViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // get contents of MediaView.xib
-        let nibConcentents = Bundle.main.loadNibNamed("MediaView", owner: nil, options: nil)
-        // put nibContents into plainView as a MediaView (UIView)
-        let plainView = nibConcentents?.last as! MediaView
-        // the size and positioning of plainview has to be the same as self.view
-        plainView.frame = self.view.frame
-        // adding plainview to the visuals of self.view
-        self.view.addSubview(plainView)
+        self.navigationController?.isNavigationBarHidden = true
         
-        plainView.titelLabel.text = "Wishlist"
         
     }
 
