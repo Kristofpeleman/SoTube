@@ -20,6 +20,8 @@
 		2F91E93D1EC0571E004A2E99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E93B1EC0571E004A2E99 /* Main.storyboard */; };
 		2F91E93F1EC0571E004A2E99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E93E1EC0571E004A2E99 /* Assets.xcassets */; };
 		2F91E9421EC0571E004A2E99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E9401EC0571E004A2E99 /* LaunchScreen.storyboard */; };
+		2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */; };
+		2FE813BD1EC450FC00F418E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FE813BC1EC450FC00F418E7 /* GoogleService-Info.plist */; };
 		599072BA7E0EBDDF41ABDD93 /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */; };
 /* End PBXBuildFile section */
 
@@ -40,6 +42,8 @@
 		2F91E93E1EC0571E004A2E99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F91E9411EC0571E004A2E99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F91E9431EC0571E004A2E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
+		2FE813BC1EC450FC00F418E7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
 		FF68D940F44C872C8192EC57 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -64,6 +68,7 @@
 				2F2FD2901EC1E67500628995 /* FavoriteSongsViewController.swift */,
 				2F2FD2921EC1E68200628995 /* WishlistViewController.swift */,
 				2F2FD2941EC1E6A000628995 /* FilteredSongsViewController.swift */,
+				2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */,
 			);
 			name = SongsViewControllers;
 			sourceTree = "<group>";
@@ -107,6 +112,7 @@
 				2F91E93E1EC0571E004A2E99 /* Assets.xcassets */,
 				2F91E9401EC0571E004A2E99 /* LaunchScreen.storyboard */,
 				2F91E9431EC0571E004A2E99 /* Info.plist */,
+				2FE813BC1EC450FC00F418E7 /* GoogleService-Info.plist */,
 			);
 			path = SoTube;
 			sourceTree = "<group>";
@@ -191,6 +197,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				2F91E9421EC0571E004A2E99 /* LaunchScreen.storyboard in Resources */,
+				2FE813BD1EC450FC00F418E7 /* GoogleService-Info.plist in Resources */,
 				2F91E93F1EC0571E004A2E99 /* Assets.xcassets in Resources */,
 				2F91E93D1EC0571E004A2E99 /* Main.storyboard in Resources */,
 			);
@@ -254,6 +261,7 @@
 				2F2FD28B1EC1E0BD00628995 /* AllSongsViewController.swift in Sources */,
 				2F91E93A1EC0571E004A2E99 /* ViewController.swift in Sources */,
 				2F2FD2931EC1E68200628995 /* WishlistViewController.swift in Sources */,
+				2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */,
 				2F2FD2951EC1E6A000628995 /* FilteredSongsViewController.swift in Sources */,
 				2F49BF781EC32ECE0031F5E4 /* LogInViewController.swift in Sources */,
 				2F2FD2911EC1E67500628995 /* FavoriteSongsViewController.swift in Sources */,
@@ -385,7 +393,7 @@
 				INFOPLIST_FILE = SoTube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = be.vdab.SoTube;
+				PRODUCT_BUNDLE_IDENTIFIER = be.vdab.KriFaRo.SoTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
@@ -400,7 +408,7 @@
 				INFOPLIST_FILE = SoTube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
-				PRODUCT_BUNDLE_IDENTIFIER = be.vdab.SoTube;
+				PRODUCT_BUNDLE_IDENTIFIER = be.vdab.KriFaRo.SoTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;

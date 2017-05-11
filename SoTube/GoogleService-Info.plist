@@ -1,0 +1,40 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE plist PUBLIC "-//Apple//DTD PLIST 1.0//EN" "http://www.apple.com/DTDs/PropertyList-1.0.dtd">
+<plist version="1.0">
+<dict>
+	<key>AD_UNIT_ID_FOR_BANNER_TEST</key>
+	<string>ca-app-pub-3940256099942544/2934735716</string>
+	<key>AD_UNIT_ID_FOR_INTERSTITIAL_TEST</key>
+	<string>ca-app-pub-3940256099942544/4411468910</string>
+	<key>CLIENT_ID</key>
+	<string>1023510952823-02v24uv2kc28j78dr0odg39sskhi4l2m.apps.googleusercontent.com</string>
+	<key>REVERSED_CLIENT_ID</key>
+	<string>com.googleusercontent.apps.1023510952823-02v24uv2kc28j78dr0odg39sskhi4l2m</string>
+	<key>API_KEY</key>
+	<string>AIzaSyBlEf9KYbyiVM7vY5iQ58kfqnBvWJQDgRA</string>
+	<key>GCM_SENDER_ID</key>
+	<string>1023510952823</string>
+	<key>PLIST_VERSION</key>
+	<string>1</string>
+	<key>BUNDLE_ID</key>
+	<string>be.vdab.KriFaRo.SoTube</string>
+	<key>PROJECT_ID</key>
+	<string>sotube-28c03</string>
+	<key>STORAGE_BUCKET</key>
+	<string>sotube-28c03.appspot.com</string>
+	<key>IS_ADS_ENABLED</key>
+	<true/>
+	<key>IS_ANALYTICS_ENABLED</key>
+	<false/>
+	<key>IS_APPINVITE_ENABLED</key>
+	<false/>
+	<key>IS_GCM_ENABLED</key>
+	<true/>
+	<key>IS_SIGNIN_ENABLED</key>
+	<true/>
+	<key>GOOGLE_APP_ID</key>
+	<string>1:1023510952823:ios:2a3a3c0dbd3d6213</string>
+	<key>DATABASE_URL</key>
+	<string>https://sotube-28c03.firebaseio.com</string>
+</dict>
+</plist>

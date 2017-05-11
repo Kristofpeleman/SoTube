@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZM7-2z-NjU">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZM7-2z-NjU">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -28,7 +28,7 @@
                                 <rect key="frame" x="16" y="139" width="288" height="370"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
-                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fN2-l4-Q9r">
+                                    <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" id="fN2-l4-Q9r" customClass="SongTableViewCell" customModule="SoTube" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fN2-l4-Q9r" id="V7S-lR-i2x">
@@ -69,6 +69,11 @@
                                                 <constraint firstAttribute="trailingMargin" secondItem="DZj-8a-ZWa" secondAttribute="trailing" id="mxq-Ka-j0R"/>
                                             </constraints>
                                         </tableViewCellContentView>
+                                        <connections>
+                                            <outlet property="artistNameLabel" destination="xZ5-L8-lhK" id="B0b-HW-q5H"/>
+                                            <outlet property="costLabel" destination="DZj-8a-ZWa" id="W4T-93-aAs"/>
+                                            <outlet property="songTitleLabel" destination="WJq-kR-GEi" id="Eyx-Na-FYV"/>
+                                        </connections>
                                     </tableViewCell>
                                 </prototypes>
                             </tableView>
@@ -124,7 +129,7 @@
                             <constraint firstItem="TY1-4m-eLT" firstAttribute="top" secondItem="5cm-du-jW8" secondAttribute="bottom" constant="10" id="ykj-oN-JwI"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="wgn-mS-7Z6"/>
+                    <tabBarItem key="tabBarItem" title="All Songs" id="wgn-mS-7Z6"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOX-Lj-dF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -246,7 +251,7 @@
                             <constraint firstItem="HOf-fO-nEH" firstAttribute="leading" secondItem="Z8k-Kt-VWr" secondAttribute="leadingMargin" id="xgO-5x-Z5v"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="U7k-95-aK8"/>
+                    <tabBarItem key="tabBarItem" title="My Songs" id="U7k-95-aK8"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P17-DX-9cc" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -347,7 +352,7 @@
                             <constraint firstAttribute="trailing" secondItem="Vec-8L-Gbk" secondAttribute="trailing" id="w4l-Qw-fNi"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="eDg-mb-RSk"/>
+                    <tabBarItem key="tabBarItem" title="Filtered" id="eDg-mb-RSk"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="GG6-Qf-CxD" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -448,7 +453,7 @@
                             <constraint firstItem="QGx-6D-bzq" firstAttribute="leading" secondItem="lDU-uJ-hZb" secondAttribute="leadingMargin" id="yxV-SE-42l"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="rzs-mu-L2r"/>
+                    <tabBarItem key="tabBarItem" title="Favorites" id="rzs-mu-L2r"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eaz-Ou-tn9" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -834,7 +839,7 @@
                             <constraint firstItem="X2e-ct-uIF" firstAttribute="top" secondItem="xu0-Fb-g9Y" secondAttribute="bottom" id="uFk-OD-0f4"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Item" id="vs5-j2-JdJ"/>
+                    <tabBarItem key="tabBarItem" title="Wishlist" id="vs5-j2-JdJ"/>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7D2-af-O0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -842,6 +847,6 @@
         </scene>
     </scenes>
     <inferredMetricsTieBreakers>
-        <segue reference="DJc-7M-zPS"/>
+        <segue reference="Def-eb-XHu"/>
     </inferredMetricsTieBreakers>
 </document>
