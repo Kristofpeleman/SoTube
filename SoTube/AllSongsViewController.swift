@@ -7,10 +7,20 @@
 //
 
 import UIKit
+import AVFoundation
 
-class AllSongsViewController: UIViewController {
+class AllSongsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let feedURL = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY?"
+    
+    var songTitle: String?
+    var artistName: String?
+    var audioPlayer: AVAudioPlayer?
+    var url: URL?
+    
+    
+    
+    @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -38,6 +48,11 @@ class AllSongsViewController: UIViewController {
 //                print(allArtists.reduce("", {$0 + " " + $1}))
                 print(preview_url)
                 
+                self.songTitle = songName
+                self.artistName = allArtists[0]
+//                self.url = NSURL.fileURL(withPath: preview_url)
+                self.url = URL(string: preview_url)
+                
 //                self.titleLabel.text = title
 //                self.artistLabel.text = artist
 //                let _ = self.loadImage(from: URL(string: imagePathArray.lastObject! as! String)!)
@@ -53,6 +68,30 @@ class AllSongsViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    
+    // MARK: - TableView Datasource Methods
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return 1
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongTableViewCell
+        
+        cell.artistNameLabel.text = songTitle
+        cell.songTitleLabel.text = artistName
+        cell.costLabel.text = "2.0$"
+        
+        return cell
+    }
+    
+    
+    //MARK: - TableView Delegate Methods
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        playSound(withURL: self.url!)
+    }
+    
 
     /*
     // MARK: - Navigation
@@ -66,6 +105,16 @@ class AllSongsViewController: UIViewController {
     
     
     // MARK: - Homemade Functions
+    
+    func playSound(withURL url : URL) {
+        do {
+            try audioPlayer = AVAudioPlayer.init(data: Data(contentsOf: url), fileTypeHint: "mp3")
+
+        }
+        catch {print("assignment of audioplayer failed")}
+        audioPlayer?.play()
+    }
+    
     
     func getStringOfArtists(artists: [String]) -> String {
         
