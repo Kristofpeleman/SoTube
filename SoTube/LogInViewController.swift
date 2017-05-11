@@ -74,6 +74,14 @@ class LogInViewController: UIViewController {
         })
     }
     
+    
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
     private func updateView(){
         emailAddressTextField.text = ""
         passwordTextField.text = ""

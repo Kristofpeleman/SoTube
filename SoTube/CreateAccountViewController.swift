@@ -91,10 +91,7 @@ class CreateAccountViewController: UIViewController {
         }
         else {
             let alertController = UIAlertController(title: "Password Control", message: "Your passwords don't match. Please re-enter both password textfields.", preferredStyle: .alert)
-            let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: { (action) in
-                // Dismiss the current view controller
-                self.dismiss(animated: true, completion: nil)
-            })
+            let okayAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
             updatePasswordTextFields()
             alertController.addAction(okayAction)
             self.present(alertController, animated: true, completion: nil)
