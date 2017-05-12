@@ -705,7 +705,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Reset password" id="pzU-Qd-Wuk">
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xsd-9V-5tc"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="xsd-9V-5tc">
+                                            <connections>
+                                                <action selector="cancel:" destination="ZLX-mZ-xRe" id="tA0-2H-8Zl"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>

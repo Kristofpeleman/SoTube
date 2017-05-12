@@ -70,8 +70,8 @@ class LogInViewController: UIViewController {
             // Dismiss keyboard
             self.view.endEditing(true)
             
-            self.performSegue(withIdentifier: "", sender: nil)
         })
+        self.dismiss(animated: true, completion: nil)
     }
     
     
