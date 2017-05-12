@@ -9,6 +9,7 @@
 import UIKit
 import AVFoundation
 
+
 class AllSongsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
     
     let feedURL = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY?"
@@ -45,22 +46,20 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
                 }
                 print(allArtists[0])
                 print(allArtists[1])
-//                print(allArtists.reduce("", {$0 + " " + $1}))
                 print(preview_url)
                 
                 self.songTitle = songName
-                self.artistName = allArtists[0]
-//                self.url = NSURL.fileURL(withPath: preview_url)
+                self.artistName = self.getStringOfArtists(artists: allArtists)
                 self.url = URL(string: preview_url)
-                
-//                self.titleLabel.text = title
-//                self.artistLabel.text = artist
-//                let _ = self.loadImage(from: URL(string: imagePathArray.lastObject! as! String)!)
                 
             }
         }
         task.resume()
         
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
     }
 
     override func didReceiveMemoryWarning() {
@@ -118,8 +117,14 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func getStringOfArtists(artists: [String]) -> String {
         
+        var fullListOfArtists = artists[0]
+        if artists.count > 1 {
+            for index in 1...artists.count - 1 {
+                fullListOfArtists += " & \(artists[index])"
+            }
+        }
         
-        return ""
+        return fullListOfArtists
     }
 
 }
