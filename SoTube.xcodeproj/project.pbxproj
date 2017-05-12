@@ -22,6 +22,7 @@
 		2F91E93D1EC0571E004A2E99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E93B1EC0571E004A2E99 /* Main.storyboard */; };
 		2F91E93F1EC0571E004A2E99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E93E1EC0571E004A2E99 /* Assets.xcassets */; };
 		2F91E9421EC0571E004A2E99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E9401EC0571E004A2E99 /* LaunchScreen.storyboard */; };
+		2FBEF7F81EC5D42C000398CC /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBEF7F71EC5D42C000398CC /* MusicPlayerViewController.swift */; };
 		2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */; };
 		2FE813BD1EC450FC00F418E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FE813BC1EC450FC00F418E7 /* GoogleService-Info.plist */; };
 		599072BA7E0EBDDF41ABDD93 /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */; };
@@ -46,6 +47,7 @@
 		2F91E93E1EC0571E004A2E99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F91E9411EC0571E004A2E99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F91E9431EC0571E004A2E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2FBEF7F71EC5D42C000398CC /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
 		2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		2FE813BC1EC450FC00F418E7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -128,6 +130,7 @@
 				2F91E9371EC0571E004A2E99 /* AppDelegate.swift */,
 				2F91E9391EC0571E004A2E99 /* ViewController.swift */,
 				2F91E93B1EC0571E004A2E99 /* Main.storyboard */,
+				2FBEF7F71EC5D42C000398CC /* MusicPlayerViewController.swift */,
 				2F7F29281EC5975400D2B03A /* Model */,
 				2F2FD2961EC1E6AF00628995 /* SongsViewControllers */,
 				2F49BF7D1EC32FC00031F5E4 /* LoginViewControllers */,
@@ -293,6 +296,7 @@
 				2F49BF7A1EC32FA70031F5E4 /* CreateAccountViewController.swift in Sources */,
 				2F2FD28F1EC1E65200628995 /* MySongsViewController.swift in Sources */,
 				2F91E9381EC0571E004A2E99 /* AppDelegate.swift in Sources */,
+				2FBEF7F81EC5D42C000398CC /* MusicPlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
