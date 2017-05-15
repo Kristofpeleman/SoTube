@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 
-class AllSongsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate {
+class AllSongsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
     
 //    let feedURL = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY?"
     let feedURLs = ViewModel().feeds
@@ -19,12 +19,19 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     var currentSong: Song?
     var songs: [Song]?
     var audioPlayer: AVAudioPlayer?
+    
+    var filteredSongs: [Song] = []
+    var currentPickerViewRow = 0
+    
+    
+    
 
     @IBOutlet weak var sortingPickerView: UIPickerView!
     @IBOutlet var sortingOptions: SortingOptions!
     
     @IBOutlet weak var tableView: UITableView!
 
+    @IBOutlet weak var searchBar: UISearchBar!
     
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -32,6 +39,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     
         sortingPickerView.dataSource = sortingOptions
         tableView.dataSource = self
+        searchBar.delegate = self
 //        setSongFromJSONFeed(json: feedURL)
         setSongsFromJSONFeed(jsonData: feedURLs)
         
@@ -53,18 +61,27 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - TableView Datasource Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        
-        return (songs?.count) ?? 4
+        if !filteredSongs.isEmpty {
+            return filteredSongs.count
+        }
+        return (songs?.count) ?? 1
     
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongTableViewCell
         
-        if let song = self.songs?[indexPath.row] {
-        cell.artistNameLabel.text = getStringOfArtists(artists: (song.artistNames))
-        cell.songTitleLabel.text = song.songTitle
-        cell.costLabel.text = String(describing: song.cost)
+        if !filteredSongs.isEmpty {
+            cell.artistNameLabel.text = getStringOfArtists(artists: (self.filteredSongs[indexPath.row].artistNames))
+            cell.songTitleLabel.text = self.filteredSongs[indexPath.row].songTitle
+            cell.costLabel.text = String(describing: self.filteredSongs[indexPath.row].cost)
+        }
+        else {
+            if let song = self.songs?[indexPath.row] {
+                cell.artistNameLabel.text = getStringOfArtists(artists: (song.artistNames))
+                cell.songTitleLabel.text = song.songTitle
+                cell.costLabel.text = String(describing: song.cost)
+            }
         }
         return cell
     }
@@ -147,28 +164,88 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        if songs != nil {
+        if !filteredSongs.isEmpty {
+            switch sortingOptions.values[row] {
+            case "Artist (A-Z)":
+                filteredSongs.sort(by: {$0.artistNames[0] < $1.artistNames[0]})
+                currentPickerViewRow = 0
+            case "Artist (Z-A)":
+                filteredSongs.sort(by: {$0.artistNames[0] > $1.artistNames[0]})
+                currentPickerViewRow = 1
+            case "Song Title (A-Z)":
+                filteredSongs.sort(by: {$0.songTitle < $1.songTitle})
+                currentPickerViewRow = 2
+            case "Song Title (Z-A)":
+                filteredSongs.sort(by: {$0.songTitle > $1.songTitle})
+                currentPickerViewRow = 3
+            default: break
+            }
+
+        }
+        else if songs != nil {
             switch sortingOptions.values[row] {
             case "Artist (A-Z)":
                 songs!.sort(by: {$0.artistNames[0] < $1.artistNames[0]})
+                currentPickerViewRow = 0
             case "Artist (Z-A)":
                 songs!.sort(by: {$0.artistNames[0] > $1.artistNames[0]})
+                currentPickerViewRow = 1
             case "Song Title (A-Z)":
                 songs!.sort(by: {$0.songTitle < $1.songTitle})
+                currentPickerViewRow = 2
             case "Song Title (Z-A)":
                 songs!.sort(by: {$0.songTitle > $1.songTitle})
+                currentPickerViewRow = 3
             default: break
             }
         }
-        tableView.reloadData()
         
+        tableView.reloadData()
     }
 
     
     
     
     
+    // MARK: - SearchBar
     
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" || songs == nil {
+            filteredSongs = []
+        }
+        else {
+            filteredSongs = songs!.filter(({ (song) -> Bool in
+            return song.artistNames[0].lowercased().contains(searchText.lowercased())
+            }))
+            filteredSongs += songs!.filter(({ (song) -> Bool in
+                if song.artistNames.count > 1 {
+                    return song.artistNames[1].lowercased().contains(searchText.lowercased())
+                }
+                return false
+            }))
+            filteredSongs += songs!.filter(({ (song) -> Bool in
+                return song.songTitle.lowercased().contains(searchText.lowercased())
+            }))
+            
+        }
+        for song in filteredSongs {
+            print(song.artistNames[0] + " " + song.songTitle)
+        }
+        pickerView(sortingPickerView, didSelectRow: currentPickerViewRow, inComponent: 0)
+        tableView.reloadData()
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    // MARK: - Segues
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "musicPlayerSegue" {
