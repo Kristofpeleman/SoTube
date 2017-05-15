@@ -10,7 +10,7 @@ import UIKit
 
 class SortingOptions: NSObject, UIPickerViewDataSource {
     
-    let values = ["Artist (A-Z)", "Artist (Z-A)", "Song Title (A-Z)", "Song Title (Z-A)"]
+    let values = ["None", "Artist (A-Z)", "Artist (Z-A)", "Song Title (A-Z)", "Song Title (Z-A)"]
     
     func numberOfComponents(in pickerView: UIPickerView) -> Int {
         return 1

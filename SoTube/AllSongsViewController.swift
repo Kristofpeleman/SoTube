@@ -17,7 +17,13 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
     
     var currentSong: Song?
-    var songs: [Song]?
+    var songs: [Song]? {
+        didSet {
+            if songs?.count == feedURLs.count {
+                self.tableView.reloadData()
+            }
+        }
+    }
     var audioPlayer: AVAudioPlayer?
     
     var filteredSongs: [Song] = []
@@ -44,13 +50,6 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         setSongsFromJSONFeed(jsonData: feedURLs)
         
     }
-    
-    
-    override func viewDidAppear(_ animated: Bool) {
-        tableView.reloadData()
-    }
-    
-    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
