@@ -16,6 +16,7 @@
 		2F49BF7A1EC32FA70031F5E4 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49BF791EC32FA70031F5E4 /* CreateAccountViewController.swift */; };
 		2F49BF7C1EC32FB70031F5E4 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49BF7B1EC32FB70031F5E4 /* ForgotPasswordViewController.swift */; };
 		2F7F29271EC5970600D2B03A /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F29261EC5970600D2B03A /* Song.swift */; };
+		2F7F292A1EC5C3FB00D2B03A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F29291EC5C3FB00D2B03A /* ViewModel.swift */; };
 		2F91E9381EC0571E004A2E99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F91E9371EC0571E004A2E99 /* AppDelegate.swift */; };
 		2F91E93A1EC0571E004A2E99 /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F91E9391EC0571E004A2E99 /* ViewController.swift */; };
 		2F91E93D1EC0571E004A2E99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E93B1EC0571E004A2E99 /* Main.storyboard */; };
@@ -38,6 +39,7 @@
 		2F49BF791EC32FA70031F5E4 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		2F49BF7B1EC32FB70031F5E4 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
 		2F7F29261EC5970600D2B03A /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
+		2F7F29291EC5C3FB00D2B03A /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2F91E9341EC0571E004A2E99 /* SoTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		2F91E9371EC0571E004A2E99 /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
 		2F91E9391EC0571E004A2E99 /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
@@ -95,6 +97,14 @@
 			name = Model;
 			sourceTree = "<group>";
 		};
+		2F7F292B1EC5C40000D2B03A /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				2F7F29291EC5C3FB00D2B03A /* ViewModel.swift */,
+			);
+			name = ViewModel;
+			sourceTree = "<group>";
+		};
 		2F91E92B1EC0571D004A2E99 = {
 			isa = PBXGroup;
 			children = (
@@ -116,6 +126,7 @@
 		2F91E9361EC0571E004A2E99 /* SoTube */ = {
 			isa = PBXGroup;
 			children = (
+				2F7F292B1EC5C40000D2B03A /* ViewModel */,
 				2F91E9371EC0571E004A2E99 /* AppDelegate.swift */,
 				2F91E9391EC0571E004A2E99 /* ViewController.swift */,
 				2F91E93B1EC0571E004A2E99 /* Main.storyboard */,
@@ -278,6 +289,7 @@
 				2F2FD2931EC1E68200628995 /* WishlistViewController.swift in Sources */,
 				2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */,
 				2F2FD2951EC1E6A000628995 /* FilteredSongsViewController.swift in Sources */,
+				2F7F292A1EC5C3FB00D2B03A /* ViewModel.swift in Sources */,
 				2F49BF781EC32ECE0031F5E4 /* LogInViewController.swift in Sources */,
 				2F2FD2911EC1E67500628995 /* FavoriteSongsViewController.swift in Sources */,
 				2F49BF7C1EC32FB70031F5E4 /* ForgotPasswordViewController.swift in Sources */,
