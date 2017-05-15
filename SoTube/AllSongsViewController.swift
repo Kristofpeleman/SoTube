@@ -16,30 +16,33 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     let feedURLs = ViewModel().feeds
     let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
     
-//    var song: Song?
     var currentSong: Song?
     var songs: [Song]?
     var audioPlayer: AVAudioPlayer?
 
     @IBOutlet weak var sortingPickerView: UIPickerView!
-    
     @IBOutlet var sortingOptions: SortingOptions!
+    
     @IBOutlet weak var tableView: UITableView!
 
+    
     override func viewDidLoad() {
         super.viewDidLoad()
-    
-//        setSongFromJSONFeed(json: feedURL)
-        setSongsFromJSONFeed(jsonData: feedURLs)
+        
     
         sortingPickerView.dataSource = sortingOptions
+        tableView.dataSource = self
+//        setSongFromJSONFeed(json: feedURL)
+        setSongsFromJSONFeed(jsonData: feedURLs)
         
     }
     
+    
     override func viewDidAppear(_ animated: Bool) {
-
-        self.tableView.reloadData()
+        tableView.reloadData()
     }
+    
+    
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
@@ -50,7 +53,8 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - TableView Datasource Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (songs?.count) ?? 1
+        
+        return (songs?.count) ?? 4
     
     }
     
@@ -62,7 +66,6 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         cell.songTitleLabel.text = song.songTitle
         cell.costLabel.text = String(describing: song.cost)
         }
-        
         return cell
     }
     
@@ -88,7 +91,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     // MARK: - Homemade Functions
-    
+    /*
     func playSound(withURL url : URL) {
         do {
             try audioPlayer = AVAudioPlayer.init(data: Data(contentsOf: url), fileTypeHint: "mp3")
@@ -97,7 +100,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         catch {print("assignment of audioplayer failed")}
         audioPlayer?.play()
     }
-    
+    */
     
     func getStringOfArtists(artists: [String]) -> String {
         
@@ -107,7 +110,6 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
                 fullListOfArtists += " & \(artists[index])"
             }
         }
-        
         return fullListOfArtists
     }
     
@@ -118,7 +120,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     
     
     
-    
+    // MARK: - PickerView
     
     
     func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
@@ -130,9 +132,8 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
             label = UILabel()
         }
         
-        label.textColor = .black
-        label.textAlignment = .center
-        label.font = UIFont(name: "System", size: 12)
+        label.adjustsFontSizeToFitWidth = true
+        label.text = sortingOptions.values[row]
         
         
         return label
@@ -205,8 +206,10 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
 //        }
 //        
 //        task.resume()
-//    
-//    }
+    //
+    //    }
+    
+    // MARK: - JSON
     
     func setSongsFromJSONFeed(jsonData: [String]) {
         
@@ -226,18 +229,23 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
                     var allArtists: [String] = []
                     for dictionary in artists {
                         allArtists.append((dictionary as! NSDictionary).value(forKey: "name") as! String? ?? "NOT FOUND")
+                        
+                        
                     }
-                    
-                    if let _ = self.songs {
+                if let _ = self.songs {
                     self.songs?.append(Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url))
-                    } else {self.songs = [Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url)] }
+                } else {
+                    self.songs = [Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url)]
+                }
                     
                 }
             }
+            
             
             task.resume()
         }
         
     }
-
 }
+
+

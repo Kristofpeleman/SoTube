@@ -25,7 +25,7 @@
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5cm-du-jW8">
-                                <rect key="frame" x="16" y="139" width="288" height="370"/>
+                                <rect key="frame" x="16" y="142.5" width="288" height="366.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SongCell" id="fN2-l4-Q9r" customClass="SongTableViewCell" customModule="SoTube" customModuleProvider="target">
@@ -102,7 +102,7 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tG-DK-Rpe">
-                                <rect key="frame" x="79" y="99" width="80" height="35"/>
+                                <rect key="frame" x="73" y="99" width="89" height="38.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8tG-DK-Rpe" secondAttribute="height" multiplier="2.3:1" id="yub-LT-gSq"/>
                                 </constraints>
@@ -111,8 +111,8 @@
                                 </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMR-6X-fhy">
-                                <rect key="frame" x="16" y="109" width="58" height="18"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <rect key="frame" x="16" y="110.5" width="51.5" height="16"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
@@ -124,8 +124,7 @@
                             <constraint firstItem="D3Z-jY-RCg" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leading" id="3uh-U2-TOn"/>
                             <constraint firstItem="8tG-DK-Rpe" firstAttribute="leading" secondItem="lMR-6X-fhy" secondAttribute="trailing" constant="5" id="7SJ-s0-eVc"/>
                             <constraint firstItem="lMR-6X-fhy" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leadingMargin" id="9vB-L5-cFF"/>
-                            <constraint firstItem="8tG-DK-Rpe" firstAttribute="width" secondItem="pj7-ZH-o6R" secondAttribute="width" multiplier="1:4" id="IhZ-04-7Rp"/>
-                            <constraint firstItem="lMR-6X-fhy" firstAttribute="top" secondItem="D3Z-jY-RCg" secondAttribute="bottom" constant="10" id="Oc6-uY-Eci"/>
+                            <constraint firstItem="8tG-DK-Rpe" firstAttribute="width" secondItem="pj7-ZH-o6R" secondAttribute="width" multiplier="1:3.6" id="IhZ-04-7Rp"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5cm-du-jW8" secondAttribute="trailing" id="QoO-uy-Tsy"/>
                             <constraint firstItem="id9-Xv-COs" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leading" id="ViJ-vK-mh4"/>
                             <constraint firstAttribute="trailing" secondItem="D3Z-jY-RCg" secondAttribute="trailing" id="aeX-yB-Ik4"/>
@@ -133,6 +132,7 @@
                             <constraint firstItem="D3Z-jY-RCg" firstAttribute="top" secondItem="id9-Xv-COs" secondAttribute="bottom" id="dSk-dI-SWV"/>
                             <constraint firstItem="5cm-du-jW8" firstAttribute="top" secondItem="8tG-DK-Rpe" secondAttribute="bottom" constant="5" id="jhT-wm-iKy"/>
                             <constraint firstItem="8tG-DK-Rpe" firstAttribute="top" secondItem="D3Z-jY-RCg" secondAttribute="bottom" id="nPK-Su-J8a"/>
+                            <constraint firstItem="lMR-6X-fhy" firstAttribute="centerY" secondItem="8tG-DK-Rpe" secondAttribute="centerY" id="pDy-lT-Xp5"/>
                             <constraint firstItem="TY1-4m-eLT" firstAttribute="top" secondItem="5cm-du-jW8" secondAttribute="bottom" constant="10" id="ykj-oN-JwI"/>
                         </constraints>
                     </view>
@@ -147,7 +147,7 @@
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOX-Lj-dF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
                 <customObject id="HZt-CG-Cfh" customClass="SortingOptions" customModule="SoTube" customModuleProvider="target"/>
             </objects>
-            <point key="canvasLocation" x="-1230" y="-350"/>
+            <point key="canvasLocation" x="-1230" y="-350.7042253521127"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1Tx-r3-G53">
