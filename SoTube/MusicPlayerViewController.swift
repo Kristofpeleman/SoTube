@@ -10,10 +10,15 @@ import UIKit
 
 class MusicPlayerViewController: UIViewController {
 
+    @IBOutlet weak var navigationSongTitel: UINavigationItem!
     
+    @IBOutlet weak var albumImageView: UIImageView!
     
+    @IBOutlet weak var songProgressView: UIProgressView!
     
+    @IBOutlet weak var currentTimeLabel: UILabel!
     
+    @IBOutlet weak var endTimeLabel: UILabel!
     
     
     
@@ -28,6 +33,38 @@ class MusicPlayerViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    @IBAction func previousSong(_ sender: UIButton) {
+    }
+    
+    
+    
+    @IBAction func playSong(_ sender: UIButton) {
+    }
+    
+    
+    
+    @IBAction func nextSong(_ sender: UIButton) {
+    }
+    
+    
+    @IBAction func back(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
     
 
     /*
