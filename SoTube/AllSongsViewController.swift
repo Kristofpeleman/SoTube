@@ -164,45 +164,46 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
-        if !filteredSongs.isEmpty {
-            switch sortingOptions.values[row] {
-            case "Artist (A-Z)":
-                filteredSongs.sort(by: {$0.artistNames[0] < $1.artistNames[0]})
-                currentPickerViewRow = 0
-            case "Artist (Z-A)":
-                filteredSongs.sort(by: {$0.artistNames[0] > $1.artistNames[0]})
-                currentPickerViewRow = 1
-            case "Song Title (A-Z)":
-                filteredSongs.sort(by: {$0.songTitle < $1.songTitle})
-                currentPickerViewRow = 2
-            case "Song Title (Z-A)":
-                filteredSongs.sort(by: {$0.songTitle > $1.songTitle})
-                currentPickerViewRow = 3
-            default: break
-            }
-
+        currentPickerViewRow = row
+        
+        if !filteredSongs.isEmpty{
+            sortSongs(from: filteredSongs)
         }
         else if songs != nil {
-            switch sortingOptions.values[row] {
-            case "Artist (A-Z)":
-                songs!.sort(by: {$0.artistNames[0] < $1.artistNames[0]})
-                currentPickerViewRow = 0
-            case "Artist (Z-A)":
-                songs!.sort(by: {$0.artistNames[0] > $1.artistNames[0]})
-                currentPickerViewRow = 1
-            case "Song Title (A-Z)":
-                songs!.sort(by: {$0.songTitle < $1.songTitle})
-                currentPickerViewRow = 2
-            case "Song Title (Z-A)":
-                songs!.sort(by: {$0.songTitle > $1.songTitle})
-                currentPickerViewRow = 3
-            default: break
-            }
+            sortSongs(from: songs!)
+        }
+        
+        
+    }
+
+    func sortSongs(from list: [Song]){
+        var sortedList = list
+        switch sortingOptions.values[currentPickerViewRow] {
+        case "Artist (A-Z)":
+            sortedList.sort(by: {$0.artistNames[0] < $1.artistNames[0]})
+            currentPickerViewRow = 0
+        case "Artist (Z-A)":
+            sortedList.sort(by: {$0.artistNames[0] > $1.artistNames[0]})
+            currentPickerViewRow = 1
+        case "Song Title (A-Z)":
+            sortedList.sort(by: {$0.songTitle < $1.songTitle})
+            currentPickerViewRow = 2
+        case "Song Title (Z-A)":
+            sortedList.sort(by: {$0.songTitle > $1.songTitle})
+            currentPickerViewRow = 3
+        default: break
+        }
+        if !filteredSongs.isEmpty {
+            filteredSongs = sortedList
+        }
+        else {
+            songs = sortedList
         }
         
         tableView.reloadData()
     }
-
+    
+    
     
     
     

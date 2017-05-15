@@ -84,12 +84,8 @@ class MusicPlayerViewController: UIViewController {
     
     func updateSliderProgress(){
         if audioPlayer != nil {
-            if Int((audioPlayer?.currentTime)!) < 10 {
-                currentTimeLabel.text = "00:0\(String(Int((audioPlayer?.currentTime)!)))"
-            }
-            else {
-                currentTimeLabel.text = "\(String(Int((audioPlayer?.currentTime)!/100))):\(String(Int((audioPlayer?.currentTime)!)))"
-            }
+            currentTimeLabel.text = returnCurrentTimeInSong()
+            
             let progress = (audioPlayer?.currentTime)! / (audioPlayer?.duration)!
             songProgressView.setProgress(Float(progress), animated: false)
         }
@@ -102,6 +98,21 @@ class MusicPlayerViewController: UIViewController {
     @IBAction func back(_ sender: UIBarButtonItem) {
         audioPlayer = nil
         dismiss(animated: true, completion: nil)
+    }
+    
+    
+    
+    
+    
+    
+    
+    func returnCurrentTimeInSong() -> String{
+        if Int((audioPlayer?.currentTime)!) < 10 {
+            return "00:0\(String(Int((audioPlayer?.currentTime)!)))"
+        }
+        else {
+            return "\(String(Int((audioPlayer?.currentTime)!/100))):\(String(Int((audioPlayer?.currentTime)!)))"
+        }
     }
     
     
