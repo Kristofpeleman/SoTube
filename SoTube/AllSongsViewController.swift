@@ -22,6 +22,9 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
             if songs?.count == feedURLs.count {
                 self.tableView.reloadData()
             }
+            else if songs?.count == 15 {
+                self.tableView.reloadData()
+            }
         }
     }
     var audioPlayer: AVAudioPlayer?

@@ -20,7 +20,16 @@ class ViewModel {
         "3UygY7qW2cvG9Llkay6i1i",
         "3PYdxIDuBIuJSDGwfptFx4",
         "60a0Rd6pjrkxjPbaKzXjfq",
-        "7dyluIqv7QYVTXXZiMWPHW"
+        "7dyluIqv7QYVTXXZiMWPHW",
+        "1w1kzejjmiMhdWAOecgo4l",
+        "1Ehv7VYICZDF2EAvqfDPsa",
+        "7xfzwPasShmaPL7gB7va3J",
+        "1MDoll6jK4rrk2BcFRP5i7",
+        "0azC730Exh71aQlOt9Zj3y",
+        "3bDGwl0X3EjQmIyFD1uif5",
+        "4lLtanYk6tkMvooU0tWzG8",
+        "2M9ULmQwTaTGmAdXaXpfz5",
+        "6PCUP3dWmTjcTtXY02oFdT"
     ]
     
     var feeds: [String] {
