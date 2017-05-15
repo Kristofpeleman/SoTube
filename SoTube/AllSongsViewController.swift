@@ -45,7 +45,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     // MARK: - TableView Datasource Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (songs?.count) ?? 4
+        return (songs?.count) ?? 1
     
     }
     
@@ -66,7 +66,8 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         currentSong = self.songs?[indexPath.row]
-        playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
+        //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
+        performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
     }
     
 
