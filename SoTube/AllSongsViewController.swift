@@ -17,6 +17,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
     
 //    var song: Song?
+    var currentSong: Song?
     var songs: [Song]?
     var audioPlayer: AVAudioPlayer?
 
@@ -64,6 +65,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - TableView Delegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        currentSong = self.songs?[indexPath.row]
         playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
     }
     
@@ -102,6 +104,19 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         
         return fullListOfArtists
     }
+    
+    
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        if segue.identifier == "musicPlayerSegue" {
+            if let destinationVC = segue.destination as? MusicPlayerViewController {
+                destinationVC.currentSong = self.currentSong
+            }
+        }
+    }
+    
+    
+    
+    
     
 //    func setSongFromJSONFeed(json: String) {
 //        
