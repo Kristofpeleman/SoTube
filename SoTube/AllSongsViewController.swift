@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 
 
-class AllSongsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class AllSongsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate {
     
 //    let feedURL = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY?"
     let feedURLs = ViewModel().feeds
@@ -21,7 +21,9 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     var songs: [Song]?
     var audioPlayer: AVAudioPlayer?
 
+    @IBOutlet weak var sortingPickerView: UIPickerView!
     
+    @IBOutlet var sortingOptions: SortingOptions!
     @IBOutlet weak var tableView: UITableView!
 
     override func viewDidLoad() {
@@ -29,6 +31,9 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     
 //        setSongFromJSONFeed(json: feedURL)
         setSongsFromJSONFeed(jsonData: feedURLs)
+    
+        sortingPickerView.dataSource = sortingOptions
+        
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -105,6 +110,63 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         
         return fullListOfArtists
     }
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        var label: UILabel
+        
+        if let view = view as? UILabel {
+            label = view
+        } else {
+            label = UILabel()
+        }
+        
+        label.textColor = .black
+        label.textAlignment = .center
+        label.font = UIFont(name: "System", size: 12)
+        
+        
+        return label
+    }
+
+    
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return sortingOptions.values[row]
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        if songs != nil {
+            switch sortingOptions.values[row] {
+            case "Artist (A-Z)":
+                songs!.sort(by: {$0.artistNames[0] < $1.artistNames[0]})
+            case "Artist (Z-A)":
+                songs!.sort(by: {$0.artistNames[0] > $1.artistNames[0]})
+            case "Song Title (A-Z)":
+                songs!.sort(by: {$0.songTitle < $1.songTitle})
+            case "Song Title (Z-A)":
+                songs!.sort(by: {$0.songTitle > $1.songTitle})
+            default: break
+            }
+        }
+        tableView.reloadData()
+        
+    }
+
+    
+    
+    
+    
     
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {

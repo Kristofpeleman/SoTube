@@ -106,6 +106,9 @@
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="8tG-DK-Rpe" secondAttribute="height" multiplier="2.3:1" id="yub-LT-gSq"/>
                                 </constraints>
+                                <connections>
+                                    <outlet property="delegate" destination="uS8-Hq-Lct" id="sMu-Ci-pEO"/>
+                                </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMR-6X-fhy">
                                 <rect key="frame" x="16" y="109" width="58" height="18"/>
@@ -135,11 +138,14 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="All Songs" id="wgn-mS-7Z6"/>
                     <connections>
+                        <outlet property="sortingOptions" destination="HZt-CG-Cfh" id="uVD-eT-FEh"/>
+                        <outlet property="sortingPickerView" destination="8tG-DK-Rpe" id="vPF-Tf-1KF"/>
                         <outlet property="tableView" destination="5cm-du-jW8" id="q7S-RP-DCs"/>
                         <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="vHY-iE-ELE"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOX-Lj-dF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="HZt-CG-Cfh" customClass="SortingOptions" customModule="SoTube" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-1230" y="-350"/>
         </scene>
@@ -264,6 +270,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P17-DX-9cc" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Ubd-ky-pDp"/>
             </objects>
             <point key="canvasLocation" x="-1230" y="338"/>
         </scene>
@@ -488,6 +495,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eaz-Ou-tn9" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="uLP-1I-xQp"/>
             </objects>
             <point key="canvasLocation" x="-1230" y="1090"/>
         </scene>
@@ -888,6 +896,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7D2-af-O0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="7FX-z2-xX0"/>
             </objects>
             <point key="canvasLocation" x="-1230" y="1825"/>
         </scene>
