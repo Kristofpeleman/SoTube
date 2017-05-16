@@ -12,7 +12,12 @@ import AVFoundation
 class MusicPlayerViewController: UIViewController {
     
     
-    var currentSong: Song?
+    //var currentSong: Song?
+    var currentSongPositionInList: Int?
+    var songList: [Song]?
+    var currentSong: Song {
+        return songList![currentSongPositionInList!]
+    }
     var audioPlayer: AVAudioPlayer?
     var displayLink: CADisplayLink?
 
@@ -29,10 +34,8 @@ class MusicPlayerViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
                 // Do any additional setup after loading the view.
-        navigationSongTitel.title = currentSong?.songTitle
-        
-        currentTimeLabel.text = "00:00"
-        endTimeLabel.text = "00:00"
+        //navigationSongTitel.title = currentSong?.songTitle
+        updateTitleSliderAndLabels()
         
     }
 
@@ -45,6 +48,18 @@ class MusicPlayerViewController: UIViewController {
     
     
     @IBAction func previousSong(_ sender: UIButton) {
+        
+        audioPlayer = nil
+        if currentSongPositionInList != nil {
+            if currentSongPositionInList == 0 {
+                currentSongPositionInList = (songList?.count)! - 1
+            }
+            else {
+                currentSongPositionInList! -= 1
+            }
+        }
+        
+        updateTitleSliderAndLabels()
     }
     
     
@@ -53,7 +68,6 @@ class MusicPlayerViewController: UIViewController {
         
         
         if audioPlayer != nil {
-            
             if (audioPlayer?.isPlaying)! {
                 audioPlayer?.pause()
                 playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
@@ -65,10 +79,14 @@ class MusicPlayerViewController: UIViewController {
                 playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
                 displayLink = CADisplayLink(target: self, selector: (#selector(MusicPlayerViewController.updateSliderProgress)))
                 displayLink?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+            
             }
         }
         else {
-            playSound(withURL: URL(string: (currentSong?.previewURLAssString)!)!)
+            if songList != nil {
+                //playSound(withURL: URL(string: (currentSong?.previewURLAssString)!)!)
+                playSound(withURL: URL(string: (currentSong.previewURLAssString))!)
+            }
             playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
             displayLink = CADisplayLink(target: self, selector: (#selector(MusicPlayerViewController.updateSliderProgress)))
             displayLink?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
@@ -92,6 +110,17 @@ class MusicPlayerViewController: UIViewController {
     }
     
     @IBAction func nextSong(_ sender: UIButton) {
+        audioPlayer = nil
+        if currentSongPositionInList != nil {
+            if currentSongPositionInList! == (songList?.count)!-1 {
+                currentSongPositionInList = 0
+            }
+            else {
+                currentSongPositionInList! += 1
+            }
+        }
+        updateTitleSliderAndLabels()
+
     }
     
     
@@ -133,7 +162,14 @@ class MusicPlayerViewController: UIViewController {
     
     
     
-    
+    func updateTitleSliderAndLabels(){
+        navigationSongTitel.title = currentSong.songTitle
+        
+        currentTimeLabel.text = "00:00"
+        endTimeLabel.text = "00:00"
+        playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+        songProgressView.progress = 0
+    }
     
 
     /*

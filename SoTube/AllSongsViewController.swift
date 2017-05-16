@@ -18,7 +18,8 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     let feedURLs = ViewModel().feeds
     let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
     
-    var currentSong: Song?
+    //var currentSong: Song?
+    var currentSongPositionInList = 0
     var songs: [Song]? {
         didSet {
             if songs?.count == feedURLs.count {
@@ -87,12 +88,9 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - TableView Delegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        if !filteredSongs.isEmpty {
-            currentSong = self.filteredSongs[indexPath.row]
-        }
-        else {
-            currentSong = self.songs?[indexPath.row]
-        }
+        //currentSong = self.filteredSongs[indexPath.row]
+        currentSongPositionInList = indexPath.row
+        
         //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
         performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
     }
@@ -255,7 +253,14 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "musicPlayerSegue" {
             if let destinationVC = segue.destination as? MusicPlayerViewController {
-                destinationVC.currentSong = self.currentSong
+                //destinationVC.currentSong = self.currentSong
+                if !filteredSongs.isEmpty {
+                    destinationVC.songList = filteredSongs
+                }
+                else if songs != nil {
+                    destinationVC.songList = songs
+                }
+                destinationVC.currentSongPositionInList = self.currentSongPositionInList
             }
         }
     }
