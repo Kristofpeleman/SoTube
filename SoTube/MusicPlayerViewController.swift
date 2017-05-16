@@ -28,6 +28,7 @@ class MusicPlayerViewController: UIViewController {
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var playOrPauseButton: UIButton!
     
+    @IBOutlet weak var volumeSlider: UISlider!
     
     
     
@@ -128,6 +129,18 @@ class MusicPlayerViewController: UIViewController {
         audioPlayer = nil
         dismiss(animated: true, completion: nil)
     }
+    
+    
+    
+    // MARK: - Volume Slider
+    
+    @IBAction func changeVolume(_ sender: UISlider) {
+        if audioPlayer != nil {
+            audioPlayer?.volume = volumeSlider.value
+        }
+    }
+    
+    
     
     
     

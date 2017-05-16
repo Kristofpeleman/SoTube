@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZM7-2z-NjU">
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="ZM7-2z-NjU">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -190,7 +190,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ynV-sX-mn4" id="Bai-XG-1cN">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPZ-gL-WLX">
@@ -355,9 +355,21 @@
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="rf3-ne-yDb">
+                                <rect key="frame" x="38" y="482.5" width="244" height="26"/>
+                                <constraints>
+                                    <constraint firstAttribute="height" constant="25" id="ag1-iV-jdo"/>
+                                </constraints>
+                                <color key="minimumTrackTintColor" white="0.0" alpha="1" colorSpace="calibratedWhite"/>
+                                <color key="maximumTrackTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
+                                <connections>
+                                    <action selector="changeVolume:" destination="tMx-VT-Gxf" eventType="valueChanged" id="fNS-4F-s0z"/>
+                                </connections>
+                            </slider>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="rf3-ne-yDb" firstAttribute="top" secondItem="fRL-mb-Erf" secondAttribute="bottom" constant="13" id="1Sl-Up-qtt"/>
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="top" secondItem="sbw-oP-2tT" secondAttribute="bottom" constant="35" id="4CI-pV-9Ka"/>
                             <constraint firstItem="3f7-FR-f8I" firstAttribute="top" secondItem="mbO-FT-hWy" secondAttribute="bottom" constant="46" id="5t3-CC-Klr"/>
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="centerY" secondItem="fRL-mb-Erf" secondAttribute="centerY" id="D9U-qQ-qBK"/>
@@ -365,6 +377,7 @@
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="centerX" secondItem="Od7-6S-ieB" secondAttribute="centerX" id="KoE-Op-hSu"/>
                             <constraint firstItem="vqj-ec-Ybk" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="trailing" constant="5" id="M9S-Ct-sz4"/>
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="NkZ-Cz-8U1"/>
+                            <constraint firstItem="rf3-ne-yDb" firstAttribute="trailing" secondItem="zZG-Jg-unL" secondAttribute="trailing" id="RLK-Xh-k9L"/>
                             <constraint firstItem="fRL-mb-Erf" firstAttribute="top" secondItem="vqj-ec-Ybk" secondAttribute="bottom" constant="39" id="Tlz-rr-Mzb"/>
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="0.75" id="Vqm-u3-f37"/>
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="trailing" secondItem="mbO-FT-hWy" secondAttribute="trailing" id="Zsc-ha-AHs"/>
@@ -376,6 +389,7 @@
                             <constraint firstItem="7eb-92-zob" firstAttribute="centerY" secondItem="fRL-mb-Erf" secondAttribute="centerY" id="jKW-e9-6hb"/>
                             <constraint firstItem="3f7-FR-f8I" firstAttribute="leading" secondItem="mbO-FT-hWy" secondAttribute="leading" id="kux-F3-Dv0"/>
                             <constraint firstItem="sbw-oP-2tT" firstAttribute="top" secondItem="Od7-6S-ieB" secondAttribute="top" id="mZ8-hg-kCF"/>
+                            <constraint firstItem="rf3-ne-yDb" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="leading" id="mmD-b6-Mtg"/>
                             <constraint firstAttribute="trailing" secondItem="sbw-oP-2tT" secondAttribute="trailing" id="pCX-4Z-Tzn"/>
                             <constraint firstItem="zZG-Jg-unL" firstAttribute="centerY" secondItem="3f7-FR-f8I" secondAttribute="centerY" id="rxc-LS-tdU"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="uA5-w9-Azq"/>
@@ -389,6 +403,7 @@
                         <outlet property="navigationSongTitel" destination="fj5-6Y-iBy" id="EJT-ez-miH"/>
                         <outlet property="playOrPauseButton" destination="fRL-mb-Erf" id="V0g-0a-KQG"/>
                         <outlet property="songProgressView" destination="vqj-ec-Ybk" id="tt7-au-Akp"/>
+                        <outlet property="volumeSlider" destination="rf3-ne-yDb" id="VcA-Bd-jJb"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vAx-1h-edP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -415,7 +430,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A51-ff-tFC" id="ISE-75-wfI">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9v-AI-ve2">
@@ -816,7 +831,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WVl-oU-WBb" id="Aax-UO-TYm">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGA-3g-Jim">
