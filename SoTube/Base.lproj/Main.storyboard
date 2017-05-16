@@ -338,16 +338,6 @@
                                     <action selector="previousSong:" destination="tMx-VT-Gxf" eventType="touchUpInside" id="BeY-2K-pMI"/>
                                 </connections>
                             </button>
-                            <button opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRL-mb-Erf">
-                                <rect key="frame" x="137" y="424" width="46" height="45.5"/>
-                                <constraints>
-                                    <constraint firstAttribute="width" secondItem="fRL-mb-Erf" secondAttribute="height" id="Rfo-1V-kEZ"/>
-                                </constraints>
-                                <state key="normal" title="Play" image="play"/>
-                                <connections>
-                                    <action selector="playSong:" destination="tMx-VT-Gxf" eventType="touchUpInside" id="YJq-MO-AZF"/>
-                                </connections>
-                            </button>
                             <button opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="aKl-Fi-x8c">
                                 <rect key="frame" x="234.5" y="424" width="45.5" height="46"/>
                                 <constraints>
@@ -358,11 +348,6 @@
                                     <action selector="nextSong:" destination="tMx-VT-Gxf" eventType="touchUpInside" id="lEY-1h-aKg"/>
                                 </connections>
                             </button>
-                            <progressView opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" verticalHuggingPriority="750" progress="0.5" translatesAutoresizingMaskIntoConstraints="NO" id="vqj-ec-Ybk">
-                                <rect key="frame" x="78" y="383" width="164" height="2"/>
-                                <color key="progressTintColor" white="0.0" alpha="1" colorSpace="custom" customColorSpace="genericGamma22GrayColorSpace"/>
-                                <color key="trackTintColor" white="0.66666666666666663" alpha="1" colorSpace="calibratedWhite"/>
-                            </progressView>
                             <label opaque="NO" userInteractionEnabled="NO" alpha="0.84999999999999998" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Label" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="zZG-Jg-unL">
                                 <rect key="frame" x="247" y="376" width="33" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
@@ -386,43 +371,59 @@
                                     <action selector="changeVolume:" destination="tMx-VT-Gxf" eventType="valueChanged" id="fNS-4F-s0z"/>
                                 </connections>
                             </slider>
+                            <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" value="0.5" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="O19-jx-HLe">
+                                <rect key="frame" x="79" y="369" width="162" height="31"/>
+                                <connections>
+                                    <action selector="alterMusicTime:" destination="tMx-VT-Gxf" eventType="valueChanged" id="K51-o5-dcH"/>
+                                </connections>
+                            </slider>
+                            <button opaque="NO" alpha="0.84999999999999998" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="fRL-mb-Erf">
+                                <rect key="frame" x="137" y="424" width="46" height="45.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="fRL-mb-Erf" secondAttribute="height" id="Rfo-1V-kEZ"/>
+                                </constraints>
+                                <state key="normal" title="Play" image="play"/>
+                                <connections>
+                                    <action selector="playSong:" destination="tMx-VT-Gxf" eventType="touchUpInside" id="YJq-MO-AZF"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="rf3-ne-yDb" firstAttribute="top" secondItem="fRL-mb-Erf" secondAttribute="bottom" constant="13" id="1Sl-Up-qtt"/>
+                            <constraint firstItem="fRL-mb-Erf" firstAttribute="top" secondItem="O19-jx-HLe" secondAttribute="bottom" constant="25" id="32R-sd-jKc"/>
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="top" secondItem="sbw-oP-2tT" secondAttribute="bottom" constant="35" id="4CI-pV-9Ka"/>
                             <constraint firstItem="3f7-FR-f8I" firstAttribute="top" secondItem="mbO-FT-hWy" secondAttribute="bottom" constant="46" id="5t3-CC-Klr"/>
+                            <constraint firstItem="O19-jx-HLe" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="trailing" constant="8" id="6WJ-pg-77g"/>
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="centerY" secondItem="fRL-mb-Erf" secondAttribute="centerY" id="D9U-qQ-qBK"/>
                             <constraint firstItem="zZG-Jg-unL" firstAttribute="trailing" secondItem="mbO-FT-hWy" secondAttribute="trailing" id="EyI-aG-OZg"/>
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="centerX" secondItem="Od7-6S-ieB" secondAttribute="centerX" id="KoE-Op-hSu"/>
-                            <constraint firstItem="vqj-ec-Ybk" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="trailing" constant="5" id="M9S-Ct-sz4"/>
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="NkZ-Cz-8U1"/>
                             <constraint firstItem="rf3-ne-yDb" firstAttribute="trailing" secondItem="zZG-Jg-unL" secondAttribute="trailing" id="RLK-Xh-k9L"/>
-                            <constraint firstItem="fRL-mb-Erf" firstAttribute="top" secondItem="vqj-ec-Ybk" secondAttribute="bottom" constant="39" id="Tlz-rr-Mzb"/>
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="0.75" id="Vqm-u3-f37"/>
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="trailing" secondItem="mbO-FT-hWy" secondAttribute="trailing" id="Zsc-ha-AHs"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="leading" secondItem="mbO-FT-hWy" secondAttribute="leading" id="cL8-f4-A4C"/>
                             <constraint firstItem="fRL-mb-Erf" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="fsY-vO-mp6"/>
-                            <constraint firstItem="zZG-Jg-unL" firstAttribute="leading" secondItem="vqj-ec-Ybk" secondAttribute="trailing" constant="5" id="hSG-it-VLz"/>
                             <constraint firstItem="sbw-oP-2tT" firstAttribute="leading" secondItem="Od7-6S-ieB" secondAttribute="leading" id="hZs-ap-n63"/>
                             <constraint firstItem="fRL-mb-Erf" firstAttribute="centerX" secondItem="mbO-FT-hWy" secondAttribute="centerX" id="ihG-0t-8dc"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="centerY" secondItem="fRL-mb-Erf" secondAttribute="centerY" id="jKW-e9-6hb"/>
                             <constraint firstItem="3f7-FR-f8I" firstAttribute="leading" secondItem="mbO-FT-hWy" secondAttribute="leading" id="kux-F3-Dv0"/>
+                            <constraint firstItem="O19-jx-HLe" firstAttribute="centerY" secondItem="3f7-FR-f8I" secondAttribute="centerY" id="ls6-XL-sD1"/>
                             <constraint firstItem="sbw-oP-2tT" firstAttribute="top" secondItem="Od7-6S-ieB" secondAttribute="top" id="mZ8-hg-kCF"/>
                             <constraint firstItem="rf3-ne-yDb" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="leading" id="mmD-b6-Mtg"/>
                             <constraint firstAttribute="trailing" secondItem="sbw-oP-2tT" secondAttribute="trailing" id="pCX-4Z-Tzn"/>
                             <constraint firstItem="zZG-Jg-unL" firstAttribute="centerY" secondItem="3f7-FR-f8I" secondAttribute="centerY" id="rxc-LS-tdU"/>
+                            <constraint firstItem="zZG-Jg-unL" firstAttribute="leading" secondItem="O19-jx-HLe" secondAttribute="trailing" constant="8" id="tRo-Qw-Pbd"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="uA5-w9-Azq"/>
-                            <constraint firstItem="vqj-ec-Ybk" firstAttribute="centerY" secondItem="3f7-FR-f8I" secondAttribute="centerY" id="yyR-Pr-Jg1"/>
                         </constraints>
                     </view>
                     <connections>
                         <outlet property="albumImageView" destination="mbO-FT-hWy" id="a0K-rR-UgG"/>
                         <outlet property="currentTimeLabel" destination="3f7-FR-f8I" id="l96-OI-bfb"/>
                         <outlet property="endTimeLabel" destination="zZG-Jg-unL" id="cIF-gj-Inx"/>
+                        <outlet property="musicSlider" destination="O19-jx-HLe" id="w1Y-Ob-36k"/>
                         <outlet property="navigationSongTitel" destination="fj5-6Y-iBy" id="EJT-ez-miH"/>
                         <outlet property="playOrPauseButton" destination="fRL-mb-Erf" id="V0g-0a-KQG"/>
-                        <outlet property="songProgressView" destination="vqj-ec-Ybk" id="tt7-au-Akp"/>
                         <outlet property="volumeSlider" destination="rf3-ne-yDb" id="VcA-Bd-jJb"/>
                     </connections>
                 </viewController>
@@ -979,7 +980,7 @@
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Def-eb-XHu"/>
-        <segue reference="bey-pH-39d"/>
+        <segue reference="Xlf-MO-3sR"/>
+        <segue reference="vHY-iE-ELE"/>
     </inferredMetricsTieBreakers>
 </document>
