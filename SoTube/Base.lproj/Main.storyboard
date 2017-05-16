@@ -169,9 +169,16 @@
                                     <action selector="connectToSpotify:" destination="vnE-1c-72W" eventType="touchUpInside" id="OjX-pa-BOu"/>
                                 </connections>
                             </button>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SoTube_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="ayw-Iq-cva">
+                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            </imageView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstAttribute="trailingMargin" secondItem="ayw-Iq-cva" secondAttribute="trailing" constant="-16" id="48J-I0-5tz"/>
+                            <constraint firstItem="ayw-Iq-cva" firstAttribute="top" secondItem="XLQ-rv-E3d" secondAttribute="bottom" id="Ccd-Fw-KuL"/>
+                            <constraint firstItem="ayw-Iq-cva" firstAttribute="leading" secondItem="8Td-Gh-oyh" secondAttribute="leadingMargin" constant="-16" id="DWm-m9-8XT"/>
+                            <constraint firstItem="P3o-XQ-dmV" firstAttribute="top" secondItem="ayw-Iq-cva" secondAttribute="bottom" id="Opf-Oy-jyL"/>
                             <constraint firstItem="6cV-01-xOd" firstAttribute="centerX" secondItem="8Td-Gh-oyh" secondAttribute="centerX" id="PZA-G3-L3d"/>
                             <constraint firstItem="6cV-01-xOd" firstAttribute="centerY" secondItem="8Td-Gh-oyh" secondAttribute="centerY" id="iog-8i-Z5n"/>
                         </constraints>
@@ -179,7 +186,7 @@
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aN8-hk-OeP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-4571" y="1824"/>
+            <point key="canvasLocation" x="-4571.25" y="1823.2394366197184"/>
         </scene>
         <!--Tab Bar Controller-->
         <scene sceneID="1Tx-r3-G53">
@@ -1006,6 +1013,7 @@
         </scene>
     </scenes>
     <resources>
+        <image name="SoTube_Logo" width="890" height="769"/>
         <image name="forward" width="1200" height="1200"/>
         <image name="play" width="256" height="256"/>
         <image name="rewind" width="200" height="200"/>
