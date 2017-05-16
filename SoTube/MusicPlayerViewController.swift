@@ -19,7 +19,6 @@ class MusicPlayerViewController: UIViewController {
         return songList![currentSongPositionInList!]
     }
     var audioPlayer: AVAudioPlayer?
-    var displayLink: CADisplayLink?
 
     @IBOutlet weak var navigationSongTitel: UINavigationItem!
     @IBOutlet weak var albumImageView: UIImageView!
