@@ -7,7 +7,6 @@
 //
 
 import UIKit
-import AVFoundation
 
 
 
@@ -18,7 +17,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     let feedURLs = ViewModel().feeds
     let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
     
-    //var currentSong: Song?
+    
     var currentSongPositionInList = 0
     var songs: [Song]? {
         didSet {
@@ -27,7 +26,6 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
-    var audioPlayer: AVAudioPlayer?
     
     var filteredSongs: [Song] = []
     var currentPickerViewRow = 0
@@ -49,7 +47,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         sortingPickerView.dataSource = sortingOptions
         tableView.dataSource = self
         searchBar.delegate = self
-//        setSongFromJSONFeed(json: feedURL)
+        
         setSongsFromJSONFeed(jsonData: feedURLs)
         
     }
@@ -119,6 +117,12 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     */
     
+    func alterTableViewLabels(forSongList list: [Song], inCell cell: SongTableViewCell, atRow row: Int){
+        cell.artistNameLabel.text = getStringOfArtists(artists: (list[row].artistNames))
+        cell.songTitleLabel.text = list[row].songTitle
+        cell.costLabel.text = String(describing: list[row].cost)
+    }
+    
     func getStringOfArtists(artists: [String]) -> String {
         
         var fullListOfArtists = artists[0]
@@ -130,12 +134,6 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         return fullListOfArtists
     }
     
-    
-    func alterTableViewLabels(forSongList list: [Song], inCell cell: SongTableViewCell, atRow row: Int){
-        cell.artistNameLabel.text = getStringOfArtists(artists: (list[row].artistNames))
-        cell.songTitleLabel.text = list[row].songTitle
-        cell.costLabel.text = String(describing: list[row].cost)
-    }
     
     
     
@@ -163,10 +161,6 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
 
     
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sortingOptions.values[row]
-    }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         currentPickerViewRow = row
@@ -183,19 +177,16 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
 
     func sortSongs(from list: [Song]){
         var sortedList = list
+        
         switch sortingOptions.values[currentPickerViewRow] {
         case "Artist (A-Z)":
             sortedList.sort(by: {$0.artistNames[0] < $1.artistNames[0]})
-            currentPickerViewRow = 0
         case "Artist (Z-A)":
             sortedList.sort(by: {$0.artistNames[0] > $1.artistNames[0]})
-            currentPickerViewRow = 1
         case "Song Title (A-Z)":
             sortedList.sort(by: {$0.songTitle < $1.songTitle})
-            currentPickerViewRow = 2
         case "Song Title (Z-A)":
             sortedList.sort(by: {$0.songTitle > $1.songTitle})
-            currentPickerViewRow = 3
         default: break
         }
         if !filteredSongs.isEmpty {
@@ -221,16 +212,21 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else {
             filteredSongs = songs!.filter(({ (song) -> Bool in
-            return song.artistNames[0].lowercased().contains(searchText.lowercased())
+                return song.artistNames[0].lowercased().contains(searchText.lowercased())
             }))
             filteredSongs += songs!.filter(({ (song) -> Bool in
                 if song.artistNames.count > 1 {
-                    return song.artistNames[1].lowercased().contains(searchText.lowercased())
+                    if !filteredSongs.contains(where: {$0.spotify_ID == song.spotify_ID}) {
+                        return song.artistNames[1].lowercased().contains(searchText.lowercased())
+                    }
                 }
                 return false
             }))
             filteredSongs += songs!.filter(({ (song) -> Bool in
-                return song.songTitle.lowercased().contains(searchText.lowercased())
+                if !filteredSongs.contains(where: {$0.spotify_ID == song.spotify_ID}){
+                    return song.songTitle.lowercased().contains(searchText.lowercased())
+                }
+                return false
             }))
             
         }
@@ -320,7 +316,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
                         
                     }
                 if let _ = self.songs {
-                    self.songs?.append(Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url))
+                    self.songs!.append(Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url))
                 } else {
                     self.songs = [Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url)]
                 }
