@@ -7,16 +7,17 @@
 //
 
 import UIKit
-import AVFoundation
+
+
 
 
 class AllSongsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
     
 //    let feedURL = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY?"
     let feedURLs = ViewModel().feeds
-    let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
+    //let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
     
-    var currentSong: Song?
+    var currentSongPositionInList = 0
     var songs: [Song]? {
         didSet {
             if songs?.count == feedURLs.count {
@@ -27,7 +28,6 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
             }
         }
     }
-    var audioPlayer: AVAudioPlayer?
     
     var filteredSongs: [Song] = []
     var currentPickerViewRow = 0
@@ -49,7 +49,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         sortingPickerView.dataSource = sortingOptions
         tableView.dataSource = self
         searchBar.delegate = self
-//        setSongFromJSONFeed(json: feedURL)
+        
         setSongsFromJSONFeed(jsonData: feedURLs)
         
     }
@@ -74,15 +74,11 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongTableViewCell
         
         if !filteredSongs.isEmpty {
-            cell.artistNameLabel.text = getStringOfArtists(artists: (self.filteredSongs[indexPath.row].artistNames))
-            cell.songTitleLabel.text = self.filteredSongs[indexPath.row].songTitle
-            cell.costLabel.text = String(describing: self.filteredSongs[indexPath.row].cost)
+            alterTableViewLabels(forSongList: filteredSongs, inCell: cell, atRow: indexPath.row)
         }
         else {
-            if let song = self.songs?[indexPath.row] {
-                cell.artistNameLabel.text = getStringOfArtists(artists: (song.artistNames))
-                cell.songTitleLabel.text = song.songTitle
-                cell.costLabel.text = String(describing: song.cost)
+            if let songs = self.songs {
+                alterTableViewLabels(forSongList: songs, inCell: cell, atRow: indexPath.row)
             }
         }
         return cell
@@ -92,34 +88,22 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - TableView Delegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        currentSong = self.songs?[indexPath.row]
+        //currentSong = self.filteredSongs[indexPath.row]
+        currentSongPositionInList = indexPath.row
+        
         //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
         performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     
-    // MARK: - Homemade Functions
-    /*
-    func playSound(withURL url : URL) {
-        do {
-            try audioPlayer = AVAudioPlayer.init(data: Data(contentsOf: url), fileTypeHint: "mp3")
-
-        }
-        catch {print("assignment of audioplayer failed")}
-        audioPlayer?.play()
+    
+    func alterTableViewLabels(forSongList list: [Song], inCell cell: SongTableViewCell, atRow row: Int){
+        cell.artistNameLabel.text = getStringOfArtists(artists: (list[row].artistNames))
+        cell.songTitleLabel.text = list[row].songTitle
+        cell.costLabel.text = String(describing: list[row].cost)
     }
-    */
     
     func getStringOfArtists(artists: [String]) -> String {
         
@@ -131,7 +115,6 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         return fullListOfArtists
     }
-    
     
     
     
@@ -160,10 +143,6 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
 
     
     
-    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return sortingOptions.values[row]
-    }
-    
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
         
         currentPickerViewRow = row
@@ -180,19 +159,16 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
 
     func sortSongs(from list: [Song]){
         var sortedList = list
+        
         switch sortingOptions.values[currentPickerViewRow] {
         case "Artist (A-Z)":
             sortedList.sort(by: {$0.artistNames[0] < $1.artistNames[0]})
-            currentPickerViewRow = 0
         case "Artist (Z-A)":
             sortedList.sort(by: {$0.artistNames[0] > $1.artistNames[0]})
-            currentPickerViewRow = 1
         case "Song Title (A-Z)":
             sortedList.sort(by: {$0.songTitle < $1.songTitle})
-            currentPickerViewRow = 2
         case "Song Title (Z-A)":
             sortedList.sort(by: {$0.songTitle > $1.songTitle})
-            currentPickerViewRow = 3
         default: break
         }
         if !filteredSongs.isEmpty {
@@ -218,21 +194,23 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         }
         else {
             filteredSongs = songs!.filter(({ (song) -> Bool in
-            return song.artistNames[0].lowercased().contains(searchText.lowercased())
+                return song.artistNames[0].lowercased().contains(searchText.lowercased())
             }))
             filteredSongs += songs!.filter(({ (song) -> Bool in
                 if song.artistNames.count > 1 {
-                    return song.artistNames[1].lowercased().contains(searchText.lowercased())
+                    if !filteredSongs.contains(where: {$0.spotify_ID == song.spotify_ID}) {
+                        return song.artistNames[1].lowercased().contains(searchText.lowercased())
+                    }
                 }
                 return false
             }))
             filteredSongs += songs!.filter(({ (song) -> Bool in
-                return song.songTitle.lowercased().contains(searchText.lowercased())
+                if !filteredSongs.contains(where: {$0.spotify_ID == song.spotify_ID}){
+                    return song.songTitle.lowercased().contains(searchText.lowercased())
+                }
+                return false
             }))
             
-        }
-        for song in filteredSongs {
-            print(song.artistNames[0] + " " + song.songTitle)
         }
         pickerView(sortingPickerView, didSelectRow: currentPickerViewRow, inComponent: 0)
         tableView.reloadData()
@@ -253,7 +231,14 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "musicPlayerSegue" {
             if let destinationVC = segue.destination as? MusicPlayerViewController {
-                destinationVC.currentSong = self.currentSong
+                //destinationVC.currentSong = self.currentSong
+                if !filteredSongs.isEmpty {
+                    destinationVC.songList = filteredSongs
+                }
+                else if songs != nil {
+                    destinationVC.songList = songs
+                }
+                destinationVC.currentSongPositionInList = self.currentSongPositionInList
             }
         }
     }
@@ -313,7 +298,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
                         
                     }
                 if let _ = self.songs {
-                    self.songs?.append(Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url))
+                    self.songs!.append(Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url))
                 } else {
                     self.songs = [Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url)]
                 }
