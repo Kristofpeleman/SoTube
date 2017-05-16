@@ -15,8 +15,7 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     
 //    let feedURL = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY?"
     let feedURLs = ViewModel().feeds
-    let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
-    
+    //let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
     
     var currentSongPositionInList = 0
     var songs: [Song]? {
@@ -94,28 +93,8 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
     
     
-    // MARK: - Homemade Functions
-    /*
-    func playSound(withURL url : URL) {
-        do {
-            try audioPlayer = AVAudioPlayer.init(data: Data(contentsOf: url), fileTypeHint: "mp3")
-
-        }
-        catch {print("assignment of audioplayer failed")}
-        audioPlayer?.play()
-    }
-    */
     
     func alterTableViewLabels(forSongList list: [Song], inCell cell: SongTableViewCell, atRow row: Int){
         cell.artistNameLabel.text = getStringOfArtists(artists: (list[row].artistNames))
