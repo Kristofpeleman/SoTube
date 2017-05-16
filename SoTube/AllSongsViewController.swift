@@ -10,6 +10,8 @@ import UIKit
 import AVFoundation
 
 
+
+
 class AllSongsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
     
 //    let feedURL = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY?"
@@ -71,15 +73,11 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongTableViewCell
         
         if !filteredSongs.isEmpty {
-            cell.artistNameLabel.text = getStringOfArtists(artists: (self.filteredSongs[indexPath.row].artistNames))
-            cell.songTitleLabel.text = self.filteredSongs[indexPath.row].songTitle
-            cell.costLabel.text = String(describing: self.filteredSongs[indexPath.row].cost)
+            alterTableViewLabels(forSongList: filteredSongs, inCell: cell, atRow: indexPath.row)
         }
         else {
-            if let song = self.songs?[indexPath.row] {
-                cell.artistNameLabel.text = getStringOfArtists(artists: (song.artistNames))
-                cell.songTitleLabel.text = song.songTitle
-                cell.costLabel.text = String(describing: song.cost)
+            if let songs = self.songs {
+                alterTableViewLabels(forSongList: songs, inCell: cell, atRow: indexPath.row)
             }
         }
         return cell
@@ -89,7 +87,12 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     //MARK: - TableView Delegate Methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        currentSong = self.songs?[indexPath.row]
+        if !filteredSongs.isEmpty {
+            currentSong = self.filteredSongs[indexPath.row]
+        }
+        else {
+            currentSong = self.songs?[indexPath.row]
+        }
         //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
         performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
     }
@@ -130,6 +133,11 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     }
     
     
+    func alterTableViewLabels(forSongList list: [Song], inCell cell: SongTableViewCell, atRow row: Int){
+        cell.artistNameLabel.text = getStringOfArtists(artists: (list[row].artistNames))
+        cell.songTitleLabel.text = list[row].songTitle
+        cell.costLabel.text = String(describing: list[row].cost)
+    }
     
     
     
@@ -227,9 +235,6 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
                 return song.songTitle.lowercased().contains(searchText.lowercased())
             }))
             
-        }
-        for song in filteredSongs {
-            print(song.artistNames[0] + " " + song.songTitle)
         }
         pickerView(sortingPickerView, didSelectRow: currentPickerViewRow, inComponent: 0)
         tableView.reloadData()
