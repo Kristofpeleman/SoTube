@@ -11,7 +11,8 @@ import UIKit
 
 
 
-class AllSongsViewController: UIViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
+class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
+    
     
 //    let feedURL = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY?"
     let feedURLs = ViewModel().feeds
@@ -44,6 +45,8 @@ class AllSongsViewController: UIViewController, UITableViewDelegate, UITableView
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        print(auth ?? "AUTH is nil")
+        print(session ?? "SESSION is nil")
         
     
         sortingPickerView.dataSource = sortingOptions

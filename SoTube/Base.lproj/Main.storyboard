@@ -15,7 +15,7 @@
         <!--AllSongs-->
         <scene sceneID="spS-NV-S4R">
             <objects>
-                <viewController title="AllSongs" id="uS8-Hq-Lct" customClass="AllSongsViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                <viewController storyboardIdentifier="AllSongsVC" title="AllSongs" id="uS8-Hq-Lct" customClass="AllSongsViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="rhP-m4-jTh"/>
                         <viewControllerLayoutGuide type="bottom" id="TY1-4m-eLT"/>
@@ -167,6 +167,7 @@
                                 <state key="normal" title="Connect with Spotify"/>
                                 <connections>
                                     <action selector="connectToSpotify:" destination="vnE-1c-72W" eventType="touchUpInside" id="OjX-pa-BOu"/>
+                                    <segue destination="ZM7-2z-NjU" kind="presentation" identifier="TabBarControllerSegue" id="1Lr-Nn-ZLw"/>
                                 </connections>
                             </button>
                             <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SoTube_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="ayw-Iq-cva">
@@ -183,6 +184,9 @@
                             <constraint firstItem="6cV-01-xOd" firstAttribute="centerY" secondItem="8Td-Gh-oyh" secondAttribute="centerY" id="iog-8i-Z5n"/>
                         </constraints>
                     </view>
+                    <connections>
+                        <outlet property="startBtn" destination="6cV-01-xOd" id="tLP-lI-myM"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="aN8-hk-OeP" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>

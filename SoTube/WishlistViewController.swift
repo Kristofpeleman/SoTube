@@ -8,11 +8,12 @@
 
 import UIKit
 
-class WishlistViewController: UIViewController {
+class WishlistViewController: TopMediaViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-                
+        print(auth ?? "AUTH is nil")
+        print(session ?? "SESSION is nil")
     }
 
     override func didReceiveMemoryWarning() {

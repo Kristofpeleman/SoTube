@@ -1,19 +1,22 @@
 //
-//  MySongsViewController.swift
+//  TopMediaViewController.swift
 //  SoTube
 //
-//  Created by VDAB Cursist on 09/05/17.
+//  Created by Kristof Peleman on 16/05/17.
 //  Copyright © 2017 VDAB Cursist. All rights reserved.
 //
 
 import UIKit
 
-class MySongsViewController: TopMediaViewController {
+class TopMediaViewController: UIViewController {
+    
+    var auth: SPTAuth?
+    var session: SPTSession?
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        print(auth ?? "AUTH is nil")
-        print(session ?? "SESSION is nil")
+
+        // Do any additional setup after loading the view.
     }
 
     override func didReceiveMemoryWarning() {

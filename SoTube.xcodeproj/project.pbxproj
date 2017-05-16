@@ -32,6 +32,7 @@
 		6D24D3A91ECB8AF00087024D /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D24D3A61ECB8AF00087024D /* SpotifyAuthentication.framework */; };
 		6D24D3AA1ECB8AF00087024D /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D24D3A71ECB8AF00087024D /* SpotifyMetadata.framework */; };
 		6D24D3AE1ECB8B350087024D /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D24D3AD1ECB8B350087024D /* BridgeViewController.m */; };
+		6D24D3B01ECBAC410087024D /* TopMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D24D3AF1ECBAC410087024D /* TopMediaViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -65,6 +66,7 @@
 		6D24D3AB1ECB8B350087024D /* SoTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoTube-Bridging-Header.h"; sourceTree = "<group>"; };
 		6D24D3AC1ECB8B350087024D /* BridgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeViewController.h; sourceTree = "<group>"; };
 		6D24D3AD1ECB8B350087024D /* BridgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeViewController.m; sourceTree = "<group>"; };
+		6D24D3AF1ECBAC410087024D /* TopMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMediaViewController.swift; sourceTree = "<group>"; };
 		FF68D940F44C872C8192EC57 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -86,6 +88,7 @@
 		2F2FD2961EC1E6AF00628995 /* SongsViewControllers */ = {
 			isa = PBXGroup;
 			children = (
+				6D24D3AF1ECBAC410087024D /* TopMediaViewController.swift */,
 				2F2FD28A1EC1E0BD00628995 /* AllSongsViewController.swift */,
 				2F2FD28E1EC1E65200628995 /* MySongsViewController.swift */,
 				2F2FD2901EC1E67500628995 /* FavoriteSongsViewController.swift */,
@@ -312,6 +315,7 @@
 				2F7F29271EC5970600D2B03A /* Song.swift in Sources */,
 				2F2FD28B1EC1E0BD00628995 /* AllSongsViewController.swift in Sources */,
 				2F91E93A1EC0571E004A2E99 /* ViewController.swift in Sources */,
+				6D24D3B01ECBAC410087024D /* TopMediaViewController.swift in Sources */,
 				2F2FD2931EC1E68200628995 /* WishlistViewController.swift in Sources */,
 				6D24D3A41ECB85750087024D /* SpotifyConnectViewController.swift in Sources */,
 				2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */,

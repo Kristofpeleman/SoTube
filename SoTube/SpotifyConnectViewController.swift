@@ -10,12 +10,19 @@ import UIKit
 
 class SpotifyConnectViewController: UIViewController, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var startBtn: UIButton!
+    
+    
+    // MARK: - Constants and Variables
+    
     var auth = SPTAuth.defaultInstance()!
     var session:SPTSession!
     var player: SPTAudioStreamingController?
     var loginUrl: URL?
     
-
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
@@ -34,9 +41,11 @@ class SpotifyConnectViewController: UIViewController, SPTAudioStreamingDelegate,
     // MARK: - IBActions
     
     @IBAction func connectToSpotify(_ sender: UIButton) {
-        if UIApplication.shared.openURL(loginUrl!) {
-            if auth.canHandle(auth.redirectURL) {
-                // To do - build in error handling
+        if startBtn.currentTitle != "Start SoTube" {
+            if UIApplication.shared.openURL(loginUrl!) {
+                if auth.canHandle(auth.redirectURL) {
+                    // To do - build in error handling
+                }
             }
         }
     }
@@ -44,15 +53,35 @@ class SpotifyConnectViewController: UIViewController, SPTAudioStreamingDelegate,
     
     
 
-    /*
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         // Get the new view controller using segue.destinationViewController.
         // Pass the selected object to the new view controller.
+        if segue.identifier == "TabBarControllerSegue" {
+
+            let destinationVC = segue.destination as? UITabBarController
+            
+            for vc in destinationVC!.viewControllers! {
+                let viewController = vc as? TopMediaViewController
+                viewController?.auth = self.auth
+                viewController?.session = self.session
+            }
+            
+        }
     }
-    */
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        if identifier == "TabBarControllerSegue" {
+            if startBtn.currentTitle == "Start SoTube" {
+                return true
+            }
+            return false
+        }
+        return false
+    }
+ 
     
     
     // MARK: - Homemade Functions
@@ -65,24 +94,14 @@ class SpotifyConnectViewController: UIViewController, SPTAudioStreamingDelegate,
     }
     
     func updateAfterFirstLogin () {
+        startBtn.setTitle("Start SoTube", for: .normal)
         if let sessionObj:AnyObject = UserDefaults.standard.object(forKey: "SpotifySession") as AnyObject? {
             let sessionDataObj = sessionObj as! Data
             let firstTimeSession = NSKeyedUnarchiver.unarchiveObject(with: sessionDataObj) as! SPTSession
             self.session = firstTimeSession
-            //            auth.renewSession(auth.session, callback: {(error, session) in
-            //                if error != nil {
-            //                    print("BOE!")
-            //                    print("\(String(describing: error?.localizedDescription))")
-            //                }
-            //                else if session == nil {
-            //                    print("no session to renew!")
-            //                }
-            //                else {
-            //                    print("session renewed!")
-            //                }
-            //            })
             
-            initializePlayer(authSession: session)
+            
+//            initializePlayer(authSession: session)
         }
     }
     
