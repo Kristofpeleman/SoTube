@@ -13,11 +13,15 @@ import Firebase
 class AppDelegate: UIResponder, UIApplicationDelegate {
 
     var window: UIWindow?
-
+    var auth = SPTAuth()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplicationLaunchOptionsKey: Any]?) -> Bool {
         // Override point for customization after application launch.
+        auth.redirectURL = URL(string: "SoTube://returnAfterLogin")
+        auth.sessionUserDefaultsKey = "current session"
+        
         FIRApp.configure()
+        
         
         return true
     }
@@ -42,6 +46,28 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
 
     func applicationWillTerminate(_ application: UIApplication) {
         // Called when the application is about to terminate. Save data if appropriate. See also applicationDidEnterBackground:.
+    }
+    
+    func application(_ application: UIApplication, open url: URL, sourceApplication: String?, annotation: Any) -> Bool {
+        // 2- check if app can handle redirect URL
+        if auth.canHandle(auth.redirectURL) {
+            // 3 - handle callback in closure
+            auth.handleAuthCallback(withTriggeredAuthURL: url, callback: { (error, session) in
+                // 4- handle error
+                if error != nil {
+                    print("error!")
+                }
+                // 5- Add session to User Defaults
+                let userDefaults = UserDefaults.standard
+                let sessionData = NSKeyedArchiver.archivedData(withRootObject: session as Any)
+                userDefaults.set(sessionData, forKey: "SpotifySession")
+                userDefaults.synchronize()
+                // 6 - Tell notification center login is successful
+                NotificationCenter.default.post(name: Notification.Name(rawValue: "loginSuccessfull"), object: nil)
+            })
+            return true
+        }
+        return false
     }
 
 

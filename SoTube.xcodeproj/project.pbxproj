@@ -27,6 +27,11 @@
 		2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */; };
 		2FE813BD1EC450FC00F418E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FE813BC1EC450FC00F418E7 /* GoogleService-Info.plist */; };
 		599072BA7E0EBDDF41ABDD93 /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */; };
+		6D24D3A41ECB85750087024D /* SpotifyConnectViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D24D3A31ECB85750087024D /* SpotifyConnectViewController.swift */; };
+		6D24D3A81ECB8AF00087024D /* SpotifyAudioPlayback.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D24D3A51ECB8AF00087024D /* SpotifyAudioPlayback.framework */; };
+		6D24D3A91ECB8AF00087024D /* SpotifyAuthentication.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D24D3A61ECB8AF00087024D /* SpotifyAuthentication.framework */; };
+		6D24D3AA1ECB8AF00087024D /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D24D3A71ECB8AF00087024D /* SpotifyMetadata.framework */; };
+		6D24D3AE1ECB8B350087024D /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D24D3AD1ECB8B350087024D /* BridgeViewController.m */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -53,6 +58,13 @@
 		2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		2FE813BC1EC450FC00F418E7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
+		6D24D3A31ECB85750087024D /* SpotifyConnectViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SpotifyConnectViewController.swift; sourceTree = "<group>"; };
+		6D24D3A51ECB8AF00087024D /* SpotifyAudioPlayback.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAudioPlayback.framework; sourceTree = "<group>"; };
+		6D24D3A61ECB8AF00087024D /* SpotifyAuthentication.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyAuthentication.framework; sourceTree = "<group>"; };
+		6D24D3A71ECB8AF00087024D /* SpotifyMetadata.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; path = SpotifyMetadata.framework; sourceTree = "<group>"; };
+		6D24D3AB1ECB8B350087024D /* SoTube-Bridging-Header.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "SoTube-Bridging-Header.h"; sourceTree = "<group>"; };
+		6D24D3AC1ECB8B350087024D /* BridgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeViewController.h; sourceTree = "<group>"; };
+		6D24D3AD1ECB8B350087024D /* BridgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeViewController.m; sourceTree = "<group>"; };
 		FF68D940F44C872C8192EC57 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
@@ -61,7 +73,10 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				6D24D3AA1ECB8AF00087024D /* SpotifyMetadata.framework in Frameworks */,
 				599072BA7E0EBDDF41ABDD93 /* Pods_SoTube.framework in Frameworks */,
+				6D24D3A91ECB8AF00087024D /* SpotifyAuthentication.framework in Frameworks */,
+				6D24D3A81ECB8AF00087024D /* SpotifyAudioPlayback.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -133,6 +148,7 @@
 				2F91E9371EC0571E004A2E99 /* AppDelegate.swift */,
 				2F91E9391EC0571E004A2E99 /* ViewController.swift */,
 				2F91E93B1EC0571E004A2E99 /* Main.storyboard */,
+				6D24D3A31ECB85750087024D /* SpotifyConnectViewController.swift */,
 				2FBEF7F71EC5D42C000398CC /* MusicPlayerViewController.swift */,
 				2F7F29281EC5975400D2B03A /* Model */,
 				2F2FD2961EC1E6AF00628995 /* SongsViewControllers */,
@@ -141,6 +157,9 @@
 				2F91E9401EC0571E004A2E99 /* LaunchScreen.storyboard */,
 				2F91E9431EC0571E004A2E99 /* Info.plist */,
 				2FE813BC1EC450FC00F418E7 /* GoogleService-Info.plist */,
+				6D24D3AC1ECB8B350087024D /* BridgeViewController.h */,
+				6D24D3AD1ECB8B350087024D /* BridgeViewController.m */,
+				6D24D3AB1ECB8B350087024D /* SoTube-Bridging-Header.h */,
 			);
 			path = SoTube;
 			sourceTree = "<group>";
@@ -148,6 +167,9 @@
 		9429930D4C6551792C405DE9 /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				6D24D3A51ECB8AF00087024D /* SpotifyAudioPlayback.framework */,
+				6D24D3A61ECB8AF00087024D /* SpotifyAuthentication.framework */,
+				6D24D3A71ECB8AF00087024D /* SpotifyMetadata.framework */,
 				3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */,
 			);
 			name = Frameworks;
@@ -197,6 +219,7 @@
 				TargetAttributes = {
 					2F91E9331EC0571D004A2E99 = {
 						CreatedOnToolsVersion = 8.2;
+						LastSwiftMigration = 0830;
 						ProvisioningStyle = Automatic;
 					};
 				};
@@ -290,6 +313,7 @@
 				2F2FD28B1EC1E0BD00628995 /* AllSongsViewController.swift in Sources */,
 				2F91E93A1EC0571E004A2E99 /* ViewController.swift in Sources */,
 				2F2FD2931EC1E68200628995 /* WishlistViewController.swift in Sources */,
+				6D24D3A41ECB85750087024D /* SpotifyConnectViewController.swift in Sources */,
 				2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */,
 				2F2FD2951EC1E6A000628995 /* FilteredSongsViewController.swift in Sources */,
 				2F7F292A1EC5C3FB00D2B03A /* ViewModel.swift in Sources */,
@@ -299,6 +323,7 @@
 				2F36DDD41EC9A942003ABD64 /* SortingOptions.swift in Sources */,
 				2F49BF7A1EC32FA70031F5E4 /* CreateAccountViewController.swift in Sources */,
 				2F2FD28F1EC1E65200628995 /* MySongsViewController.swift in Sources */,
+				6D24D3AE1ECB8B350087024D /* BridgeViewController.m in Sources */,
 				2F91E9381EC0571E004A2E99 /* AppDelegate.swift in Sources */,
 				2FBEF7F81EC5D42C000398CC /* MusicPlayerViewController.swift in Sources */,
 			);
@@ -422,11 +447,18 @@
 			baseConfigurationReference = 0ABDEAD415BACF5138757979 /* Pods-SoTube.debug.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SoTube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = be.vdab.KriFaRo.SoTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoTube/SoTube-Bridging-Header.h";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
@@ -437,11 +469,17 @@
 			baseConfigurationReference = FF68D940F44C872C8192EC57 /* Pods-SoTube.release.xcconfig */;
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				CLANG_ENABLE_MODULES = YES;
+				FRAMEWORK_SEARCH_PATHS = (
+					"$(inherited)",
+					"$(PROJECT_DIR)",
+				);
 				INFOPLIST_FILE = SoTube/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 10.1;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = be.vdab.KriFaRo.SoTube;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_OBJC_BRIDGING_HEADER = "SoTube/SoTube-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
 				TARGETED_DEVICE_FAMILY = 1;
 			};
