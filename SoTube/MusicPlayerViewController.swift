@@ -23,12 +23,12 @@ class MusicPlayerViewController: UIViewController {
 
     @IBOutlet weak var navigationSongTitel: UINavigationItem!
     @IBOutlet weak var albumImageView: UIImageView!
-    @IBOutlet weak var songProgressView: UIProgressView!
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var playOrPauseButton: UIButton!
     
     @IBOutlet weak var volumeSlider: UISlider!
+    @IBOutlet weak var musicSlider: UISlider!
     
     
     
@@ -37,6 +37,8 @@ class MusicPlayerViewController: UIViewController {
                 // Do any additional setup after loading the view.
         //navigationSongTitel.title = currentSong?.songTitle
         updateTitleSliderAndLabels()
+        
+        _ = Timer.scheduledTimer(timeInterval: 0.1, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
         
     }
 
@@ -49,11 +51,11 @@ class MusicPlayerViewController: UIViewController {
     
     
     @IBAction func previousSong(_ sender: UIButton) {
+        resetPlayerAndSliders()
         
-        audioPlayer = nil
-        if currentSongPositionInList != nil {
+        if currentSongPositionInList != nil && songList != nil {
             if currentSongPositionInList == 0 {
-                currentSongPositionInList = (songList?.count)! - 1
+                currentSongPositionInList = songList!.count - 1
             }
             else {
                 currentSongPositionInList! -= 1
@@ -67,53 +69,64 @@ class MusicPlayerViewController: UIViewController {
     
     @IBAction func playSong(_ sender: UIButton) {
         
-        
-        if audioPlayer != nil {
-            if (audioPlayer?.isPlaying)! {
-                audioPlayer?.pause()
+        if let audioPlayer = audioPlayer {
+            if audioPlayer.isPlaying {
+                audioPlayer.pause()
                 playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
                 
-                displayLink?.invalidate()
             }
             else {
-                audioPlayer?.play()
+                audioPlayer.play()
                 playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
-                displayLink = CADisplayLink(target: self, selector: (#selector(MusicPlayerViewController.updateSliderProgress)))
-                displayLink?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
             
             }
         }
-        else {
-            if songList != nil {
-                //playSound(withURL: URL(string: (currentSong?.previewURLAssString)!)!)
-                playSound(withURL: URL(string: (currentSong.previewURLAssString))!)
-            }
-            playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
-            displayLink = CADisplayLink(target: self, selector: (#selector(MusicPlayerViewController.updateSliderProgress)))
-            displayLink?.add(to: RunLoop.current, forMode: RunLoopMode.defaultRunLoopMode)
+        else if let _ = songList {
+            playSound(withURL: URL(string: (currentSong.previewURLAssString))!)
+            musicSlider.maximumValue = Float(audioPlayer!.duration)
             
-            if Int((audioPlayer?.duration)!) < 10 {
-                endTimeLabel.text = "\(String(Int((audioPlayer?.duration)!/100))):0\(String(Int((audioPlayer?.duration)!)))"
+            currentTimeLabel.text = returnCurrentTimeInSong()
+            
+            if Int(audioPlayer!.duration) < 10 {
+                endTimeLabel.text = "\(String(Int(audioPlayer!.duration/100))):0\(String(Int(audioPlayer!.duration)))"
             }
             else {
-                endTimeLabel.text = "\(String(Int((audioPlayer?.duration)!/100))):\(String(Int((audioPlayer?.duration)!)))"
+                endTimeLabel.text = "\(String(Int(audioPlayer!.duration/100))):\(String(Int(audioPlayer!.duration)))"
             }
+            playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
         }
     }
     
+    
+    @IBAction func alterMusicTime(_ sender: UISlider) {
+       updateSliderProgress()
+    }
+    
+    
     func updateSliderProgress(){
-        if audioPlayer != nil {
+        if let audioPlayer = audioPlayer {
+            audioPlayer.stop()
+            audioPlayer.currentTime = TimeInterval(musicSlider.value)
             currentTimeLabel.text = returnCurrentTimeInSong()
+            audioPlayer.prepareToPlay()
+            audioPlayer.play()
             
-            let progress = (audioPlayer?.currentTime)! / (audioPlayer?.duration)!
-            songProgressView.setProgress(Float(progress), animated: false)
+            
+        }
+    }
+    
+    func musicSliderUpdate(){
+        if let audioPlayer = audioPlayer {
+            musicSlider.value = Float(audioPlayer.currentTime)
+            currentTimeLabel.text = returnCurrentTimeInSong()
         }
     }
     
     @IBAction func nextSong(_ sender: UIButton) {
-        audioPlayer = nil
-        if currentSongPositionInList != nil {
-            if currentSongPositionInList! == (songList?.count)!-1 {
+        resetPlayerAndSliders()
+        
+        if currentSongPositionInList != nil && songList != nil {
+            if currentSongPositionInList! == songList!.count - 1 {
                 currentSongPositionInList = 0
             }
             else {
@@ -126,7 +139,7 @@ class MusicPlayerViewController: UIViewController {
     
     
     @IBAction func back(_ sender: UIBarButtonItem) {
-        audioPlayer = nil
+        resetPlayerAndSliders()
         dismiss(animated: true, completion: nil)
     }
     
@@ -135,9 +148,15 @@ class MusicPlayerViewController: UIViewController {
     // MARK: - Volume Slider
     
     @IBAction func changeVolume(_ sender: UISlider) {
-        if audioPlayer != nil {
-            audioPlayer?.volume = volumeSlider.value
+        if let audioPlayer = audioPlayer {
+            audioPlayer.volume = volumeSlider.value
         }
+    }
+    
+    func resetPlayerAndSliders(){
+        audioPlayer = nil
+        musicSlider.value = 0
+        volumeSlider.value = 0.5
     }
     
     
@@ -145,16 +164,16 @@ class MusicPlayerViewController: UIViewController {
     
     
     
-    
-    
-    
     func returnCurrentTimeInSong() -> String{
-        if Int((audioPlayer?.currentTime)!) < 10 {
-            return "00:0\(String(Int((audioPlayer?.currentTime)!)))"
+        if let audioPlayer = audioPlayer {
+            if Int(audioPlayer.currentTime) < 10 {
+                return "\(String(Int(audioPlayer.currentTime / 100))):0\(String(Int(audioPlayer.currentTime)))"
+            }
+            else {
+                return "\(String(Int(audioPlayer.currentTime / 100))):\(String(Int(audioPlayer.currentTime)))"
+            }
         }
-        else {
-            return "\(String(Int((audioPlayer?.currentTime)!/100))):\(String(Int((audioPlayer?.currentTime)!)))"
-        }
+        return "00:00"
     }
     
     
@@ -168,7 +187,9 @@ class MusicPlayerViewController: UIViewController {
             try audioPlayer = AVAudioPlayer.init(data: Data(contentsOf: url), fileTypeHint: "mp3")
             
         }
-        catch {print("assignment of audioplayer failed")}
+        catch {
+            print("assignment of audioplayer failed")
+        }
         audioPlayer?.play()
     }
     
@@ -181,7 +202,6 @@ class MusicPlayerViewController: UIViewController {
         currentTimeLabel.text = "00:00"
         endTimeLabel.text = "00:00"
         playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
-        songProgressView.progress = 0
     }
     
 
