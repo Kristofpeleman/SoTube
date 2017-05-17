@@ -10,7 +10,7 @@ import UIKit
 import AVFoundation
 // Don't forget to import AVFoundation when working with sounds and videos
 
-class MusicPlayerViewController: UIViewController {
+class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     
     var auth: SPTAuth?
     var session: SPTSession?

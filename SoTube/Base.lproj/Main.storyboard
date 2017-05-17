@@ -1,17 +1,52 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vnE-1c-72W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vnE-1c-72W">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
         <capability name="documents saved in the Xcode 8 format" minToolsVersion="8.0"/>
     </dependencies>
     <scenes>
+        <!--Player View Controller-->
+        <scene sceneID="hLt-LY-Xrz">
+            <objects>
+                <viewController id="JCN-7j-Wxn" customClass="PlayerViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="aoN-Cu-Q87"/>
+                        <viewControllerLayoutGuide type="bottom" id="vkw-Zc-Qkx"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="4Zn-qg-pAN">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Sl3-P9-Q1g">
+                                <rect key="frame" x="136" y="264" width="48" height="40"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Sl3-P9-Q1g" secondAttribute="height" multiplier="155:128" id="83S-Cz-RFR"/>
+                                </constraints>
+                                <state key="normal" title="Button" image="play"/>
+                                <connections>
+                                    <action selector="play:" destination="JCN-7j-Wxn" eventType="touchUpInside" id="cJm-6f-aEV"/>
+                                </connections>
+                            </button>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="Sl3-P9-Q1g" firstAttribute="width" secondItem="4Zn-qg-pAN" secondAttribute="width" multiplier="0.15" id="1ms-ze-Hee"/>
+                            <constraint firstItem="Sl3-P9-Q1g" firstAttribute="centerX" secondItem="4Zn-qg-pAN" secondAttribute="centerX" id="7aE-Fa-bgR"/>
+                            <constraint firstItem="Sl3-P9-Q1g" firstAttribute="centerY" secondItem="4Zn-qg-pAN" secondAttribute="centerY" id="RXW-h6-9My"/>
+                        </constraints>
+                    </view>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="u7L-aU-RLx" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-420" y="-1263"/>
+        </scene>
         <!--AllSongs-->
         <scene sceneID="spS-NV-S4R">
             <objects>
@@ -143,6 +178,7 @@
                         <outlet property="sortingPickerView" destination="8tG-DK-Rpe" id="vPF-Tf-1KF"/>
                         <outlet property="tableView" destination="5cm-du-jW8" id="q7S-RP-DCs"/>
                         <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="vHY-iE-ELE"/>
+                        <segue destination="JCN-7j-Wxn" kind="show" identifier="playerSegue" id="MFm-ja-XKK"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="JOX-Lj-dF9" userLabel="First Responder" sceneMemberID="firstResponder"/>
