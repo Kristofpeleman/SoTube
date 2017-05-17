@@ -12,6 +12,8 @@ import AVFoundation
 
 class MusicPlayerViewController: UIViewController {
     
+    var auth: SPTAuth?
+    var session: SPTSession?
     
     // The current position of the song inside songList (remember: we're comming from a VC in the SongsViewControllers folder/group which gave this info)
     var currentSongPositionInList: Int?
@@ -23,6 +25,9 @@ class MusicPlayerViewController: UIViewController {
     var currentSong: Song {
         return songList![currentSongPositionInList!]
     }
+    
+    // Variable because it's an optional
+    //var currentUser: User?
     
     // The piece that plays our sound
     var audioPlayer: AVAudioPlayer?
@@ -105,19 +110,26 @@ class MusicPlayerViewController: UIViewController {
             // Call function to start playing sound based on our url that was saved as a String (We had fun with slightly altering the previewURL name...don't change it unless you want a lot of errors)
             playSound(withURL: URL(string: (currentSong.previewURLAssString))!)
             
-            // The maximumValue of the musicSlider becomes the duration of the song in audioPlayer
-            musicSlider.maximumValue = Float(audioPlayer!.duration)
             
             // currentTimeLabel needs to show the currentTime of the song/audioPlayer
             currentTimeLabel.text = returnCurrentTimeInSong()
             
-            // Code to change the endTimeLabel based on how long the song's duration is
-            if Int(audioPlayer!.duration) < 10 {
-                endTimeLabel.text = "\(String(Int(audioPlayer!.duration/100))):0\(String(Int(audioPlayer!.duration)))"
-            }
-            else {
-                endTimeLabel.text = "\(String(Int(audioPlayer!.duration/100))):\(String(Int(audioPlayer!.duration)))"
-            }
+            
+            // If we're listening to the preview
+            //if user.mySongs.contains{currentSong} {
+                // The label says 30secs (duration of preview)
+            //    endTimeLabel.text = "00:30"
+           // }
+                // If we aren't listening to a preview
+           // else {
+                // Change the endTimeLabel based on how long the song's duration is
+                if Int(audioPlayer!.duration) < 10 {
+                    endTimeLabel.text = "\(String(Int(audioPlayer!.duration/100))):0\(String(Int(audioPlayer!.duration)))"
+                }
+                else {
+                    endTimeLabel.text = "\(String(Int(audioPlayer!.duration/100))):\(String(Int(audioPlayer!.duration)))"
+                }
+        //    }
             
             // Since audioPlayer is currently playing --> the play-image of the button has to turn into a pause
             playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
@@ -158,11 +170,21 @@ class MusicPlayerViewController: UIViewController {
     func musicSliderUpdate(){
         // Check if audioPlayer exists/isn't "nil"
         if let audioPlayer = audioPlayer {
+            /*if preview {
+                musicSlider.maximumValue = 30
+            }
+            else {*/
+                musicSlider.maximumValue = Float(audioPlayer.duration)
+           // }
             // change musicSlider's value/position on slider to the currentTime of audioPlayer
             musicSlider.value = Float(audioPlayer.currentTime)
             
             // change currentTimeLabel to match new currentTime
             currentTimeLabel.text = returnCurrentTimeInSong()
+            
+            if musicSlider.value == musicSlider.maximumValue {
+                self.audioPlayer = nil
+            }
         }
     }
     

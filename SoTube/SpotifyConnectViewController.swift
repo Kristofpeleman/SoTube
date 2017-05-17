@@ -44,6 +44,7 @@ class SpotifyConnectViewController: UIViewController, SPTAudioStreamingDelegate,
         if startBtn.currentTitle != "Start SoTube" {
             if UIApplication.shared.openURL(loginUrl!) {
                 if auth.canHandle(auth.redirectURL) {
+                    
                     // To do - build in error handling
                 }
             }
