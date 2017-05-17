@@ -14,6 +14,8 @@ class MusicPlayerViewController: UIViewController {
     
     var auth: SPTAuth?
     var session: SPTSession?
+    var player: SPTAudioStreamingController?
+    
     
     // The current position of the song inside songList (remember: we're comming from a VC in the SongsViewControllers folder/group which gave this info)
     var currentSongPositionInList: Int?

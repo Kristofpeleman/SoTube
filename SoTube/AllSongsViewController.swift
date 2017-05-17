@@ -94,6 +94,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         //currentSong = self.filteredSongs[indexPath.row]
         currentSongPositionInList = indexPath.row
         
+        
+        
         //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
         performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
     }
@@ -235,6 +237,10 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         if segue.identifier == "musicPlayerSegue" {
             if let destinationVC = segue.destination as? MusicPlayerViewController {
                 //destinationVC.currentSong = self.currentSong
+                
+                destinationVC.auth = self.auth
+                destinationVC.session = self.session
+                
                 if !filteredSongs.isEmpty {
                     destinationVC.songList = filteredSongs
                 }
@@ -246,36 +252,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         }
     }
     
-    
-    
-    
-    
-//    func setSongFromJSONFeed(json: String) {
-//        
-//        let request = URLRequest(url: URL(string: json)!)
-//        let session = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
-//        let task = session.dataTask(with: request) {
-//            data, response, error in
-//            if let jsonData = data,
-//                let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary,
-//                let songName = feed.value(forKeyPath: "name") as? String,
-//                let artists = feed.value(forKeyPath: "artists") as? NSArray,
-//                let spotify_ID = feed.value(forKeyPath: "id") as? String,
-//                let preview_url = feed.value(forKeyPath: "preview_url") as? String
-//            {
-//                var allArtists: [String] = []
-//                for dictionary in artists {
-//                    allArtists.append((dictionary as! NSDictionary).value(forKey: "name") as! String? ?? "NOT FOUND")
-//                }
-//                
-//                self.song = Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url)
-//                
-//            }
-//        }
-//        
-//        task.resume()
-    //
-    //    }
     
     // MARK: - JSON
     
