@@ -17,14 +17,12 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
 //    let feedURL = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY?"
     let feedURLs = ViewModel().feeds
     //let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
+    let newReleasesFeed = TopMediaViewModel().newReleasesURLAsString
     
     var currentSongPositionInList = 0
     var songs: [Song]? {
         didSet {
             if songs?.count == feedURLs.count {
-                self.tableView.reloadData()
-            }
-            else if songs?.count == 15 {
                 self.tableView.reloadData()
             }
         }
@@ -60,6 +58,10 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.tableView.reloadData()
     }
     
     
@@ -188,11 +190,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         
         tableView.reloadData()
     }
-    
-    
-    
-    
-    
+
     
     // MARK: - SearchBar
     
@@ -223,15 +221,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         pickerView(sortingPickerView, didSelectRow: currentPickerViewRow, inComponent: 0)
         tableView.reloadData()
     }
-    
-    
-    
-    
-    
-    
-    
-    
-    
     
     
     // MARK: - Segues
@@ -286,7 +275,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                     let songName = feed.value(forKeyPath: "name") as? String,
                     let artists = feed.value(forKeyPath: "artists") as? NSArray,
                     let spotify_ID = feed.value(forKeyPath: "id") as? String,
-                    let preview_url = feed.value(forKeyPath: "preview_url") as? String
+                    let preview_url = feed.value(forKeyPath: "preview_url") as? String,
+                    let duration = feed.value(forKeyPath: "duration_ms") as? Int
                 {
                     var allArtists: [String] = []
                     for dictionary in artists {
@@ -294,11 +284,11 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                         
                         
                     }
-                if let _ = self.songs {
-                    self.songs!.append(Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url))
-                } else {
-                    self.songs = [Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, previewURLAssString: preview_url)]
-                }
+                    if let _ = self.songs {
+                        self.songs!.append(Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, duration: duration/1000, previewURLAssString: preview_url))
+                    } else {
+                        self.songs = [Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, duration: duration/1000, previewURLAssString: preview_url)]
+                    }
                     
                 }
             }
@@ -307,6 +297,42 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             task.resume()
         }
         
+    }
+    
+    func loadNewReleasesFromJSON(jsonData: [String]) {
+        
+        for json in jsonData {
+            
+            let request = URLRequest(url: URL(string: json)!)
+            let session = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
+            let task = session.dataTask(with: request) {
+                data, response, error in
+                if let jsonData = data,
+                    let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary,
+                    let songName = feed.value(forKeyPath: "name") as? String,
+                    let artists = feed.value(forKeyPath: "artists") as? NSArray,
+                    let spotify_ID = feed.value(forKeyPath: "id") as? String,
+                    let preview_url = feed.value(forKeyPath: "preview_url") as? String,
+                    let duration = feed.value(forKeyPath: "duration_ms") as? Int
+                {
+                    var allArtists: [String] = []
+                    for dictionary in artists {
+                        allArtists.append((dictionary as! NSDictionary).value(forKey: "name") as! String? ?? "NOT FOUND")
+                        
+                        
+                    }
+                    if let _ = self.songs {
+                        self.songs!.append(Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, duration: duration/1000, previewURLAssString: preview_url))
+                    } else {
+                        self.songs = [Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, duration: duration/1000, previewURLAssString: preview_url)]
+                    }
+                    
+                }
+            }
+            
+            
+            task.resume()
+        }
     }
 }
 

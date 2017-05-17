@@ -19,18 +19,20 @@ struct Song {
         } else {return nil}
     }
     var cost: Int
+    var duration: Int
     var favorite: Bool = false
     var spotifyJSONFeed: String {
         return "https://api.spotify.com/v1/tracks/" + spotify_ID! + "?"
     }
     
-    init(songTitle: String, artistNames: [String], spotify_ID: String, previewURLAssString: String) {
+    init(songTitle: String, artistNames: [String], spotify_ID: String, duration: Int, previewURLAssString: String) {
         self.songTitle = songTitle
         self.artistNames = artistNames
         self.spotify_ID = spotify_ID
         self.previewURLAssString = previewURLAssString
 //        self.fullSongURLAssString = nil
         self.cost = 2
+        self.duration = duration
     }
     
 }
