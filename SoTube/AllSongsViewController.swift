@@ -94,6 +94,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         //currentSong = self.filteredSongs[indexPath.row]
         currentSongPositionInList = indexPath.row
         
+        
+        
         //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
         performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
     }
@@ -235,6 +237,10 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         if segue.identifier == "musicPlayerSegue" {
             if let destinationVC = segue.destination as? MusicPlayerViewController {
                 //destinationVC.currentSong = self.currentSong
+                
+                destinationVC.auth = self.auth
+                destinationVC.session = self.session
+                
                 if !filteredSongs.isEmpty {
                     destinationVC.songList = filteredSongs
                 }
