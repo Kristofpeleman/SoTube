@@ -16,6 +16,7 @@
 		2F49BF781EC32ECE0031F5E4 /* LogInViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49BF771EC32ECE0031F5E4 /* LogInViewController.swift */; };
 		2F49BF7A1EC32FA70031F5E4 /* CreateAccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49BF791EC32FA70031F5E4 /* CreateAccountViewController.swift */; };
 		2F49BF7C1EC32FB70031F5E4 /* ForgotPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F49BF7B1EC32FB70031F5E4 /* ForgotPasswordViewController.swift */; };
+		2F72F0101ECC3EE200EF70FB /* TopMediaViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F72F00F1ECC3EE200EF70FB /* TopMediaViewModel.swift */; };
 		2F7F29271EC5970600D2B03A /* Song.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F29261EC5970600D2B03A /* Song.swift */; };
 		2F7F292A1EC5C3FB00D2B03A /* ViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F7F29291EC5C3FB00D2B03A /* ViewModel.swift */; };
 		2F91E9381EC0571E004A2E99 /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F91E9371EC0571E004A2E99 /* AppDelegate.swift */; };
@@ -46,6 +47,7 @@
 		2F49BF771EC32ECE0031F5E4 /* LogInViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LogInViewController.swift; sourceTree = "<group>"; };
 		2F49BF791EC32FA70031F5E4 /* CreateAccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateAccountViewController.swift; sourceTree = "<group>"; };
 		2F49BF7B1EC32FB70031F5E4 /* ForgotPasswordViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ForgotPasswordViewController.swift; sourceTree = "<group>"; };
+		2F72F00F1ECC3EE200EF70FB /* TopMediaViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMediaViewModel.swift; sourceTree = "<group>"; };
 		2F7F29261EC5970600D2B03A /* Song.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Song.swift; sourceTree = "<group>"; };
 		2F7F29291EC5C3FB00D2B03A /* ViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ViewModel.swift; sourceTree = "<group>"; };
 		2F91E9341EC0571E004A2E99 /* SoTube.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = SoTube.app; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -122,6 +124,7 @@
 			isa = PBXGroup;
 			children = (
 				2F7F29291EC5C3FB00D2B03A /* ViewModel.swift */,
+				2F72F00F1ECC3EE200EF70FB /* TopMediaViewModel.swift */,
 			);
 			name = ViewModel;
 			sourceTree = "<group>";
@@ -312,6 +315,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				2F72F0101ECC3EE200EF70FB /* TopMediaViewModel.swift in Sources */,
 				2F7F29271EC5970600D2B03A /* Song.swift in Sources */,
 				2F2FD28B1EC1E0BD00628995 /* AllSongsViewController.swift in Sources */,
 				2F91E93A1EC0571E004A2E99 /* ViewController.swift in Sources */,
