@@ -151,7 +151,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
          else {*/
         if let _ = player {
             if let _ = songList {
-                musicSlider.maximumValue = 30
+                musicSlider.maximumValue = Float(currentSong.duration)
                 // }
                 // change musicSlider's value/position on slider to the currentTime of player
                 musicSlider.value = Float((player?.playbackState.position)!)
@@ -160,7 +160,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 currentTimeLabel.text = returnCurrentTimeInSong()
                 
                 if musicSlider.value == musicSlider.maximumValue {
-                    player = nil
+                    pausePlayer()
+                    musicSlider.value = 0
                 }
             }
         }
@@ -212,7 +213,6 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // Removes all contents of player and changes sliders' values to their standard
     func resetPlayerAndSliders(){
         pausePlayer()
-        player = nil
         musicSlider.value = 0
     }
     
@@ -228,17 +228,36 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             let currentTime = player.playbackState.position
             // If the currentTime < 10 --> put a "0" in the 10-value of seconds (eg.: currentTime = 5 --> 0:05; else it would have been 0:5)
             if Int(currentTime) < 10 {
-                return "\(Int(currentTime) / 100):0\(String(describing: Int(currentTime)))"
+                return "\(Int(currentTime / 60)):0\(Int(currentTime))"
             }
                 // If currentTime > 10 --> just put currentTime without the "0" in the 10-value of seconds (eg.: currentTime = 15 --> 0:15)
             else {
-                return "\(Int(currentTime) / 100):\(String(describing: Int(currentTime)))"
+                return "\(Int(currentTime / 60)):\(Int(currentTime) % 60)"
             }
         }
         // If player doesn't exist, just return "00:00"
         return "00:00"
     }
     
+    
+    // Returns the currentTime in the song as a string (meant for changing currentTimeLabel)
+    func returnEndTimeInSong() -> String{
+        // player needs to exist
+        if let _ = player {
+            
+            let endTime = currentSong.duration
+            // If the currentTime < 10 --> put a "0" in the 10-value of seconds (eg.: currentTime = 5 --> 0:05; else it would have been 0:5)
+            if (endTime % 60) < 10 {
+                return "\(endTime / 60):0\(endTime)"
+            }
+                // If currentTime > 10 --> just put currentTime without the "0" in the 10-value of seconds (eg.: currentTime = 15 --> 0:15)
+            else {
+                return "\(endTime / 60):\(endTime % 60)"
+            }
+        }
+        // If player doesn't exist, just return "00:00"
+        return "00:00"
+    }
     
     
     
@@ -300,7 +319,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         
         changeVolume(volumeSlider)
         currentTimeLabel.text = "00:00"
-        endTimeLabel.text = "00:00"
+        endTimeLabel.text = returnEndTimeInSong()
         
         // Change the image of this button to a play-image
         playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)

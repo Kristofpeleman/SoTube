@@ -96,10 +96,12 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         //currentSong = self.filteredSongs[indexPath.row]
         currentSongPositionInList = indexPath.row
         
+        /*
         let song = self.songs?[currentSongPositionInList]
+        
         if let _ = song?.fullSongURLAssString {
             performSegue(withIdentifier: "playerSegue", sender: nil)
-        }
+        }*/
         
         //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
         performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
