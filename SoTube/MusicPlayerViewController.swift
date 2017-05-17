@@ -29,7 +29,7 @@ class MusicPlayerViewController: UIViewController {
 
     
     // MARK: - Outlets
-    @IBOutlet weak var navigationSongTitel: UINavigationItem!
+    @IBOutlet weak var navigationSongTitle: UINavigationItem!
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
@@ -170,7 +170,6 @@ class MusicPlayerViewController: UIViewController {
     @IBAction func nextSong(_ sender: UIButton) {
         // Same as previousSong, except here we're going to the next songs.
         
-        
         resetPlayerAndSliders()
         
         if currentSongPositionInList != nil && songList != nil {
@@ -196,13 +195,17 @@ class MusicPlayerViewController: UIViewController {
     
     // MARK: - Volume Slider
     
-    
+    // Action for a UISlider to change the volume of our audioPlayer
     @IBAction func changeVolume(_ sender: UISlider) {
+        // First make sure audioPlayer exists
         if let audioPlayer = audioPlayer {
+            // The volume of audioPlayer changes based on the value of volumeSlider (min. value: 0 (0%); max. value: 1 (100%))
             audioPlayer.volume = volumeSlider.value
         }
     }
     
+    
+    // Removes all contents of audioPlayer and changes sliders' values to their standard
     func resetPlayerAndSliders(){
         audioPlayer = nil
         musicSlider.value = 0
@@ -213,16 +216,20 @@ class MusicPlayerViewController: UIViewController {
     
     
     
-    
+    // Returns the currentTime in the song as a string (meant for changing currentTimeLabel)
     func returnCurrentTimeInSong() -> String{
+        // audioPlayer needs to exist
         if let audioPlayer = audioPlayer {
+            // If the currentTime < 10 --> put a "0" in the 10-value of seconds (eg.: currentTime = 5 --> 0:05; else it would have been 0:5)
             if Int(audioPlayer.currentTime) < 10 {
                 return "\(String(Int(audioPlayer.currentTime / 100))):0\(String(Int(audioPlayer.currentTime)))"
             }
+            // If currentTime > 10 --> just put currentTime without the "0" in the 10-value of seconds (eg.: currentTime = 15 --> 0:15)
             else {
                 return "\(String(Int(audioPlayer.currentTime / 100))):\(String(Int(audioPlayer.currentTime)))"
             }
         }
+        // If audioPlayer doesn't exist, just return "00:00"
         return "00:00"
     }
     
@@ -231,26 +238,33 @@ class MusicPlayerViewController: UIViewController {
     
     
     
-    
+    // Function to create an audioPlayer based on a URL
     func playSound(withURL url : URL) {
+        
+        // Using "do" so we can use a "try"
         do {
+            // Try to give an AVAudioPlayer containing the parameter as URL to audioPlayer
             try audioPlayer = AVAudioPlayer.init(data: Data(contentsOf: url), fileTypeHint: "mp3")
-            
         }
+        // If the "try" in "do" fails, we print the failure
         catch {
             print("assignment of audioplayer failed")
         }
+        // Start playing our AudioPlayer
         audioPlayer?.play()
     }
     
     
     
-    
+    // Function to update the Title, the Sliders and the Labels
     func updateTitleSliderAndLabels(){
-        navigationSongTitel.title = currentSong.songTitle
+        // Changes the title in our navigationBar to the songTitle
+        navigationSongTitle.title = currentSong.songTitle
         
         currentTimeLabel.text = "00:00"
         endTimeLabel.text = "00:00"
+        
+        // Change the image of this button to a play-image
         playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
     }
     
