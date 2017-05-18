@@ -31,6 +31,28 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     var filteredSongs: [Song] = []
     var currentPickerViewRow = 0
     
+    var albumIDs: [String]? {
+        didSet {
+                print(albumIDs!)
+                getTrackIDs()
+        }
+    }
+    
+    var trackIDs: [String]?
+        {
+        didSet {
+            if trackIDs!.count == 20 {
+                print(trackIDs!)
+                let feeds = trackIDs!.map{"https://api.spotify.com/v1/tracks/" + $0 + "?"}
+                setSongsFromJSONFeed(jsonData: feeds)
+            }
+        }
+    }
+    
+    var albumFeeds: [String]? {
+        return self.albumIDs?.map{"https://api.spotify.com/v1/albums/" + $0 + "?"}
+    }
+    
     
     
 
@@ -51,7 +73,10 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         tableView.dataSource = self
         searchBar.delegate = self
         
-        setSongsFromJSONFeed(jsonData: feedURLs)
+//        setSongsFromJSONFeed(jsonData: feedURLs)
+//        loadAlbumsFromNewReleases(json: newReleasesFeed)
+//        test()
+        getAlbumIDs()
         
     }
 
@@ -301,41 +326,153 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         
     }
     
-    func loadNewReleasesFromJSON(jsonData: [String]) {
+    
+    // NEW STUFF 18/05
+    
+    func test () {
+        let request = try? SPTRequest.createRequest(for: URL(string: newReleasesFeed)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         
-        for json in jsonData {
+        print(request!.allHTTPHeaderFields ?? "NO HTTP HEADER FIELDS")
+        print(request?.url ?? "MISSING URL")
+        
+        let session1 = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
+        let task = session1.dataTask(with: request!) {
+            data, response, error in
+            if let jsonData = data,
+                let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary,
+                let albumItems = feed.value(forKeyPath: "albums.items") as? NSArray
+                
+            {
+                var albumHREFs: [String] = []
+                for dictionary in albumItems {
+                    albumHREFs.append((dictionary as! NSDictionary).value(forKey: "id") as! String? ?? "NOT FOUND")
+                    
+                }
+                
+                print(albumHREFs)
+                
+                for albumHREF in albumHREFs {
+                    
+                    let request = URLRequest(url: URL(string: albumHREF)!)
+                    let session = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
+                    let task = session.dataTask(with: request) {
+                        data, response, error in
+                        if let jsonData = data,
+                            let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary,
+
+                            let tracksArray = feed.value(forKeyPath: "tracks.items") as? NSArray
+
+                        {
+                            let track = tracksArray[0] as! NSDictionary
+                            
+                            
+                            
+                            let songName = track.value(forKeyPath: "name") as? String
+                            let spotify_ID = track.value(forKeyPath: "id") as? String
+                            let preview_url = track.value(forKeyPath: "preview_url") as? String
+                            let duration = track.value(forKeyPath: "duration_ms") as? Int
+                            let artists = track.value(forKeyPath: "artists") as? NSArray
+                            
+                            var allArtists: [String] = []
+                            for dictionary in artists! {
+                                allArtists.append((dictionary as! NSDictionary).value(forKey: "name") as! String? ?? "NOT FOUND")
+                                
+                                
+                            }
+                            if let _ = self.songs {
+                                self.songs!.append(Song(songTitle: songName!, artistNames: allArtists, spotify_ID: spotify_ID!, duration: duration!/1000, previewURLAssString: preview_url!))
+                            } else {
+                                self.songs = [Song(songTitle: songName!, artistNames: allArtists, spotify_ID: spotify_ID!, duration: duration!/1000, previewURLAssString: preview_url!)]
+                            }
+                            
+                        }
+                    }
+                    
+                    
+                    task.resume()
+                
+                }
+                
+                
+            }
+                
+            else {
+                print(error ?? "NO ERROR")
+                print(data ?? "NO DATA")
+                print(response ?? "NO RESPONSE")
+            }
             
-            let request = URLRequest(url: URL(string: json)!)
-            let session = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
-            let task = session.dataTask(with: request) {
+            
+        }
+        
+        task.resume()
+        
+    }
+    
+    func getAlbumIDs() {
+        
+        let request = try? SPTRequest.createRequest(for: URL(string: newReleasesFeed)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+        
+        print(request!.allHTTPHeaderFields ?? "NO HTTP HEADER FIELDS")
+        print(request?.url ?? "MISSING URL")
+        
+        let session1 = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
+        let task = session1.dataTask(with: request!) {
+            data, response, error in
+            if let jsonData = data,
+                let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary,
+                let albumItems = feed.value(forKeyPath: "albums.items") as? NSArray
+                
+            {
+                var albumIDArray: [String] = []
+                for dictionary in albumItems {
+                    albumIDArray.append((dictionary as! NSDictionary).value(forKey: "id") as! String? ?? "NOT FOUND")
+                    
+                }
+                self.albumIDs = albumIDArray
+                
+            }
+        }
+        
+        task.resume()
+        
+    }
+    
+    func getTrackIDs() {
+        
+        for feed in self.albumFeeds! {
+            
+            let request = try? SPTRequest.createRequest(for: URL(string: feed)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+            
+            let session1 = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
+            let task = session1.dataTask(with: request!) {
                 data, response, error in
                 if let jsonData = data,
                     let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary,
-                    let songName = feed.value(forKeyPath: "name") as? String,
-                    let artists = feed.value(forKeyPath: "artists") as? NSArray,
-                    let spotify_ID = feed.value(forKeyPath: "id") as? String,
-                    let preview_url = feed.value(forKeyPath: "preview_url") as? String,
-                    let duration = feed.value(forKeyPath: "duration_ms") as? Int
-                {
-                    var allArtists: [String] = []
-                    for dictionary in artists {
-                        allArtists.append((dictionary as! NSDictionary).value(forKey: "name") as! String? ?? "NOT FOUND")
-                        
-                        
-                    }
-                    if let _ = self.songs {
-                        self.songs!.append(Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, duration: duration/1000, previewURLAssString: preview_url))
-                    } else {
-                        self.songs = [Song(songTitle: songName, artistNames: allArtists, spotify_ID: spotify_ID, duration: duration/1000, previewURLAssString: preview_url)]
-                    }
+                    let trackItems = feed.value(forKeyPath: "tracks.items") as? NSArray
                     
+                {
+                    //                print(data!)
+                    //                print(response!)
+                    //                print(error)
+                    let firstTrack = trackItems[0] as! NSDictionary
+                    
+                    if let _ = self.trackIDs {
+                        self.trackIDs?.append(firstTrack.value(forKeyPath: "id") as! String)
+                    } else {self.trackIDs = [firstTrack.value(forKeyPath: "id") as! String]}
+
+                }
+                else {
+                    print("Error getting track IDs")
                 }
             }
-            
             
             task.resume()
         }
     }
+    
+    
 }
+
 
 
