@@ -35,7 +35,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     // MARK: - Outlets
     @IBOutlet weak var navigationSongTitle: UINavigationItem!
+    @IBOutlet weak var previousAlbumImageView: UIImageView!
     @IBOutlet weak var albumImageView: UIImageView!
+    @IBOutlet weak var nextAlbumImageView: UIImageView!
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
     @IBOutlet weak var playOrPauseButton: UIButton! // Outlet because it's image can change
@@ -44,12 +46,11 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     @IBOutlet weak var musicSlider: UISlider!
     
     
-    
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // Calling function updateTitleSliderAndLabels (can't add comma's in function names)
-        updateTitleSliderAndLabels()
+        updateOutlets()
         changeVolume(volumeSlider)
         
     }
@@ -61,13 +62,75 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     }
     
     override func viewDidAppear(_ animated: Bool) {
+        // A timer repeating musicSliderUpdate every few seconds (or less depending on timeInterval) to update the musicSlider
+        _ = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
+    }
+    
+    
+    
+    // When the musicSlider is touched
+    @IBAction func alterMusicTime(_ sender: UISlider) {
+        // update slider by itself
         
-        // A timer repeating musicSliderUpdate every 0.1 second to update the musicSlider
-        _ = Timer.scheduledTimer(timeInterval: 1, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
+        sender.addTarget(nil, action: #selector(self.updateSliderProgress), for: UIControlEvents.valueChanged)
+        
+    }
+    
+                                                                                                                                                                                       
+    func updateSliderProgress(){
+        // Check if player exists/isn't "nil"
+        if let _ = player {
+            // Stop playing
+            pausePlayer()
+            
+            // Remember the currentTime/position in our player
+            let currentTime = TimeInterval(musicSlider.value)
+            
+            updateTimeLabels()
+            
+            // change currentTime of player to  wherever you dragged the musicSlider
+            playSound(startingAt: currentTime)
+            
+            
+            continuePlaying()
+            
+        }
+        
+    }
+    
+    // Function to update the musicSlider
+    func musicSliderUpdate(){
+            
+        // If player exists and songList exists (a "," is the same as "&&")
+        if let _ = player, let _ = songList {
+            
+            // MaximumValue has to be a Float, duration is a Int
+            musicSlider.maximumValue = Float(currentSong.duration)
+            
+            // change musicSlider's value/position on slider to the currentTime of player
+            musicSlider.setValue(Float(player!.playbackState.position), animated: true)
+            
+            // Out of laziness: call the function that updates both timeLabels
+            updateTimeLabels()
+
+        }
+    }
+    
+    
+    @IBAction func swipeToPreviousSong(_ sender: UISwipeGestureRecognizer) {
+        if sender.state == .ended {
+            goToPreviousSong()
+        }
+    }
+    
+    
+    // Functions speak for themselves
+    @IBAction func previousSong(_ sender: UIButton) {
+        goToPreviousSong()
     }
     
     // Button to go to/load the previous song in our list
-    @IBAction func previousSong(_ sender: UIButton) {
+    func goToPreviousSong(){
         // resets player and the positions of the sliders
         resetPlayerAndSliders()
         
@@ -83,7 +146,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 currentSongPositionInList! -= 1
             }
         }
-        updateTitleSliderAndLabels()
+        updateOutlets()
+        playSound(startingAt: 0)
     }
     
     
@@ -113,64 +177,20 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             }
         }
     }
-    
-    
-    // When the musicSlider is touched
-    @IBAction func alterMusicTime(_ sender: UISlider) {
-        // update slider by itself
-        updateSliderProgress()
-    }
-    
-    
-    func updateSliderProgress(){
-        // Check if player exists/isn't "nil"
-        if let player = player {
-            // Remember the currentTime/position in our player
-            let currentTime = TimeInterval(musicSlider.value)
-            
-            // stop playing
-            pausePlayer()
-            
-            // change currentTime of player to  wherever you dragged the musicSlider
-            playSound(startingAt: currentTime)
-            
-            continuePlaying()
-            
-            // change currentTimeLabel to match new currentTime
-            currentTimeLabel.text = returnCurrentTimeInSong()
-            
+
+    @IBAction func swipeToNextSong(_ sender: UISwipeGestureRecognizer) {
+        if sender.state == .ended {
+        goToNextSong()
         }
     }
     
-    // Function to update the musicSlider
-    func musicSliderUpdate(){
-        // Check if player exists/isn't "nil"
-        /*if preview {
-         musicSlider.maximumValue = 30
-         }
-         else {*/
-        if let _ = player {
-            if let _ = songList {
-                musicSlider.maximumValue = Float(currentSong.duration)
-                // }
-                // change musicSlider's value/position on slider to the currentTime of player
-                musicSlider.value = Float((player?.playbackState.position)!)
-                
-                // change currentTimeLabel to match new currentTime
-                currentTimeLabel.text = returnCurrentTimeInSong()
-                
-                if musicSlider.value == musicSlider.maximumValue {
-                    pausePlayer()
-                    musicSlider.value = 0
-                }
-            }
-        }
-    }
-    
-    
+    // Functions speak for themselves
     @IBAction func nextSong(_ sender: UIButton) {
-        // Same as previousSong, except here we're going to the next songs.
-        
+        goToNextSong()
+    }
+    
+    // Same as previousSong, except here we're going to the next songs.
+    func goToNextSong(){
         resetPlayerAndSliders()
         
         if currentSongPositionInList != nil && songList != nil {
@@ -181,8 +201,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 currentSongPositionInList! += 1
             }
         }
-        updateTitleSliderAndLabels()
-        
+        updateOutlets()
+        playSound(startingAt: 0)
     }
     
     
@@ -220,49 +240,6 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     
     
-    // Returns the currentTime in the song as a string (meant for changing currentTimeLabel)
-    func returnCurrentTimeInSong() -> String{
-        // player needs to exist
-        if let player = player {
-            
-            let currentTime = player.playbackState.position
-            // If the currentTime < 10 --> put a "0" in the 10-value of seconds (eg.: currentTime = 5 --> 0:05; else it would have been 0:5)
-            if Int(currentTime) < 10 {
-                return "\(Int(currentTime / 60)):0\(Int(currentTime))"
-            }
-                // If currentTime > 10 --> just put currentTime without the "0" in the 10-value of seconds (eg.: currentTime = 15 --> 0:15)
-            else {
-                return "\(Int(currentTime / 60)):\(Int(currentTime) % 60)"
-            }
-        }
-        // If player doesn't exist, just return "00:00"
-        return "00:00"
-    }
-    
-    
-    // Returns the currentTime in the song as a string (meant for changing currentTimeLabel)
-    func returnEndTimeInSong() -> String{
-        // player needs to exist
-        if let _ = player {
-            
-            let endTime = currentSong.duration
-            // If the currentTime < 10 --> put a "0" in the 10-value of seconds (eg.: currentTime = 5 --> 0:05; else it would have been 0:5)
-            if (endTime % 60) < 10 {
-                return "\(endTime / 60):0\(endTime)"
-            }
-                // If currentTime > 10 --> just put currentTime without the "0" in the 10-value of seconds (eg.: currentTime = 15 --> 0:15)
-            else {
-                return "\(endTime / 60):\(endTime % 60)"
-            }
-        }
-        // If player doesn't exist, just return "00:00"
-        return "00:00"
-    }
-    
-    
-    
-    
-    
     // Function to create an player based on a URL
     func playSound(startingAt currentTime: TimeInterval) {
         player?.playSpotifyURI(currentSong.fullSongURLAssString, startingWith: 0, startingWithPosition: currentTime, callback: {(error) in
@@ -270,26 +247,49 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 print("Starting to play")
             }
         })
+        // Since it start playing instantly -> the button's image need to become a pause
         playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
         
     }
+    
+    
+    // Function to initialize the session for our player
     func initialize(authSession: SPTSession){
+        // If the player exists we will want to pause it (just in case)
         pausePlayer()
-        
+        // If player doesn't exist/is nil
         if self.player == nil {
+            // Give player the value of an SPTAudioStreamingController, more specificly it's sharedInstance (so we don't need to type "sharedInstance" every time we want to use it)
             self.player = SPTAudioStreamingController.sharedInstance()
+            
+            // Set player's delegate and playbackDelegate
             self.player!.playbackDelegate = self
             self.player!.delegate = self
-            try! self.player!.start(withClientId: auth?.clientID)
-            self.player!.login(withAccessToken: authSession.accessToken)
+            
+            // If the player isn't logged in yet
+            if !player!.loggedIn {
+                // A try that can't fail, if it could fail our app would be useless
+                // Start the player with clientID
+                try! self.player!.start(withClientId: auth?.clientID)
+                
+                // Log in with the access token (token lasts 1 hour) (this will also automaticly activate audioStreamingDidLogin)
+                self.player!.login(withAccessToken: authSession.accessToken)
+            }
+            // If he is already logged in
+            else {
+                audioStreamingDidLogin(player)
+            }
         }
     }
     
+    // Function activates when login was succesful
     func audioStreamingDidLogin(_ audioStreaming: SPTAudioStreamingController!) {
+        // Call the function to play our sound; "startingAt" needs the position in the song where we want to start (position defined in seconds); since we want to start at the beginning of the song, we use 0
         playSound(startingAt: 0)
     }
     
     
+    // Function to pause the song
     func pausePlayer(){
         if let player = player {
             player.setIsPlaying(false, callback: {(error) in
@@ -300,6 +300,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         }
     }
     
+    // Function to continue playing the song
     func continuePlaying(){
         if let player = player {
             player.setIsPlaying(true, callback: {(error) in
@@ -310,20 +311,101 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         }
     }
     
+    // Function speaks for itself; WARNING: DO NOT CALL AT VIEWDIDLOAD -> At viewDidLoad we don't have a player.playbackState.position yet, so we will crash
+    func updateTimeLabels(){
+        // Call our function to change the value in the label
+        currentTimeLabel.text = returnCurrentTimeInSong()
+        
+        // Call our function to change the value in the label
+        endTimeLabel.text = returnEndTimeInSong()
+    }
     
+    /*
+    func updateImageViews(){
+        if let songList = songList, let currentSongPositionInList = currentSongPositionInList {
+            if currentSongPositionInList == 0 {
+                previousAlbumImageView.image = songList.last.image
+            }
+            else {
+                previousAlbumImageView.image = songList[currentSongPositionInList - 1].image
+            }
+            albumImageView.image = currentSong.image
+            
+            if currentSongPositionInList == songList.count - 1 {
+                nextAlbumImageView.image = songList.first.image
+            }
+            else {
+                nextAlbumImageView.image = songList[currentSongPositionInList + 1].image
+            }
+        }
+    }
+    */
     // Function to update the Title, the Sliders and the Labels
-    func updateTitleSliderAndLabels(){
+    func updateOutlets(){
         // Changes the title in our navigationBar to the songTitle
         initialize(authSession: session!)
         navigationSongTitle.title = currentSong.songTitle
         
+   //     updateImageViews()
+        
+        // Volume needs to adjust to where the volumeSlider currently is
         changeVolume(volumeSlider)
-        currentTimeLabel.text = "00:00"
+        
+        // We don't have a currentTime yet, but since we start at 0... (also the reason why we don't call updateTimeLabels())
+        currentTimeLabel.text = "0:00"
+        
+        // Call our function to change the value in the label
         endTimeLabel.text = returnEndTimeInSong()
+        
         
         // Change the image of this button to a play-image
         playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
     }
     
     
+    
+    // Returns the currentTime in the song as a string (meant for changing currentTimeLabel)
+    func returnCurrentTimeInSong() -> String{
+        // player needs to exist
+        if let player = player {
+            
+            let currentTime = player.playbackState.position
+            // If the currentTime < 10 --> put a "0" in the 10-value of seconds (eg.: currentTime = 5 --> 0:05; else it would have been 0:5)
+            if Int(currentTime) % 60 < 10 {
+                return "\(Int(currentTime / 60)):0\(Int(currentTime) % 60)"
+            }
+                // If currentTime > 10 --> just put currentTime without the "0" in the 10-value of seconds (eg.: currentTime = 15 --> 0:15)
+            else {
+                return "\(Int(currentTime / 60)):\(Int(currentTime) % 60)"
+            }
+        }
+        // If player doesn't exist, just return "00:00"
+        return "0:00"
+    }
+    
+    
+    // Returns the endTime in the song as a string (meant for changing endTimeLabel)
+    func returnEndTimeInSong() -> String{
+        // player needs to exist
+        if let _ = player {
+            
+            // The duration of our song that is going to play is given inside the class Song
+            let endTime = currentSong.duration
+            
+            // If the currentTime < 10 --> put a "0" in the 10-value of seconds (eg.: currentTime = 5 --> 0:05; else it would have been 0:5)
+            if (endTime % 60) < 10 {
+                return "\(endTime / 60):0\(endTime % 60)"
+            }
+                // If currentTime > 10 --> just put currentTime without the "0" in the 10-value of seconds (eg.: currentTime = 15 --> 0:15)
+            else {
+                return "\(endTime / 60):\(endTime % 60)"
+            }
+        }
+        // If player doesn't exist, just return "00:00"
+        return "0:00"
+    }
+    
+    
+    
+
 }
