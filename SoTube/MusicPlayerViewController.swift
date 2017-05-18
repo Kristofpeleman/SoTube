@@ -72,35 +72,41 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     @IBAction func alterMusicTime(_ sender: UISlider) {
         // update slider by itself
         
-        sender.addTarget(nil, action: #selector(self.updateSliderProgress), for: UIControlEvents.valueChanged)
-        
+        musicSlider.addTarget(nil, action: #selector(updateSliderProgress), for: .touchUpInside)
+        musicSlider.addTarget(nil, action: #selector(updateSliderProgress), for: .touchUpOutside)
+        musicSlider.actions(forTarget: nil, forControlEvent: .touchUpInside)
+        musicSlider.actions(forTarget: nil, forControlEvent: .touchUpOutside)
     }
     
-                                                                                                                                                                                       
+    
     func updateSliderProgress(){
         // Check if player exists/isn't "nil"
+    
         if let _ = player {
             // Stop playing
             pausePlayer()
             
-            // Remember the currentTime/position in our player
+            
             let currentTime = TimeInterval(musicSlider.value)
             
             updateTimeLabels()
             
             // change currentTime of player to  wherever you dragged the musicSlider
-            playSound(startingAt: currentTime)
-            
-            
+            playSound(startingAt: currentTime)            
             continuePlaying()
             
         }
         
     }
     
+    
+    
+    
+    
+    
     // Function to update the musicSlider
     func musicSliderUpdate(){
-            
+        if !musicSlider.isTouchInside {
         // If player exists and songList exists (a "," is the same as "&&")
         if let _ = player, let _ = songList {
             
@@ -112,7 +118,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             
             // Out of laziness: call the function that updates both timeLabels
             updateTimeLabels()
-
+            }
         }
     }
     
@@ -180,7 +186,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
 
     @IBAction func swipeToNextSong(_ sender: UISwipeGestureRecognizer) {
         if sender.state == .ended {
-        goToNextSong()
+            goToNextSong()
         }
     }
     
@@ -230,14 +236,6 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     }
     
     
-    // Removes all contents of player and changes sliders' values to their standard
-    func resetPlayerAndSliders(){
-        pausePlayer()
-        musicSlider.value = 0
-    }
-    
-    
-    
     
     
     // Function to create an player based on a URL
@@ -249,7 +247,6 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         })
         // Since it start playing instantly -> the button's image need to become a pause
         playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
-        
     }
     
     
@@ -318,6 +315,13 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         
         // Call our function to change the value in the label
         endTimeLabel.text = returnEndTimeInSong()
+    }
+    
+    
+    // Removes all contents of player and changes sliders' values to their standard
+    func resetPlayerAndSliders(){
+        pausePlayer()
+        musicSlider.value = 0
     }
     
     /*
