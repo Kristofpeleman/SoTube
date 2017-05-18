@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vnE-1c-72W">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vnE-1c-72W">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -387,6 +387,17 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="zKD-bu-nQP">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                            </imageView>
+                            <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="fDU-Cd-hS5">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="K67-wZ-UZF">
+                                    <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                                    <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                </view>
+                                <blurEffect style="light"/>
+                            </visualEffectView>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbw-oP-2tT">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                 <constraints>
@@ -483,14 +494,20 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <gestureRecognizers/>
                         <constraints>
+                            <constraint firstItem="fDU-Cd-hS5" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" id="11J-MH-D8O"/>
                             <constraint firstItem="rf3-ne-yDb" firstAttribute="top" secondItem="fRL-mb-Erf" secondAttribute="bottom" constant="18" id="1Sl-Up-qtt"/>
                             <constraint firstItem="fRL-mb-Erf" firstAttribute="top" secondItem="O19-jx-HLe" secondAttribute="bottom" constant="25" id="32R-sd-jKc"/>
+                            <constraint firstItem="zKD-bu-nQP" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" id="3V2-AC-BV9"/>
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="top" secondItem="sbw-oP-2tT" secondAttribute="bottom" constant="50" id="4CI-pV-9Ka"/>
                             <constraint firstItem="b0M-87-zPn" firstAttribute="top" secondItem="rf3-ne-yDb" secondAttribute="bottom" constant="50" id="5LD-8N-hTP"/>
                             <constraint firstItem="O19-jx-HLe" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="trailing" constant="8" id="6WJ-pg-77g"/>
+                            <constraint firstItem="zKD-bu-nQP" firstAttribute="centerY" secondItem="Od7-6S-ieB" secondAttribute="centerY" id="8EH-KF-VR4"/>
                             <constraint firstItem="3f7-FR-f8I" firstAttribute="leading" secondItem="Od7-6S-ieB" secondAttribute="leadingMargin" constant="8" id="9Gt-9I-C1k"/>
                             <constraint firstItem="84f-Fb-3eK" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="0.2" id="A9t-vJ-aT7"/>
+                            <constraint firstItem="zKD-bu-nQP" firstAttribute="centerX" secondItem="Od7-6S-ieB" secondAttribute="centerX" id="Ahk-Vp-TXZ"/>
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="centerY" secondItem="fRL-mb-Erf" secondAttribute="centerY" id="D9U-qQ-qBK"/>
+                            <constraint firstItem="fDU-Cd-hS5" firstAttribute="centerY" secondItem="Od7-6S-ieB" secondAttribute="centerY" id="FEQ-Me-9Zy"/>
+                            <constraint firstItem="zKD-bu-nQP" firstAttribute="height" secondItem="Od7-6S-ieB" secondAttribute="height" id="FfA-ew-8Cr"/>
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="centerX" secondItem="Od7-6S-ieB" secondAttribute="centerX" id="KoE-Op-hSu"/>
                             <constraint firstItem="O19-jx-HLe" firstAttribute="top" relation="greaterThanOrEqual" secondItem="mbO-FT-hWy" secondAttribute="bottom" constant="20" id="L8g-WS-m3A"/>
                             <constraint firstAttribute="trailing" secondItem="84f-Fb-3eK" secondAttribute="trailing" id="NdK-Rm-Pgd"/>
@@ -501,6 +518,7 @@
                             <constraint firstAttribute="trailingMargin" secondItem="zZG-Jg-unL" secondAttribute="trailing" constant="8" id="YKb-qi-DGg"/>
                             <constraint firstItem="84f-Fb-3eK" firstAttribute="centerY" secondItem="mbO-FT-hWy" secondAttribute="centerY" id="ZDH-JO-M3Y"/>
                             <constraint firstItem="fRL-mb-Erf" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="fsY-vO-mp6"/>
+                            <constraint firstItem="fDU-Cd-hS5" firstAttribute="height" secondItem="Od7-6S-ieB" secondAttribute="height" id="h7k-YC-y7g"/>
                             <constraint firstItem="sbw-oP-2tT" firstAttribute="leading" secondItem="Od7-6S-ieB" secondAttribute="leading" id="hZs-ap-n63"/>
                             <constraint firstItem="fRL-mb-Erf" firstAttribute="centerX" secondItem="mbO-FT-hWy" secondAttribute="centerX" id="ihG-0t-8dc"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="centerY" secondItem="fRL-mb-Erf" secondAttribute="centerY" id="jKW-e9-6hb"/>
@@ -515,6 +533,7 @@
                             <constraint firstItem="zZG-Jg-unL" firstAttribute="leading" secondItem="O19-jx-HLe" secondAttribute="trailing" constant="8" id="tRo-Qw-Pbd"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="uA5-w9-Azq"/>
                             <constraint firstItem="aco-gw-pxO" firstAttribute="centerY" secondItem="mbO-FT-hWy" secondAttribute="centerY" id="v7Z-6k-jzR"/>
+                            <constraint firstItem="fDU-Cd-hS5" firstAttribute="centerX" secondItem="Od7-6S-ieB" secondAttribute="centerX" id="wpG-GX-pVJ"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="leading" id="z8k-QC-6iJ"/>
                         </constraints>
                         <connections>
@@ -524,6 +543,7 @@
                     </view>
                     <connections>
                         <outlet property="albumImageView" destination="mbO-FT-hWy" id="a0K-rR-UgG"/>
+                        <outlet property="background" destination="zKD-bu-nQP" id="MZX-yk-MSU"/>
                         <outlet property="currentTimeLabel" destination="3f7-FR-f8I" id="l96-OI-bfb"/>
                         <outlet property="endTimeLabel" destination="zZG-Jg-unL" id="cIF-gj-Inx"/>
                         <outlet property="musicSlider" destination="O19-jx-HLe" id="w1Y-Ob-36k"/>

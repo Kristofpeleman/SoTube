@@ -23,8 +23,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     var songs: [Song]? {
         didSet {
             print(String(songs!.count) + " SONGS")
-            if songs?.count == 39 {
-                print(songs![38])
+            if songs?.count == 35 {
+                print(songs![34])
                 self.tableView.reloadData()
             }
         }
@@ -295,9 +295,11 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         
         for json in jsonData {
             
-            let request = URLRequest(url: URL(string: json)!)
-            let session = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
-            let task = session.dataTask(with: request) {
+            let request = try? SPTRequest.createRequest(for: URL(string: json)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+            
+//            let request = URLRequest(url: URL(string: json)!)
+            let session1 = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
+            let task = session1.dataTask(with: request!) {
                 data, response, error in
                 if let jsonData = data,
                     let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary,

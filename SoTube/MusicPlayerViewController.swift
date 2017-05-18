@@ -34,6 +34,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     
     // MARK: - Outlets
+    
+    @IBOutlet weak var background: UIImageView!
     @IBOutlet weak var navigationSongTitle: UINavigationItem!
     @IBOutlet weak var previousAlbumImageView: UIImageView!
     @IBOutlet weak var albumImageView: UIImageView!
@@ -368,6 +370,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         //Sets the central UIImageView to an album image of the currently playing song
         albumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: currentSong.imageURLAssString)!))
 
+        //Set the background image (blurred)
+        background.image = albumImageView.image
+        
         //Sets the album image of the previous song in the context
         if currentSongPositionInList == 0 {
             previousAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList![13].imageURLAssString)!))
@@ -381,6 +386,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         } else {
             nextAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList![currentSongPositionInList! + 1].imageURLAssString)!))
         }
+        
     }
     
     
