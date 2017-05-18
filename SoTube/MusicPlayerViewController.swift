@@ -364,6 +364,23 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         
         // Change the image of this button to a play-image
         playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+        
+        //Sets the central UIImageView to an album image of the currently playing song
+        albumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: currentSong.imageURLAssString)!))
+
+        //Sets the album image of the previous song in the context
+        if currentSongPositionInList == 0 {
+            previousAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList![13].imageURLAssString)!))
+        } else {
+            previousAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList![currentSongPositionInList! - 1].imageURLAssString)!))
+        }
+        
+        //Sets the album image of the next song in the context
+        if currentSongPositionInList == songList!.count - 1 {
+            nextAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList![0].imageURLAssString)!))
+        } else {
+            nextAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList![currentSongPositionInList! + 1].imageURLAssString)!))
+        }
     }
     
     
