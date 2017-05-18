@@ -22,9 +22,11 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     var currentSongPositionInList = 0
     var songs: [Song]? {
         didSet {
-            print(String(songs!.count) + " SONGS")
-            if songs?.count == 35 {
-                print(songs![34])
+//            print(String(songs!.count) + " SONGS")
+            if songs?.count == 50 {
+                print(songs![49])
+                print(String(songs!.count) + " SONGS")
+                
                 self.tableView.reloadData()
             }
         }
@@ -251,6 +253,14 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         tableView.reloadData()
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        let keywords = searchBar.text
+        let query = keywords?.replacingOccurrences(of: " ", with: "+")
+        let searchFeed = "https://api.spotify.com/v1/search?q=\(query!)&type=track&limit=50"
+        self.songs = nil
+        getSearchResponse(searchFeed: searchFeed)
+    }
+    
     
     // MARK: - Segues
     
@@ -392,6 +402,33 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             
             task.resume()
         }
+    }
+    
+    func getSearchResponse(searchFeed: String) {
+        
+            let request = try? SPTRequest.createRequest(for: URL(string: searchFeed)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+            
+            let session1 = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
+            let task = session1.dataTask(with: request!) {
+                data, response, error in
+                if let jsonData = data,
+                    let feed = (try? JSONSerialization.jsonObject(with: jsonData, options: .mutableContainers)) as? NSDictionary,
+                    let tracksArray = feed.value(forKeyPath: "tracks.items") as? NSArray
+                    
+                {
+                    var IDsArray: [String] = []
+                    for dictionary in tracksArray {
+                        IDsArray.append((dictionary as! NSDictionary).value(forKeyPath: "id") as! String)
+                    }
+                    
+                    self.trackIDs = IDsArray
+                    
+                }
+
+            }
+            
+            task.resume()
+        
     }
     
     
