@@ -8,6 +8,7 @@
 
 import UIKit
 import AVFoundation
+import Firebase
 // Don't forget to import AVFoundation when working with sounds and videos
 
 class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
@@ -29,6 +30,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     var currentSong: Song {
         return songList![currentSongPositionInList!]
     }
+    
+    private var rootReference: FIRDatabaseReference?
     
     // Variable because it's an optional
     //var currentUser: User?
@@ -65,6 +68,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         super.viewDidLoad()
         // Do any additional setup after loading the view.
         // Calling function updateTitleSliderAndLabels (can't add comma's in function names)
+        rootReference = FIRDatabase.database().reference()
+        
         updateOutlets()
         changeVolume(volumeSlider)
         
@@ -83,6 +88,14 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         // A timer repeating musicSliderUpdate every few seconds (or less depending on timeInterval) to update the musicSlider
         _ = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
     }
+    
+    // MARK: - FireBase
+    
+    @IBAction func addCurrentSongToBasket(_ sender: UIBarButtonItem) {
+        
+    }
+    
+    
     
     
     // MARK: - MusicSlider
