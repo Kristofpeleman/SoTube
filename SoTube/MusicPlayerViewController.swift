@@ -12,6 +12,8 @@ import AVFoundation
 
 class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     
+    
+    // MARK: - Global Variables
     var auth: SPTAuth?
     var session: SPTSession?
     var player: SPTAudioStreamingController?
@@ -35,17 +37,28 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     // MARK: - Outlets
     
+    // ImageOutlets
     @IBOutlet weak var background: UIImageView!
-    @IBOutlet weak var navigationSongTitle: UINavigationItem!
     @IBOutlet weak var previousAlbumImageView: UIImageView!
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var nextAlbumImageView: UIImageView!
+    
+    // TextOutlets
+    @IBOutlet weak var navigationSongTitle: UINavigationItem!
+    @IBOutlet weak var artistLabel: UILabel!
+    @IBOutlet weak var productionAndYearLabel: UILabel!
+    
+    // TimeLabelOutlets
     @IBOutlet weak var currentTimeLabel: UILabel!
     @IBOutlet weak var endTimeLabel: UILabel!
-    @IBOutlet weak var playOrPauseButton: UIButton! // Outlet because it's image can change
     
+    // SliderOutlets
     @IBOutlet weak var volumeSlider: UISlider!
     @IBOutlet weak var musicSlider: UISlider!
+    
+    // ButtonOutlets
+    @IBOutlet weak var playOrPauseButton: UIButton! // Outlet because the image can change
+    @IBOutlet weak var repeatButton: UIButton!// Outlet because the image can change
     
     
     override func viewDidLoad() {
@@ -54,6 +67,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         // Calling function updateTitleSliderAndLabels (can't add comma's in function names)
         updateOutlets()
         changeVolume(volumeSlider)
+        
+        
         
     }
     
@@ -69,13 +84,17 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     }
     
     
+    // MARK: - MusicSlider
     
     // When the musicSlider is touched
     @IBAction func alterMusicTime(_ sender: UISlider) {
-        // update slider by itself
         
+        // update slider by itself
+        // Say WHAT needs to be done ("action") when something happens ("for")
         musicSlider.addTarget(nil, action: #selector(updateSliderProgress), for: .touchUpInside)
         musicSlider.addTarget(nil, action: #selector(updateSliderProgress), for: .touchUpOutside)
+        
+        // Say check if our previous "for" happens and if he need to perform the "action" we stated there
         musicSlider.actions(forTarget: nil, forControlEvent: .touchUpInside)
         musicSlider.actions(forTarget: nil, forControlEvent: .touchUpOutside)
     }
@@ -83,18 +102,21 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     func updateSliderProgress(){
         // Check if player exists/isn't "nil"
-    
         if let _ = player {
-            // Stop playing
+            
+            // Pause playing
             pausePlayer()
             
-            
+            // Define the currentTime
             let currentTime = TimeInterval(musicSlider.value)
             
+            // Update our labels
             updateTimeLabels()
             
-            // change currentTime of player to  wherever you dragged the musicSlider
-            playSound(startingAt: currentTime)            
+            // Change currentTime of player to  wherever you dragged the musicSlider
+            playSound(startingAt: currentTime)
+            
+            // Continue playing
             continuePlaying()
             
         }
@@ -102,29 +124,49 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     }
     
     
-    
-    
-    
-    
     // Function to update the musicSlider
     func musicSliderUpdate(){
+        
+        // If we aren't touching our musicSlider (prevents slider thumb from switching between where we are dragging and player!.playbackState.position every 0.25secs)
         if !musicSlider.isTouchInside {
-        // If player exists and songList exists (a "," is the same as "&&")
-        if let _ = player, let _ = songList {
             
-            // MaximumValue has to be a Float, duration is a Int
-            musicSlider.maximumValue = Float(currentSong.duration)
-            
-            // change musicSlider's value/position on slider to the currentTime of player
-            musicSlider.setValue(Float(player!.playbackState.position), animated: true)
-            
-            // Out of laziness: call the function that updates both timeLabels
-            updateTimeLabels()
+            // If player exists and songList exists (a "," is the same as "&&")
+            if let player = player, let _ = songList {
+                
+                // MaximumValue has to be a Float, duration is a Int
+                musicSlider.maximumValue = Float(currentSong.duration)
+                
+                // Change musicSlider's value/position on slider to the currentTime of player
+                musicSlider.setValue(Float(player.playbackState.position), animated: true)
+                
+                // Call the function that updates both timeLabels
+                updateTimeLabels()
+                
+                // Check if player is repeating the song;
+                // because of the "!" before "player" he will do something when it is NOT repeating
+                if !player.playbackState.isRepeating {
+                    
+                    // Check if our next second in the song is the ending or after the ending
+                    if Int(musicSlider.value + 1) >= Int(musicSlider.maximumValue) {
+                        
+                        goToNextSong()
+                    
+                    }
+                }
             }
         }
     }
     
     
+    
+    // MARK: - Changing songs
+    
+    // Tapping on the left-side ImageView makes you go to the previous song
+    @IBAction func tapToPreviousSong(_ sender: UITapGestureRecognizer) {
+        goToPreviousSong()
+    }
+    
+    // Swiping from left to right makes you go to the previous song
     @IBAction func swipeToPreviousSong(_ sender: UISwipeGestureRecognizer) {
         if sender.state == .ended {
             goToPreviousSong()
@@ -140,7 +182,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // Button to go to/load the previous song in our list
     func goToPreviousSong(){
         // resets player and the positions of the sliders
-        resetPlayerAndSliders()
+        resetMusicSlider()
         
         // Check if currentSongPositionInList and songList exist/aren't nil
         if currentSongPositionInList != nil && songList != nil {
@@ -159,6 +201,42 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     }
     
     
+    
+    // Tapping on the right-side ImageView makes you go to the next song
+    @IBAction func tapToNextSong(_ sender: UITapGestureRecognizer) {
+        goToNextSong()
+    }
+    
+    // Swiping from right to left makes you go to the next song
+    @IBAction func swipeToNextSong(_ sender: UISwipeGestureRecognizer) {
+        if sender.state == .ended {
+            goToNextSong()
+        }
+    }
+    
+    // Functions speak for themselves
+    @IBAction func nextSong(_ sender: UIButton) {
+        goToNextSong()
+    }
+    
+    // Same as previousSong, except here we're going to the next songs.
+    func goToNextSong(){
+        resetMusicSlider()
+        
+        if currentSongPositionInList != nil && songList != nil {
+            if currentSongPositionInList! == songList!.count - 1 {
+                currentSongPositionInList = 0
+            }
+            else {
+                currentSongPositionInList! += 1
+            }
+        }
+        updateOutlets()
+        playSound(startingAt: 0)
+    }
+   
+    
+    // MARK: - Play button and Back
     // The play-button has to play or pause the song depending on the situation
     @IBAction func playSong(_ sender: UIButton) {
         
@@ -184,42 +262,40 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
             }
         }
-    }
-
-    @IBAction func swipeToNextSong(_ sender: UISwipeGestureRecognizer) {
-        if sender.state == .ended {
-            goToNextSong()
-        }
-    }
-    
-    // Functions speak for themselves
-    @IBAction func nextSong(_ sender: UIButton) {
-        goToNextSong()
-    }
-    
-    // Same as previousSong, except here we're going to the next songs.
-    func goToNextSong(){
-        resetPlayerAndSliders()
-        
-        if currentSongPositionInList != nil && songList != nil {
-            if currentSongPositionInList! == songList!.count - 1 {
-                currentSongPositionInList = 0
-            }
-            else {
-                currentSongPositionInList! += 1
-            }
-        }
-        updateOutlets()
-        playSound(startingAt: 0)
-    }
-    
+    } 
     
     // Bar button item resets sliders and goes back to whichever VC we came from before comming here
     @IBAction func back(_ sender: UIBarButtonItem) {
-        resetPlayerAndSliders()
         dismiss(animated: true, completion: nil)
     }
     
+    
+    // MARK: - Repeat
+    
+    @IBAction func repeatSong(_ sender: UIButton) {
+        repeatOneOrAll()
+    }
+    
+    
+    // Switch between repeating and not repeating the same song
+    func repeatOneOrAll(){
+        if let player = player {
+            if player.playbackState.isRepeating {
+                player.setRepeat(.off, callback: {(error) in
+                    if error != nil {
+                        print("Turning repeat off")
+                    }
+                })
+            }
+            else {
+                player.setRepeat(.one, callback: {(error) in
+                    if error != nil {
+                        print("Turning repeat one on")
+                    }
+                })
+            }
+        }
+    }
     
     
     // MARK: - Volume Slider
@@ -239,6 +315,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     
     
+    // MARK: - Music Player and play/pause
     
     // Function to create an player based on a URL
     func playSound(startingAt currentTime: TimeInterval) {
@@ -249,6 +326,30 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         })
         // Since it start playing instantly -> the button's image need to become a pause
         playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+    }
+    
+    // Function to pause the song
+    func pausePlayer(){
+        if let player = player {
+            player.setIsPlaying(false, callback: {(error) in
+                if error != nil {
+                    print("Pausing")
+                }
+            })
+            playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
+        }
+    }
+    
+    // Function to continue playing the song
+    func continuePlaying(){
+        if let player = player {
+            player.setIsPlaying(true, callback: {(error) in
+                if error != nil {
+                    print("Continue playing")
+                }
+            })
+            playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
+        }
     }
     
     
@@ -288,27 +389,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     }
     
     
-    // Function to pause the song
-    func pausePlayer(){
-        if let player = player {
-            player.setIsPlaying(false, callback: {(error) in
-                if error != nil {
-                    print("Pausing")
-                }
-            })
-        }
-    }
     
-    // Function to continue playing the song
-    func continuePlaying(){
-        if let player = player {
-            player.setIsPlaying(true, callback: {(error) in
-                if error != nil {
-                    print("Continue playing")
-                }
-            })
-        }
-    }
+    
+    // MARK: - Updates and resets
     
     // Function speaks for itself; WARNING: DO NOT CALL AT VIEWDIDLOAD -> At viewDidLoad we don't have a player.playbackState.position yet, so we will crash
     func updateTimeLabels(){
@@ -321,38 +404,43 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     
     // Removes all contents of player and changes sliders' values to their standard
-    func resetPlayerAndSliders(){
-        pausePlayer()
+    func resetMusicSlider(){
         musicSlider.value = 0
     }
     
-    /*
+    
     func updateImageViews(){
         if let songList = songList, let currentSongPositionInList = currentSongPositionInList {
             if currentSongPositionInList == 0 {
-                previousAlbumImageView.image = songList.last.image
+                previousAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList.last!.imageURLAssString)!))
             }
             else {
-                previousAlbumImageView.image = songList[currentSongPositionInList - 1].image
+                previousAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList[currentSongPositionInList - 1].imageURLAssString)!))
             }
-            albumImageView.image = currentSong.image
+            albumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: currentSong.imageURLAssString)!))
             
             if currentSongPositionInList == songList.count - 1 {
-                nextAlbumImageView.image = songList.first.image
+                nextAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList.first!.imageURLAssString)!))
             }
             else {
-                nextAlbumImageView.image = songList[currentSongPositionInList + 1].image
+                nextAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList[currentSongPositionInList + 1].imageURLAssString)!))
             }
+            
+            //Set the background image (blurred)
+            background.image = albumImageView.image
         }
     }
-    */
+    
     // Function to update the Title, the Sliders and the Labels
     func updateOutlets(){
         // Changes the title in our navigationBar to the songTitle
         initialize(authSession: session!)
         navigationSongTitle.title = currentSong.songTitle
+        artistLabel.text = currentSong.artists
+        productionAndYearLabel.text = ""
         
-   //     updateImageViews()
+        // Calling our update of our images
+        updateImageViews()
         
         // Volume needs to adjust to where the volumeSlider currently is
         changeVolume(volumeSlider)
@@ -363,33 +451,11 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         // Call our function to change the value in the label
         endTimeLabel.text = returnEndTimeInSong()
         
-        
-        // Change the image of this button to a play-image
-        playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
-        
-        //Sets the central UIImageView to an album image of the currently playing song
-        albumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: currentSong.imageURLAssString)!))
-
-        //Set the background image (blurred)
-        background.image = albumImageView.image
-        
-        //Sets the album image of the previous song in the context
-        if currentSongPositionInList == 0 {
-            previousAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList![13].imageURLAssString)!))
-        } else {
-            previousAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList![currentSongPositionInList! - 1].imageURLAssString)!))
-        }
-        
-        //Sets the album image of the next song in the context
-        if currentSongPositionInList == songList!.count - 1 {
-            nextAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList![0].imageURLAssString)!))
-        } else {
-            nextAlbumImageView.image = UIImage(data: try! Data(contentsOf: URL(string: songList![currentSongPositionInList! + 1].imageURLAssString)!))
-        }
-        
     }
     
     
+    
+    // MARK: - Return Times
     
     // Returns the currentTime in the song as a string (meant for changing currentTimeLabel)
     func returnCurrentTimeInSong() -> String{
