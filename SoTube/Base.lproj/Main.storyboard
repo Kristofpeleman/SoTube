@@ -70,20 +70,20 @@
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WJq-kR-GEi">
-                                                    <rect key="frame" x="8" y="11" width="131" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="WJq-kR-GEi">
+                                                    <rect key="frame" x="8" y="8" width="131" height="27.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xZ5-L8-lhK">
-                                                    <rect key="frame" x="144" y="11" width="95" height="21"/>
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="xZ5-L8-lhK">
+                                                    <rect key="frame" x="144" y="8" width="95" height="27.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="DZj-8a-ZWa">
-                                                    <rect key="frame" x="244" y="11" width="36" height="21"/>
+                                                    <rect key="frame" x="244" y="8" width="36" height="27.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
@@ -91,16 +91,16 @@
                                             </subviews>
                                             <constraints>
                                                 <constraint firstItem="DZj-8a-ZWa" firstAttribute="leading" secondItem="xZ5-L8-lhK" secondAttribute="trailing" constant="5" id="9Xm-2W-Cgr"/>
-                                                <constraint firstItem="DZj-8a-ZWa" firstAttribute="top" secondItem="V7S-lR-i2x" secondAttribute="topMargin" constant="3" id="NEu-yF-DGj"/>
+                                                <constraint firstItem="DZj-8a-ZWa" firstAttribute="top" secondItem="V7S-lR-i2x" secondAttribute="topMargin" id="NEu-yF-DGj"/>
                                                 <constraint firstItem="WJq-kR-GEi" firstAttribute="width" secondItem="V7S-lR-i2x" secondAttribute="width" multiplier="1:2.2" id="QW0-ei-Wlj"/>
-                                                <constraint firstItem="xZ5-L8-lhK" firstAttribute="top" secondItem="V7S-lR-i2x" secondAttribute="topMargin" constant="3" id="RlJ-ks-cao"/>
+                                                <constraint firstItem="xZ5-L8-lhK" firstAttribute="top" secondItem="V7S-lR-i2x" secondAttribute="topMargin" id="RlJ-ks-cao"/>
                                                 <constraint firstItem="WJq-kR-GEi" firstAttribute="leading" secondItem="V7S-lR-i2x" secondAttribute="leadingMargin" id="U30-cM-qg3"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="xZ5-L8-lhK" secondAttribute="bottom" constant="3" id="Ur1-z0-jxy"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="xZ5-L8-lhK" secondAttribute="bottom" id="Ur1-z0-jxy"/>
                                                 <constraint firstItem="xZ5-L8-lhK" firstAttribute="leading" secondItem="WJq-kR-GEi" secondAttribute="trailing" constant="5" id="V7o-7W-m93"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="DZj-8a-ZWa" secondAttribute="bottom" constant="3" id="YGf-Ch-v8Y"/>
-                                                <constraint firstItem="WJq-kR-GEi" firstAttribute="top" secondItem="V7S-lR-i2x" secondAttribute="topMargin" constant="3" id="Z4n-I8-cCl"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="DZj-8a-ZWa" secondAttribute="bottom" id="YGf-Ch-v8Y"/>
+                                                <constraint firstItem="WJq-kR-GEi" firstAttribute="top" secondItem="V7S-lR-i2x" secondAttribute="topMargin" id="Z4n-I8-cCl"/>
                                                 <constraint firstItem="DZj-8a-ZWa" firstAttribute="width" secondItem="V7S-lR-i2x" secondAttribute="width" multiplier="1:8" id="caX-x5-vvL"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="WJq-kR-GEi" secondAttribute="bottom" constant="3" id="hpu-CE-Hfk"/>
+                                                <constraint firstAttribute="bottomMargin" secondItem="WJq-kR-GEi" secondAttribute="bottom" id="hpu-CE-Hfk"/>
                                                 <constraint firstAttribute="trailingMargin" secondItem="DZj-8a-ZWa" secondAttribute="trailing" id="mxq-Ka-j0R"/>
                                             </constraints>
                                         </tableViewCellContentView>
@@ -483,6 +483,7 @@
                             </slider>
                             <slider opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" minValue="0.0" maxValue="1" translatesAutoresizingMaskIntoConstraints="NO" id="O19-jx-HLe">
                                 <rect key="frame" x="63" y="320.5" width="194" height="31"/>
+                                <color key="thumbTintColor" red="1" green="1" blue="1" alpha="1" colorSpace="calibratedRGB"/>
                                 <connections>
                                     <action selector="alterMusicTime:" destination="tMx-VT-Gxf" eventType="valueChanged" id="K51-o5-dcH"/>
                                 </connections>
@@ -1171,7 +1172,7 @@
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="Xlf-MO-3sR"/>
         <segue reference="vHY-iE-ELE"/>
-        <segue reference="Yyy-cB-Q5z"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -69,7 +69,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         changeVolume(volumeSlider)
         
         
-        
+        musicSlider.setThumbImage(#imageLiteral(resourceName: "musicNote"), for: .normal)
+        musicSlider.setThumbImage(#imageLiteral(resourceName: "musicNote"), for: .highlighted)
     }
     
     // Standard function
