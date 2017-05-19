@@ -11,17 +11,34 @@ import Foundation
 struct Song {
     let songTitle: String
     let artistNames: [String]
+    
+    var artists: String {
+        if artistNames.count > 1 {
+            var names = artistNames[0]
+            if artistNames.count > 1 {
+                for index in 1...artistNames.count - 1 {
+                    names += " & \(artistNames[index])"
+                }
+            }
+            return names
+        }
+        return artistNames[0]
+    }
+    
     let spotify_ID: String?
     let previewURLAssString: String
     let imageURLAssString: String
+
     var fullSongURLAssString: String? {
         if let id = self.spotify_ID {
             return "spotify:track:" + id
         } else {return nil}
     }
+    
     var cost: Int
     var duration: Int
     var favorite: Bool = false
+    
     var spotifyJSONFeed: String {
         return "https://api.spotify.com/v1/tracks/" + spotify_ID! + "?"
     }
