@@ -108,9 +108,12 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             logInButton.title = "Log out"
 
             reference.observe(.value, with: {snapshot in
-                print(snapshot)
-                print(snapshot.key)
-                print(snapshot.value ?? "NO SNAPSHOT VALUE")
+
+                self.currentUser = User(with: snapshot)
+                print(self.currentUser?.fireBaseID ?? "NO FIREBASE ID")
+                print(self.currentUser?.userName ?? "NO USERNAME")
+                print(self.currentUser?.emailAddress ?? "NO EMAIL")
+                print(self.currentUser?.points ?? "NO POINTS")
             })
             
         }
