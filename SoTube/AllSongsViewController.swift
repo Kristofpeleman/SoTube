@@ -7,17 +7,18 @@
 //
 
 import UIKit
-
-
-
+import Firebase
 
 class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
     
+    private var onlineUsersReference: FIRDatabaseReference?
+    private var userReference: FIRDatabaseReference?
     
-//    let feedURL = "https://api.spotify.com/v1/tracks/1zHlj4dQ8ZAtrayhuDDmkY?"
+    
     let feedURLs = ViewModel().feeds
-    //let searchURL = "https://api.spotify.com/v1/search?query=Eminem&type=track&market=BE&offset=0&limit=50"
     let newReleasesFeed = TopMediaViewModel().newReleasesURLAsString
+    
+    
     
     var currentSongPositionInList = 0
     var songs: [Song]? {
@@ -59,19 +60,31 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     
     
-
+    @IBOutlet weak var logInButton: UIBarButtonItem!
     @IBOutlet weak var sortingPickerView: UIPickerView!
     @IBOutlet var sortingOptions: SortingOptions!
-    
     @IBOutlet weak var tableView: UITableView!
-
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    
     
     override func viewDidLoad() {
         super.viewDidLoad()
         print(auth ?? "AUTH is nil")
         print(session ?? "SESSION is nil")
         
+        onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
+        onlineUsersReference?.observe(.value, with: {snapshot in
+            let userName = FIRAuth.auth()?.currentUser?.displayName ?? ""
+            if snapshot.hasChild(userName) {
+                let userReference = FIRDatabase.database().reference(withPath: "Users/\(userName)")
+                print(userReference.key)
+                print(userReference.key)
+                print(userReference)
+                self.online = true
+                print(self.online)
+            }
+        })
     
         sortingPickerView.dataSource = sortingOptions
         tableView.dataSource = self
@@ -81,7 +94,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
 //        loadAlbumsFromNewReleases(json: newReleasesFeed)
 //        test()
         getAlbumIDs()
-        
     }
 
     override func didReceiveMemoryWarning() {
@@ -89,8 +101,25 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
+        print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
+        
+        if online {
+            logInButton.title = "Log out"
+            let userName = FIRAuth.auth()?.currentUser?.displayName ?? ""
+            userReference = FIRDatabase.database().reference(withPath: "Users/\(userName)")
+            userReference?.observe(.value, with: {snapshot in
+                print(snapshot.value ?? "NO SNAPSHOT VALUE")
+            })
+            userReference?.removeAllObservers()
+        }
+        
+    }
+    
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        
     }
     
     
@@ -248,7 +277,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     }
     
     
-    // MARK: - Segues
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "musicPlayerSegue" {
@@ -280,6 +309,12 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                     destinationVC.songList = songs
                 }
                 destinationVC.currentSongPositionInList = self.currentSongPositionInList
+            }
+        }
+        
+        if segue.identifier == "loginSegue" {
+            if let _ = segue.destination as? LogInViewController {
+                
             }
         }
     }

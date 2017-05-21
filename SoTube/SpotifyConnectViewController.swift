@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class SpotifyConnectViewController: UIViewController, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     
@@ -68,6 +69,7 @@ class SpotifyConnectViewController: UIViewController, SPTAudioStreamingDelegate,
                 let viewController = vc as? TopMediaViewController
                 viewController?.auth = self.auth
                 viewController?.session = self.session
+                viewController?.rootReference = FIRDatabase.database().reference()
             }
             
         }

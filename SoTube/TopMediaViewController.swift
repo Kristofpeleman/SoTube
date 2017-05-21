@@ -7,11 +7,15 @@
 //
 
 import UIKit
+import Firebase
 
 class TopMediaViewController: UIViewController {
     
     var auth: SPTAuth?
     var session: SPTSession?
+    var rootReference: FIRDatabaseReference?
+    var currentUser: User?
+    var online = false
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -23,6 +27,7 @@ class TopMediaViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
     
 
     /*

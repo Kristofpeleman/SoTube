@@ -7,6 +7,7 @@
 //
 
 import UIKit
+import Firebase
 
 class FavoriteSongsViewController: TopMediaViewController {
 
@@ -21,15 +22,25 @@ class FavoriteSongsViewController: TopMediaViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
+        print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
+    }
+    
+    override func viewDidAppear(_ animated: Bool) {
 
-    /*
+    }
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
+        if segue.identifier == "loginSegue" {
+            if let _ = segue.destination as? LogInViewController {
+                
+            }
+        }
     }
-    */
+    
 
 }

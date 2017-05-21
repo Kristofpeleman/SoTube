@@ -10,7 +10,7 @@ import Foundation
 
 struct User {
     var emailAddress: String
-    var username: String
+    var userName: String
     var points: Int
     
     var mySongs: [Song]?

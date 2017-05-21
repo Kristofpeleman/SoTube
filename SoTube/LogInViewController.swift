@@ -9,13 +9,20 @@
 import UIKit
 import Firebase
 
+
 class LogInViewController: UIViewController {
+    
+    // MARK: - IBOutlets
 
     @IBOutlet weak var loginImageView: UIImageView!
-    
     @IBOutlet weak var emailAddressTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    // MARK: - Constants and variables
+    
+    
+    // MARK: UIViewController Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -27,6 +34,9 @@ class LogInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    // MARK: - IBActions
     
     @IBAction func login(_ sender: UIButton) {
         guard let emailAddress = emailAddressTextField.text, emailAddress != "",
@@ -67,8 +77,30 @@ class LogInViewController: UIViewController {
                 return
             }
             
+            // Update FireBase Online Users
+            
             let onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
             onlineUsersReference.setValue([currentUser.displayName! : currentUser.email])
+            onlineUsersReference.onDisconnectRemoveValue()
+            
+            
+            // Update FireBase Users IN CASE OF A NEW USER
+            
+            let existingUsersReference = FIRDatabase.database().reference(withPath: "Users")
+            
+            existingUsersReference.observe(.value, with: {snapshot in
+
+                if !snapshot.hasChild(currentUser.displayName!) {
+                    
+                    let user: [String : Any] = ["userName": currentUser.displayName!, "emailAddress": currentUser.email!, "points": 20]
+                    existingUsersReference.setValue([currentUser.displayName! : user])
+                }
+            })
+            
+
+            
+            
+            
             
             // Dismiss keyboard
             self.view.endEditing(true)
@@ -85,13 +117,15 @@ class LogInViewController: UIViewController {
     }
     
     
-    
+    // MARK: - Homemade Functions
     
     private func updateView(){
         emailAddressTextField.text = ""
         passwordTextField.text = ""
     }
     
+    
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -104,14 +138,5 @@ class LogInViewController: UIViewController {
         }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
