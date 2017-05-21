@@ -25,6 +25,7 @@
 		2F91E93F1EC0571E004A2E99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E93E1EC0571E004A2E99 /* Assets.xcassets */; };
 		2F91E9421EC0571E004A2E99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E9401EC0571E004A2E99 /* LaunchScreen.storyboard */; };
 		2FBEF7F81EC5D42C000398CC /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBEF7F71EC5D42C000398CC /* MusicPlayerViewController.swift */; };
+		2FDDA7B81ECEF3BF004BB880 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDDA7B71ECEF3BF004BB880 /* User.swift */; };
 		2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */; };
 		2FE813BD1EC450FC00F418E7 /* GoogleService-Info.plist in Resources */ = {isa = PBXBuildFile; fileRef = 2FE813BC1EC450FC00F418E7 /* GoogleService-Info.plist */; };
 		599072BA7E0EBDDF41ABDD93 /* Pods_SoTube.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */; };
@@ -58,6 +59,7 @@
 		2F91E9411EC0571E004A2E99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F91E9431EC0571E004A2E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		2FBEF7F71EC5D42C000398CC /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
+		2FDDA7B71ECEF3BF004BB880 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
 		2FE813BC1EC450FC00F418E7 /* GoogleService-Info.plist */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.plist.xml; path = "GoogleService-Info.plist"; sourceTree = "<group>"; };
 		3F926F402C381B06DDBAABD5 /* Pods_SoTube.framework */ = {isa = PBXFileReference; explicitFileType = wrapper.framework; includeInIndex = 0; path = Pods_SoTube.framework; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -113,6 +115,7 @@
 		2F7F29281EC5975400D2B03A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2FDDA7B71ECEF3BF004BB880 /* User.swift */,
 				2F7F29261EC5970600D2B03A /* Song.swift */,
 				2F36DDD31EC9A942003ABD64 /* SortingOptions.swift */,
 			);
@@ -323,6 +326,7 @@
 				2F2FD2931EC1E68200628995 /* WishlistViewController.swift in Sources */,
 				6D24D3A41ECB85750087024D /* SpotifyConnectViewController.swift in Sources */,
 				2F72F0121ECC513A00EF70FB /* PlayerViewController.swift in Sources */,
+				2FDDA7B81ECEF3BF004BB880 /* User.swift in Sources */,
 				2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */,
 				2F7F292A1EC5C3FB00D2B03A /* ViewModel.swift in Sources */,
 				2F49BF781EC32ECE0031F5E4 /* LogInViewController.swift in Sources */,

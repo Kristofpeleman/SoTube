@@ -141,25 +141,11 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     
     func alterTableViewLabels(forSongList list: [Song], inCell cell: SongTableViewCell, atRow row: Int){
-        cell.artistNameLabel.text = getStringOfArtists(artists: (list[row].artistNames))
+        cell.artistNameLabel.text = list[row].artists
         cell.songTitleLabel.text = list[row].songTitle
         cell.costLabel.text = String(describing: list[row].cost)
+ 
     }
-    
-    func getStringOfArtists(artists: [String]) -> String {
-        
-        var fullListOfArtists = artists[0]
-        if artists.count > 1 {
-            for index in 1...artists.count - 1 {
-                fullListOfArtists += " & \(artists[index])"
-            }
-        }
-        return fullListOfArtists
-    }
-    
-    
-    
-    
     
     
     
