@@ -297,6 +297,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                     destinationVC.songList = songs
                 }
                 destinationVC.currentSongPositionInList = self.currentSongPositionInList
+                destinationVC.currentUser = self.currentUser
+                destinationVC.userReference = self.userReference
             }
         }
         
@@ -331,6 +333,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 let currentOnlineUserReference = FIRDatabase.database().reference(withPath: "online users/\(self.userID!)")
                 currentOnlineUserReference.removeValue()
                 
+                self.currentUser = nil
                 logInButton.title = "Log in"
                 
             return false} else {return true}

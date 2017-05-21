@@ -105,7 +105,7 @@ class LogInViewController: UIViewController {
             
             existingUsersReference.observe(.value, with: {snapshot in
 
-                if !snapshot.hasChild(currentUser.displayName!) {
+                if !snapshot.hasChild(currentUser.uid) {
                     
                     let user: [String : Any] = ["userName": currentUser.displayName!, "emailAddress": currentUser.email!, "points": 20]
                     let thisUserReference = existingUsersReference.child("\(currentUser.uid)")

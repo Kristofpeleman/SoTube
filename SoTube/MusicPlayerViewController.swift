@@ -19,6 +19,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     var session: SPTSession?
     var player: SPTAudioStreamingController?
     
+    // Variable which is nil if no user is logged into the app, but which is a User object when a user has logged in successfully
+    var currentUser: User?
     
     // The current position of the song inside songList (remember: we're comming from a VC in the SongsViewControllers folder/group which gave this info)
     var currentSongPositionInList: Int?
@@ -32,6 +34,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     }
     
     private var rootReference: FIRDatabaseReference?
+    var userReference: FIRDatabaseReference?
     
     // Variable because it's an optional
     //var currentUser: User?
@@ -92,7 +95,17 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // MARK: - FireBase
     
     @IBAction func addCurrentSongToBasket(_ sender: UIBarButtonItem) {
+        currentUser?.addToShoppingCart(currentSong)
+        print(currentSong.spotify_ID!)
+        print(currentSong.spotifyJSONFeed)
         
+        let userShoppingCartReference = userReference?.child("shoppingCart")
+        
+        let songValues: [String : Any] = [currentSong.spotify_ID! : ["json" : currentSong.spotifyJSONFeed]]
+        
+        userShoppingCartReference?.setValue(songValues)
+        
+        print(currentUser ?? "COULDN'T PRINT CURRENT USER")
     }
     
     
