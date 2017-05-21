@@ -10,6 +10,11 @@ import UIKit
 import Firebase
 
 
+protocol LoginViewControllerDelegate {
+    func setUserReference(_ ref: FIRDatabaseReference)
+    func setUserID(_ id: String)
+}
+
 class LogInViewController: UIViewController {
     
     // MARK: - IBOutlets
@@ -20,12 +25,16 @@ class LogInViewController: UIViewController {
     
     // MARK: - Constants and variables
     
+    private var onlineUsersReference: FIRDatabaseReference?
+    var delegate: LoginViewControllerDelegate?
     
     // MARK: UIViewController Methods
     
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setting the online users reference
+        onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
         emailAddressTextField.becomeFirstResponder()
         // Do any additional setup after loading the view.
     }
@@ -79,9 +88,15 @@ class LogInViewController: UIViewController {
             
             // Update FireBase Online Users
             
-            let onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
-            onlineUsersReference.setValue([currentUser.displayName! : currentUser.email])
-            onlineUsersReference.onDisconnectRemoveValue()
+            FIRAuth.auth()?.addStateDidChangeListener({[weak self] (auth, user) in
+                if let currentUser = user {
+                    let currentUserReference = self?.onlineUsersReference?.child(currentUser.uid)
+                    currentUserReference?.setValue(currentUser.displayName)
+                    currentUserReference?.onDisconnectRemoveValue()
+                }
+            })
+            
+
             
             
             // Update FireBase Users IN CASE OF A NEW USER
@@ -93,12 +108,17 @@ class LogInViewController: UIViewController {
                 if !snapshot.hasChild(currentUser.displayName!) {
                     
                     let user: [String : Any] = ["userName": currentUser.displayName!, "emailAddress": currentUser.email!, "points": 20]
-                    existingUsersReference.setValue([currentUser.displayName! : user])
+                    let thisUserReference = existingUsersReference.child("\(currentUser.uid)")
+                    thisUserReference.setValue(user)
                 }
             })
             
-
+            // Setting userID and userReference in the delegate
             
+            let thisUserReference = existingUsersReference.child("\(currentUser.uid)")
+            
+            self.delegate?.setUserID(currentUser.uid)
+            self.delegate?.setUserReference(thisUserReference)
             
             
             

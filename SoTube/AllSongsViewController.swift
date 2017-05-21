@@ -9,10 +9,11 @@
 import UIKit
 import Firebase
 
-class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate {
+class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate, LoginViewControllerDelegate {
     
-    private var onlineUsersReference: FIRDatabaseReference?
+//    private var onlineUsersReference: FIRDatabaseReference?
     private var userReference: FIRDatabaseReference?
+    private var userID: String?
     
     
     let feedURLs = ViewModel().feeds
@@ -73,26 +74,24 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         print(auth ?? "AUTH is nil")
         print(session ?? "SESSION is nil")
         
-        onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
-        onlineUsersReference?.observe(.value, with: {snapshot in
-            let userName = FIRAuth.auth()?.currentUser?.displayName ?? ""
-            if snapshot.hasChild(userName) {
-                let userReference = FIRDatabase.database().reference(withPath: "Users/\(userName)")
-                print(userReference.key)
-                print(userReference.key)
-                print(userReference)
-                self.online = true
-                print(self.online)
-            }
-        })
+//        onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
+//        onlineUsersReference?.observe(.value, with: {snapshot in
+//            self.userName = FIRAuth.auth()?.currentUser?.displayName ?? ""
+//            if snapshot.hasChild(self.userName!) {
+//                let userReference = FIRDatabase.database().reference(withPath: "Users/\(self.userName!)")
+//                print(userReference.key)
+//                print(userReference.key)
+//                print(userReference)
+//                self.online = true
+//                print(self.online)
+//            }
+//        })
+        
     
         sortingPickerView.dataSource = sortingOptions
         tableView.dataSource = self
         searchBar.delegate = self
         
-//        setSongsFromJSONFeed(jsonData: feedURLs)
-//        loadAlbumsFromNewReleases(json: newReleasesFeed)
-//        test()
         getAlbumIDs()
     }
 
@@ -105,14 +104,15 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
         
-        if online {
+        if let reference = self.userReference {
             logInButton.title = "Log out"
-            let userName = FIRAuth.auth()?.currentUser?.displayName ?? ""
-            userReference = FIRDatabase.database().reference(withPath: "Users/\(userName)")
-            userReference?.observe(.value, with: {snapshot in
+
+            reference.observe(.value, with: {snapshot in
+                print(snapshot)
+                print(snapshot.key)
                 print(snapshot.value ?? "NO SNAPSHOT VALUE")
             })
-            userReference?.removeAllObservers()
+            
         }
         
     }
@@ -313,10 +313,39 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         }
         
         if segue.identifier == "loginSegue" {
-            if let _ = segue.destination as? LogInViewController {
-                
+            if let destinationVC = segue.destination as? LogInViewController {
+                destinationVC.delegate = self
             }
         }
+    }
+    
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        switch identifier {
+        case "loginSegue":
+            
+            if logInButton.title == "Log out" {
+
+                let currentOnlineUserReference = FIRDatabase.database().reference(withPath: "online users/\(self.userID!)")
+                currentOnlineUserReference.removeValue()
+                
+                logInButton.title = "Log in"
+                
+            return false} else {return true}
+            
+        default: return true
+            
+        }
+
+    }
+    
+    // MARK: - LoginViewControllerDelegate methods
+    
+    func setUserID(_ id: String) {
+        self.userID = id
+    }
+    
+    func setUserReference(_ ref: FIRDatabaseReference) {
+        self.userReference = ref
     }
     
     

@@ -12,6 +12,7 @@ struct User {
     var emailAddress: String
     var userName: String
     var points: Int
+    var fireBaseID: String
     
     var mySongs: [Song]?
     var wishList: [Song]?
