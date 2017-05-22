@@ -33,7 +33,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 }
             }
             
-            print(self.currentUser!.shoppingCart!)
         }
     
     }

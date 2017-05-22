@@ -47,14 +47,44 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     // MARK: - IBActions
     
     @IBAction func buySongs(_ sender: UIButton) {
-        
+        if let _ = self.currentUser?.shoppingCart {
+            
+            // Adapt "mySongs"
+            self.currentUser?.addToMySongs(self.currentUser!.shoppingCart!)
+            
+            let userMySongsReference = self.userReference?.child("mySongs")
+            let songs = self.currentUser!.shoppingCart!
+            let points = self.currentUser!.points
+            
+            for index in 1...songs.count {
+                let songInMySongsReference = userMySongsReference?.childByAutoId()
+                songInMySongsReference?.setValue(returnDictionaryFor(songs[index - 1]))
+            }
+            
+            // Adapt "points"
+            let pointsReference = userReference?.child("points")
+            pointsReference?.setValue(points - calculatePoints())
+            
+            self.currentUser!.points -= calculatePoints()
+            
+            // Adapt ShoppingCart
+            let shoppingCartReference = userReference?.child("shoppingCart")
+            shoppingCartReference?.removeValue()
+            
+            self.currentUser?.shoppingCart = nil
+            self.tableView.reloadData()
+            self.dismiss(animated: true, completion: nil)
+        }
     }
     
     
     // MARK: - TableView Datasource Methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (currentUser?.shoppingCart?.count)!
+        if let _ = currentUser?.shoppingCart {
+            return (currentUser?.shoppingCart?.count)!
+        } else {return 0}
+        
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
@@ -75,5 +105,17 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         } else {return 0}
     }
     
-
+    func returnDictionaryFor(_ song: Song) -> [String : Any] {
+        let dict: [String : Any] = [
+            "spotify_ID" : song.spotify_ID!,
+            "songTitle" : song.songTitle,
+            "json" : song.spotifyJSONFeed,
+            "artists" : song.artists,
+            "previewURL" : song.previewURLAssString,
+            "imageURL" : song.imageURLAssString,
+            "duration" : song.duration,
+        ]
+        return dict
+    }
+    
 }

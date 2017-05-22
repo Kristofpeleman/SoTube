@@ -97,4 +97,14 @@ class User {
             self.mySongs = [song]
         }
     }
+    
+    // Function to add an array of "Song" objects to our songs ("mySongs")
+    func addToMySongs(_ songs: [Song]) {
+        if let _ = self.mySongs {
+            self.mySongs! += songs
+        }
+        else {
+            self.mySongs = songs
+        }
+    }
 }
