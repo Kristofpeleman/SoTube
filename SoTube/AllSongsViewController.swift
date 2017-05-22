@@ -14,6 +14,24 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
 //    private var onlineUsersReference: FIRDatabaseReference?
     private var userReference: FIRDatabaseReference?
     private var userID: String?
+    var currentUser: User?{
+        didSet {
+            let mainTabBarController:UITabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
+            
+            for vc in mainTabBarController.childViewControllers {
+                if vc is MySongsViewController {
+                    (vc as! MySongsViewController).currentUser = self.currentUser
+                }
+                if vc is FavoriteSongsViewController {
+                    (vc as! FavoriteSongsViewController).currentUser = self.currentUser
+                }
+                if vc is WishlistViewController {
+                    (vc as! WishlistViewController).currentUser = self.currentUser
+                }
+            }
+        }
+    
+    }
     
     
     let feedURLs = ViewModel().feeds
