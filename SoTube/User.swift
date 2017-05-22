@@ -47,7 +47,7 @@ class User {
         // Calling normal initialization with our snapshot constants as parameters
         self.init(fireBaseID: snapshotFirebaseID, emailAddress: snapshotEmailAddress, userName: snapshotUserName, points: snapshotPoints)
         
-        // Ii "snapshotValue["shoppingCart"] as? [String : Any]" exists/isn't nil
+        // If "snapshotValue["shoppingCart"] as? [String : Any]" exists/isn't nil
         if let snapshotShoppingCart = snapshotValue["shoppingCart"] as? [String : Any] {
             // Print the shoopingCart
             print(snapshotShoppingCart)
