@@ -579,6 +579,22 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     }
     
     
+     // MARK: - Navigation
+     
+     // In a storyboard-based application, you will often want to do a little preparation before navigation
+     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+     
+        if segue.identifier == "shoppingCartVCSegue" {
+            if let destinationVC = segue.destination as? ShoppingCartViewController {
+                
+                destinationVC.auth = self.auth
+                destinationVC.session = self.session
+                destinationVC.currentUser = self.currentUser
+                destinationVC.userReference = self.userReference
+            }
+        }
+     }
+     
     
 
 }

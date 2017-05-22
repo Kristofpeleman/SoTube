@@ -32,6 +32,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                     (vc as! WishlistViewController).currentUser = self.currentUser
                 }
             }
+            
+            print(self.currentUser!.shoppingCart!)
         }
     
     }
