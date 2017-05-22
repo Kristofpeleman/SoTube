@@ -22,6 +22,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // Variable which is nil if no user is logged into the app, but which is a User object when a user has logged in successfully
     var currentUser: User?
     
+    // Variable to define how long they can listen to the song if it's a preview
+    var previewDuration: Float = 30
+    
     // The current position of the song inside songList (remember: we're comming from a VC in the SongsViewControllers folder/group which gave this info)
     var currentSongPositionInList: Int?
     
@@ -95,7 +98,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // MARK: - FireBase
     
     @IBAction func addCurrentSongToBasket(_ sender: UIBarButtonItem) {
-        currentUser?.addToShoppingCart(currentSong)
+        if let currentUser = currentUser {
+        currentUser.addToShoppingCart(currentSong)
         print(currentSong.spotify_ID!)
         print(currentSong.spotifyJSONFeed)
         
@@ -115,7 +119,13 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         
         songInShoppingCartReference?.setValue(songValues)
         
-        print(currentUser ?? "COULDN'T PRINT CURRENT USER")
+        print(currentUser)
+        }
+        else {
+            print("COULDN'T PRINT USER")
+            return
+        }
+        
     }
     
     
@@ -170,8 +180,22 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             // If player exists and songList exists (a "," is the same as "&&")
             if let player = player, let _ = songList {
                 
-                // MaximumValue has to be a Float, duration is a Int
-                musicSlider.maximumValue = Float(currentSong.duration)
+                // If nobody is logged in OR the song isn't in the "currentUser"'s "mySongs"
+                if currentUser == nil {
+                    musicSlider.maximumValue = previewDuration
+                }
+                else if let mySongs = currentUser!.mySongs {
+                    if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
+                        // MaximumValue has to be a Float, duration is a Int
+                        musicSlider.maximumValue = Float(currentSong.duration)
+                    }
+                    else {
+                        musicSlider.maximumValue = previewDuration
+                    }
+                }
+                else {
+                    musicSlider.maximumValue = previewDuration
+                }
                 
                 // Change musicSlider's value/position on slider to the currentTime of player
                 musicSlider.setValue(Float(player.playbackState.position), animated: true)
@@ -518,9 +542,23 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     func returnEndTimeInSong() -> String{
         // player needs to exist
         if let _ = player {
-            
-            // The duration of our song that is going to play is given inside the class Song
-            let endTime = currentSong.duration
+            var endTime = 0
+            if currentUser == nil {
+                endTime = Int(previewDuration)
+            }
+            else if let mySongs = currentUser!.mySongs {
+                if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
+                    // The duration of our song that is going to play is given inside the class Song
+                    endTime = currentSong.duration
+                }
+                else {
+                    endTime = Int(previewDuration)
+                }
+            }
+            else {
+                endTime = Int(previewDuration)
+            }
+
             
             // If the currentTime < 10 --> put a "0" in the 10-value of seconds (eg.: currentTime = 5 --> 0:05; else it would have been 0:5)
             if (endTime % 60) < 10 {

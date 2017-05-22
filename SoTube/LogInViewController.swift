@@ -113,6 +113,8 @@ class LogInViewController: UIViewController {
                 }
             })
             
+            sleep(2)
+            
             // Setting userID and userReference in the delegate
             
             let thisUserReference = existingUsersReference.child("\(currentUser.uid)")
