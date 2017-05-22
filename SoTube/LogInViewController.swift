@@ -86,8 +86,6 @@ class LogInViewController: UIViewController {
                 return
             }
             
-<<<<<<< HEAD
-=======
             // Update FireBase Online Users
             
             FIRAuth.auth()?.addStateDidChangeListener({[weak self] (auth, user) in
@@ -123,7 +121,7 @@ class LogInViewController: UIViewController {
             self.delegate?.setUserReference(thisUserReference)
             
             
->>>>>>> b75829a19a6ea70021ee7810b90033b137fe6ad7
+
             
             // Dismiss keyboard
             self.view.endEditing(true)
