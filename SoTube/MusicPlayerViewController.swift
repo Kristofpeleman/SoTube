@@ -335,6 +335,11 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     @IBAction func repeatSong(_ sender: UIButton) {
         repeatOneOrAll()
+        if repeatButton.title(for: .normal) == "Repeat: Off" {
+            repeatButton.setTitle("Repeat: On", for: .normal)
+        } else {
+            repeatButton.setTitle("Repeat: Off", for: .normal)
+        }
     }
     
     

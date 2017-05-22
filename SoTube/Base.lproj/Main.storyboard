@@ -171,7 +171,7 @@
                             <constraint firstItem="TY1-4m-eLT" firstAttribute="top" secondItem="5cm-du-jW8" secondAttribute="bottom" constant="10" id="ykj-oN-JwI"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="All Songs" id="wgn-mS-7Z6"/>
+                    <tabBarItem key="tabBarItem" title="All Songs" image="AllSongs_selected" selectedImage="AllSongs_selected" id="wgn-mS-7Z6"/>
                     <connections>
                         <outlet property="logInButton" destination="lw8-bn-E9Q" id="ezC-iT-Hkp"/>
                         <outlet property="searchBar" destination="D3Z-jY-RCg" id="i7w-PN-PFW"/>
@@ -366,7 +366,7 @@
                             <constraint firstItem="WcI-Bz-fJ7" firstAttribute="centerY" secondItem="6lY-oU-XF9" secondAttribute="centerY" id="zC4-1R-MmG"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="My Songs" id="U7k-95-aK8"/>
+                    <tabBarItem key="tabBarItem" title="My Songs" image="MySongs_selected" selectedImage="MySongs_selected" id="U7k-95-aK8"/>
                     <connections>
                         <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="dH2-8a-Myi"/>
                     </connections>
@@ -411,9 +411,9 @@
                                                 <action selector="back:" destination="tMx-VT-Gxf" id="dbK-z5-gae"/>
                                             </connections>
                                         </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="add" id="bVb-e2-04s">
+                                        <barButtonItem key="rightBarButtonItem" title="Add to Cart" id="FgY-Q1-Rcb">
                                             <connections>
-                                                <action selector="addCurrentSongToBasket:" destination="tMx-VT-Gxf" id="bND-vQ-A83"/>
+                                                <action selector="addCurrentSongToBasket:" destination="tMx-VT-Gxf" id="C9i-cL-ebo"/>
                                             </connections>
                                         </barButtonItem>
                                     </navigationItem>
@@ -525,11 +525,24 @@
                                 </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ay1-XV-1Ge">
-                                <rect key="frame" x="137" y="474" width="46" height="30"/>
-                                <state key="normal" title="Button"/>
+                                <rect key="frame" x="120.5" y="474" width="79" height="30"/>
+                                <state key="normal" title="Repeat: Off"/>
                                 <connections>
                                     <action selector="repeatSong:" destination="tMx-VT-Gxf" eventType="touchUpInside" id="V8V-TN-RR3"/>
                                 </connections>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNM-Ca-Iur">
+                                <rect key="frame" x="24" y="474" width="16" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                                <state key="normal" image="MySongs_selected">
+                                    <color key="titleColor" red="0.043511681258678436" green="0.49739736318588257" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
+                            </button>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAy-8Q-GnH">
+                                <rect key="frame" x="280" y="474" width="16" height="30"/>
+                                <state key="normal" image="Wishlist_selected">
+                                    <color key="titleColor" red="0.043511681259999997" green="0.4973973632" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
+                                </state>
                             </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -544,6 +557,7 @@
                             <constraint firstItem="zKD-bu-nQP" firstAttribute="centerY" secondItem="Od7-6S-ieB" secondAttribute="centerY" id="8EH-KF-VR4"/>
                             <constraint firstItem="3f7-FR-f8I" firstAttribute="leading" secondItem="Od7-6S-ieB" secondAttribute="leadingMargin" constant="8" id="9Gt-9I-C1k"/>
                             <constraint firstItem="84f-Fb-3eK" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="0.2" id="A9t-vJ-aT7"/>
+                            <constraint firstItem="SAy-8Q-GnH" firstAttribute="height" secondItem="Ay1-XV-1Ge" secondAttribute="height" id="APn-zI-SO8"/>
                             <constraint firstItem="zKD-bu-nQP" firstAttribute="centerX" secondItem="Od7-6S-ieB" secondAttribute="centerX" id="Ahk-Vp-TXZ"/>
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="centerY" secondItem="fRL-mb-Erf" secondAttribute="centerY" id="D9U-qQ-qBK"/>
                             <constraint firstItem="fDU-Cd-hS5" firstAttribute="centerY" secondItem="Od7-6S-ieB" secondAttribute="centerY" id="FEQ-Me-9Zy"/>
@@ -555,6 +569,9 @@
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="NkZ-Cz-8U1"/>
                             <constraint firstItem="GCd-0Z-GKm" firstAttribute="top" secondItem="1st-yf-WT8" secondAttribute="bottom" constant="5" id="Q8t-E9-gH6"/>
                             <constraint firstItem="rf3-ne-yDb" firstAttribute="trailing" secondItem="zZG-Jg-unL" secondAttribute="trailing" id="RLK-Xh-k9L"/>
+                            <constraint firstItem="SAy-8Q-GnH" firstAttribute="trailing" secondItem="rf3-ne-yDb" secondAttribute="trailing" id="U3Z-F9-X3A"/>
+                            <constraint firstItem="WNM-Ca-Iur" firstAttribute="leading" secondItem="rf3-ne-yDb" secondAttribute="leading" id="UAJ-us-Mh4"/>
+                            <constraint firstItem="WNM-Ca-Iur" firstAttribute="top" secondItem="rf3-ne-yDb" secondAttribute="bottom" constant="10" id="Ub9-PB-JIW"/>
                             <constraint firstItem="GCd-0Z-GKm" firstAttribute="centerX" secondItem="1st-yf-WT8" secondAttribute="centerX" id="Usb-4c-Zyd"/>
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="0.45" id="Vqm-u3-f37"/>
                             <constraint firstItem="zZG-Jg-unL" firstAttribute="width" secondItem="3f7-FR-f8I" secondAttribute="width" id="Xdi-Xf-n5M"/>
@@ -579,11 +596,13 @@
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="trailing" secondItem="zZG-Jg-unL" secondAttribute="trailing" id="sGU-fj-oei"/>
                             <constraint firstItem="zZG-Jg-unL" firstAttribute="leading" secondItem="O19-jx-HLe" secondAttribute="trailing" constant="8" id="tRo-Qw-Pbd"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="uA5-w9-Azq"/>
+                            <constraint firstItem="SAy-8Q-GnH" firstAttribute="top" secondItem="rf3-ne-yDb" secondAttribute="bottom" constant="10" id="uTo-Iq-uF3"/>
                             <constraint firstItem="YZX-aq-vUR" firstAttribute="height" secondItem="zKD-bu-nQP" secondAttribute="height" multiplier="0.45" id="uhH-fS-UYq"/>
                             <constraint firstItem="aco-gw-pxO" firstAttribute="centerY" secondItem="mbO-FT-hWy" secondAttribute="centerY" id="v7Z-6k-jzR"/>
                             <constraint firstItem="fDU-Cd-hS5" firstAttribute="centerX" secondItem="Od7-6S-ieB" secondAttribute="centerX" id="wpG-GX-pVJ"/>
                             <constraint firstItem="Ay1-XV-1Ge" firstAttribute="centerX" secondItem="rf3-ne-yDb" secondAttribute="centerX" id="xH3-H0-EQL"/>
                             <constraint firstItem="1st-yf-WT8" firstAttribute="top" secondItem="mbO-FT-hWy" secondAttribute="bottom" constant="8" id="xeG-Ho-gHu"/>
+                            <constraint firstItem="WNM-Ca-Iur" firstAttribute="height" secondItem="Ay1-XV-1Ge" secondAttribute="height" id="z7q-R0-JpC"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="leading" id="z8k-QC-6iJ"/>
                             <constraint firstAttribute="trailing" secondItem="YZX-aq-vUR" secondAttribute="trailing" id="znD-wW-qpB"/>
                         </constraints>
@@ -741,7 +760,7 @@
                             <constraint firstItem="QGx-6D-bzq" firstAttribute="leading" secondItem="lDU-uJ-hZb" secondAttribute="leadingMargin" id="yxV-SE-42l"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Favorites" id="rzs-mu-L2r"/>
+                    <tabBarItem key="tabBarItem" systemItem="favorites" id="rzs-mu-L2r"/>
                     <connections>
                         <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="bK6-a7-b2h"/>
                     </connections>
@@ -1160,7 +1179,7 @@
                             <constraint firstItem="Wug-yA-JbP" firstAttribute="top" secondItem="X2e-ct-uIF" secondAttribute="bottom" id="wKr-Kg-hHV"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Wishlist" id="vs5-j2-JdJ"/>
+                    <tabBarItem key="tabBarItem" title="Wishlist" image="Wishlist_selected" selectedImage="Wishlist_selected" id="vs5-j2-JdJ"/>
                     <connections>
                         <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="bey-pH-39d"/>
                     </connections>
@@ -1172,13 +1191,16 @@
         </scene>
     </scenes>
     <resources>
+        <image name="AllSongs_selected" width="16" height="16"/>
+        <image name="MySongs_selected" width="16" height="16"/>
         <image name="SoTube_Logo" width="890" height="769"/>
+        <image name="Wishlist_selected" width="16" height="16"/>
         <image name="forward" width="1200" height="1200"/>
         <image name="play" width="256" height="256"/>
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vHY-iE-ELE"/>
         <segue reference="Xlf-MO-3sR"/>
+        <segue reference="vHY-iE-ELE"/>
     </inferredMetricsTieBreakers>
 </document>
