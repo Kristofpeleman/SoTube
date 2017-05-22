@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class WishlistViewController: TopMediaViewController {
+    var currentUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()

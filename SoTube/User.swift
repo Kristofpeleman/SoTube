@@ -37,6 +37,17 @@ class User {
         let snapshotPoints = snapshotValue ["points"] as! Int
         
         self.init(fireBaseID: snapshotFirebaseID, emailAddress: snapshotEmailAddress, userName: snapshotUserName, points: snapshotPoints)
+        
+        if let snapshotShoppingCart = snapshotValue["shoppingCart"] as? [String : Any] {
+            print(snapshotShoppingCart)
+            for (_ , value) in snapshotShoppingCart {
+                let dictionary = value as! Dictionary<String, AnyObject>
+                let song = Song(songTitle: dictionary["songTitle"] as! String, artistNames: [dictionary["artists"] as! String], spotify_ID: dictionary["spotify_ID"] as! String, duration: dictionary["duration"] as! Int, imageURLAssString: dictionary["imageURL"] as! String, previewURLAssString: dictionary["previewURL"] as! String)
+                addToShoppingCart(song)
+            }
+        }
+        
+        print(self.shoppingCart ?? "SHOPPING CART EMPTY")
 
     }
     

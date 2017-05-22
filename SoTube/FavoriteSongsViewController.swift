@@ -10,6 +10,7 @@ import UIKit
 import Firebase
 
 class FavoriteSongsViewController: TopMediaViewController {
+    var currentUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()

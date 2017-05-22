@@ -100,10 +100,20 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         print(currentSong.spotifyJSONFeed)
         
         let userShoppingCartReference = userReference?.child("shoppingCart")
+        let songInShoppingCartReference = userShoppingCartReference?.childByAutoId()
         
-        let songValues: [String : Any] = [currentSong.spotify_ID! : ["json" : currentSong.spotifyJSONFeed]]
+        let songValues: [String : Any] = [
+            "spotify_ID" : currentSong.spotify_ID!,
+            "songTitle" : currentSong.songTitle,
+            "json" : currentSong.spotifyJSONFeed,
+            "artists" : currentSong.artists,
+            "previewURL" : currentSong.previewURLAssString,
+            "imageURL" : currentSong.imageURLAssString,
+            "duration" : currentSong.duration,
+            
+            ]
         
-        userShoppingCartReference?.setValue(songValues)
+        songInShoppingCartReference?.setValue(songValues)
         
         print(currentUser ?? "COULDN'T PRINT CURRENT USER")
     }
