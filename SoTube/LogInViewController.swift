@@ -67,8 +67,6 @@ class LogInViewController: UIViewController {
                 return
             }
             
-            let onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
-            onlineUsersReference.setValue([currentUser.displayName! : currentUser.email])
             
             // Dismiss keyboard
             self.view.endEditing(true)

@@ -345,6 +345,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 let albumItems = feed.value(forKeyPath: "albums.items") as? NSArray
                 
             {
+
                 var albumIDArray: [String] = []
                 for dictionary in albumItems {
                     albumIDArray.append((dictionary as! NSDictionary).value(forKey: "id") as! String? ?? "NOT FOUND")
