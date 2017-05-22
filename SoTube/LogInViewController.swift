@@ -9,16 +9,32 @@
 import UIKit
 import Firebase
 
+
+protocol LoginViewControllerDelegate {
+    func setUserReference(_ ref: FIRDatabaseReference)
+    func setUserID(_ id: String)
+}
+
 class LogInViewController: UIViewController {
+    
+    // MARK: - IBOutlets
 
     @IBOutlet weak var loginImageView: UIImageView!
-    
     @IBOutlet weak var emailAddressTextField: UITextField!
-    
     @IBOutlet weak var passwordTextField: UITextField!
+    
+    // MARK: - Constants and variables
+    
+    private var onlineUsersReference: FIRDatabaseReference?
+    var delegate: LoginViewControllerDelegate?
+    
+    // MARK: UIViewController Methods
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        // Setting the online users reference
+        onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
         emailAddressTextField.becomeFirstResponder()
         // Do any additional setup after loading the view.
     }
@@ -27,6 +43,9 @@ class LogInViewController: UIViewController {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
     }
+    
+    
+    // MARK: - IBActions
     
     @IBAction func login(_ sender: UIButton) {
         guard let emailAddress = emailAddressTextField.text, emailAddress != "",
@@ -67,6 +86,44 @@ class LogInViewController: UIViewController {
                 return
             }
             
+<<<<<<< HEAD
+=======
+            // Update FireBase Online Users
+            
+            FIRAuth.auth()?.addStateDidChangeListener({[weak self] (auth, user) in
+                if let currentUser = user {
+                    let currentUserReference = self?.onlineUsersReference?.child(currentUser.uid)
+                    currentUserReference?.setValue(currentUser.displayName)
+                    currentUserReference?.onDisconnectRemoveValue()
+                }
+            })
+            
+
+            
+            
+            // Update FireBase Users IN CASE OF A NEW USER
+            
+            let existingUsersReference = FIRDatabase.database().reference(withPath: "Users")
+            
+            existingUsersReference.observe(.value, with: {snapshot in
+
+                if !snapshot.hasChild(currentUser.uid) {
+                    
+                    let user: [String : Any] = ["userName": currentUser.displayName!, "emailAddress": currentUser.email!, "points": 20]
+                    let thisUserReference = existingUsersReference.child("\(currentUser.uid)")
+                    thisUserReference.setValue(user)
+                }
+            })
+            
+            // Setting userID and userReference in the delegate
+            
+            let thisUserReference = existingUsersReference.child("\(currentUser.uid)")
+            
+            self.delegate?.setUserID(currentUser.uid)
+            self.delegate?.setUserReference(thisUserReference)
+            
+            
+>>>>>>> b75829a19a6ea70021ee7810b90033b137fe6ad7
             
             // Dismiss keyboard
             self.view.endEditing(true)
@@ -83,13 +140,15 @@ class LogInViewController: UIViewController {
     }
     
     
-    
+    // MARK: - Homemade Functions
     
     private func updateView(){
         emailAddressTextField.text = ""
         passwordTextField.text = ""
     }
     
+    
+    // MARK: - Navigation
     
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
@@ -102,14 +161,5 @@ class LogInViewController: UIViewController {
         }
     }
 
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destinationViewController.
-        // Pass the selected object to the new view controller.
-    }
-    */
 
 }
