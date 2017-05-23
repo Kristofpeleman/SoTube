@@ -14,7 +14,6 @@ class TopMediaViewController: UIViewController {
     var auth: SPTAuth?
     var session: SPTSession?
     var rootReference: FIRDatabaseReference?
-//    var currentUser: User?
 
     override func viewDidLoad() {
         super.viewDidLoad()
