@@ -97,28 +97,41 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // MARK: - FireBase
     
     @IBAction func addCurrentSongToBasket(_ sender: UIBarButtonItem) {
+
         if let currentUser = currentUser {
-        currentUser.addToShoppingCart(currentSong)
-        print(currentSong.spotify_ID!)
-        print(currentSong.spotifyJSONFeed)
-        
-        let userShoppingCartReference = userReference?.child("shoppingCart")
-        let songInShoppingCartReference = userShoppingCartReference?.childByAutoId()
-        
-        let songValues: [String : Any] = [
-            "spotify_ID" : currentSong.spotify_ID!,
-            "songTitle" : currentSong.songTitle,
-            "json" : currentSong.spotifyJSONFeed,
-            "artists" : currentSong.artists,
-            "previewURL" : currentSong.previewURLAssString,
-            "imageURL" : currentSong.imageURLAssString,
-            "duration" : currentSong.duration,
             
-            ]
-        
-        songInShoppingCartReference?.setValue(songValues)
-        
-        print(currentUser)
+            if currentUser.mySongs != nil && currentUser.mySongs!.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
+                
+                let alertController = UIAlertController(title: "Duplicate Purchase", message: "You already purchased this song...", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+                
+            }
+            else {
+                currentUser.addToShoppingCart(currentSong)
+                print(currentSong.spotify_ID!)
+                print(currentSong.spotifyJSONFeed)
+                
+                let userShoppingCartReference = userReference?.child("shoppingCart")
+                let songInShoppingCartReference = userShoppingCartReference?.childByAutoId()
+                
+                let songValues: [String : Any] = [
+                    "spotify_ID" : currentSong.spotify_ID!,
+                    "songTitle" : currentSong.songTitle,
+                    "json" : currentSong.spotifyJSONFeed,
+                    "artists" : currentSong.artists,
+                    "previewURL" : currentSong.previewURLAssString,
+                    "imageURL" : currentSong.imageURLAssString,
+                    "duration" : currentSong.duration,
+                    
+                    ]
+                
+                songInShoppingCartReference?.setValue(songValues)
+                
+                print(currentUser)
+            }
+            
         }
         else {
             print("COULDN'T PRINT USER")
