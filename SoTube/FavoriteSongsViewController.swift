@@ -29,7 +29,7 @@ class FavoriteSongsViewController: TopMediaViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
+        print(currentUser ?? "NO CURRENT USER SET")
     }
     
     // MARK: - Navigation

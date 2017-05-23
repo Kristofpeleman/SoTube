@@ -36,7 +36,7 @@ class MySongsViewController: TopMediaViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-
+        print(currentUser ?? "NO CURRENT USER SET")
     }
 
     override func didReceiveMemoryWarning() {
