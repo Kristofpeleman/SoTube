@@ -49,8 +49,7 @@ class User {
         
         // If "snapshotValue["shoppingCart"] as? [String : Any]" exists/isn't nil
         if let snapshotShoppingCart = snapshotValue["shoppingCart"] as? [String : Any] {
-            // Print the shoopingCart
-            print(snapshotShoppingCart)
+
             // For each item in the shoppingCart (each item is a tuple, but we only need it's value (value could still be a seperate array or another tuple))
             for (_ , value) in snapshotShoppingCart {
                 // Local constant "dictionary" containing "value as! Dictionary<String, AnyObject>"
@@ -63,8 +62,19 @@ class User {
             }
         }
         
-        // Print our shoppingCart if it isn't nil, if it is nil, then print "SHOPPING CART EMPTY"
-        print(self.shoppingCart ?? "SHOPPING CART EMPTY")
+        if let snapshotMySongs = snapshotValue["mySongs"] as? [String : Any] {
+            
+            print(snapshotMySongs)
+            
+            for (_ , value) in snapshotMySongs {
+                let dictionary = value as! Dictionary<String, AnyObject>
+                
+                let song = Song(songTitle: dictionary["songTitle"] as! String, artistNames: [dictionary["artists"] as! String], spotify_ID: dictionary["spotify_ID"] as! String, duration: dictionary["duration"] as! Int, imageURLAssString: dictionary["imageURL"] as! String, previewURLAssString: dictionary["previewURL"] as! String)
+                
+                addToMySongs(song)
+            }
+        }
+        
 
     }
     
