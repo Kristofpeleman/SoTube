@@ -23,7 +23,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     var currentUser: User?
     
     // Variable to define how long they can listen to the song if it's a preview
-    var previewDuration: Float = 30
+    var previewDuration: Float = 10
     
     // The current position of the song inside songList (remember: we're comming from a VC in the SongsViewControllers folder/group which gave this info)
     var currentSongPositionInList: Int?
@@ -175,51 +175,65 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     func musicSliderUpdate(){
         
         // If we aren't touching our musicSlider (prevents slider thumb from switching between where we are dragging and player!.playbackState.position every 0.25secs)
-        if !musicSlider.isTouchInside {
-            
-            // If player exists and songList exists (a "," is the same as "&&")
-            if let player = player, let _ = songList {
+        if player?.playbackState.position != nil {
+            if !musicSlider.isTouchInside {
                 
-                // If nobody is logged in OR the song isn't in the "currentUser"'s "mySongs"
-                if currentUser == nil {
-                    musicSlider.maximumValue = previewDuration
-                }
-                else if let mySongs = currentUser!.mySongs {
-                    if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
-                        // MaximumValue has to be a Float, duration is a Int
-                        musicSlider.maximumValue = Float(currentSong.duration)
-                    }
-                    else {
+                // If player exists and songList exists (a "," is the same as "&&")
+                if let player = player, let _ = songList {
+                    
+                    // If nobody is logged in OR the song isn't in the "currentUser"'s "mySongs"
+                    if currentUser == nil {
+                        print("currentUser == nil")
                         musicSlider.maximumValue = previewDuration
                     }
-                }
-                else {
-                    musicSlider.maximumValue = previewDuration
-                }
-                
-                // Change musicSlider's value/position on slider to the currentTime of player
-                musicSlider.setValue(Float(player.playbackState.position), animated: true)
-                
-                // Call the function that updates both timeLabels
-                updateTimeLabels()
-                
-                // Check if player is repeating the song;
-                // because of the "!" before "player" he will do something when it is NOT repeating
-                if !player.playbackState.isRepeating {
-                    
-                    // Check if our next second in the song is the ending or after the ending
-                    if Int(musicSlider.value + 1) >= Int(musicSlider.maximumValue) {
-                        
-                        goToNextSong()
-                    
+                    else if let mySongs = currentUser!.mySongs {
+                        if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
+                            // MaximumValue has to be a Float, duration is a Int
+                            print("contains")
+                            musicSlider.maximumValue = Float(currentSong.duration)
+                        }
+                        else {
+                            print("first else")
+                            musicSlider.maximumValue = previewDuration
+                        }
                     }
+                    else {
+                        print("second else")
+                        musicSlider.maximumValue = previewDuration
+                    }
+                    
+                    // Change musicSlider's value/position on slider to the currentTime of player
+                    musicSlider.setValue(Float(player.playbackState.position), animated: true)
+                    
+                    // Call the function that updates both timeLabels
+                    updateTimeLabels()
+                    
+                    // Check if player is repeating the song;
+                    // because of the "!" before "player" he will do something when it is NOT repeating
+                    if !player.playbackState.isRepeating {
+                        
+                        // Check if our next second in the song is the ending or after the ending
+                        if Int(musicSlider.value + 1) >= Int(musicSlider.maximumValue) {
+                            
+                            goToNextSong()
+                            
+                        }
+                    }
+                    else if player.playbackState.isRepeating && (musicSlider.maximumValue == previewDuration) {
+                        if Int(musicSlider.value + 1) >= Int(musicSlider.maximumValue) {
+                            pausePlayer()
+                            playSound(startingAt: 0)
+                            continuePlaying()
+                        }
+                    }
+                    
                 }
             }
         }
     }
-    
-    
-    
+
+
+
     // MARK: - Changing songs
     
     // Tapping on the left-side ImageView makes you go to the previous song
