@@ -108,6 +108,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     let activityIndicator = UIActivityIndicatorView()
     
+    var loadingTimer: Timer?
+    
     
     // MARK: - Outlets
     // Button
@@ -157,6 +159,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         activityIndicator.color? = .black
         activityIndicator.center = self.view.center
         view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
         
     }
 
@@ -191,23 +194,43 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             })
             
         }
-        activityIndicator.stopAnimating()
-        tableView.isUserInteractionEnabled = true
         
     }
     
     // When the View just showed itself
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
+        activityIndicator.stopAnimating()
+        tableView.isUserInteractionEnabled = true
     }
     
+    
+    
+    
+    
+    
+    func longLoadingAlert(){
+        if activityIndicator.isAnimating{
+            let alertController = UIAlertController(title: "Long Loading Time", message: "The app can't seem to find 50+ results for your search.\nWould you like to keep waiting for results?", preferredStyle: .alert)
+            let yesAction = UIAlertAction(title: "Yes", style: .default, handler: nil)
+            let noAction = UIAlertAction(title: "No", style: .default, handler: { (action) in
+                self.tableView.reloadData()
+                self.activityIndicator.stopAnimating()
+                self.tableView.isUserInteractionEnabled = true
+            })
+            alertController.addAction(noAction)
+            alertController.addAction(yesAction)
+            self.present(alertController, animated: true, completion: nil)
+            loadingTimer?.invalidate()
+        }
+    }
     
     // MARK: - TableView Datasource Methods
     
     // Define how many rows there are in our tableView
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
         // If songs?.count isn't nil -> use that count, else use 1
-        return (songs?.count) ?? 1
+        return (songs?.count) ?? 0
     
     }
     
@@ -372,6 +395,11 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         activityIndicator.startAnimating()
         tableView.isUserInteractionEnabled = false
+        
+        if loadingTimer != nil {
+            loadingTimer?.invalidate()
+        }
+        loadingTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.longLoadingAlert), userInfo: nil, repeats: true)
         
         // Local constant containing the text of the searchBar
         let keywords = searchBar.text
