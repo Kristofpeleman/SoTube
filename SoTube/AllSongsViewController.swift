@@ -19,20 +19,18 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     private var userID: String?
     var currentUser: User?{
         didSet {
-            let mainTabBarController:UITabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
+//            let mainTabBarController:UITabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
             
-            for vc in mainTabBarController.childViewControllers {
-                if vc is MySongsViewController {
-                    (vc as! MySongsViewController).currentUser = self.currentUser
-                }
-                if vc is FavoriteSongsViewController {
-                    (vc as! FavoriteSongsViewController).currentUser = self.currentUser
-                }
-                if vc is WishlistViewController {
-                    (vc as! WishlistViewController).currentUser = self.currentUser
-                }
-            }
+            let mySongsVC: MySongsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MySongsVC") as! MySongsViewController
+            print("\n\n\n\n\n\n\(mySongsVC)\n\n\n\n\n\n")
             
+            mySongsVC.currentUser = self.currentUser
+            
+            let favoriteSongsVC: FavoriteSongsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavoriteSongsVC") as! FavoriteSongsViewController
+            favoriteSongsVC.currentUser = self.currentUser
+            
+            let wishListVC: WishlistViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WishListVC") as! WishlistViewController
+            wishListVC.currentUser = self.currentUser
         }
     
     }
@@ -50,8 +48,17 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     var songs: [Song]? {
         // When the value changes
         didSet {
-//            print(String(songs!.count) + " SONGS")
+            if songs?.count == 0 {
+                self.tableView.reloadData()
+            }
             
+            if songs?.count == 1 {
+                self.tableView.reloadData()
+            }
+            
+            if songs?.count == 10 {
+                self.tableView.reloadData()
+            }
             // !!!! REMEMBER: Count starts at 1, an array-positioning/index starts at 0
             // If there are 50 items in the array
             if songs?.count == 50 {
