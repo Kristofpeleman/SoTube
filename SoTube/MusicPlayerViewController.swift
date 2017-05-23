@@ -91,7 +91,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     override func viewDidAppear(_ animated: Bool) {
         // A timer repeating musicSliderUpdate every few seconds (or less depending on timeInterval) to update the musicSlider
-        timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.3, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
     }
     
     // MARK: - FireBase
@@ -213,9 +213,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                         
                         // Check if our next second in the song is the ending or after the ending
                         if Int(musicSlider.value + 1) >= Int(musicSlider.maximumValue) {
-                            
+                            musicSlider.value = 0
                             goToNextSong()
-                            
                         }
                     }
                     else if player.playbackState.isRepeating && (musicSlider.maximumValue == previewDuration) {
@@ -340,6 +339,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     // Bar button item resets sliders and goes back to whichever VC we came from before comming here
     @IBAction func back(_ sender: UIBarButtonItem) {
+        if musicSlider.maximumValue == previewDuration {
+            pausePlayer()
+        }
         timer?.invalidate()
         dismiss(animated: true, completion: nil)
     }
@@ -607,6 +609,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 destinationVC.userReference = self.userReference
             }
         }
+        pausePlayer()
+        timer?.invalidate()
      }
      
     
