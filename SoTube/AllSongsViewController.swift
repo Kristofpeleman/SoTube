@@ -17,23 +17,15 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
 //    private var onlineUsersReference: FIRDatabaseReference?
     private var userReference: FIRDatabaseReference?
     private var userID: String?
+
+    
     var currentUser: User?{
         didSet {
-//            let mainTabBarController:UITabBarController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MainTabBarController") as! UITabBarController
-            
-            let mySongsVC: MySongsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "MySongsVC") as! MySongsViewController
-            print("\n\n\n\n\n\n\(mySongsVC)\n\n\n\n\n\n")
-            
-            mySongsVC.currentUser = self.currentUser
-            
-            let favoriteSongsVC: FavoriteSongsViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "FavoriteSongsVC") as! FavoriteSongsViewController
-            favoriteSongsVC.currentUser = self.currentUser
-            
-            let wishListVC: WishlistViewController = UIStoryboard(name: "Main", bundle: nil).instantiateViewController(withIdentifier: "WishListVC") as! WishlistViewController
-            wishListVC.currentUser = self.currentUser
+
         }
-    
     }
+    
+    var shared = Shared.current
     
     
     // Created a constant containing the feed-urls (as Strings) from ViewModel()
@@ -130,19 +122,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // Login
         print(auth ?? "AUTH is nil")
         print(session ?? "SESSION is nil")
-        
-//        onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
-//        onlineUsersReference?.observe(.value, with: {snapshot in
-//            self.userName = FIRAuth.auth()?.currentUser?.displayName ?? ""
-//            if snapshot.hasChild(self.userName!) {
-//                let userReference = FIRDatabase.database().reference(withPath: "Users/\(self.userName!)")
-//                print(userReference.key)
-//                print(userReference.key)
-//                print(userReference)
-//                self.online = true
-//                print(self.online)
-//            }
-//        })
+                
         
         // Set dataSource for pickerView and TableView
         sortingPickerView.dataSource = sortingOptions
@@ -178,6 +158,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             reference.observe(.value, with: {snapshot in
 
                 self.currentUser = User(with: snapshot)
+                self.shared.user = User(with: snapshot)
+                
                 print(self.currentUser?.fireBaseID ?? "NO FIREBASE ID")
                 print(self.currentUser?.userName ?? "NO USERNAME")
                 print(self.currentUser?.emailAddress ?? "NO EMAIL")
@@ -615,6 +597,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             task.resume()
         
     }
+    
     
     
 }

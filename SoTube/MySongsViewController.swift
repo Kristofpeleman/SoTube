@@ -12,6 +12,7 @@ import Firebase
 class MySongsViewController: TopMediaViewController {
     
     var currentUser: User?
+    var shared = Shared.current
 
     override func viewDidLoad() {
         super.viewDidLoad()
@@ -37,6 +38,7 @@ class MySongsViewController: TopMediaViewController {
     
     override func viewDidAppear(_ animated: Bool) {
         print(currentUser ?? "NO CURRENT USER SET")
+        print(shared.user?.mySongs ?? "SHARED INSTANCE NOT FOUND")
     }
 
     override func didReceiveMemoryWarning() {

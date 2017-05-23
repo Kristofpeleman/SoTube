@@ -24,6 +24,7 @@
 		2F91E93D1EC0571E004A2E99 /* Main.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E93B1EC0571E004A2E99 /* Main.storyboard */; };
 		2F91E93F1EC0571E004A2E99 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E93E1EC0571E004A2E99 /* Assets.xcassets */; };
 		2F91E9421EC0571E004A2E99 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 2F91E9401EC0571E004A2E99 /* LaunchScreen.storyboard */; };
+		2F9BCD6E1ED46E6600FA0B4C /* Shared.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F9BCD6D1ED46E6600FA0B4C /* Shared.swift */; };
 		2FBEF7F81EC5D42C000398CC /* MusicPlayerViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FBEF7F71EC5D42C000398CC /* MusicPlayerViewController.swift */; };
 		2FDDA7B81ECEF3BF004BB880 /* User.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FDDA7B71ECEF3BF004BB880 /* User.swift */; };
 		2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */; };
@@ -59,6 +60,7 @@
 		2F91E93E1EC0571E004A2E99 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		2F91E9411EC0571E004A2E99 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		2F91E9431EC0571E004A2E99 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		2F9BCD6D1ED46E6600FA0B4C /* Shared.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Shared.swift; sourceTree = "<group>"; };
 		2FBEF7F71EC5D42C000398CC /* MusicPlayerViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MusicPlayerViewController.swift; sourceTree = "<group>"; };
 		2FDDA7B71ECEF3BF004BB880 /* User.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = User.swift; sourceTree = "<group>"; };
 		2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SongTableViewCell.swift; sourceTree = "<group>"; };
@@ -117,6 +119,7 @@
 		2F7F29281EC5975400D2B03A /* Model */ = {
 			isa = PBXGroup;
 			children = (
+				2F9BCD6D1ED46E6600FA0B4C /* Shared.swift */,
 				2FDDA7B71ECEF3BF004BB880 /* User.swift */,
 				2F7F29261EC5970600D2B03A /* Song.swift */,
 				2F36DDD31EC9A942003ABD64 /* SortingOptions.swift */,
@@ -341,6 +344,7 @@
 				2F2FD28F1EC1E65200628995 /* MySongsViewController.swift in Sources */,
 				6D24D3AE1ECB8B350087024D /* BridgeViewController.m in Sources */,
 				2F91E9381EC0571E004A2E99 /* AppDelegate.swift in Sources */,
+				2F9BCD6E1ED46E6600FA0B4C /* Shared.swift in Sources */,
 				2FBEF7F81EC5D42C000398CC /* MusicPlayerViewController.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
