@@ -36,12 +36,13 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         return songList![currentSongPositionInList!]
     }
     
+    // Optional variable containing nil or an item of type "Timer"
+    var timer: Timer?
+    
+    
     private var rootReference: FIRDatabaseReference?
     var userReference: FIRDatabaseReference?
-    
-    // Variable because it's an optional
-    //var currentUser: User?
-    
+       
     
     
     // MARK: - Outlets
@@ -92,7 +93,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     override func viewDidAppear(_ animated: Bool) {
         // A timer repeating musicSliderUpdate every few seconds (or less depending on timeInterval) to update the musicSlider
-        _ = Timer.scheduledTimer(timeInterval: 0.25, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
+        timer = Timer.scheduledTimer(timeInterval: 0.2, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
     }
     
     // MARK: - FireBase
@@ -186,7 +187,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                         print("currentUser == nil")
                         musicSlider.maximumValue = previewDuration
                     }
-                    else if let mySongs = currentUser!.mySongs {
+                    else if let mySongs = currentUser?.mySongs {
                         if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                             // MaximumValue has to be a Float, duration is a Int
                             print("contains")
@@ -198,7 +199,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                         }
                     }
                     else {
-                        print("second else")
+                        print("\(currentSong.spotify_ID)")
                         musicSlider.maximumValue = previewDuration
                     }
                     
@@ -341,6 +342,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     // Bar button item resets sliders and goes back to whichever VC we came from before comming here
     @IBAction func back(_ sender: UIBarButtonItem) {
+        timer?.invalidate()
         dismiss(animated: true, completion: nil)
     }
     
