@@ -23,7 +23,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     var currentUser: User?
     
     // Variable to define how long they can listen to the song if it's a preview
-    var previewDuration: Float = 10
+    var previewDuration: Float = 30
     
     // The current position of the song inside songList (remember: we're comming from a VC in the SongsViewControllers folder/group which gave this info)
     var currentSongPositionInList: Int?
