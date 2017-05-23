@@ -7,9 +7,7 @@
 //
 
 import UIKit
-import AVFoundation
 import Firebase
-// Don't forget to import AVFoundation when working with sounds and videos
 
 class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     
