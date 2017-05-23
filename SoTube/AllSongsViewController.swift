@@ -48,27 +48,21 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     var songs: [Song]? {
         // When the value changes
         didSet {
-            if songs?.count == 0 {
-                self.tableView.reloadData()
-            }
-            
-            if songs?.count == 1 {
-                self.tableView.reloadData()
-            }
-            
-            if songs?.count == 10 {
-                self.tableView.reloadData()
-            }
-            // !!!! REMEMBER: Count starts at 1, an array-positioning/index starts at 0
-            // If there are 50 items in the array
-            if songs?.count == 50 {
-                // print the 49th position in the array (= item 50)
-                print(songs![49])
-                
-                print(String(songs!.count) + " SONGS")
-                
-                // reload the tableView to show all the new items
-                self.tableView.reloadData()
+            if songs != nil {
+                // !!!! REMEMBER: Count starts at 1, an array-positioning/index starts at 0
+                // If there are 50 items in the array
+                if songs!.count == 50 {
+                    // print the 49th position in the array (= item 50)
+                    //print(songs![49])
+                    
+                    print(String(songs!.count) + " SONGS")
+                    
+                    // reload the tableView to show all the new items
+                    self.tableView.reloadData()
+                    
+                    activityIndicator.stopAnimating()
+                    tableView.isUserInteractionEnabled = true
+                }
             }
         }
     }
@@ -101,6 +95,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 let feeds = trackIDs!.map{"https://api.spotify.com/v1/tracks/" + $0 + "?"}
                 // Use the local array in the function "setSongsFromJSONFeed()"
                 setSongsFromJSONFeed(jsonData: feeds)
+                
             }
         }
     }
@@ -110,6 +105,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // puts the values in our albumIDs between these strings and becomes the value of albumFeeds
         return self.albumIDs?.map{"https://api.spotify.com/v1/albums/" + $0 + "?"}
     }
+    
+    let activityIndicator = UIActivityIndicatorView()
     
     
     // MARK: - Outlets
@@ -152,6 +149,15 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         
         // Call function "getAlbumIDs()"
         getAlbumIDs()
+        
+        
+        
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color? = .black
+        activityIndicator.center = self.view.center
+        view.addSubview(activityIndicator)
+        
     }
 
     override func didReceiveMemoryWarning() {
@@ -185,6 +191,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             })
             
         }
+        activityIndicator.stopAnimating()
+        tableView.isUserInteractionEnabled = true
         
     }
     
@@ -222,20 +230,22 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     //MARK: - TableView Delegate Methods
     // What to do when a row is selected
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        activityIndicator.startAnimating()
+        tableView.isUserInteractionEnabled = false
+            // The current position in our array is the row we just clicked on
+            currentSongPositionInList = indexPath.row
+            
+            /*
+             let song = self.songs?[currentSongPositionInList]
+             
+             if let _ = song?.fullSongURLAssString {
+             performSegue(withIdentifier: "playerSegue", sender: nil)
+             }*/
+            
+            //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
+            // Perform the following segue to a new ViewController
+            performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
         
-        // The current position in our array is the row we just clicked on
-        currentSongPositionInList = indexPath.row
-        
-        /*
-        let song = self.songs?[currentSongPositionInList]
-        
-        if let _ = song?.fullSongURLAssString {
-            performSegue(withIdentifier: "playerSegue", sender: nil)
-        }*/
-        
-        //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
-        // Perform the following segue to a new ViewController
-        performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
     }
     
 
@@ -278,7 +288,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     // Define what happens when we select a row
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        
+        activityIndicator.startAnimating()
         // Change currentPickerViewRow's value to the selected row
         currentPickerViewRow = row
         
@@ -287,7 +297,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             // Call "sortSongs" function with parameter songs (unwrapped, since "songs" is of type "[Song]?" and we need something of type "[Song]" (+ we know it isn't nil at this point))
             sortSongs(from: songs!)
         }
-        
         
     }
 
@@ -361,6 +370,9 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     // When you press "enter"/"return" in the searchBar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        activityIndicator.startAnimating()
+        tableView.isUserInteractionEnabled = false
+        
         // Local constant containing the text of the searchBar
         let keywords = searchBar.text
         // Local constant containging the one above, but every empty space turns into a "+"
@@ -371,6 +383,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         self.songs = nil
         // Call function "getSearchResponse" with our "searchFeed" as a parameter
         getSearchResponse(searchFeed: searchFeed)
+        
     }
     
     
@@ -525,7 +538,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             
             task.resume()
         }
-        
     }
     
     func getAlbumIDs() {
@@ -555,13 +567,12 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         }
         
         task.resume()
-        
     }
     
     func getTrackIDs() {
         
         for feed in self.albumFeeds! {
-            
+        
             let request = try? SPTRequest.createRequest(for: URL(string: feed)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
             
             let session1 = URLSession(configuration: .default, delegate: nil, delegateQueue: .main)
@@ -612,8 +623,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
 
             }
             
-            task.resume()
-        
+        task.resume()
     }
     
     
