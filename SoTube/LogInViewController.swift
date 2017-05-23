@@ -28,6 +28,8 @@ class LogInViewController: UIViewController {
     private var onlineUsersReference: FIRDatabaseReference?
     var delegate: LoginViewControllerDelegate?
     
+    let activityIndicator = UIActivityIndicatorView()
+    
     // MARK: UIViewController Methods
     
     override func viewDidLoad() {
@@ -37,6 +39,13 @@ class LogInViewController: UIViewController {
         onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
         emailAddressTextField.becomeFirstResponder()
         // Do any additional setup after loading the view.
+        
+        
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color? = .black
+        activityIndicator.center = self.view.center
+        view.addSubview(activityIndicator)
     }
 
     override func didReceiveMemoryWarning() {
@@ -48,6 +57,9 @@ class LogInViewController: UIViewController {
     // MARK: - IBActions
     
     @IBAction func login(_ sender: UIButton) {
+        
+        self.activityIndicator.startAnimating()
+        
         guard let emailAddress = emailAddressTextField.text, emailAddress != "",
             let password = passwordTextField.text, password != "" else {
                 
@@ -128,6 +140,7 @@ class LogInViewController: UIViewController {
             // Dismiss keyboard
             self.view.endEditing(true)
             
+            self.activityIndicator.stopAnimating()
             self.dismiss(animated: true, completion: nil)
         })
         
