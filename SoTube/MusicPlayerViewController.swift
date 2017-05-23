@@ -130,6 +130,11 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 songInShoppingCartReference?.setValue(songValues)
                 
                 print(currentUser)
+                
+                let alertController = UIAlertController(title: "Confirmation", message: "Song added to shopping cart", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
             }
             
         }

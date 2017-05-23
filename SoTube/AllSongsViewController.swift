@@ -25,7 +25,14 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         }
     }
     
-    var shared = Shared.current
+    var shared = Shared.current {
+        didSet {
+            if shared.user == nil {
+                self.userReference = nil
+                self.userID = nil
+            }
+        }
+    }
     
     
     // Created a constant containing the feed-urls (as Strings) from ViewModel()
@@ -157,6 +164,10 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // Print who is logged into FireBase
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
+        
+        if let _ = shared.user {
+            logInButton.title = "Log out"
+        }
         
         // If userReference (from FireBase) exists/isn't nil
         if let reference = self.userReference {
@@ -469,12 +480,16 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             if logInButton.title == "Log out" {
                 
                 // Get the user that is logged in his/her online-status from FireBase
-                let currentOnlineUserReference = FIRDatabase.database().reference(withPath: "online users/\(self.userID!)")
+                let currentOnlineUserReference = FIRDatabase.database().reference(withPath: "online users/\(self.shared.user!.fireBaseID)")
                 // Remove the value of the online-status (make it go offline)
                 currentOnlineUserReference.removeValue()
                 
                 // Since the value isn't in FireBase anymore, we must delete it localy
                 self.currentUser = nil
+                self.shared.user = nil
+                self.userReference = nil
+                self.userID = nil
+                
                 // Change "logInButton"'s title to "Log in"
                 logInButton.title = "Log in"
                 
