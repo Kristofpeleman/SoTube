@@ -51,7 +51,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     @IBAction func buySongs(_ sender: UIButton) {
         if let _ = self.currentUser?.shoppingCart {
             
-            // Adapt "mySongs"
+            
             
             // Adapt "points"
             
@@ -79,6 +79,8 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                 let points = self.currentUser!.points
                 let pointsReference = userReference?.child("points")
                 pointsReference?.setValue(points - calculatePoints())
+                
+                // Adapt "mySongs"
                 
                 self.currentUser?.addToMySongs(self.currentUser!.shoppingCart!)
                 
@@ -166,6 +168,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
             "previewURL" : song.previewURLAssString,
             "imageURL" : song.imageURLAssString,
             "duration" : song.duration,
+            "favorite" : song.favorite
         ]
         return dict
     }

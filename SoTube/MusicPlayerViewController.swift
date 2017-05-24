@@ -68,6 +68,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     @IBOutlet weak var playOrPauseButton: UIButton! // Outlet because the image can change
     @IBOutlet weak var repeatButton: UIButton!// Outlet because the image can change
     @IBOutlet weak var wishListButton: UIButton!
+    @IBOutlet weak var favoriteButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -134,7 +135,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     "previewURL" : currentSong.previewURLAssString,
                     "imageURL" : currentSong.imageURLAssString,
                     "duration" : currentSong.duration,
-                    
+                    "favorite" : currentSong.favorite
                     ]
                 
                 songInShoppingCartReference?.setValue(songValues)
@@ -198,7 +199,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     "previewURL" : currentSong.previewURLAssString,
                     "imageURL" : currentSong.imageURLAssString,
                     "duration" : currentSong.duration,
-                    
+                    "favorite" : currentSong.favorite
                     ]
                 
                 songInWishListReference?.setValue(songValues)
@@ -217,6 +218,10 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     }
     
     
+    @IBAction func setSongAsFavorite(_ sender: UIButton) {
+        
+        
+    }
     
     
     

@@ -551,10 +551,10 @@
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNM-Ca-Iur">
                                 <rect key="frame" x="24" y="474" width="16" height="30"/>
-                                <fontDescription key="fontDescription" type="system" pointSize="15"/>
-                                <state key="normal" image="MySongs_selected">
-                                    <color key="titleColor" red="0.043511681258678436" green="0.49739736318588257" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
-                                </state>
+                                <state key="normal" image="MySongs"/>
+                                <connections>
+                                    <action selector="setSongAsFavorite:" destination="tMx-VT-Gxf" eventType="touchUpInside" id="pbw-aL-Vvt"/>
+                                </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAy-8Q-GnH">
                                 <rect key="frame" x="280" y="474" width="16" height="30"/>
@@ -638,6 +638,7 @@
                         <outlet property="background" destination="zKD-bu-nQP" id="MZX-yk-MSU"/>
                         <outlet property="currentTimeLabel" destination="3f7-FR-f8I" id="l96-OI-bfb"/>
                         <outlet property="endTimeLabel" destination="zZG-Jg-unL" id="cIF-gj-Inx"/>
+                        <outlet property="favoriteButton" destination="WNM-Ca-Iur" id="Xrf-1s-xow"/>
                         <outlet property="musicSlider" destination="O19-jx-HLe" id="w1Y-Ob-36k"/>
                         <outlet property="navigationSongTitle" destination="fj5-6Y-iBy" id="Gco-T5-CaG"/>
                         <outlet property="nextAlbumImageView" destination="84f-Fb-3eK" id="0FJ-ZO-2jS"/>
@@ -1376,6 +1377,7 @@
     </scenes>
     <resources>
         <image name="AllSongs_selected" width="16" height="16"/>
+        <image name="MySongs" width="16" height="16"/>
         <image name="MySongs_selected" width="16" height="16"/>
         <image name="SoTubeIconBottom" width="1000" height="508"/>
         <image name="SoTubeIconTop" width="1000" height="497"/>
@@ -1386,9 +1388,7 @@
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bey-pH-39d"/>
-        <segue reference="tpj-gN-ERD"/>
         <segue reference="vHY-iE-ELE"/>
-        <segue reference="Xlf-MO-3sR"/>
+        <segue reference="tpj-gN-ERD"/>
     </inferredMetricsTieBreakers>
 </document>
