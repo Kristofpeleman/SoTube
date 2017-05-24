@@ -11,7 +11,6 @@ import Firebase
 
 class CreateAccountViewController: UIViewController {
     
-    @IBOutlet weak var createAccountImageView: UIImageView!
     
     @IBOutlet weak var userNameTextField: UITextField!
     
