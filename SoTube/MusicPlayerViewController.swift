@@ -67,6 +67,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // ButtonOutlets
     @IBOutlet weak var playOrPauseButton: UIButton! // Outlet because the image can change
     @IBOutlet weak var repeatButton: UIButton!// Outlet because the image can change
+    @IBOutlet weak var wishListButton: UIButton!
     
     
     override func viewDidLoad() {
@@ -144,6 +145,61 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         }
         
     }
+    
+    
+    @IBAction func addCurrentSongToWishList(_ sender: UIButton) {
+        if let currentUser = currentUser {
+            
+            if currentUser.mySongs != nil && currentUser.mySongs!.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
+                
+                let alertController = UIAlertController(title: "Song exists in your songs", message: "You already purchased this song...", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+                
+            }
+                
+            else if currentUser.wishList != nil && currentUser.wishList!.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
+                
+                let alertController = UIAlertController(title: "Song exists in your wishlist", message: "You already added this song to your wishlist...", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+                
+            }
+                
+            else {
+                currentUser.addToWishList(currentSong)
+                
+                let userWishListReference = userReference?.child("wishList")
+                let songInWishListReference = userWishListReference?.childByAutoId()
+                
+                let songValues: [String : Any] = [
+                    "spotify_ID" : currentSong.spotify_ID!,
+                    "songTitle" : currentSong.songTitle,
+                    "json" : currentSong.spotifyJSONFeed,
+                    "artists" : currentSong.artists,
+                    "previewURL" : currentSong.previewURLAssString,
+                    "imageURL" : currentSong.imageURLAssString,
+                    "duration" : currentSong.duration,
+                    
+                    ]
+                
+                songInWishListReference?.setValue(songValues)
+                
+                let alertController = UIAlertController(title: "Confirmation", message: "Song added to your wishlist", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+            }
+            
+        }
+        else {
+            print("COULDN'T PRINT USER")
+            return
+        }
+    }
+    
     
     
     
