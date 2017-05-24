@@ -125,7 +125,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 print(currentSong.spotifyJSONFeed)
                 
                 let userShoppingCartReference = userReference?.child("shoppingCart")
-                let songInShoppingCartReference = userShoppingCartReference?.childByAutoId()
+                let songInShoppingCartReference = userShoppingCartReference?.child(currentSong.spotify_ID!)
                 
                 let songValues: [String : Any] = [
                     "spotify_ID" : currentSong.spotify_ID!,
@@ -151,12 +151,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         }
         else {
             let alertController = UIAlertController(title: "Log in", message: "You need to be logged in to add songs to your shopping cart.", preferredStyle: .alert)
-            let logInAction = UIAlertAction(title: "Log in", style: .default, handler: { (action) in
-                self.performSegue(withIdentifier: "loginSegue", sender: nil)
-            })
-            let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
-            alertController.addAction(cancelAction)
-            alertController.addAction(logInAction)
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
             present(alertController, animated: true, completion: nil)
             return
         }
@@ -189,7 +185,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 currentUser.addToWishList(currentSong)
                 
                 let userWishListReference = userReference?.child("wishList")
-                let songInWishListReference = userWishListReference?.childByAutoId()
+                let songInWishListReference = userWishListReference?.child(currentSong.spotify_ID!)
                 
                 let songValues: [String : Any] = [
                     "spotify_ID" : currentSong.spotify_ID!,

@@ -88,7 +88,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                 let songs = self.currentUser!.shoppingCart!
                 
                 for index in 1...songs.count {
-                    let songInMySongsReference = userMySongsReference?.childByAutoId()
+                    let songInMySongsReference = userMySongsReference?.child(songs[index - 1].spotify_ID!)
                     songInMySongsReference?.setValue(returnDictionaryFor(songs[index - 1]))
                 }
 
