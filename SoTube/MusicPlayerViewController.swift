@@ -40,7 +40,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     private var rootReference: FIRDatabaseReference?
     var userReference: FIRDatabaseReference?
-       
+    
     
     
     // MARK: - Outlets
@@ -97,7 +97,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // MARK: - FireBase
     
     @IBAction func addCurrentSongToBasket(_ sender: UIBarButtonItem) {
-
+        
         if let currentUser = currentUser {
             
             if currentUser.mySongs != nil && currentUser.mySongs!.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
@@ -191,65 +191,59 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // Function to update the musicSlider
     func musicSliderUpdate(){
         
-        // If we aren't touching our musicSlider (prevents slider thumb from switching between where we are dragging and player!.playbackState.position every 0.25secs)
-        if player?.playbackState?.position != nil {
-            if !musicSlider.isTouchInside {
+        // If we aren't touching our musicSlider (prevents slider thumb from switching between where we are dragging and player.playbackState.position every 0.25secs)
+        if !musicSlider.isTouchInside {
+            
+            // If player exists and songList exists (a "," is the same as "&&")
+            if let currentPlaybackState = player?.playbackState, let _ = songList {
                 
-                // If player exists and songList exists (a "," is the same as "&&")
-                if let player = player, let _ = songList {
-                    
-                    // If nobody is logged in OR the song isn't in the "currentUser"'s "mySongs"
-                    if currentUser == nil {
-                        print("currentUser == nil")
-                        musicSlider.maximumValue = previewDuration
-                    }
-                    else if let mySongs = currentUser?.mySongs {
-                        if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
-                            // MaximumValue has to be a Float, duration is a Int
-                            print("contains")
-                            musicSlider.maximumValue = Float(currentSong.duration)
-                        }
-                        else {
-                            print("first else")
-                            musicSlider.maximumValue = previewDuration
-                        }
+                // If nobody is logged in OR the song isn't in the "currentUser"'s "mySongs"
+                if let mySongs = currentUser?.mySongs {
+                    if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
+                        // MaximumValue has to be a Float, duration is a Int
+                        print("contains")
+                        musicSlider.maximumValue = Float(currentSong.duration)
                     }
                     else {
-                        print("\(currentSong.spotify_ID)")
+                        print("not in mySongs")
                         musicSlider.maximumValue = previewDuration
                     }
-                    
-                    // Change musicSlider's value/position on slider to the currentTime of player
-                    musicSlider.setValue(Float(player.playbackState.position), animated: true)
-                    
-                    // Call the function that updates both timeLabels
-                    updateTimeLabels()
-                    
-                    // Check if player is repeating the song;
-                    // because of the "!" before "player" he will do something when it is NOT repeating
-                    if !player.playbackState.isRepeating {
-                        
-                        // Check if our next second in the song is the ending or after the ending
-                        if Int(musicSlider.value + 1) >= Int(musicSlider.maximumValue) {
-                            musicSlider.value = 0
-                            goToNextSong()
-                        }
-                    }
-                    else if player.playbackState.isRepeating && (musicSlider.maximumValue == previewDuration) {
-                        if Int(musicSlider.value + 1) >= Int(musicSlider.maximumValue) {
-                            pausePlayer()
-                            playSound(startingAt: 0)
-                            continuePlaying()
-                        }
-                    }
-                    
                 }
+                else {
+                    print("no user or mySongs present")
+                    musicSlider.maximumValue = previewDuration
+                }
+                
+                // Change musicSlider's value/position on slider to the currentTime of player
+                musicSlider.setValue(Float(currentPlaybackState.position), animated: true)
+                
+                // Call the function that updates both timeLabels
+                updateTimeLabels()
+                
+                // Check if player is repeating the song;
+                // because of the "!" before "player" he will do something when it is NOT repeating
+                if !currentPlaybackState.isRepeating {
+                    
+                    // Check if our next second in the song is the ending or after the ending
+                    if Int(musicSlider.value + 1) >= Int(musicSlider.maximumValue) {
+                        musicSlider.value = 0
+                        goToNextSong()
+                    }
+                }
+                else if currentPlaybackState.isRepeating && (musicSlider.maximumValue == previewDuration) {
+                    if Int(musicSlider.value + 1) >= Int(musicSlider.maximumValue) {
+                        pausePlayer()
+                        playSound(startingAt: 0)
+                        continuePlaying()
+                    }
+                }
+                
             }
         }
     }
-
-
-
+    
+    
+    
     // MARK: - Changing songs
     
     // Tapping on the left-side ImageView makes you go to the previous song
@@ -325,7 +319,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         updateOutlets()
         playSound(startingAt: 0)
     }
-   
+    
     
     // MARK: - Play button and Back
     // The play-button has to play or pause the song depending on the situation
@@ -353,14 +347,17 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
             }
         }
-    } 
+    }
     
     // Bar button item resets sliders and goes back to whichever VC we came from before comming here
     @IBAction func back(_ sender: UIBarButtonItem) {
+        timer?.invalidate()
         if musicSlider.maximumValue == previewDuration {
             pausePlayer()
         }
-        timer?.invalidate()
+        if player?.playbackState?.position != nil {
+            timer = Timer(timeInterval: TimeInterval(musicSlider.maximumValue) - player!.playbackState.position - 1, target: self, selector: #selector(self.pausePlayer), userInfo: nil, repeats: false)
+        }
         dismiss(animated: true, completion: nil)
     }
     
@@ -475,7 +472,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 // Log in with the access token (token lasts 1 hour) (this will also automaticly activate audioStreamingDidLogin)
                 self.player!.login(withAccessToken: authSession.accessToken)
             }
-            // If he is already logged in
+                // If he is already logged in
             else {
                 audioStreamingDidLogin(player)
             }
@@ -597,7 +594,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             else {
                 endTime = Int(previewDuration)
             }
-
+            
             
             // If the currentTime < 10 --> put a "0" in the 10-value of seconds (eg.: currentTime = 5 --> 0:05; else it would have been 0:5)
             if (endTime % 60) < 10 {
@@ -613,11 +610,11 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     }
     
     
-     // MARK: - Navigation
-     
-     // In a storyboard-based application, you will often want to do a little preparation before navigation
-     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-     
+    // MARK: - Navigation
+    
+    // In a storyboard-based application, you will often want to do a little preparation before navigation
+    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
+        
         if segue.identifier == "shoppingCartVCSegue" {
             if let destinationVC = segue.destination as? ShoppingCartViewController {
                 
@@ -629,8 +626,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         }
         pausePlayer()
         timer?.invalidate()
-     }
-     
+    }
     
-
+    
+    
 }
