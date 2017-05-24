@@ -9,10 +9,22 @@
 import UIKit
 import Firebase
 
-class WishlistViewController: TopMediaViewController {
-    var currentUser: User?
+class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource {
+    
+    // MARK: - Global variables and constants
+    
     var shared = Shared.current
+    var currentSongPositionInList = 0
 
+    // MARK: - IBOutlets
+    
+    @IBOutlet weak var tableView: UITableView!
+    
+    
+    
+    
+    // MARK: - UIViewController functions
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         print(auth ?? "AUTH is nil")
@@ -30,9 +42,35 @@ class WishlistViewController: TopMediaViewController {
     }
     
     override func viewDidAppear(_ animated: Bool) {
-        print(currentUser ?? "NO CURRENT USER SET")
-        print(shared.user?.mySongs ?? "SHARED INSTANCE NOT FOUND")
+        self.tableView.reloadData()
+        print(shared.user?.wishList ?? "SHARED INSTANCE NOT FOUND")
     }
+    
+    
+    // MARK: - Tableview DataSource methods
+    
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return (shared.user?.wishList?.count) ?? 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongTableViewCell
+        
+        cell.songTitleLabel.text = shared.user?.wishList![indexPath.row].songTitle
+        cell.artistNameLabel.text = shared.user?.wishList![indexPath.row].artists
+        cell.costLabel.text = String(describing: shared.user?.wishList![indexPath.row].cost)
+        
+        return cell
+    }
+    
+    
+    // MARK: - Tableview Delegate methods
+    
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        self.currentSongPositionInList = indexPath.row
+        performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
+    }
+    
     
     // MARK: - Navigation
 
@@ -40,6 +78,22 @@ class WishlistViewController: TopMediaViewController {
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "loginSegue" {
             if let _ = segue.destination as? LogInViewController {
+                
+            }
+        }
+        
+        if segue.identifier == "musicPlayerSegue" {
+            if let destinationVC = segue.destination as? MusicPlayerViewController {
+                destinationVC.auth = self.auth
+                destinationVC.session = self.session
+                destinationVC.songList = self.shared.user?.wishList
+                destinationVC.currentSongPositionInList = self.currentSongPositionInList
+                destinationVC.currentUser = self.shared.user
+                
+                let usersReference: FIRDatabaseReference = (rootReference?.child("Users"))!
+                let userID = shared.user?.fireBaseID
+                
+                destinationVC.userReference = usersReference.child(userID!)
                 
             }
         }
