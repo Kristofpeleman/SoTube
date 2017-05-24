@@ -647,6 +647,7 @@
                         <outlet property="repeatButton" destination="Ay1-XV-1Ge" id="Dmy-fl-dSg"/>
                         <outlet property="volumeSlider" destination="rf3-ne-yDb" id="VcA-Bd-jJb"/>
                         <outlet property="wishListButton" destination="SAy-8Q-GnH" id="klt-ze-L61"/>
+                        <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="tpj-gN-ERD"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="vAx-1h-edP" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -691,6 +692,16 @@
                                 <items>
                                     <navigationItem title="Shopping Cart" id="iW0-mV-mDl">
                                         <barButtonItem key="backBarButtonItem" title="Back" id="Db0-s3-YCs"/>
+                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="aNs-hN-vVi">
+                                            <connections>
+                                                <action selector="cancel:" destination="x9N-ly-E92" id="MnW-ha-Ox0"/>
+                                            </connections>
+                                        </barButtonItem>
+                                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="Mi7-b6-eTr">
+                                            <connections>
+                                                <action selector="emptyShoppingCart:" destination="x9N-ly-E92" id="s5b-tJ-NmZ"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -1376,6 +1387,6 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="bey-pH-39d"/>
-        <segue reference="Def-eb-XHu"/>
+        <segue reference="tpj-gN-ERD"/>
     </inferredMetricsTieBreakers>
 </document>
