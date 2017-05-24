@@ -192,7 +192,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     func musicSliderUpdate(){
         
         // If we aren't touching our musicSlider (prevents slider thumb from switching between where we are dragging and player!.playbackState.position every 0.25secs)
-        if player?.playbackState.position != nil {
+        if player?.playbackState?.position != nil {
             if !musicSlider.isTouchInside {
                 
                 // If player exists and songList exists (a "," is the same as "&&")
