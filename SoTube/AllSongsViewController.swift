@@ -18,7 +18,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     private var userReference: FIRDatabaseReference?
     private var userID: String?
 
-    var currentUser: User?
     
     var shared = Shared.current {
         didSet {
@@ -35,9 +34,12 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     // Created a constant containing the feed-urls (as Strings) from TopMediaViewModel()
     let newReleasesFeed = TopMediaViewModel().newReleasesURLAsString
     
-    
     // Created a variable for the position of the song in the list we are currently using
     var currentSongPositionInList = 0
+    
+    
+    // Variable to lessen the amount of "magic" numbers in the app
+    let tableViewSongLimit = 50
     // Created an optional variable "songs"-array containing elements of class "Song"
     var songs: [Song]? {
         // When the value changes
@@ -45,7 +47,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             if songs != nil {
                 // !!!! REMEMBER: Count starts at 1, an array-positioning/index starts at 0
                 // If there are 50 items in the array
-                if songs!.count == 50 {
+                if songs!.count == tableViewSongLimit {
                     // print the 49th position in the array (= item 50)
                     //print(songs![49])
                     
@@ -82,7 +84,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // When value changes
         didSet {
             // If there are 50 items in the array
-            if trackIDs!.count == 50 {
+            if trackIDs!.count == tableViewSongLimit {
                 // Print our array
                 print(trackIDs!)
                 // local constant is a temporary array that puts the values in our trackIDs between these strings
@@ -174,22 +176,20 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             // The user that's logged into fireBase's values will be copied into our "currentUser" variable
             reference.observe(.value, with: {snapshot in
 
-                self.currentUser = User(with: snapshot)
                 self.shared.user = User(with: snapshot)
                 
-                print(self.currentUser?.fireBaseID ?? "NO FIREBASE ID")
-                print(self.currentUser?.userName ?? "NO USERNAME")
-                print(self.currentUser?.emailAddress ?? "NO EMAIL")
-                print(self.currentUser?.points ?? "NO POINTS")
+                print(self.shared.user?.fireBaseID ?? "NO FIREBASE ID")
+                print(self.shared.user?.userName ?? "NO USERNAME")
+                print(self.shared.user?.emailAddress ?? "NO EMAIL")
+                print(self.shared.user?.points ?? "NO POINTS")
             })
             
         }
-        
-        
     }
     
     // When the View just showed itself
     override func viewDidAppear(_ animated: Bool) {
+        sleep(1)
         self.tableView.reloadData()
         activityIndicator.stopAnimating()
         tableView.isUserInteractionEnabled = true
@@ -390,7 +390,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         if loadingTimer != nil {
             loadingTimer?.invalidate()
         }
-        loadingTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.longLoadingAlert), userInfo: nil, repeats: false)
+        loadingTimer = Timer.scheduledTimer(timeInterval: 5, target: self, selector: #selector(self.longLoadingAlert), userInfo: nil, repeats: false)
         
         // Local constant containing the text of the searchBar
         let keywords = searchBar.text
@@ -431,7 +431,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 destinationVC.currentSongPositionInList = self.currentSongPositionInList
                 
                 // Same as above for these 2
-                destinationVC.currentUser = self.currentUser
+                destinationVC.currentUser = self.shared.user
                 destinationVC.userReference = self.userReference
                 
             }
@@ -484,7 +484,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 currentOnlineUserReference.removeValue()
                 
                 // Since the value isn't in FireBase anymore, we must delete it localy
-                self.currentUser = nil
                 self.shared.user = nil
                 self.userReference = nil
                 self.userID = nil
