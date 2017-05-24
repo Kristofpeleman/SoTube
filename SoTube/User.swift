@@ -75,6 +75,17 @@ class User {
             }
         }
         
+        if let snapshotWishList = snapshotValue["wishList"] as? [String : Any] {
+            
+            for (_ , value) in snapshotWishList {
+                let dictionary = value as! Dictionary<String, AnyObject>
+                
+                let song = Song(songTitle: dictionary["songTitle"] as! String, artistNames: [dictionary["artists"] as! String], spotify_ID: dictionary["spotify_ID"] as! String, duration: dictionary["duration"] as! Int, imageURLAssString: dictionary["imageURL"] as! String, previewURLAssString: dictionary["previewURL"] as! String)
+                
+                addToWishList(song)
+            }
+        }
+        
 
     }
     
