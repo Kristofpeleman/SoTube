@@ -1386,12 +1386,9 @@
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-<<<<<<< HEAD
         <segue reference="bey-pH-39d"/>
         <segue reference="tpj-gN-ERD"/>
-=======
         <segue reference="vHY-iE-ELE"/>
         <segue reference="Xlf-MO-3sR"/>
->>>>>>> kristof
     </inferredMetricsTieBreakers>
 </document>
