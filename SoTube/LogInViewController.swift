@@ -19,7 +19,9 @@ class LogInViewController: UIViewController {
     
     // MARK: - IBOutlets
 
-    @IBOutlet weak var loginImageView: UIImageView!
+    @IBOutlet weak var iconTopImageView: UIImageView!
+    @IBOutlet weak var iconBottomImageView: UIImageView!
+    
     @IBOutlet weak var emailAddressTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
     
@@ -68,6 +70,7 @@ class LogInViewController: UIViewController {
                 alertController.addAction(okAction)
                 present(alertController, animated: true, completion: nil)
                 
+                self.activityIndicator.stopAnimating()
                 return
         }
         
@@ -79,6 +82,7 @@ class LogInViewController: UIViewController {
                 alertController.addAction(okAction)
                 self.present(alertController, animated: true, completion: nil)
                 
+                self.activityIndicator.stopAnimating()
                 return
             }
             
@@ -95,6 +99,7 @@ class LogInViewController: UIViewController {
                 alertController.addAction(cancelAction)
                 
                 self.present(alertController, animated: true, completion: nil)
+                self.activityIndicator.stopAnimating()
                 return
             }
             
@@ -123,7 +128,9 @@ class LogInViewController: UIViewController {
                     let thisUserReference = existingUsersReference.child("\(currentUser.uid)")
                     thisUserReference.setValue(user)
                 }
+                self.activityIndicator.stopAnimating()
             })
+            
             
             sleep(2)
             
@@ -135,7 +142,8 @@ class LogInViewController: UIViewController {
             self.delegate?.setUserReference(thisUserReference)
             
             
-
+            
+            
             
             // Dismiss keyboard
             self.view.endEditing(true)
@@ -176,3 +184,4 @@ class LogInViewController: UIViewController {
 
 
 }
+

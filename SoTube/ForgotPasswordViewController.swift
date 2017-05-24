@@ -12,8 +12,6 @@ import Firebase
 class ForgotPasswordViewController: UIViewController {
     
     
-    @IBOutlet weak var resetPasswordImageView: UIImageView!
-    
     @IBOutlet weak var emailAddressTextField: UITextField!
     
     

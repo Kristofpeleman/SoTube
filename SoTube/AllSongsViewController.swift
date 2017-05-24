@@ -120,6 +120,14 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     // MARK: - Standard Functions
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        activityIndicator.activityIndicatorViewStyle = .whiteLarge
+        activityIndicator.hidesWhenStopped = true
+        activityIndicator.color? = .black
+        activityIndicator.center = self.view.center
+        view.addSubview(activityIndicator)
+        activityIndicator.startAnimating()
+        
         // Login
         print(auth ?? "AUTH is nil")
         print(session ?? "SESSION is nil")
@@ -134,14 +142,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // Call function "getAlbumIDs()"
         getAlbumIDs()
         
-        
-        
-        activityIndicator.activityIndicatorViewStyle = .whiteLarge
-        activityIndicator.hidesWhenStopped = true
-        activityIndicator.color? = .black
-        activityIndicator.center = self.view.center
-        view.addSubview(activityIndicator)
-        activityIndicator.startAnimating()
         
     }
 
@@ -184,6 +184,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             })
             
         }
+        
         
     }
     
@@ -301,7 +302,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     // Define what happens when we select a row
     func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
-        activityIndicator.startAnimating()
+        
         // Change currentPickerViewRow's value to the selected row
         currentPickerViewRow = row
         
@@ -389,7 +390,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         if loadingTimer != nil {
             loadingTimer?.invalidate()
         }
-        loadingTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.longLoadingAlert), userInfo: nil, repeats: true)
+        loadingTimer = Timer.scheduledTimer(timeInterval: 6, target: self, selector: #selector(self.longLoadingAlert), userInfo: nil, repeats: false)
         
         // Local constant containing the text of the searchBar
         let keywords = searchBar.text
@@ -432,6 +433,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 // Same as above for these 2
                 destinationVC.currentUser = self.currentUser
                 destinationVC.userReference = self.userReference
+                
             }
         }
         
