@@ -52,30 +52,53 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         if let _ = self.currentUser?.shoppingCart {
             
             // Adapt "mySongs"
-            self.currentUser?.addToMySongs(self.currentUser!.shoppingCart!)
-            
-            let userMySongsReference = self.userReference?.child("mySongs")
-            let songs = self.currentUser!.shoppingCart!
-            let points = self.currentUser!.points
-            
-            for index in 1...songs.count {
-                let songInMySongsReference = userMySongsReference?.childByAutoId()
-                songInMySongsReference?.setValue(returnDictionaryFor(songs[index - 1]))
-            }
             
             // Adapt "points"
-            let pointsReference = userReference?.child("points")
-            pointsReference?.setValue(points - calculatePoints())
             
-            self.currentUser!.points -= calculatePoints()
+            let newPoints = self.currentUser!.points - calculatePoints()
             
-            // Adapt ShoppingCart
-            let shoppingCartReference = userReference?.child("shoppingCart")
-            shoppingCartReference?.removeValue()
-            
-            self.currentUser?.shoppingCart = nil
-            self.tableView.reloadData()
-            self.dismiss(animated: true, completion: nil)
+            if newPoints < 0 {
+                let alertController = UIAlertController(title: "Insufficient Points", message: "You do not have enough points to buy these songs.\nWould you like to buy 20 more points?", preferredStyle: .alert)
+                let addPointsAction = UIAlertAction(title: "Buy", style: .default, handler: { (action) in
+                    
+                    self.currentUser?.points += 20
+                    
+                    let userShoppingCartReference = self.userReference?.child("points")
+                    
+                    userShoppingCartReference?.setValue(self.currentUser?.points)
+                })
+                let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+                alertController.addAction(cancelAction)
+                alertController.addAction(addPointsAction)
+                present(alertController, animated: true, completion: nil)
+                
+            }
+                
+            else {
+                self.currentUser!.points -= calculatePoints()
+                let points = self.currentUser!.points
+                let pointsReference = userReference?.child("points")
+                pointsReference?.setValue(points - calculatePoints())
+                
+                self.currentUser?.addToMySongs(self.currentUser!.shoppingCart!)
+                
+                let userMySongsReference = self.userReference?.child("mySongs")
+                let songs = self.currentUser!.shoppingCart!
+                
+                for index in 1...songs.count {
+                    let songInMySongsReference = userMySongsReference?.childByAutoId()
+                    songInMySongsReference?.setValue(returnDictionaryFor(songs[index - 1]))
+                }
+
+                
+                // Adapt ShoppingCart
+                let shoppingCartReference = userReference?.child("shoppingCart")
+                shoppingCartReference?.removeValue()
+                
+                self.currentUser?.shoppingCart = nil
+                self.tableView.reloadData()
+                self.dismiss(animated: true, completion: nil)
+            }
         }
     }
     
