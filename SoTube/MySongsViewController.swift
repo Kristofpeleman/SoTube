@@ -48,6 +48,8 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
         
         if let _ = shared.user {
             logInButton.title = "Log out"
+        } else {
+            logInButton.title = "Log in"
         }
         
         

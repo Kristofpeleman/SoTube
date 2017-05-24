@@ -18,12 +18,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     private var userReference: FIRDatabaseReference?
     private var userID: String?
 
-    
-    var currentUser: User?{
-        didSet {
-
-        }
-    }
+    var currentUser: User?
     
     var shared = Shared.current {
         didSet {
@@ -167,6 +162,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         
         if let _ = shared.user {
             logInButton.title = "Log out"
+        } else {
+            logInButton.title = "Log in"
         }
         
         // If userReference (from FireBase) exists/isn't nil
