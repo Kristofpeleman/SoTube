@@ -29,6 +29,8 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        navigationController?.isNavigationBarHidden = true
+        
         print(currentUser?.shoppingCart?[0] ?? "NO SONG IN SHOPPING CART")
 
     }
@@ -76,6 +78,33 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
             self.dismiss(animated: true, completion: nil)
         }
     }
+    
+    
+    @IBAction func cancel(_ sender: UIBarButtonItem) {
+        dismiss(animated: true, completion: nil)
+    }
+    
+    @IBAction func emptyShoppingCart(_ sender: UIBarButtonItem) {
+        let alertController = UIAlertController(title: "Empty Cart", message: "Are you certain you want to remove all the songs from your shopping cart?", preferredStyle: .alert)
+        let removeAction = UIAlertAction(title: "Yes", style: .destructive, handler: { (action) in
+            
+            self.currentUser?.shoppingCart = nil
+            
+            let userShoppingCartReference = self.userReference?.child("shoppingCart")
+            
+            userShoppingCartReference?.removeValue()
+
+            
+            self.dismiss(animated: true, completion: nil)
+        })
+        let cancelAction = UIAlertAction(title: "Cancel", style: .cancel, handler: nil)
+        alertController.addAction(cancelAction)
+        alertController.addAction(removeAction)
+        present(alertController, animated: true, completion: nil)
+        
+        
+    }
+    
     
     
     // MARK: - TableView Datasource Methods
