@@ -355,7 +355,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         if musicSlider.maximumValue == previewDuration {
             pausePlayer()
         }
-        if player?.playbackState?.position != nil {
+        else if player?.playbackState?.position != nil {
             timer = Timer(timeInterval: TimeInterval(musicSlider.maximumValue) - player!.playbackState.position - 1, target: self, selector: #selector(self.pausePlayer), userInfo: nil, repeats: false)
         }
         dismiss(animated: true, completion: nil)
