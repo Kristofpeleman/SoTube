@@ -54,5 +54,11 @@ struct Song {
         self.duration = duration
     }
     
+    init(favorite: Bool, songTitle: String, artistNames: [String], spotify_ID: String, duration: Int, imageURLAssString: String, previewURLAssString: String) {
+        
+        self.init(songTitle: songTitle, artistNames: artistNames, spotify_ID: spotify_ID, duration: duration, imageURLAssString: imageURLAssString, previewURLAssString: previewURLAssString)
+        self.favorite = favorite
+    }
+    
 }
 
