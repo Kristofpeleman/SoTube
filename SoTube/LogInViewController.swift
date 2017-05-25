@@ -159,7 +159,8 @@ class LogInViewController: UIViewController {
                                         })
                                         let cancelAction = UIAlertAction(title: "Cancel",
                                                                          style: .cancel,
-                                                                         handler: nil)
+                                                                         handler: nil
+                                        )
                                         
                                         // Add the alertActions to the alertController
                                         alertController.addAction(okAction)
