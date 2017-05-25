@@ -12,20 +12,9 @@ import Firebase
 class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, LoginViewControllerDelegate {
     
     // MARK: - Global variables and constants
-    private var userReference: FIRDatabaseReference?
-    private var userID: String?
+
     var shared = Shared.current
 
-    var sharedUser: User? {
-        willSet (newValue) {
-            if newValue == nil {
-                userReference = nil
-                userID = nil
-            }
-        }
-    }
-    
-    
     var currentSongPositionInList = 0
     
     // MARK: - IBOutlets
@@ -48,27 +37,18 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
         
-        self.sharedUser = shared.user
-        
         if let _ = shared.user {
             logInButton.title = "Log out"
+            
+            print(self.shared.user?.fireBaseID ?? "NO FIREBASE ID")
+            print(self.shared.user?.userName ?? "NO USERNAME")
+            print(self.shared.user?.emailAddress ?? "NO EMAIL")
+            print(self.shared.user?.points ?? "NO POINTS")
+            
         } else {
             logInButton.title = "Log in"
         }
         
-        
-        if let reference = self.userReference {
-            
-            // The title of logInButton has to change
-            logInButton.title = "Log out"
-            
-            reference.observe(.value, with: {snapshot in
-                
-                self.shared.user = User(with: snapshot)
-                
-            })
-            
-        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -152,8 +132,6 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
                 
                 // Since the value isn't in FireBase anymore, we must delete it localy
                 self.shared.user = nil
-                self.userReference = nil
-                self.userID = nil
                 
                 self.tableView.reloadData()
                 // Change "logInButton"'s title to "Log in"
@@ -174,14 +152,8 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
     
     // MARK: - LoginViewControllerDelegate methods
     
-    func setUserID(_ id: String) {
-        // Give "userID" the value of "id"
-        self.userID = id
-    }
-    
-    func setUserReference(_ ref: FIRDatabaseReference) {
-        // Give "userReference" the value of "ref"
-        self.userReference = ref
+    func setUser(_ user: User) {
+        self.shared.user = user
     }
     
 

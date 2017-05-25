@@ -12,8 +12,8 @@ import Firebase
 // Created a protocol for a delegate
 protocol LoginViewControllerDelegate {
     // Functions that will be needed to follow this protocol
-    func setUserReference(_ ref: FIRDatabaseReference)
-    func setUserID(_ id: String)
+
+    func setUser(_ user: User)
 }
 
 
@@ -220,17 +220,22 @@ class LogInViewController: UIViewController {
                                 })
                                 
                                 sleep(1)
-                                self.rotateImages(degrees: 90)
-                                self.perform(#selector(self.seperateImages), with: nil, afterDelay: 1)
-                                
+
                                 // Setting userID and userReference in the delegate
                                 
                                 let thisUserReference = existingUsersReference.child("\(currentUser.uid)")
                                 
-                                self.delegate?.setUserID(currentUser.uid)
-                                self.delegate?.setUserReference(thisUserReference)
+                                thisUserReference.observe(.value, with: {snapshot in
+                                    
+                                        let user = User(with: snapshot)
+                                        self.delegate?.setUser(user)
+
+                                })
+                                sleep(1)
                                 
                                 
+                                self.rotateImages(degrees: 90)
+                                self.perform(#selector(self.seperateImages), with: nil, afterDelay: 1)
                                 
                                 // Stop activityIndicator
                                 self.activityIndicator.stopAnimating()
