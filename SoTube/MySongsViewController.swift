@@ -89,7 +89,6 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
         
         cell.songTitleLabel.text = shared.user?.mySongs![indexPath.row].songTitle
         cell.artistNameLabel.text = shared.user?.mySongs![indexPath.row].artists
-        cell.costLabel.text = String(describing: shared.user?.mySongs![indexPath.row].cost)
         
         return cell
     }

@@ -86,7 +86,7 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
         
         cell.songTitleLabel.text = myFavoriteSongs?[indexPath.row].songTitle
         cell.artistNameLabel.text = myFavoriteSongs?[indexPath.row].artists
-        cell.costLabel.text = String(describing: myFavoriteSongs?[indexPath.row].cost)
+//        cell.costLabel.text = String(describing: myFavoriteSongs?[indexPath.row].cost)
         
         return cell
     }
