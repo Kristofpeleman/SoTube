@@ -105,10 +105,10 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
                 destinationVC.currentSongPositionInList = self.currentSongPositionInList
                 destinationVC.currentUser = self.shared.user
                 
-                let usersReference: FIRDatabaseReference = (rootReference?.child("Users"))!
-                let userID = shared.user?.fireBaseID
+                let usersReference: FIRDatabaseReference = rootReference!.child("Users")
+                let userID = shared.user!.fireBaseID
                 
-                destinationVC.userReference = usersReference.child(userID!)
+                destinationVC.userReference = usersReference.child(userID)
                 
             }
         }

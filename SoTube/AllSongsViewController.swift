@@ -408,10 +408,13 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 // Same as above for these 2
                 destinationVC.currentUser = self.shared.user
                 
-                let usersReference: FIRDatabaseReference? = rootReference?.child("Users")
-                let thisUserReference = usersReference?.child("\(String(describing: shared.user?.fireBaseID))")
+                if let _ = self.shared.user {
+                
+                let usersReference: FIRDatabaseReference = rootReference!.child("Users")
+                let thisUserReference = usersReference.child(self.shared.user!.fireBaseID)
                 
                 destinationVC.userReference = thisUserReference
+                }
                 
             }
         }

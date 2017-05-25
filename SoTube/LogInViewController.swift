@@ -213,7 +213,7 @@ class LogInViewController: UIViewController {
                                     if !snapshot.hasChild(currentUser.uid) {
                                         
                                         let user: [String : Any] = ["userName": currentUser.displayName!, "emailAddress": currentUser.email!, "points": 20]
-                                        let thisUserReference = existingUsersReference.child("\(currentUser.uid)")
+                                        let thisUserReference = existingUsersReference.child(currentUser.uid)
                                         thisUserReference.setValue(user)
                                     }
                                     self.activityIndicator.stopAnimating()
@@ -223,7 +223,7 @@ class LogInViewController: UIViewController {
 
                                 // Setting userID and userReference in the delegate
                                 
-                                let thisUserReference = existingUsersReference.child("\(currentUser.uid)")
+                                let thisUserReference = existingUsersReference.child(currentUser.uid)
                                 
                                 thisUserReference.observe(.value, with: {snapshot in
                                     

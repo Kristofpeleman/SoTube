@@ -93,6 +93,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     override func viewDidAppear(_ animated: Bool) {
         // A timer repeating musicSliderUpdate every few seconds (or less depending on timeInterval) to update the musicSlider
+        
+        print("\n\n\n\n\n\n\(String(describing: self.userReference))\n\n\n\n\n\n")
+        
         timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
     }
     
@@ -124,8 +127,10 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 print(currentSong.spotify_ID!)
                 print(currentSong.spotifyJSONFeed)
                 
-                let userShoppingCartReference = userReference?.child("shoppingCart")
-                let songInShoppingCartReference = userShoppingCartReference?.child(currentSong.spotify_ID!)
+                let userShoppingCartReference = self.userReference!.child("shoppingCart")
+                
+                
+                let songInShoppingCartReference = userShoppingCartReference.child(currentSong.spotify_ID!)
                 
                 let songValues: [String : Any] = [
                     "spotify_ID" : currentSong.spotify_ID!,
@@ -138,7 +143,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     "favorite" : currentSong.favorite
                     ]
                 
-                songInShoppingCartReference?.setValue(songValues)
+                songInShoppingCartReference.setValue(songValues)
                 
                 print(currentUser)
                 
@@ -184,8 +189,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             else {
                 currentUser.addToWishList(currentSong)
                 
-                let userWishListReference = userReference?.child("wishList")
-                let songInWishListReference = userWishListReference?.child(currentSong.spotify_ID!)
+                let userWishListReference = self.userReference!.child("wishList")
+                let songInWishListReference = userWishListReference.child(currentSong.spotify_ID!)
                 
                 let songValues: [String : Any] = [
                     "spotify_ID" : currentSong.spotify_ID!,
@@ -198,7 +203,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     "favorite" : currentSong.favorite
                     ]
                 
-                songInWishListReference?.setValue(songValues)
+                songInWishListReference.setValue(songValues)
                 
                 let alertController = UIAlertController(title: "Confirmation", message: "Song added to your wishlist", preferredStyle: .alert)
                 let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
