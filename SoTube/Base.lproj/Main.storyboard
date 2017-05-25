@@ -122,8 +122,8 @@
                                     <constraint firstAttribute="height" constant="55" id="Xw9-GM-ZTV"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem id="fBQ-je-4H0">
-                                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Current Song" id="59z-5K-80b"/>
+                                    <navigationItem title="Search" id="fBQ-je-4H0">
+                                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Playing..." id="59z-5K-80b"/>
                                         <barButtonItem key="rightBarButtonItem" title="Log in" id="lw8-bn-E9Q">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="Xlf-MO-3sR"/>
@@ -245,6 +245,7 @@
                         <segue destination="5G4-0t-NrY" kind="relationship" relationship="viewControllers" id="6UV-nA-fGF"/>
                         <segue destination="3sM-JY-iPi" kind="relationship" relationship="viewControllers" id="O8u-ak-YOK"/>
                         <segue destination="wbl-Tl-2rj" kind="relationship" relationship="viewControllers" id="c01-k0-WP0"/>
+                        <segue destination="cZS-6q-uLo" kind="relationship" relationship="viewControllers" id="ufT-bu-bGl"/>
                     </connections>
                 </tabBarController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="AE6-dg-T9q" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -315,8 +316,8 @@
                                     <constraint firstAttribute="height" constant="55" id="fCG-Vk-emL"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem id="7hw-bG-RjH">
-                                        <barButtonItem key="leftBarButtonItem" title="Genres" id="cFG-rw-yte"/>
+                                    <navigationItem title="My Songs" id="7hw-bG-RjH">
+                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="cFG-rw-yte"/>
                                         <barButtonItem key="rightBarButtonItem" title="Log in" id="2BL-xo-b3a">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="DJc-7M-zPS"/>
@@ -855,8 +856,8 @@
                                     <constraint firstAttribute="height" constant="55" id="FuR-fi-gs7"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem id="efY-ry-8QE">
-                                        <barButtonItem key="leftBarButtonItem" title="Genres" id="J3q-kH-lnR"/>
+                                    <navigationItem title="Favorites" id="efY-ry-8QE">
+                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="J3q-kH-lnR"/>
                                         <barButtonItem key="rightBarButtonItem" title="Log in" id="r1Z-SV-ysc">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="Yyy-cB-Q5z"/>
@@ -1343,8 +1344,8 @@
                                     <constraint firstAttribute="height" constant="55" id="TlR-wf-aWw"/>
                                 </constraints>
                                 <items>
-                                    <navigationItem id="oBh-Ew-EpM">
-                                        <barButtonItem key="leftBarButtonItem" title="Genres" id="eeq-vX-QEY"/>
+                                    <navigationItem title="Wishlist" id="oBh-Ew-EpM">
+                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="eeq-vX-QEY"/>
                                         <barButtonItem key="rightBarButtonItem" title="Log in" id="isI-v4-E5s">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="Def-eb-XHu"/>
@@ -1402,6 +1403,38 @@
             </objects>
             <point key="canvasLocation" x="-1230" y="1824.2957746478874"/>
         </scene>
+        <!--Account-->
+        <scene sceneID="a2k-wg-gU8">
+            <objects>
+                <viewController title="Account" id="cZS-6q-uLo" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="fdd-sx-AiY"/>
+                        <viewControllerLayoutGuide type="bottom" id="O5h-zS-0jM"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="gvJ-0i-PdY">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <subviews>
+                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FBI-He-7wW">
+                                <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
+                                <items>
+                                    <navigationItem title="Account" id="4PV-Ww-stf">
+                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="7LF-QF-7DO"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Log in" id="Ktf-Ih-gzP"/>
+                                    </navigationItem>
+                                </items>
+                            </navigationBar>
+                        </subviews>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <tabBarItem key="tabBarItem" title="Account" image="profile" selectedImage="profile" id="CPx-xf-d5l"/>
+                    <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="NFv-Mq-aXh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-1230" y="2560"/>
+        </scene>
     </scenes>
     <resources>
         <image name="AllSongs_selected" width="16" height="16"/>
@@ -1413,10 +1446,11 @@
         <image name="Wishlist_selected" width="16" height="16"/>
         <image name="forward" width="1200" height="1200"/>
         <image name="play" width="256" height="256"/>
+        <image name="profile" width="36" height="35"/>
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bey-pH-39d"/>
-        <segue reference="Def-eb-XHu"/>
+        <segue reference="Yyy-cB-Q5z"/>
+        <segue reference="bK6-a7-b2h"/>
     </inferredMetricsTieBreakers>
 </document>
