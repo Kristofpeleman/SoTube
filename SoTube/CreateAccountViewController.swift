@@ -22,6 +22,13 @@ class CreateAccountViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         // Do any additional setup after loading the view.
+        
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self);
     }
     
     override func didReceiveMemoryWarning() {
@@ -164,12 +171,29 @@ class CreateAccountViewController: UIViewController {
     }
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
+        // Dismiss keyboard
+        self.view.endEditing(true)
+        
         // Go back to the ViewController you were on before you came to CreateAccountViewController
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func stopKeyboard(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
     
     // MARK: - Homemade Functions
+    
+    
+    func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y = -150 // Move view 150 points upward
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y = 0 // Move view to original position
+    }
+    
+    
     
     // Function to empty the passwordTextFields
     private func updatePasswordTextFields(){

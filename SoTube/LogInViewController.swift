@@ -47,10 +47,12 @@ class LogInViewController: UIViewController {
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+
         
         // Setting the online users reference
         onlineUsersReference = FIRDatabase.database().reference(withPath: "online users")
-        emailAddressTextField.becomeFirstResponder()
         
         
         // Change design of the UIActivityIndicatorView
@@ -60,10 +62,19 @@ class LogInViewController: UIViewController {
         activityIndicator.center = self.view.center                // Position where it has to rotate/be active
         self.view.addSubview(activityIndicator)                         // Put the UIActivityIndicatorView in the "self.view"
     }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self);
+    }
 
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
+    }
+    
+    
+    override func viewDidAppear(_ animated: Bool) {
+        self.view.endEditing(true)
     }
     
     
@@ -73,6 +84,9 @@ class LogInViewController: UIViewController {
         
         // Start the activityIndicator
         self.activityIndicator.startAnimating()
+        
+        // Dismiss keyboard
+        self.view.endEditing(true)
         
         // Check if all fields are filled out
         guard let emailAddress = emailAddressTextField.text,
@@ -98,6 +112,7 @@ class LogInViewController: UIViewController {
                 
                 // Show/Present the controller
                 present(alertController, animated: true, completion: nil)
+                
                 
                 // Stop the activityIndicator
                 self.activityIndicator.stopAnimating()
@@ -217,11 +232,6 @@ class LogInViewController: UIViewController {
                                 
                                 
                                 
-                                
-                                
-                                // Dismiss keyboard
-                                self.view.endEditing(true)
-                                
                                 // Stop activityIndicator
                                 self.activityIndicator.stopAnimating()
                                 
@@ -234,13 +244,26 @@ class LogInViewController: UIViewController {
     
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
+        // Dismiss keyboard
+        self.view.endEditing(true)
+        
         // Go back to the ViewController you were on before you came to LogInViewController
         self.dismiss(animated: true, completion: nil)
     }
     
+    @IBAction func stopKeyboard(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(false)
+    }
     
     // MARK: - Homemade Functions
     
+    func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y = -150 // Move view 150 points upward
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y = 0 // Move view to original position
+    }
     
     
     // Function to empty textFields

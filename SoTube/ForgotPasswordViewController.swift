@@ -18,7 +18,12 @@ class ForgotPasswordViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        // Do any additional setup after loading the view.
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name:NSNotification.Name.UIKeyboardWillShow, object: nil)
+        NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name:NSNotification.Name.UIKeyboardWillHide, object: nil)
+    }
+    
+    deinit {
+        NotificationCenter.default.removeObserver(self);
     }
     
     override func didReceiveMemoryWarning() {
@@ -60,6 +65,9 @@ class ForgotPasswordViewController: UIViewController {
     
     
     @IBAction func cancel(_ sender: UIBarButtonItem) {
+        // Dismiss keyboard
+        self.view.endEditing(true)
+        
         // Go back to the ViewController you were on before you came to ForgotPasswordViewController
         dismiss(animated: true, completion: nil)
     }
@@ -119,5 +127,23 @@ class ForgotPasswordViewController: UIViewController {
             
         })
     }
+    
+    @IBAction func stopKeyboard(_ sender: UITapGestureRecognizer) {
+        self.view.endEditing(true)
+    }
+    
+    
+    // MARK: - Homemade Functions
+    
+    
+    func keyboardWillShow(sender: NSNotification) {
+        self.view.frame.origin.y = -150 // Move view 150 points upward
+    }
+    
+    func keyboardWillHide(sender: NSNotification) {
+        self.view.frame.origin.y = 0 // Move view to original position
+    }
+    
+    
     
 }
