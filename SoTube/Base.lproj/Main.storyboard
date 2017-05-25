@@ -1406,7 +1406,7 @@
         <!--Account-->
         <scene sceneID="a2k-wg-gU8">
             <objects>
-                <viewController title="Account" id="cZS-6q-uLo" sceneMemberID="viewController">
+                <viewController title="Account" id="cZS-6q-uLo" customClass="AccountViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
                     <layoutGuides>
                         <viewControllerLayoutGuide type="top" id="fdd-sx-AiY"/>
                         <viewControllerLayoutGuide type="bottom" id="O5h-zS-0jM"/>
@@ -1421,7 +1421,11 @@
                                 <items>
                                     <navigationItem title="Account" id="4PV-Ww-stf">
                                         <barButtonItem key="leftBarButtonItem" title="Playing..." id="7LF-QF-7DO"/>
-                                        <barButtonItem key="rightBarButtonItem" title="Log in" id="Ktf-Ih-gzP"/>
+                                        <barButtonItem key="rightBarButtonItem" title="Log in" id="Ktf-Ih-gzP">
+                                            <connections>
+                                                <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="Uvf-Jz-1dC"/>
+                                            </connections>
+                                        </barButtonItem>
                                     </navigationItem>
                                 </items>
                             </navigationBar>
@@ -1430,6 +1434,9 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Account" image="profile" selectedImage="profile" id="CPx-xf-d5l"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
+                    <connections>
+                        <outlet property="loginButton" destination="Ktf-Ih-gzP" id="7vX-WE-CIt"/>
+                    </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFv-Mq-aXh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
@@ -1450,7 +1457,7 @@
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Yyy-cB-Q5z"/>
-        <segue reference="bK6-a7-b2h"/>
+        <segue reference="Uvf-Jz-1dC"/>
+        <segue reference="bey-pH-39d"/>
     </inferredMetricsTieBreakers>
 </document>
