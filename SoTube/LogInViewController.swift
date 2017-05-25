@@ -20,14 +20,14 @@ protocol LoginViewControllerDelegate {
 class LogInViewController: UIViewController {
     
     // MARK: - IBOutlets
-    // Images
+    // Concerning Images
+    @IBOutlet weak var imageSuperiorView: UIView!
     @IBOutlet weak var iconTopImageView: UIImageView!
     @IBOutlet weak var iconBottomImageView: UIImageView!
     
     // TextFields
     @IBOutlet weak var emailAddressTextField: UITextField!
     @IBOutlet weak var passwordTextField: UITextField!
-    
     
     
     // MARK: - Constants and variables
@@ -204,8 +204,9 @@ class LogInViewController: UIViewController {
                                     self.activityIndicator.stopAnimating()
                                 })
                                 
-                                
-                                sleep(2)
+                                sleep(1)
+                                self.rotateImages(degrees: 90)
+                                self.perform(#selector(self.seperateImages), with: nil, afterDelay: 1)
                                 
                                 // Setting userID and userReference in the delegate
                                 
@@ -225,7 +226,7 @@ class LogInViewController: UIViewController {
                                 self.activityIndicator.stopAnimating()
                                 
                                 // Go back to the ViewController you were on before you came to LogInViewController
-                                self.dismiss(animated: true, completion: nil)
+                                self.perform(#selector(self.dismissing), with: nil, afterDelay: 2)
         })
         
         
@@ -240,11 +241,38 @@ class LogInViewController: UIViewController {
     
     // MARK: - Homemade Functions
     
+    
+    
     // Function to empty textFields
     private func updateView(){
         emailAddressTextField.text = ""
         passwordTextField.text = ""
     }
+    
+    
+    // MARK: - Opening Logo
+    func rotateImages(degrees: Double){
+        UIView.animate(withDuration: 1, animations: {
+            self.imageSuperiorView.transform = CGAffineTransform(rotationAngle: CGFloat(degrees * (M_PI/180)))
+        }
+        )
+    }
+    
+    func seperateImages(){
+        UIView.animate(withDuration: 1, animations: {
+            self.iconTopImageView.center.y -= 150
+            self.iconBottomImageView.center.y += 150
+            print("in animate")
+        }
+        )
+        print("in seperator")
+    }
+    
+    func dismissing(){
+        self.dismiss(animated: true, completion: nil)
+    }
+    
+    
     
     
     // MARK: - Navigation
