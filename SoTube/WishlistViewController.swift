@@ -9,18 +9,19 @@
 import UIKit
 import Firebase
 
-class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource {
+class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, LoginViewControllerDelegate {
     
     // MARK: - Global variables and constants
     
+    private var userReference: FIRDatabaseReference?
+    private var userID: String?
     var shared = Shared.current
     var currentSongPositionInList = 0
 
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
-    
-    
+    @IBOutlet weak var logInButton: UIBarButtonItem!
     
     
     // MARK: - UIViewController functions
@@ -39,6 +40,26 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
     override func viewWillAppear(_ animated: Bool) {
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
+        
+        if let _ = shared.user {
+            logInButton.title = "Log out"
+        } else {
+            logInButton.title = "Log in"
+        }
+        
+        
+        if let reference = self.userReference {
+            
+            // The title of logInButton has to change
+            logInButton.title = "Log out"
+            
+            reference.observe(.value, with: {snapshot in
+                
+                self.shared.user = User(with: snapshot)
+                
+            })
+            
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -77,8 +98,8 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "loginSegue" {
-            if let _ = segue.destination as? LogInViewController {
-                
+            if let destinationVC = segue.destination as? LogInViewController {
+                destinationVC.delegate = self
             }
         }
         
@@ -97,6 +118,57 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
                 
             }
         }
+    }
+    
+    
+    // An override function when performing a segue
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
+        
+        // Check the value of "identifier"
+        switch identifier {
+        // If the value is "loginSegue"
+        case "loginSegue":
+            // If "logInButton"'s title is "Log out"
+            if logInButton.title == "Log out" {
+                
+                // Get the user that is logged in his/her online-status from FireBase
+                let currentOnlineUserReference = FIRDatabase.database().reference(withPath: "online users/\(self.shared.user!.fireBaseID)")
+                // Remove the value of the online-status (make it go offline)
+                currentOnlineUserReference.removeValue()
+                
+                // Since the value isn't in FireBase anymore, we must delete it localy
+                self.shared.user = nil
+                self.userReference = nil
+                self.userID = nil
+                
+                self.tableView.reloadData()
+                // Change "logInButton"'s title to "Log in"
+                logInButton.title = "Log in"
+                
+                // Leave the function with the return and don't perform the segue
+                return false
+            }
+                // If "logInButton"'s title isn't "Log out"
+            else {
+                // Perform the segue
+                return true
+            }
+        // If the identifier's value isn't any of the above: perform Segue
+        default: return true
+        }
+    }
+    
+    
+    // MARK: - LoginViewControllerDelegate methods
+    
+    func setUserID(_ id: String) {
+        // Give "userID" the value of "id"
+        self.userID = id
+    }
+    
+    func setUserReference(_ ref: FIRDatabaseReference) {
+        // Give "userReference" the value of "ref"
+        self.userReference = ref
     }
     
 

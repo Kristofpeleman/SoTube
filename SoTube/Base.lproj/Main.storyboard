@@ -1392,6 +1392,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Wishlist" image="Wishlist_selected" selectedImage="Wishlist_selected" id="vs5-j2-JdJ"/>
                     <connections>
+                        <outlet property="logInButton" destination="isI-v4-E5s" id="xv5-pb-3Em"/>
                         <outlet property="tableView" destination="sMQ-IR-ybh" id="Eim-VS-hq1"/>
                         <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="bey-pH-39d"/>
                     </connections>
@@ -1415,7 +1416,7 @@
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Yyy-cB-Q5z"/>
-        <segue reference="bK6-a7-b2h"/>
+        <segue reference="bey-pH-39d"/>
+        <segue reference="Def-eb-XHu"/>
     </inferredMetricsTieBreakers>
 </document>
