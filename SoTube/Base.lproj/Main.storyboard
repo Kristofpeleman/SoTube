@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vnE-1c-72W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vnE-1c-72W">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -926,6 +926,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="rzs-mu-L2r"/>
                     <connections>
+                        <outlet property="logInButton" destination="r1Z-SV-ysc" id="ned-Of-Fp9"/>
                         <outlet property="tableView" destination="QGx-6D-bzq" id="lvg-EP-y0k"/>
                         <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="bK6-a7-b2h"/>
                     </connections>
@@ -1411,7 +1412,7 @@
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DJc-7M-zPS"/>
-        <segue reference="vHY-iE-ELE"/>
+        <segue reference="bK6-a7-b2h"/>
+        <segue reference="Yyy-cB-Q5z"/>
     </inferredMetricsTieBreakers>
 </document>
