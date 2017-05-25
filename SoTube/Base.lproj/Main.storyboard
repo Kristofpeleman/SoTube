@@ -275,42 +275,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPZ-gL-WLX">
-                                                    <rect key="frame" x="8" y="11" width="131" height="21"/>
+                                                    <rect key="frame" x="8" y="11" width="144" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMm-wV-4vU">
-                                                    <rect key="frame" x="144" y="11" width="95" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="afk-8R-nck">
-                                                    <rect key="frame" x="244" y="11" width="36" height="21"/>
+                                                    <rect key="frame" x="157" y="11" width="123" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
-                                                <constraint firstAttribute="bottomMargin" secondItem="afk-8R-nck" secondAttribute="bottom" constant="3" id="4hs-8Q-QKS"/>
                                                 <constraint firstItem="oPZ-gL-WLX" firstAttribute="leading" secondItem="Bai-XG-1cN" secondAttribute="leadingMargin" id="76G-yt-LnJ"/>
                                                 <constraint firstItem="oPZ-gL-WLX" firstAttribute="top" secondItem="Bai-XG-1cN" secondAttribute="topMargin" constant="3" id="J2b-2Q-gQ6"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="afk-8R-nck" secondAttribute="trailing" id="K3l-Qt-AAf"/>
-                                                <constraint firstItem="oPZ-gL-WLX" firstAttribute="width" secondItem="Bai-XG-1cN" secondAttribute="width" multiplier="1:2.2" id="NVW-QG-r29"/>
-                                                <constraint firstItem="afk-8R-nck" firstAttribute="width" secondItem="Bai-XG-1cN" secondAttribute="width" multiplier="1:8" id="Vzf-t1-VvI"/>
-                                                <constraint firstItem="afk-8R-nck" firstAttribute="leading" secondItem="fMm-wV-4vU" secondAttribute="trailing" constant="5" id="ZJt-f3-IlN"/>
-                                                <constraint firstItem="afk-8R-nck" firstAttribute="top" secondItem="Bai-XG-1cN" secondAttribute="topMargin" constant="3" id="bkp-Tw-y2V"/>
+                                                <constraint firstItem="oPZ-gL-WLX" firstAttribute="width" secondItem="Bai-XG-1cN" secondAttribute="width" multiplier="1:2" id="NVW-QG-r29"/>
                                                 <constraint firstItem="fMm-wV-4vU" firstAttribute="top" secondItem="Bai-XG-1cN" secondAttribute="topMargin" constant="3" id="low-A4-tfB"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="fMm-wV-4vU" secondAttribute="bottom" constant="3" id="mhE-eJ-KVu"/>
+                                                <constraint firstAttribute="trailingMargin" secondItem="fMm-wV-4vU" secondAttribute="trailing" id="pvH-aD-ScT"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="oPZ-gL-WLX" secondAttribute="bottom" constant="3" id="sJP-do-f8W"/>
                                                 <constraint firstItem="fMm-wV-4vU" firstAttribute="leading" secondItem="oPZ-gL-WLX" secondAttribute="trailing" constant="5" id="xte-Le-HBR"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="artistNameLabel" destination="fMm-wV-4vU" id="2eS-Kw-TUb"/>
-                                            <outlet property="costLabel" destination="afk-8R-nck" id="74B-rN-P1R"/>
                                             <outlet property="songTitleLabel" destination="oPZ-gL-WLX" id="eff-nt-5lU"/>
                                         </connections>
                                     </tableViewCell>
@@ -826,42 +815,31 @@
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9v-AI-ve2">
-                                                    <rect key="frame" x="8" y="11" width="131" height="21"/>
+                                                    <rect key="frame" x="8" y="11" width="144" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1j-ku-foo">
-                                                    <rect key="frame" x="144" y="11" width="95" height="21"/>
-                                                    <fontDescription key="fontDescription" type="system" pointSize="14"/>
-                                                    <nil key="textColor"/>
-                                                    <nil key="highlightedColor"/>
-                                                </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="cost" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="J8u-MA-tda">
-                                                    <rect key="frame" x="244" y="11" width="36" height="21"/>
+                                                    <rect key="frame" x="157" y="11" width="123" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
                                             </subviews>
                                             <constraints>
+                                                <constraint firstAttribute="trailingMargin" secondItem="K1j-ku-foo" secondAttribute="trailing" id="9VI-s4-VTI"/>
                                                 <constraint firstItem="E9v-AI-ve2" firstAttribute="leading" secondItem="ISE-75-wfI" secondAttribute="leadingMargin" id="9o5-e1-lvx"/>
-                                                <constraint firstItem="J8u-MA-tda" firstAttribute="leading" secondItem="K1j-ku-foo" secondAttribute="trailing" constant="5" id="Bjl-0N-HjP"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="E9v-AI-ve2" secondAttribute="bottom" constant="3" id="FML-0F-eyV"/>
-                                                <constraint firstAttribute="bottomMargin" secondItem="J8u-MA-tda" secondAttribute="bottom" constant="3" id="Rzo-Jt-uI4"/>
                                                 <constraint firstItem="K1j-ku-foo" firstAttribute="leading" secondItem="E9v-AI-ve2" secondAttribute="trailing" constant="5" id="XEP-bf-gjB"/>
                                                 <constraint firstItem="K1j-ku-foo" firstAttribute="top" secondItem="ISE-75-wfI" secondAttribute="topMargin" constant="3" id="bzs-fb-Cv3"/>
                                                 <constraint firstAttribute="bottomMargin" secondItem="K1j-ku-foo" secondAttribute="bottom" constant="3" id="cqn-HC-eSg"/>
-                                                <constraint firstItem="E9v-AI-ve2" firstAttribute="width" secondItem="ISE-75-wfI" secondAttribute="width" multiplier="1:2.2" id="gTx-ew-yd4"/>
-                                                <constraint firstItem="J8u-MA-tda" firstAttribute="width" secondItem="ISE-75-wfI" secondAttribute="width" multiplier="1:8" id="h6S-24-22f"/>
-                                                <constraint firstItem="J8u-MA-tda" firstAttribute="top" secondItem="ISE-75-wfI" secondAttribute="topMargin" constant="3" id="io7-V5-vRb"/>
+                                                <constraint firstItem="E9v-AI-ve2" firstAttribute="width" secondItem="ISE-75-wfI" secondAttribute="width" multiplier="1:2" id="gTx-ew-yd4"/>
                                                 <constraint firstItem="E9v-AI-ve2" firstAttribute="top" secondItem="ISE-75-wfI" secondAttribute="topMargin" constant="3" id="spn-4D-s7L"/>
-                                                <constraint firstAttribute="trailingMargin" secondItem="J8u-MA-tda" secondAttribute="trailing" id="zq5-Zn-ls8"/>
                                             </constraints>
                                         </tableViewCellContentView>
                                         <connections>
                                             <outlet property="artistNameLabel" destination="K1j-ku-foo" id="trg-6Y-j10"/>
-                                            <outlet property="costLabel" destination="J8u-MA-tda" id="Dcr-HF-fTU"/>
                                             <outlet property="songTitleLabel" destination="E9v-AI-ve2" id="STR-R9-2zA"/>
                                         </connections>
                                     </tableViewCell>
@@ -1411,7 +1389,7 @@
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="DJc-7M-zPS"/>
-        <segue reference="vHY-iE-ELE"/>
+        <segue reference="Yyy-cB-Q5z"/>
+        <segue reference="bK6-a7-b2h"/>
     </inferredMetricsTieBreakers>
 </document>
