@@ -215,7 +215,61 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     
     @IBAction func setSongAsFavorite(_ sender: UIButton) {
+        if let currentUser = currentUser {
+            
+            if let mySongs = currentUser.mySongs, mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
+                
+                let userSongsReference = userReference?.child("mySongs")
+                let songInMySongsReference = userSongsReference?.child(currentSong.spotify_ID!)
+                
+                let newFavoriteSetting = !currentSong.favorite
+                
+                let songValues: [String : Any] = [
+                    "spotify_ID" : currentSong.spotify_ID!,
+                    "songTitle" : currentSong.songTitle,
+                    "json" : currentSong.spotifyJSONFeed,
+                    "artists" : currentSong.artists,
+                    "previewURL" : currentSong.previewURLAssString,
+                    "imageURL" : currentSong.imageURLAssString,
+                    "duration" : currentSong.duration,
+                    "favorite" : newFavoriteSetting
+                ]
+                
+                songInMySongsReference?.setValue(songValues)
+                self.songList?[currentSongPositionInList!].favorite = newFavoriteSetting
+                
+                switch newFavoriteSetting {
+                    
+                case true:
+                    let alertController = UIAlertController(title: "Confirmation", message: "Song added to favorites", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okAction)
+                    present(alertController, animated: true, completion: nil)
+                    
+                case false:
+                    let alertController = UIAlertController(title: "Confirmation", message: "Song removed from favorites", preferredStyle: .alert)
+                    let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    alertController.addAction(okAction)
+                    present(alertController, animated: true, completion: nil)
+                }
+                
+            }
+            
+            else {
+                let alertController = UIAlertController(title: "Notification", message: "You can only favorite songs you own", preferredStyle: .alert)
+                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                alertController.addAction(okAction)
+                present(alertController, animated: true, completion: nil)
+            }
+            
+        }
         
+        else {
+            let alertController = UIAlertController(title: "Notification", message: "You need to log in before you can favorite any of your songs", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
+        }
         
     }
     
