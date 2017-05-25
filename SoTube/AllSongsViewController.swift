@@ -18,12 +18,13 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     private var userReference: FIRDatabaseReference?
     private var userID: String?
 
-    
-    var shared = Shared.current {
-        didSet {
-            if shared.user == nil {
-                self.userReference = nil
-                self.userID = nil
+    var shared = Shared.current
+
+    var sharedUser: User? {
+        willSet (newValue) {
+            if newValue == nil {
+                userReference = nil
+                userID = nil
             }
         }
     }
@@ -161,6 +162,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // Print who is logged into FireBase
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
+        
+        self.sharedUser = shared.user
         
         if let _ = shared.user {
             logInButton.title = "Log out"

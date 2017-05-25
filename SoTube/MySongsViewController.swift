@@ -14,11 +14,13 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
     // MARK: - Global variables and constants
     private var userReference: FIRDatabaseReference?
     private var userID: String?
-    var shared = Shared.current {
-        didSet {
-            if shared.user == nil {
-                self.userReference = nil
-                self.userID = nil
+    var shared = Shared.current
+
+    var sharedUser: User? {
+        willSet (newValue) {
+            if newValue == nil {
+                userReference = nil
+                userID = nil
             }
         }
     }
@@ -45,6 +47,8 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
     override func viewWillAppear(_ animated: Bool) {
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
+        
+        self.sharedUser = shared.user
         
         if let _ = shared.user {
             logInButton.title = "Log out"

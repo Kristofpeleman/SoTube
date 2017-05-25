@@ -16,6 +16,16 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
     private var userReference: FIRDatabaseReference?
     private var userID: String?
     var shared = Shared.current
+    
+    var sharedUser: User? {
+        willSet (newValue) {
+            if newValue == nil {
+                userReference = nil
+                userID = nil
+            }
+        }
+    }
+    
     var currentSongPositionInList = 0
 
     // MARK: - IBOutlets
@@ -40,6 +50,8 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
     override func viewWillAppear(_ animated: Bool) {
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
+        
+        self.sharedUser = shared.user
         
         if let _ = shared.user {
             logInButton.title = "Log out"
