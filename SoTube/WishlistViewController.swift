@@ -9,28 +9,42 @@
 import UIKit
 import Firebase
 
-class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, LoginViewControllerDelegate, MusicPlayerViewControllerDelegate {
+class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate, LoginViewControllerDelegate, MusicPlayerViewControllerDelegate {
     
     // MARK: - Global variables and constants
     
     var shared = Shared.current
     
-    var currentSongPositionInList = 0
-
+    var wishList: [Song]?
+    var filteredSongs: [Song] = []
+    var currentPickerViewRow = 0
+    
+    
     // MARK: - IBOutlets
     
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var logInButton: UIBarButtonItem!
     
+    @IBOutlet weak var sortingPickerView: UIPickerView!
+    @IBOutlet var sortingOptions: SortingOptions!
+    
+    @IBOutlet weak var searchBar: UISearchBar!
+    @IBOutlet weak var goToMusicPlayerButton: UIBarButtonItem!
     
     // MARK: - UIViewController functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
         print(auth ?? "AUTH is nil")
         print(session ?? "SESSION is nil")
+        
+        
+        sortingPickerView.delegate = self
+        sortingPickerView.dataSource = sortingOptions
+        searchBar.delegate = self
     }
-
+    
     override func didReceiveMemoryWarning() {
         super.didReceiveMemoryWarning()
         // Dispose of any resources that can be recreated.
@@ -40,7 +54,7 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
         
-//        self.sharedUser = shared.user
+        //        self.sharedUser = shared.user
         
         if let _ = shared.user {
             logInButton.title = "Log out"
@@ -54,11 +68,22 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
             logInButton.title = "Log in"
         }
         
+        
+        if shared.user?.wishList != nil {
+            wishList = shared.user?.wishList
+        }
+        
+        if shared.currentPositionInList != nil {
+            goToMusicPlayerButton.isEnabled = true
+        }
+        else {
+            goToMusicPlayerButton.isEnabled = false
+        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
-        print(shared.user?.wishList ?? "SHARED INSTANCE NOT FOUND")
+        print(wishList ?? "SHARED INSTANCE NOT FOUND")
     }
     
     
@@ -72,15 +97,25 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
     // MARK: - Tableview DataSource methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return (shared.user?.wishList?.count) ?? 0
+        if !filteredSongs.isEmpty {
+            return filteredSongs.count
+        }
+        return (wishList?.count) ?? 0
     }
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "SongCell", for: indexPath) as! SongTableViewCell
         
-        cell.songTitleLabel.text = shared.user?.wishList![indexPath.row].songTitle
-        cell.artistNameLabel.text = shared.user?.wishList![indexPath.row].artists
-        cell.costLabel.text = String(describing: shared.user?.wishList![indexPath.row].cost)
+        if !filteredSongs.isEmpty {
+            cell.songTitleLabel.text = filteredSongs[indexPath.row].songTitle
+            cell.artistNameLabel.text = filteredSongs[indexPath.row].artists
+            cell.costLabel.text = String(describing: filteredSongs[indexPath.row].cost)
+        }
+        else if let wishList = wishList {
+            cell.songTitleLabel.text = wishList[indexPath.row].songTitle
+            cell.artistNameLabel.text = wishList[indexPath.row].artists
+            cell.costLabel.text = String(describing: wishList[indexPath.row].cost)
+        }
         
         return cell
     }
@@ -89,13 +124,128 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
     // MARK: - Tableview Delegate methods
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
-        self.currentSongPositionInList = indexPath.row
+        self.shared.currentPositionInList = indexPath.row
         performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
     }
     
     
+    
+    
+    // MARK: - Sort And Filter
+    
+    // Define the design of our UIview/UILabel in our rows
+    func pickerView(_ pickerView: UIPickerView, viewForRow row: Int, forComponent component: Int, reusing view: UIView?) -> UIView {
+        // Created local variable "label" of type "UILabel"
+        var label: UILabel
+        
+        // If our view (parameter) exists/isn't nil when we read it as a UILabel
+        if let view = view as? UILabel {
+            // Then our label is that view
+            label = view
+            // Otherwise:
+        } else {
+            // Our label is a standard UILabel
+            label = UILabel()
+        }
+        // Our words inside our label/row will always fit within the width, even if it has to change it's font-size
+        label.adjustsFontSizeToFitWidth = true
+        // The text inside our labels/rows will be the value from inside sortingOptions.values depending on the row we are currently on
+        label.text = sortingOptions.values[row]
+        
+        
+        return label
+    }
+    
+    
+    // Define what happens when we select a row
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int, inComponent component: Int) {
+        
+        // Change currentPickerViewRow's value to the selected row
+        currentPickerViewRow = row
+        
+        
+        if !filteredSongs.isEmpty {
+            sortSongs(from: filteredSongs)
+        }
+        // Make sure songs exists/isn't nil
+        else if wishList != nil {
+            // Call "sortSongs" function with parameter songs (unwrapped, since "songs" is of type "[Song]?" and we need something of type "[Song]" (+ we know it isn't nil at this point))
+            sortSongs(from: shared.user!.wishList!)
+        }
+        
+    }
+    
+    // Function to sort our list/array containing elements of "Song"
+    func sortSongs(from list: [Song]){
+        // Local variable containing our parameter, because a parameter becomes a constant withing the function (even if the original wasn't)
+        var sortedList = list
+        
+        // if the value in "sortingOptions.values[currentPickerViewRow]" is one of the following:
+        switch sortingOptions.values[currentPickerViewRow] {
+        case "Artist (A-Z)":
+            // Sort our local list by artistNames from A-Z
+            sortedList.sort(by: {$0.artistNames[0] < $1.artistNames[0]})
+        case "Artist (Z-A)":
+            // Sort our local list by artistNames from Z-A
+            sortedList.sort(by: {$0.artistNames[0] > $1.artistNames[0]})
+        case "Song Title (A-Z)":
+            // Sort our local list by songTitle from A-Z
+            sortedList.sort(by: {$0.songTitle < $1.songTitle})
+        case "Song Title (Z-A)":
+            // Sort our local list by songTitle from Z-A
+            sortedList.sort(by: {$0.songTitle > $1.songTitle})
+        // If it wasn't any of the above: stop the switch (prevents infinite loops)
+        default: break
+        }
+        
+        if !filteredSongs.isEmpty {
+            filteredSongs = sortedList
+        }
+        // If songs exists/isn't empty
+        else if wishList != nil {
+            wishList = sortedList
+        }
+        
+        // Reload the tableView to show either "filteredSongs" or "songs" with the sorted contents
+        tableView.reloadData()
+    }
+    
+    
+    // MARK: - SearchBar
+    
+    
+    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
+        if searchText == "" || wishList == nil {
+            filteredSongs = []
+        }
+        else {
+            filteredSongs = wishList!.filter(({ (song) -> Bool in
+                return song.artistNames[0].lowercased().contains(searchText.lowercased())
+            }))
+            filteredSongs += wishList!.filter(({ (song) -> Bool in
+                if song.artistNames.count > 1 {
+                    if !filteredSongs.contains(where: {$0.spotify_ID == song.spotify_ID}) {
+                        return song.artistNames[1].lowercased().contains(searchText.lowercased())
+                    }
+                }
+                return false
+            }))
+            filteredSongs += wishList!.filter(({ (song) -> Bool in
+                if !filteredSongs.contains(where: {$0.spotify_ID == song.spotify_ID}){
+                    return song.songTitle.lowercased().contains(searchText.lowercased())
+                }
+                return false
+            }))
+            
+        }
+        pickerView(sortingPickerView, didSelectRow: currentPickerViewRow, inComponent: 0)
+        tableView.reloadData()
+    }
+    
+    
+    
     // MARK: - Navigation
-
+    
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         if segue.identifier == "loginSegue" {
@@ -115,9 +265,13 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
                     destinationVC.currentSongPositionInList = self.shared.currentPositionInList
                 }
                 else {
-                    
-                    destinationVC.songList = self.shared.user?.wishList
-                    destinationVC.currentSongPositionInList = self.currentSongPositionInList
+                    if !filteredSongs.isEmpty {
+                        destinationVC.songList = self.filteredSongs
+                    }
+                    else {
+                        destinationVC.songList = self.wishList
+                    }
+                    destinationVC.currentSongPositionInList = self.shared.currentPositionInList
                 }
                 destinationVC.currentUser = self.shared.user
                 
@@ -196,5 +350,5 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
         self.shared.currentPositionInList = position
     }
     
-
+    
 }
