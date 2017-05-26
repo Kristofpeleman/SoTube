@@ -71,6 +71,8 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
             
         } else {
             logInButton.title = "Log in"
+            sortedFavoriteSongs = nil
+            filteredSongs = []
         }
         
         if shared.currentPositionInList != nil {
@@ -310,6 +312,9 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
                 
                 // Since the value isn't in FireBase anymore, we must delete it localy
                 self.shared.user = nil
+                self.sortedFavoriteSongs = nil
+                self.filteredSongs = []
+                
                 
                 self.tableView.reloadData()
                 // Change "logInButton"'s title to "Log in"

@@ -66,6 +66,8 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
             
         } else {
             logInButton.title = "Log in"
+            self.wishList = nil
+            self.filteredSongs = []
         }
         
         
@@ -305,6 +307,9 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
                 
                 // Since the value isn't in FireBase anymore, we must delete it localy
                 self.shared.user = nil
+                self.wishList = nil
+                self.filteredSongs = []
+                
                 
                 self.tableView.reloadData()
                 // Change "logInButton"'s title to "Log in"

@@ -58,6 +58,8 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
             
         } else {
             logInButton.title = "Log in"
+            self.mySongs = nil
+            self.filteredSongs = []
         }
         
         if shared.user?.mySongs != nil {
@@ -300,6 +302,8 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
                 
                 // Since the value isn't in FireBase anymore, we must delete it localy
                 self.shared.user = nil
+                self.mySongs = nil
+                self.filteredSongs = []
                 
                 self.tableView.reloadData()
                 // Change "logInButton"'s title to "Log in"
