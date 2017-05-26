@@ -113,7 +113,14 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
                                         (action) in
                                         self.shared.user!.points += 20
                                         self.updatePointsLabel()
-                                     }
+                                        
+                                        // Persist updated value to Firebase
+                                        let currentPoints = self.shared.user?.points
+                                        let usersReference = self.rootReference?.child("Users")
+                                        let thisUserReference = usersReference?.child("\(self.shared.user?.fireBaseID ?? "dummy user")")
+                                        let pointsReference = thisUserReference?.child("points")
+                                        pointsReference?.setValue(currentPoints)
+        }
         )
         
         let cancelAction = UIAlertAction(title: "No",
