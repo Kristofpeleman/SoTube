@@ -9,12 +9,12 @@
 import UIKit
 import Firebase
 
-class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITableViewDataSource {
+class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource {
     
     // MARK: - Global Variables
     // Variables to access spotify database and our Firebase
-    var auth: SPTAuth?
-    var session: SPTSession?
+//    var auth: SPTAuth?
+//    var session: SPTSession?
     var currentUser: User?
     var userReference: FIRDatabaseReference?
     

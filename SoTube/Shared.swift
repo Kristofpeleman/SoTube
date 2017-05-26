@@ -19,7 +19,7 @@ final class Shared {
     
     static let current = Shared()
     
-    // MARK: Local Variable
+    // MARK: Local Variables
     
     var user : User?
     var songList: [Song]?
