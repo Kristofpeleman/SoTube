@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vnE-1c-72W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hGK-qc-P1j">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -191,6 +191,27 @@
                 <customObject id="HZt-CG-Cfh" customClass="SortingOptions" customModule="SoTube" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-1230" y="-350.7042253521127"/>
+        </scene>
+        <!--After Launch Screen View Controller-->
+        <scene sceneID="WfF-2K-P1Z">
+            <objects>
+                <viewController id="hGK-qc-P1j" customClass="AfterLaunchScreenViewController" customModule="SoTube" customModuleProvider="target" sceneMemberID="viewController">
+                    <layoutGuides>
+                        <viewControllerLayoutGuide type="top" id="Ptc-ui-5ce"/>
+                        <viewControllerLayoutGuide type="bottom" id="9wk-CM-vGD"/>
+                    </layoutGuides>
+                    <view key="view" contentMode="scaleToFill" id="Mtp-3M-xxv">
+                        <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
+                        <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                        <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                    </view>
+                    <connections>
+                        <segue destination="vnE-1c-72W" kind="show" identifier="initialSegue" id="pxG-ub-oIB"/>
+                    </connections>
+                </viewController>
+                <placeholder placeholderIdentifier="IBFirstResponder" id="5Z6-9x-Vna" userLabel="First Responder" sceneMemberID="firstResponder"/>
+            </objects>
+            <point key="canvasLocation" x="-5426.25" y="1823.2394366197184"/>
         </scene>
         <!--Spotify Connect View Controller-->
         <scene sceneID="JoB-BU-UYd">
