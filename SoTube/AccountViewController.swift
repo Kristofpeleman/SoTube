@@ -9,11 +9,20 @@
 import UIKit
 import Firebase
 
-class AccountViewController: TopMediaViewController, LoginViewControllerDelegate, MusicPlayerViewControllerDelegate {
+class AccountViewController: TopMediaViewController, LoginViewControllerDelegate, MusicPlayerViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
     
     // MARK: - Global variables and constants
     
     var shared = Shared.current
+    
+    let backGroundKeys = ["Black & White","Purple","Yellow","Orange","Blue"]
+    let backGroundColorData: [String : String] = [
+        "Black & White" : "",
+        "Purple" : "",
+        "Yellow" : "",
+        "Orange" : "songVCBackground",
+        "Blue" : ""
+        ]
     
     
     // MARK: - IBOutlets
@@ -27,6 +36,9 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
     @IBOutlet weak var buyPointsButton: UIButton!
     
     @IBOutlet weak var goToMusicPlayerButton: UIBarButtonItem!
+    
+    @IBOutlet weak var backGroundPickerView: UIPickerView!
+    
     
     // MARK: - UIViewController functions
     
@@ -228,7 +240,18 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
         }
     }
  
+    // MARK: - (Background) PickerView Methods
     
+    func numberOfComponents(in: UIPickerView) -> Int {
+        return 1
+    }
+    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
+        return backGroundColorData.count
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
+        return backGroundKeys[row]
+    }
     
     
     // MARK: - LoginViewControllerDelegate methods

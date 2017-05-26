@@ -59,7 +59,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="6AI-ei-ZiZ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="6AI-ei-ZiZ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTh-NN-ReA">
@@ -310,7 +310,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="NxR-G9-sq9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="NxR-G9-sq9">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44S-ky-1cZ">
@@ -751,7 +751,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="OK4-f6-kE2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="OK4-f6-kE2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lYy-us-Azo">
@@ -788,7 +788,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAI-5O-pyb" id="br8-1O-eM6">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JzE-WR-qW1">
@@ -911,7 +911,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-Wa-Zx7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-Wa-Zx7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1zS-9z-DKq">
@@ -1416,7 +1416,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="k2t-KH-8nu">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="k2t-KH-8nu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="at0-CC-3xd">
@@ -1578,7 +1578,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" translatesAutoresizingMaskIntoConstraints="NO" id="Sqn-Cm-6hK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="Sqn-Cm-6hK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hot-Xq-Kax">
@@ -1671,6 +1671,13 @@
                                     <action selector="buyPoints:" destination="cZS-6q-uLo" eventType="touchUpInside" id="bv5-NY-8T1"/>
                                 </connections>
                             </button>
+                            <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfR-WY-78I">
+                                <rect key="frame" x="0.0" y="394" width="320" height="114"/>
+                                <connections>
+                                    <outlet property="dataSource" destination="cZS-6q-uLo" id="XEV-uU-mtW"/>
+                                    <outlet property="delegate" destination="cZS-6q-uLo" id="fjN-6m-Wc9"/>
+                                </connections>
+                            </pickerView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
@@ -1678,13 +1685,16 @@
                             <constraint firstItem="AFH-BW-tGV" firstAttribute="top" secondItem="fdd-sx-AiY" secondAttribute="bottom" constant="75" id="4ME-8x-NBt"/>
                             <constraint firstItem="AFH-BW-tGV" firstAttribute="centerX" secondItem="gvJ-0i-PdY" secondAttribute="centerX" id="4Ob-sY-ldh"/>
                             <constraint firstItem="jl4-I9-4qc" firstAttribute="width" secondItem="gvJ-0i-PdY" secondAttribute="width" multiplier="1:2" id="8Aw-1V-VYz"/>
+                            <constraint firstItem="dfR-WY-78I" firstAttribute="centerX" secondItem="gvJ-0i-PdY" secondAttribute="centerX" id="AHW-69-lDA"/>
                             <constraint firstItem="hot-Xq-Kax" firstAttribute="centerY" secondItem="gvJ-0i-PdY" secondAttribute="centerY" id="Bry-zN-yHk"/>
+                            <constraint firstItem="dfR-WY-78I" firstAttribute="height" secondItem="gvJ-0i-PdY" secondAttribute="height" multiplier="0.2" id="C97-U7-wmU"/>
                             <constraint firstItem="jl4-I9-4qc" firstAttribute="top" secondItem="HYn-Mf-Pgy" secondAttribute="bottom" constant="25" id="Ddm-St-MJU"/>
                             <constraint firstItem="HYn-Mf-Pgy" firstAttribute="leading" secondItem="zKA-3u-unc" secondAttribute="trailing" id="E1y-Ub-A5M"/>
                             <constraint firstItem="hot-Xq-Kax" firstAttribute="centerX" secondItem="gvJ-0i-PdY" secondAttribute="centerX" id="UU8-5w-Oge"/>
                             <constraint firstItem="HYn-Mf-Pgy" firstAttribute="width" secondItem="gvJ-0i-PdY" secondAttribute="width" multiplier="0.5" id="cbw-wU-fXL"/>
                             <constraint firstItem="Sqn-Cm-6hK" firstAttribute="centerX" secondItem="gvJ-0i-PdY" secondAttribute="centerX" id="ehc-JA-B9E"/>
                             <constraint firstItem="hot-Xq-Kax" firstAttribute="height" secondItem="gvJ-0i-PdY" secondAttribute="height" id="giA-it-hcK"/>
+                            <constraint firstItem="jl4-I9-4qc" firstAttribute="bottom" secondItem="dfR-WY-78I" secondAttribute="top" constant="-10" id="h1T-Pp-Vjs"/>
                             <constraint firstItem="jl4-I9-4qc" firstAttribute="centerX" secondItem="gvJ-0i-PdY" secondAttribute="centerX" id="iBC-w3-n5h"/>
                             <constraint firstAttribute="leadingMargin" secondItem="AFH-BW-tGV" secondAttribute="leading" id="joi-Bh-NGZ"/>
                             <constraint firstItem="AFH-BW-tGV" firstAttribute="height" secondItem="gvJ-0i-PdY" secondAttribute="height" multiplier="0.2" id="mg7-RC-W6h"/>
@@ -1701,6 +1711,7 @@
                     <tabBarItem key="tabBarItem" title="Account" image="profile" selectedImage="profile" id="CPx-xf-d5l"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backGroundPickerView" destination="dfR-WY-78I" id="3Zt-5v-eiE"/>
                         <outlet property="buyPointsButton" destination="jl4-I9-4qc" id="5Tn-Ge-FMF"/>
                         <outlet property="emailAddressLabel" destination="i0O-zj-bMi" id="xyH-gz-aFi"/>
                         <outlet property="goToMusicPlayerButton" destination="bN2-PS-WGg" id="GKu-Ne-hdw"/>
@@ -1725,13 +1736,14 @@
         <image name="SoTube_Logo" width="890" height="769"/>
         <image name="TabBarIcon_me_selected" width="164" height="158"/>
         <image name="Wishlist_selected" width="16" height="16"/>
+        <image name="background_orange" width="640" height="640"/>
         <image name="forward" width="1200" height="1200"/>
         <image name="play" width="256" height="256"/>
         <image name="profile" width="36" height="35"/>
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Def-eb-XHu"/>
-        <segue reference="bey-pH-39d"/>
+        <segue reference="Yyy-cB-Q5z"/>
+        <segue reference="bK6-a7-b2h"/>
     </inferredMetricsTieBreakers>
 </document>

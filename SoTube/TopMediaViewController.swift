@@ -25,8 +25,7 @@ class TopMediaViewController: UIViewController {
 
     override func viewDidLoad() {
         super.viewDidLoad()
-        self.songVCBackGroundImage.image = UIImage(data: try! Data(contentsOf: URL(string: "https://i.scdn.co/image/2e5e772e7cec065be0a59891d69ea39efd6c3031")!))
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {
