@@ -152,9 +152,12 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                     let wishListSongIDs = songs.filter{songIsInWishList($0)}.map{$0.spotify_ID}
                     let userWishListReference = self.userReference?.child("wishList")
                     
-                    for index in 1...wishListSongIDs.count {
-                        let songInWishListReference = userWishListReference?.child(wishListSongIDs[index - 1]!)
-                        songInWishListReference?.removeValue()
+                    if wishListSongIDs.count > 0 {
+                        
+                        for index in 1...wishListSongIDs.count {
+                            let songInWishListReference = userWishListReference?.child(wishListSongIDs[index - 1]!)
+                            songInWishListReference?.removeValue()
+                        }
                     }
                 }
                 
