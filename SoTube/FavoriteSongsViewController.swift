@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, LoginViewControllerDelegate {
+class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, LoginViewControllerDelegate, MusicPlayerViewControllerDelegate {
     
     // MARK: - Global variables and constants
     
@@ -69,6 +69,13 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
         print(self.myFavoriteSongs ?? "FAVORITE SONGS NOT FOUND")
     }
     
+    // MARK: - IBActions
+    
+    @IBAction func goToMusicPlayer(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "musicPlayerSegue", sender: sender)
+    }
+    
+    
     // MARK: - Tableview DataSource methods
     
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
@@ -90,7 +97,7 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
     
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         self.currentSongPositionInList = indexPath.row
-        performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
+        performSegue(withIdentifier: "musicPlayerSegue", sender: self.tableView)
     }
     
     
@@ -108,14 +115,26 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
             if let destinationVC = segue.destination as? MusicPlayerViewController {
                 destinationVC.auth = self.auth
                 destinationVC.session = self.session
-                destinationVC.songList = self.myFavoriteSongs
-                destinationVC.currentSongPositionInList = self.currentSongPositionInList
+                destinationVC.delegate = self
+                
+                if sender is UIBarButtonItem {
+                    destinationVC.songList = self.shared.songList
+                    destinationVC.currentSongPositionInList = self.shared.currentPositionInList
+                }
+                else {
+                    
+                    destinationVC.songList = self.myFavoriteSongs
+                    destinationVC.currentSongPositionInList = self.currentSongPositionInList
+                }
                 destinationVC.currentUser = self.shared.user
                 
-                let usersReference: FIRDatabaseReference = rootReference!.child("Users")
-                let userID = shared.user!.fireBaseID
-                
-                destinationVC.userReference = usersReference.child(userID)
+                if let _ = self.shared.user {
+                    
+                    let usersReference: FIRDatabaseReference = rootReference!.child("Users")
+                    let thisUserReference = usersReference.child(self.shared.user!.fireBaseID)
+                    
+                    destinationVC.userReference = thisUserReference
+                }
                 
             }
         }
@@ -152,6 +171,15 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
                 // Perform the segue
                 return true
             }
+        case "musicPlayerSegue":
+            
+            if sender is UIBarButtonItem {
+                if let _ = self.shared.songList, let _ = self.shared.currentPositionInList {
+                    return true
+                }
+                return false
+                
+            } else {return true}
         // If the identifier's value isn't any of the above: perform Segue
         default: return true
         }
@@ -162,6 +190,16 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
     
     func setUser(_ user: User) {
         self.shared.user = user
+    }
+    
+    // MARK: - MusicPlayerViewControllerDelegate methods
+    
+    func setSongList(_ songList: [Song]) {
+        self.shared.songList = songList
+    }
+    
+    func setCurrentPositionInList(_ position: Int) {
+        self.shared.currentPositionInList = position
     }
     
 

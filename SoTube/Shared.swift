@@ -22,5 +22,6 @@ final class Shared {
     // MARK: Local Variable
     
     var user : User?
-    
+    var songList: [Song]?
+    var currentPositionInList: Int?
 }

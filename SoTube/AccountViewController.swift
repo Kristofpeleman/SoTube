@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class AccountViewController: TopMediaViewController, LoginViewControllerDelegate {
+class AccountViewController: TopMediaViewController, LoginViewControllerDelegate, MusicPlayerViewControllerDelegate {
     
     // MARK: - Global variables and constants
     
@@ -74,6 +74,12 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
         
     }
     
+    // MARK: - IBActions
+    
+    @IBAction func goToMusicPlayer(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "musicPlayerSegue", sender: sender)
+    }
+    
 
     // MARK: - Navigation
 
@@ -83,6 +89,30 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
         if segue.identifier == "loginSegue" {
             if let destinationVC = segue.destination as? LogInViewController {
                 destinationVC.delegate = self
+            }
+        }
+        
+        if segue.identifier == "musicPlayerSegue" {
+            if let destinationVC = segue.destination as? MusicPlayerViewController {
+                destinationVC.auth = self.auth
+                destinationVC.session = self.session
+                destinationVC.delegate = self
+                
+                if sender is UIBarButtonItem {
+                    destinationVC.songList = self.shared.songList
+                    destinationVC.currentSongPositionInList = self.shared.currentPositionInList
+                }
+
+                destinationVC.currentUser = self.shared.user
+                
+                if let _ = self.shared.user {
+                    
+                    let usersReference: FIRDatabaseReference = rootReference!.child("Users")
+                    let thisUserReference = usersReference.child(self.shared.user!.fireBaseID)
+                    
+                    destinationVC.userReference = thisUserReference
+                }
+                
             }
         }
         
@@ -120,6 +150,16 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
                 // Perform the segue
                 return true
             }
+            
+        case "musicPlayerSegue":
+            
+            if sender is UIBarButtonItem {
+                if let _ = self.shared.songList, let _ = self.shared.currentPositionInList {
+                    return true
+                }
+                return false
+                
+            } else {return true}
         // If the identifier's value isn't any of the above: perform Segue
         default: return true
         }
@@ -132,5 +172,17 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
     func setUser(_ user: User) {
         self.shared.user = user
     }
+    
+    
+    // MARK: - MusicPlayerViewControllerDelegate methods
+    
+    func setSongList(_ songList: [Song]) {
+        self.shared.songList = songList
+    }
+    
+    func setCurrentPositionInList(_ position: Int) {
+        self.shared.currentPositionInList = position
+    }
+    
 
 }

@@ -9,6 +9,14 @@
 import UIKit
 import Firebase
 
+// Created a protocol for a delegate
+protocol MusicPlayerViewControllerDelegate {
+    // Functions that will be needed to follow this protocol
+    
+    func setSongList(_ songList: [Song])
+    func setCurrentPositionInList(_ position: Int)
+}
+
 class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SPTAudioStreamingPlaybackDelegate {
     
     
@@ -29,6 +37,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // The current list of songs we need to navigate in (could be: All, Filtered, My Songs, Favorites or Wishlist)(and obeys the previous VC's sort(by:) logic)
     var songList: [Song]?
     
+    
     // Calculated property to define the current song form the info we got from the previous VC (makes it easier to call later on in code)
     var currentSong: Song {
         return songList![currentSongPositionInList!]
@@ -36,6 +45,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     // Optional variable containing nil or an item of type "Timer"
     var timer: Timer?
+    
+    // Declaration of the MusicPlayerViewControllerDelegate
+    var delegate: MusicPlayerViewControllerDelegate?
     
     
     private var rootReference: FIRDatabaseReference?
@@ -93,10 +105,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     override func viewDidAppear(_ animated: Bool) {
         // A timer repeating musicSliderUpdate every few seconds (or less depending on timeInterval) to update the musicSlider
+
+            timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
         
-        print("\n\n\n\n\n\n\(String(describing: self.userReference))\n\n\n\n\n\n")
-        
-        timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
     }
     
     // MARK: - FireBase
@@ -347,7 +358,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 }
                 
                 // Change musicSlider's value/position on slider to the currentTime of player
+
                 musicSlider.setValue(Float(currentPlaybackState.position), animated: true)
+            
                 
                 // Call the function that updates both timeLabels
                 updateTimeLabels()
@@ -484,12 +497,19 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // Bar button item resets sliders and goes back to whichever VC we came from before comming here
     @IBAction func back(_ sender: UIBarButtonItem) {
         timer?.invalidate()
-        if musicSlider.maximumValue == previewDuration {
-            pausePlayer()
-        }
-        else if player?.playbackState?.position != nil {
+        
+//        if musicSlider.maximumValue == previewDuration {
+//            pausePlayer()
+//        }
+//        else if player?.playbackState?.position != nil {
+//            timer = Timer(timeInterval: TimeInterval(musicSlider.maximumValue) - player!.playbackState.position - 1, target: self, selector: #selector(self.pausePlayer), userInfo: nil, repeats: false)
+//        }
+        
+        if player?.playbackState?.position != nil {
             timer = Timer(timeInterval: TimeInterval(musicSlider.maximumValue) - player!.playbackState.position - 1, target: self, selector: #selector(self.pausePlayer), userInfo: nil, repeats: false)
         }
+        
+        
         dismiss(animated: true, completion: nil)
     }
     
@@ -664,6 +684,10 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     func updateOutlets(){
         // Changes the title in our navigationBar to the songTitle
         initialize(authSession: session!)
+        
+        delegate?.setSongList(self.songList!)
+        delegate?.setCurrentPositionInList(self.currentSongPositionInList!)
+        
         navigationSongTitle.title = currentSong.songTitle
         artistLabel.text = currentSong.artists
         productionAndYearLabel.text = ""

@@ -41,6 +41,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         // Dispose of any resources that can be recreated.
     }
     
+    
     // When the view has appeared
     override func viewDidAppear(_ animated: Bool) {
         // Reload the tableView's design and cells
@@ -225,6 +226,19 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         // NOTE: AMOUNT of rows starts at 1, but when USING/CALLING a row it starts at 0 (just like an array/dictionary
         
         return cell
+    }
+    
+    func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
+        if editingStyle == .delete {
+            let song = currentUser!.shoppingCart![indexPath.row]
+            let userShoppingCartReference = self.userReference?.child("shoppingCart")
+            userShoppingCartReference?.child(song.spotify_ID!).removeValue()
+            
+            sleep(2)
+            self.currentUser?.shoppingCart = Shared.current.user?.shoppingCart
+            self.tableView.reloadData()
+            
+        }
     }
     
     // MARK: - Homemade Functions

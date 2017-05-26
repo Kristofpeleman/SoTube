@@ -123,7 +123,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Search" id="fBQ-je-4H0">
-                                        <barButtonItem key="leftBarButtonItem" enabled="NO" title="Playing..." id="59z-5K-80b"/>
+                                        <barButtonItem key="leftBarButtonItem" tag="1" title="Playing..." id="59z-5K-80b">
+                                            <connections>
+                                                <action selector="goToMusicPlayer:" destination="uS8-Hq-Lct" id="tHm-4D-v86"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Log in" id="lw8-bn-E9Q">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="Xlf-MO-3sR"/>
@@ -173,6 +177,7 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="All Songs" image="AllSongs_selected" selectedImage="AllSongs_selected" id="wgn-mS-7Z6"/>
                     <connections>
+                        <outlet property="goToMusicPlayerButton" destination="59z-5K-80b" id="rW3-vG-G7b"/>
                         <outlet property="logInButton" destination="lw8-bn-E9Q" id="ezC-iT-Hkp"/>
                         <outlet property="searchBar" destination="D3Z-jY-RCg" id="i7w-PN-PFW"/>
                         <outlet property="sortingOptions" destination="HZt-CG-Cfh" id="uVD-eT-FEh"/>
@@ -317,7 +322,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="My Songs" id="7hw-bG-RjH">
-                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="cFG-rw-yte"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="cFG-rw-yte">
+                                            <connections>
+                                                <action selector="goToMusicPlayer:" destination="5G4-0t-NrY" id="1pj-Mp-gEE"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Log in" id="2BL-xo-b3a">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="DJc-7M-zPS"/>
@@ -857,7 +866,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Favorites" id="efY-ry-8QE">
-                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="J3q-kH-lnR"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="J3q-kH-lnR">
+                                            <connections>
+                                                <action selector="goToMusicPlayer:" destination="3sM-JY-iPi" id="jJD-Kh-cPh"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Log in" id="r1Z-SV-ysc">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="Yyy-cB-Q5z"/>
@@ -1345,7 +1358,11 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Wishlist" id="oBh-Ew-EpM">
-                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="eeq-vX-QEY"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="eeq-vX-QEY">
+                                            <connections>
+                                                <action selector="goToMusicPlayer:" destination="wbl-Tl-2rj" id="iqD-EW-Q0t"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Log in" id="isI-v4-E5s">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="Def-eb-XHu"/>
@@ -1420,7 +1437,11 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Account" id="4PV-Ww-stf">
-                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="7LF-QF-7DO"/>
+                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="7LF-QF-7DO">
+                                            <connections>
+                                                <action selector="goToMusicPlayer:" destination="cZS-6q-uLo" id="EvG-m1-9Ig"/>
+                                            </connections>
+                                        </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Log in" id="Ktf-Ih-gzP">
                                             <connections>
                                                 <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="Uvf-Jz-1dC"/>
@@ -1506,6 +1527,7 @@
                         <outlet property="loginButton" destination="Ktf-Ih-gzP" id="7vX-WE-CIt"/>
                         <outlet property="pointsLabel" destination="FhP-x8-lJC" id="eIs-F0-KPR"/>
                         <outlet property="userNameLabel" destination="jer-hf-CxB" id="CFj-bR-xqW"/>
+                        <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="ViR-ba-d3c"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFv-Mq-aXh" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -1528,7 +1550,7 @@
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
+        <segue reference="ViR-ba-d3c"/>
         <segue reference="Uvf-Jz-1dC"/>
-        <segue reference="bey-pH-39d"/>
     </inferredMetricsTieBreakers>
 </document>

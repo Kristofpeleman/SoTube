@@ -9,7 +9,7 @@
 import UIKit
 import Firebase
 
-class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate, LoginViewControllerDelegate {
+class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate, LoginViewControllerDelegate, MusicPlayerViewControllerDelegate {
     
     // MARK: - Variables and constants
 
@@ -104,6 +104,9 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     // SearchBar
     @IBOutlet weak var searchBar: UISearchBar!
     
+    @IBOutlet weak var goToMusicPlayerButton: UIBarButtonItem!
+    
+    
     
     // MARK: - Standard Functions
     override func viewDidLoad() {
@@ -171,6 +174,11 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     }
     
     
+    // MARK: - IBActions
+    
+    @IBAction func goToMusicPlayer(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "musicPlayerSegue", sender: sender)
+    }
     
     
     
@@ -233,7 +241,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             
             //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
             // Perform the following segue to a new ViewController
-            performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
+            performSegue(withIdentifier: "musicPlayerSegue", sender: self.tableView)
         
     }
     
@@ -395,15 +403,23 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 // Set the FireBase authentication and session
                 destinationVC.auth = self.auth
                 destinationVC.session = self.session
+                destinationVC.delegate = self
                 
-                // If this VC's "songs" exists/isn't nil
-                if songs != nil {
-                    // Give the "songList" in our destination the value of this VC's "songs"
-                    destinationVC.songList = songs
+                if sender is UIBarButtonItem {
+                    destinationVC.songList = self.shared.songList
+                    destinationVC.currentSongPositionInList = self.shared.currentPositionInList
+
+                } else {
+                    
+                    // If this VC's "songs" exists/isn't nil
+                    if songs != nil {
+                        // Give the "songList" in our destination the value of this VC's "songs"
+                        destinationVC.songList = songs
+                    }
+                    
+                    // Give the "currentSongPositionInList" in our destination the value of this VC's "currentSongPositionInList"
+                    destinationVC.currentSongPositionInList = self.currentSongPositionInList
                 }
-                
-                // Give the "currentSongPositionInList" in our destination the value of this VC's "currentSongPositionInList"
-                destinationVC.currentSongPositionInList = self.currentSongPositionInList
                 
                 // Same as above for these 2
                 destinationVC.currentUser = self.shared.user
@@ -452,7 +468,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     // An override function when performing a segue
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-       
+        
         // Check the value of "identifier"
         switch identifier {
         // If the value is "loginSegue"
@@ -467,8 +483,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 
                 // Since the value isn't in FireBase anymore, we must delete it localy
                 self.shared.user = nil
-//                self.userReference = nil
-//                self.userID = nil
+                //                self.userReference = nil
+                //                self.userID = nil
                 
                 // Change "logInButton"'s title to "Log in"
                 logInButton.title = "Log in"
@@ -476,13 +492,25 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 // Leave the function with the return and don't perform the segue
                 return false
             }
-            // If "logInButton"'s title isn't "Log out"
+                // If "logInButton"'s title isn't "Log out"
             else {
                 // Perform the segue
                 return true
             }
+        case "musicPlayerSegue":
+            
+            if sender is UIBarButtonItem {
+                if let _ = self.shared.songList, let _ = self.shared.currentPositionInList {
+                    return true
+                }
+                return false
+                
+            } else {return true}
+            
         // If the identifier's value isn't any of the above: perform Segue
         default: return true
+            
+            
         }
     }
     
@@ -492,6 +520,16 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     func setUser(_ user: User) {
         self.shared.user = user
+    }
+    
+    // MARK: - MusicPlayerViewControllerDelegate methods
+    
+    func setSongList(_ songList: [Song]) {
+        self.shared.songList = songList
+    }
+    
+    func setCurrentPositionInList(_ position: Int) {
+        self.shared.currentPositionInList = position
     }
     
     
