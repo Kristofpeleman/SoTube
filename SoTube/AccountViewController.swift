@@ -24,6 +24,9 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
     @IBOutlet weak var emailAddressLabel: UILabel!
     @IBOutlet weak var pointsLabel: UILabel!
     
+    @IBOutlet weak var buyPointsButton: UIButton!
+    
+    @IBOutlet weak var goToMusicPlayerButton: UIBarButtonItem!
     
     // MARK: - UIViewController functions
     
@@ -59,17 +62,35 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
             print(self.shared.user?.userName ?? "NO USERNAME")
             print(self.shared.user?.emailAddress ?? "NO EMAIL")
             print(self.shared.user?.points ?? "NO POINTS")
+            buyPointsButton.isEnabled = true
             
         } else {
             loginButton.title = "Log in"
             self.userNameLabel.text = "NO USER"
             self.emailAddressLabel.text = "NO USER"
             self.pointsLabel.text = "NO USER"
+            buyPointsButton.isEnabled = false
             
-            let alertController = UIAlertController(title: "No User found", message: "You need to log in before you can see your account details", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            let alertController = UIAlertController(title: "No User found",
+                                                    message: "You need to log in before you can see your account details",
+                                                    preferredStyle: .alert
+            )
+            
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .cancel,
+                                         handler: nil
+            )
+            
             alertController.addAction(okAction)
+            
             present(alertController, animated: true, completion: nil)
+        }
+        
+        if shared.currentPositionInList != nil {
+            goToMusicPlayerButton.isEnabled = true
+        }
+        else {
+            goToMusicPlayerButton.isEnabled = false
         }
         
     }
@@ -80,7 +101,42 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
         performSegue(withIdentifier: "musicPlayerSegue", sender: sender)
     }
     
+    @IBAction func buyPoints(_ sender: UIButton) {
+        let alertController = UIAlertController(title: "Buy Points",
+                                                message: "Are you certain you want to buy 20 points?",
+                                                preferredStyle: .alert
+        )
+        
+        let okAction = UIAlertAction(title: "Yes",
+                                     style: .default,
+                                     handler: {
+                                        (action) in
+                                        self.shared.user!.points += 20
+                                        self.updatePointsLabel()
+                                     }
+        )
+        
+        let cancelAction = UIAlertAction(title: "No",
+                                         style: .cancel,
+                                         handler: nil
+        )
+        
+        alertController.addAction(okAction)
+        alertController.addAction(cancelAction)
+        
+        present(alertController, animated: true, completion: nil)
+    }
 
+    
+    // MARK: - Homemade Functions
+    
+    func updatePointsLabel(){
+        if shared.user != nil {
+        pointsLabel.text = String(describing: shared.user!.points)
+        }
+    }
+    
+    
     // MARK: - Navigation
 
     // In a storyboard-based application, you will often want to do a little preparation before navigation
@@ -165,6 +221,7 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
         }
     }
  
+    
     
     
     // MARK: - LoginViewControllerDelegate methods
