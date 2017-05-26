@@ -128,6 +128,9 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                 
                 // Create a constant for easier access to the songs in our shoppingCart
                 let songs = self.currentUser!.shoppingCart!
+                
+
+                
                 // Add the songs from our shoppingCart to currentUser.mySongs
                 self.currentUser?.addToMySongs(songs)
                 
@@ -141,6 +144,23 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                     let songInMySongsReference = userMySongsReference?.child(songs[index - 1].spotify_ID!)
                     // Change the value of where our new reference points in our firebase
                     songInMySongsReference?.setValue(returnDictionaryFor(songs[index - 1]))
+                }
+                
+                
+                // Check for existence of purchased songs in Wishlist and remove them from Firebase wishList
+                if let _ = self.currentUser?.wishList {
+                    let wishListSongIDs = songs.filter{songIsInWishList($0)}.map{$0.spotify_ID}
+                    let userWishListReference = self.userReference?.child("wishList")
+                    
+                    for index in 1...wishListSongIDs.count {
+                        let songInWishListReference = userWishListReference?.child(wishListSongIDs[index - 1]!)
+                        songInWishListReference?.removeValue()
+                    }
+                }
+                
+                // Helper function for the filter closure above
+                func songIsInWishList(_ song: Song) -> Bool {
+                    return self.currentUser!.wishList!.contains(where: {song.spotify_ID == $0.spotify_ID})
                 }
 
                 
