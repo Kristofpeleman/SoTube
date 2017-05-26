@@ -20,11 +20,21 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
     
     @IBOutlet weak var loginButton: UIBarButtonItem!
     
+    @IBOutlet weak var userNameLabel: UILabel!
+    @IBOutlet weak var emailAddressLabel: UILabel!
+    @IBOutlet weak var pointsLabel: UILabel!
+    
     
     // MARK: - UIViewController functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
+        
+        if let _ = self.shared.user {
+            self.userNameLabel.text = shared.user?.userName
+            self.emailAddressLabel.text = shared.user?.emailAddress
+            self.pointsLabel.text = "\(shared.user!.points)"
+        }
         
         // Do any additional setup after loading the view.
     }
@@ -41,6 +51,10 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
         if let _ = shared.user {
             loginButton.title = "Log out"
             
+            self.userNameLabel.text = shared.user?.userName
+            self.emailAddressLabel.text = shared.user?.emailAddress
+            self.pointsLabel.text = "\(shared.user!.points)"
+            
             print(self.shared.user?.fireBaseID ?? "NO FIREBASE ID")
             print(self.shared.user?.userName ?? "NO USERNAME")
             print(self.shared.user?.emailAddress ?? "NO EMAIL")
@@ -48,6 +62,14 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
             
         } else {
             loginButton.title = "Log in"
+            self.userNameLabel.text = "NO USER"
+            self.emailAddressLabel.text = "NO USER"
+            self.pointsLabel.text = "NO USER"
+            
+            let alertController = UIAlertController(title: "No User found", message: "You need to log in before you can see your account details", preferredStyle: .alert)
+            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            alertController.addAction(okAction)
+            present(alertController, animated: true, completion: nil)
         }
         
     }
@@ -86,6 +108,9 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
 
                 // Change "logInButton"'s title to "Log in"
                 loginButton.title = "Log in"
+                self.userNameLabel.text = "NO USER"
+                self.emailAddressLabel.text = "NO USER"
+                self.pointsLabel.text = "NO USER"
                 
                 // Leave the function with the return and don't perform the segue
                 return false

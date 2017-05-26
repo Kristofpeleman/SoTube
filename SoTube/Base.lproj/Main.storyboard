@@ -1429,18 +1429,88 @@
                                     </navigationItem>
                                 </items>
                             </navigationBar>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBarIcon_me_selected" translatesAutoresizingMaskIntoConstraints="NO" id="AFH-BW-tGV">
+                                <rect key="frame" x="16" y="95" width="288" height="113.5"/>
+                            </imageView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="zKA-3u-unc">
+                                <rect key="frame" x="16" y="247.5" width="128" height="73.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Username" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="GLV-6N-HJk">
+                                        <rect key="frame" x="0.0" y="0.0" width="128" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Email address" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fOw-ov-KH5">
+                                        <rect key="frame" x="0.0" y="29.5" width="128" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Points Available" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="cDP-Vq-oTq">
+                                        <rect key="frame" x="0.0" y="59" width="128" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                                <constraints>
+                                    <constraint firstItem="GLV-6N-HJk" firstAttribute="width" secondItem="zKA-3u-unc" secondAttribute="width" id="WIb-2J-4QX"/>
+                                    <constraint firstItem="GLV-6N-HJk" firstAttribute="top" secondItem="zKA-3u-unc" secondAttribute="top" id="ezR-pt-jil"/>
+                                    <constraint firstItem="GLV-6N-HJk" firstAttribute="leading" secondItem="zKA-3u-unc" secondAttribute="leading" id="ydb-xa-zxC"/>
+                                </constraints>
+                            </stackView>
+                            <stackView opaque="NO" contentMode="scaleToFill" axis="vertical" distribution="equalSpacing" spacing="15" translatesAutoresizingMaskIntoConstraints="NO" id="HYn-Mf-Pgy">
+                                <rect key="frame" x="144" y="247.5" width="160" height="73.5"/>
+                                <subviews>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO USER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jer-hf-CxB">
+                                        <rect key="frame" x="0.0" y="0.0" width="160" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO USER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="i0O-zj-bMi">
+                                        <rect key="frame" x="0.0" y="29.5" width="160" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="NO USER" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="FhP-x8-lJC">
+                                        <rect key="frame" x="0.0" y="59" width="160" height="14.5"/>
+                                        <fontDescription key="fontDescription" type="system" pointSize="12"/>
+                                        <nil key="textColor"/>
+                                        <nil key="highlightedColor"/>
+                                    </label>
+                                </subviews>
+                            </stackView>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                        <constraints>
+                            <constraint firstItem="AFH-BW-tGV" firstAttribute="top" secondItem="fdd-sx-AiY" secondAttribute="bottom" constant="75" id="4ME-8x-NBt"/>
+                            <constraint firstItem="AFH-BW-tGV" firstAttribute="centerX" secondItem="gvJ-0i-PdY" secondAttribute="centerX" id="4Ob-sY-ldh"/>
+                            <constraint firstItem="HYn-Mf-Pgy" firstAttribute="leading" secondItem="zKA-3u-unc" secondAttribute="trailing" id="E1y-Ub-A5M"/>
+                            <constraint firstItem="HYn-Mf-Pgy" firstAttribute="width" secondItem="gvJ-0i-PdY" secondAttribute="width" multiplier="0.5" id="cbw-wU-fXL"/>
+                            <constraint firstAttribute="leadingMargin" secondItem="AFH-BW-tGV" secondAttribute="leading" id="joi-Bh-NGZ"/>
+                            <constraint firstItem="AFH-BW-tGV" firstAttribute="height" secondItem="gvJ-0i-PdY" secondAttribute="height" multiplier="0.2" id="mg7-RC-W6h"/>
+                            <constraint firstItem="HYn-Mf-Pgy" firstAttribute="centerY" secondItem="gvJ-0i-PdY" secondAttribute="centerY" id="rdh-x5-qy1"/>
+                            <constraint firstItem="zKA-3u-unc" firstAttribute="centerY" secondItem="gvJ-0i-PdY" secondAttribute="centerY" id="sCR-Z3-Mgc"/>
+                            <constraint firstItem="zKA-3u-unc" firstAttribute="leading" secondItem="gvJ-0i-PdY" secondAttribute="leadingMargin" id="t6E-W0-fti"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="AFH-BW-tGV" secondAttribute="trailing" id="upf-5B-6zX"/>
+                            <constraint firstItem="zKA-3u-unc" firstAttribute="width" secondItem="gvJ-0i-PdY" secondAttribute="width" multiplier="0.4" id="wDh-Ka-l2F"/>
+                        </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="Account" image="profile" selectedImage="profile" id="CPx-xf-d5l"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="emailAddressLabel" destination="i0O-zj-bMi" id="xyH-gz-aFi"/>
                         <outlet property="loginButton" destination="Ktf-Ih-gzP" id="7vX-WE-CIt"/>
+                        <outlet property="pointsLabel" destination="FhP-x8-lJC" id="eIs-F0-KPR"/>
+                        <outlet property="userNameLabel" destination="jer-hf-CxB" id="CFj-bR-xqW"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFv-Mq-aXh" userLabel="First Responder" sceneMemberID="firstResponder"/>
             </objects>
-            <point key="canvasLocation" x="-1230" y="2560"/>
+            <point key="canvasLocation" x="-1230" y="2559.5070422535214"/>
         </scene>
     </scenes>
     <resources>
@@ -1450,6 +1520,7 @@
         <image name="SoTubeIconBottom" width="1000" height="508"/>
         <image name="SoTubeIconTop" width="1000" height="497"/>
         <image name="SoTube_Logo" width="890" height="769"/>
+        <image name="TabBarIcon_me_selected" width="164" height="158"/>
         <image name="Wishlist_selected" width="16" height="16"/>
         <image name="forward" width="1200" height="1200"/>
         <image name="play" width="256" height="256"/>
