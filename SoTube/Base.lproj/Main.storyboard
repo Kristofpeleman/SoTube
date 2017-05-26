@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vnE-1c-72W">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="vnE-1c-72W">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
@@ -123,7 +123,7 @@
                                 </constraints>
                                 <items>
                                     <navigationItem title="Search" id="fBQ-je-4H0">
-                                        <barButtonItem key="leftBarButtonItem" tag="1" title="Playing..." id="59z-5K-80b">
+                                        <barButtonItem key="leftBarButtonItem" tag="1" enabled="NO" title="Playing..." id="59z-5K-80b">
                                             <connections>
                                                 <action selector="goToMusicPlayer:" destination="uS8-Hq-Lct" id="tHm-4D-v86"/>
                                             </connections>
@@ -376,13 +376,17 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="My Songs" image="MySongs_selected" selectedImage="MySongs_selected" id="U7k-95-aK8"/>
                     <connections>
+                        <outlet property="goToMusicPlayerBarButton" destination="cFG-rw-yte" id="TuN-H2-KRs"/>
                         <outlet property="logInButton" destination="2BL-xo-b3a" id="3cL-tf-Uoe"/>
+                        <outlet property="searchBar" destination="rnf-7E-gZs" id="RL6-Im-qKk"/>
+                        <outlet property="sortingOptions" destination="Ubd-ky-pDp" id="rhS-Nk-Ndc"/>
+                        <outlet property="sortingPickerView" destination="6lY-oU-XF9" id="z7K-ay-3if"/>
                         <outlet property="tableView" destination="HOf-fO-nEH" id="mqy-HZ-dQX"/>
                         <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="dH2-8a-Myi"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="P17-DX-9cc" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="Ubd-ky-pDp"/>
+                <customObject id="Ubd-ky-pDp" customClass="SortingOptions" customModule="SoTube" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-1230" y="336.97183098591552"/>
         </scene>
@@ -686,9 +690,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="B0a-i1-Lvr">
+                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0a-i1-Lvr">
                                 <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Shopping Cart" id="iW0-mV-mDl">
                                         <barButtonItem key="backBarButtonItem" title="Back" id="Db0-s3-YCs"/>
@@ -706,14 +709,14 @@
                                 </items>
                             </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v5m-Z4-3Lt">
-                                <rect key="frame" x="16" y="85.5" width="288" height="398"/>
+                                <rect key="frame" x="16" y="69" width="288" height="370"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongCell" id="tAI-5O-pyb" customClass="SongTableViewCell" customModule="SoTube" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAI-5O-pyb" id="br8-1O-eM6">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JzE-WR-qW1">
@@ -764,14 +767,20 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lk7-H5-q5P">
-                                <rect key="frame" x="16" y="494" width="74" height="30"/>
+                                <rect key="frame" x="16" y="485" width="74" height="30"/>
                                 <state key="normal" title="Buy Songs"/>
                                 <connections>
                                     <action selector="buySongs:" destination="x9N-ly-E92" eventType="touchUpInside" id="RDq-ab-MlM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost: 0 Points" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTZ-xV-6VG">
-                                <rect key="frame" x="176" y="494" width="128" height="30"/>
+                                <rect key="frame" x="176" y="485" width="128" height="30"/>
+                                <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                                <nil key="textColor"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your points: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ted-Kd-SSL">
+                                <rect key="frame" x="16" y="454" width="160" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -779,20 +788,28 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="ted-Kd-SSL" firstAttribute="top" secondItem="v5m-Z4-3Lt" secondAttribute="bottom" constant="15" id="7iB-WJ-Hiy"/>
                             <constraint firstItem="qTZ-xV-6VG" firstAttribute="height" secondItem="lk7-H5-q5P" secondAttribute="height" id="7mI-cf-QkE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="qTZ-xV-6VG" secondAttribute="trailing" id="B8z-yw-jIp"/>
-                            <constraint firstItem="lel-A7-DWQ" firstAttribute="top" secondItem="qTZ-xV-6VG" secondAttribute="bottom" id="Che-Wx-dCh"/>
-                            <constraint firstItem="lel-A7-DWQ" firstAttribute="top" secondItem="lk7-H5-q5P" secondAttribute="bottom" id="TFe-sq-ogL"/>
-                            <constraint firstItem="v5m-Z4-3Lt" firstAttribute="centerY" secondItem="E5P-bs-iws" secondAttribute="centerY" id="g1X-ZQ-fgq"/>
+                            <constraint firstItem="ted-Kd-SSL" firstAttribute="leading" secondItem="E5P-bs-iws" secondAttribute="leadingMargin" id="E4S-cI-Hqp"/>
+                            <constraint firstItem="ted-Kd-SSL" firstAttribute="width" secondItem="E5P-bs-iws" secondAttribute="width" multiplier="0.5" id="GZm-Qo-A3S"/>
+                            <constraint firstItem="v5m-Z4-3Lt" firstAttribute="top" secondItem="B0a-i1-Lvr" secondAttribute="bottom" constant="5" id="Od3-Du-ccJ"/>
+                            <constraint firstItem="B0a-i1-Lvr" firstAttribute="top" secondItem="KiN-xf-Z5I" secondAttribute="bottom" id="XeK-Z3-U5p"/>
+                            <constraint firstItem="lk7-H5-q5P" firstAttribute="centerY" secondItem="qTZ-xV-6VG" secondAttribute="centerY" id="elL-qt-6hX"/>
                             <constraint firstAttribute="leadingMargin" secondItem="v5m-Z4-3Lt" secondAttribute="leading" id="g7I-ww-8UO"/>
-                            <constraint firstItem="v5m-Z4-3Lt" firstAttribute="height" secondItem="E5P-bs-iws" secondAttribute="height" multiplier="0.7" id="jRM-l3-XRu"/>
+                            <constraint firstItem="v5m-Z4-3Lt" firstAttribute="height" secondItem="E5P-bs-iws" secondAttribute="height" multiplier="0.65" id="jRM-l3-XRu"/>
                             <constraint firstItem="qTZ-xV-6VG" firstAttribute="width" secondItem="E5P-bs-iws" secondAttribute="width" multiplier="0.4" id="kXg-GW-UbM"/>
                             <constraint firstItem="v5m-Z4-3Lt" firstAttribute="centerX" secondItem="E5P-bs-iws" secondAttribute="centerX" id="one-3k-jFF"/>
+                            <constraint firstItem="lk7-H5-q5P" firstAttribute="top" secondItem="ted-Kd-SSL" secondAttribute="bottom" constant="10" id="q0J-vw-3cS"/>
                             <constraint firstAttribute="leadingMargin" secondItem="lk7-H5-q5P" secondAttribute="leading" id="r05-NY-ey0"/>
+                            <constraint firstItem="B0a-i1-Lvr" firstAttribute="leading" secondItem="E5P-bs-iws" secondAttribute="leading" id="rkw-Oq-dqY"/>
+                            <constraint firstAttribute="trailing" secondItem="B0a-i1-Lvr" secondAttribute="trailing" id="txH-mE-UrP"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
                     <connections>
+                        <outlet property="availablePointsLabel" destination="ted-Kd-SSL" id="Vst-lM-dTx"/>
+                        <outlet property="buySongsButton" destination="lk7-H5-q5P" id="Ftp-7d-089"/>
                         <outlet property="pointsLabel" destination="qTZ-xV-6VG" id="wtS-Uo-3xU"/>
                         <outlet property="tableView" destination="v5m-Z4-3Lt" id="Idj-Gx-z8k"/>
                     </connections>
@@ -918,13 +935,17 @@
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="rzs-mu-L2r"/>
                     <connections>
+                        <outlet property="goToMusicPlayerButton" destination="J3q-kH-lnR" id="e4l-ZV-Dqw"/>
                         <outlet property="logInButton" destination="r1Z-SV-ysc" id="ned-Of-Fp9"/>
+                        <outlet property="searchBar" destination="PRR-QU-8eX" id="szn-SS-JV9"/>
+                        <outlet property="sortingOptions" destination="uLP-1I-xQp" id="uch-wI-nM6"/>
+                        <outlet property="sortingPickerView" destination="t6U-LK-0Cu" id="fWL-au-f0M"/>
                         <outlet property="tableView" destination="QGx-6D-bzq" id="lvg-EP-y0k"/>
                         <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="bK6-a7-b2h"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="eaz-Ou-tn9" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="uLP-1I-xQp"/>
+                <customObject id="uLP-1I-xQp" customClass="SortingOptions" customModule="SoTube" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-1230" y="1089.0845070422536"/>
         </scene>
@@ -1410,13 +1431,17 @@
                     </view>
                     <tabBarItem key="tabBarItem" title="Wishlist" image="Wishlist_selected" selectedImage="Wishlist_selected" id="vs5-j2-JdJ"/>
                     <connections>
+                        <outlet property="goToMusicPlayerButton" destination="eeq-vX-QEY" id="Vea-A6-wtS"/>
                         <outlet property="logInButton" destination="isI-v4-E5s" id="xv5-pb-3Em"/>
+                        <outlet property="searchBar" destination="X2e-ct-uIF" id="zmM-bF-ZQD"/>
+                        <outlet property="sortingOptions" destination="7FX-z2-xX0" id="l7O-qH-cDW"/>
+                        <outlet property="sortingPickerView" destination="Wug-yA-JbP" id="YK1-PF-qh7"/>
                         <outlet property="tableView" destination="sMQ-IR-ybh" id="Eim-VS-hq1"/>
                         <segue destination="tMx-VT-Gxf" kind="show" identifier="musicPlayerSegue" id="bey-pH-39d"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="7D2-af-O0W" userLabel="First Responder" sceneMemberID="firstResponder"/>
-                <customObject id="7FX-z2-xX0"/>
+                <customObject id="7FX-z2-xX0" customClass="SortingOptions" customModule="SoTube" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-1230" y="1824.2957746478874"/>
         </scene>
@@ -1437,9 +1462,9 @@
                                 <autoresizingMask key="autoresizingMask" widthSizable="YES" flexibleMaxY="YES"/>
                                 <items>
                                     <navigationItem title="Account" id="4PV-Ww-stf">
-                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="7LF-QF-7DO">
+                                        <barButtonItem key="leftBarButtonItem" title="Playing..." id="bN2-PS-WGg">
                                             <connections>
-                                                <action selector="goToMusicPlayer:" destination="cZS-6q-uLo" id="EvG-m1-9Ig"/>
+                                                <action selector="goToMusicPlayer:" destination="cZS-6q-uLo" id="pKv-U9-D6L"/>
                                             </connections>
                                         </barButtonItem>
                                         <barButtonItem key="rightBarButtonItem" title="Log in" id="Ktf-Ih-gzP">
@@ -1504,13 +1529,26 @@
                                     </label>
                                 </subviews>
                             </stackView>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="jl4-I9-4qc">
+                                <rect key="frame" x="80" y="346" width="160" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="jl4-I9-4qc" secondAttribute="height" multiplier="4.2:1" id="A14-BH-bwr"/>
+                                </constraints>
+                                <state key="normal" title="Buy 20 Points"/>
+                                <connections>
+                                    <action selector="buyPoints:" destination="cZS-6q-uLo" eventType="touchUpInside" id="bv5-NY-8T1"/>
+                                </connections>
+                            </button>
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="AFH-BW-tGV" firstAttribute="top" secondItem="fdd-sx-AiY" secondAttribute="bottom" constant="75" id="4ME-8x-NBt"/>
                             <constraint firstItem="AFH-BW-tGV" firstAttribute="centerX" secondItem="gvJ-0i-PdY" secondAttribute="centerX" id="4Ob-sY-ldh"/>
+                            <constraint firstItem="jl4-I9-4qc" firstAttribute="width" secondItem="gvJ-0i-PdY" secondAttribute="width" multiplier="1:2" id="8Aw-1V-VYz"/>
+                            <constraint firstItem="jl4-I9-4qc" firstAttribute="top" secondItem="HYn-Mf-Pgy" secondAttribute="bottom" constant="25" id="Ddm-St-MJU"/>
                             <constraint firstItem="HYn-Mf-Pgy" firstAttribute="leading" secondItem="zKA-3u-unc" secondAttribute="trailing" id="E1y-Ub-A5M"/>
                             <constraint firstItem="HYn-Mf-Pgy" firstAttribute="width" secondItem="gvJ-0i-PdY" secondAttribute="width" multiplier="0.5" id="cbw-wU-fXL"/>
+                            <constraint firstItem="jl4-I9-4qc" firstAttribute="centerX" secondItem="gvJ-0i-PdY" secondAttribute="centerX" id="iBC-w3-n5h"/>
                             <constraint firstAttribute="leadingMargin" secondItem="AFH-BW-tGV" secondAttribute="leading" id="joi-Bh-NGZ"/>
                             <constraint firstItem="AFH-BW-tGV" firstAttribute="height" secondItem="gvJ-0i-PdY" secondAttribute="height" multiplier="0.2" id="mg7-RC-W6h"/>
                             <constraint firstItem="HYn-Mf-Pgy" firstAttribute="centerY" secondItem="gvJ-0i-PdY" secondAttribute="centerY" id="rdh-x5-qy1"/>
@@ -1523,7 +1561,9 @@
                     <tabBarItem key="tabBarItem" title="Account" image="profile" selectedImage="profile" id="CPx-xf-d5l"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="buyPointsButton" destination="jl4-I9-4qc" id="5Tn-Ge-FMF"/>
                         <outlet property="emailAddressLabel" destination="i0O-zj-bMi" id="xyH-gz-aFi"/>
+                        <outlet property="goToMusicPlayerButton" destination="bN2-PS-WGg" id="GKu-Ne-hdw"/>
                         <outlet property="loginButton" destination="Ktf-Ih-gzP" id="7vX-WE-CIt"/>
                         <outlet property="pointsLabel" destination="FhP-x8-lJC" id="eIs-F0-KPR"/>
                         <outlet property="userNameLabel" destination="jer-hf-CxB" id="CFj-bR-xqW"/>
@@ -1550,7 +1590,7 @@
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ViR-ba-d3c"/>
         <segue reference="Uvf-Jz-1dC"/>
+        <segue reference="ViR-ba-d3c"/>
     </inferredMetricsTieBreakers>
 </document>
