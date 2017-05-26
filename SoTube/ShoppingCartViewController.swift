@@ -23,6 +23,9 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     @IBOutlet weak var tableView: UITableView!
     @IBOutlet weak var pointsLabel: UILabel!
     
+    @IBOutlet weak var availablePointsLabel: UILabel!
+    
+    @IBOutlet weak var buySongsButton: UIButton!
     
     //MARK: - UIViewController Functions
     
@@ -48,7 +51,15 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         self.tableView.reloadData()
         
         // Update the pointsLabel
-        self.pointsLabel.text = "Cost: \(calculatePoints()) Points"
+        updatePointLabels()
+        
+        if currentUser == nil {
+            buySongsButton.isEnabled = false
+            self.availablePointsLabel.text = "0"
+        }
+        else {
+            buySongsButton.isEnabled = true
+        }
     }
     
     
@@ -96,7 +107,6 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                 
                 // Show/Present our alert
                 present(alertController, animated: true, completion: nil)
-                
             }
             
             // If our new points-total is bigger than 0
@@ -112,7 +122,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                 // Make a reference from our firebase's currentUser's points-total
                 let pointsReference = userReference?.child("points")
                 // Change the value of where our reference points in our firebase
-                pointsReference?.setValue(points - calculatePoints())
+                pointsReference?.setValue(points)
                 
                 // Adapt "mySongs"
                 
@@ -151,6 +161,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                 self.dismiss(animated: true, completion: nil)
             }
         }
+        updatePointLabels()
     }
     
     
@@ -183,6 +194,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
                                             // Go back to the ViewController you were in before you came to this one
                                             self.dismiss(animated: true, completion: nil)
         })
+        
         // Create a UIAlertAction that does nothing but make the alert go away
         let cancelAction = UIAlertAction(title: "Cancel",
                                          style: .cancel,
@@ -195,7 +207,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         // Show/Present our alert
         present(alertController, animated: true, completion: nil)
         
-        
+        updatePointLabels()
     }
     
     
@@ -237,7 +249,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
             sleep(2)
             self.currentUser?.shoppingCart = Shared.current.user?.shoppingCart
             self.tableView.reloadData()
-            
+            updatePointLabels()
         }
     }
     
@@ -260,7 +272,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         
         // ALTERNATIVE for our "if"-statement in case songs' cost aren't always 2 in the future
         /*
-        if let _ = self.currentUser?.shoppingCart {
+        if let shoppingCart = self.currentUser?.shoppingCart {
             var total = 0
             for song in shoppingCart {
                 total += song.cost
@@ -274,7 +286,7 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
     }
     
     
-    // Funciton returning a dictionary of [String : Any], using a parameter of type "Song"
+    // Function returning a dictionary of [String : Any], using a parameter of type "Song"
     func returnDictionaryFor(_ song: Song) -> [String : Any] {
         
         // "String" = key; "Any" = value
@@ -291,5 +303,14 @@ class ShoppingCartViewController: UIViewController, UITableViewDelegate, UITable
         
         return dict
     }
+    
+    
+    func updatePointLabels(){
+        if currentUser != nil {
+            self.pointsLabel.text = "Cost: \(calculatePoints()) Points"
+            self.availablePointsLabel.text = "Your points: \(currentUser!.points)"
+        }
+    }
+    
     
 }
