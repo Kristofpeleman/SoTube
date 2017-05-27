@@ -724,22 +724,22 @@
                                 </connections>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="Ay1-XV-1Ge">
-                                <rect key="frame" x="120.5" y="474" width="79" height="30"/>
+                                <rect key="frame" x="120.5" y="474" width="79" height="36"/>
                                 <state key="normal" title="Repeat: Off"/>
                                 <connections>
                                     <action selector="repeatSong:" destination="tMx-VT-Gxf" eventType="touchUpInside" id="V8V-TN-RR3"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="WNM-Ca-Iur">
-                                <rect key="frame" x="24" y="474" width="16" height="30"/>
-                                <state key="normal" image="MySongs"/>
+                                <rect key="frame" x="24" y="474" width="36" height="36"/>
+                                <state key="normal" image="my_songs"/>
                                 <connections>
                                     <action selector="setSongAsFavorite:" destination="tMx-VT-Gxf" eventType="touchUpInside" id="pbw-aL-Vvt"/>
                                 </connections>
                             </button>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SAy-8Q-GnH">
-                                <rect key="frame" x="280" y="474" width="16" height="30"/>
-                                <state key="normal" image="Wishlist_selected">
+                                <rect key="frame" x="264" y="474" width="32" height="36"/>
+                                <state key="normal" image="TabBarIcon_wishlist_testnr1">
                                     <color key="titleColor" red="0.043511681259999997" green="0.4973973632" blue="1" alpha="1" colorSpace="custom" customColorSpace="sRGB"/>
                                 </state>
                                 <connections>
@@ -1811,7 +1811,7 @@
                             <constraint firstItem="at0-CC-3xd" firstAttribute="height" secondItem="KT0-o7-5dD" secondAttribute="height" id="wqm-zH-Sn7"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Wishlist" image="wish_list" selectedImage="wish_list" id="vs5-j2-JdJ"/>
+                    <tabBarItem key="tabBarItem" title="Wishlist" image="TabBarIcon_wishlist_testnr1" selectedImage="TabBarIcon_wishlist_testnr1" id="vs5-j2-JdJ"/>
                     <connections>
                         <outlet property="goToMusicPlayerButton" destination="eeq-vX-QEY" id="Vea-A6-wtS"/>
                         <outlet property="logInButton" destination="isI-v4-E5s" id="xv5-pb-3Em"/>
@@ -1993,13 +1993,12 @@
         </scene>
     </scenes>
     <resources>
-        <image name="MySongs" width="16" height="16"/>
         <image name="SoTubeIconBottom" width="1000" height="508"/>
         <image name="SoTubeIconTop" width="1000" height="497"/>
         <image name="SoTube_Logo" width="890" height="769"/>
         <image name="TabBarIcon_me_selected" width="164" height="158"/>
         <image name="TabBarIcon_points2_selected" width="51" height="53"/>
-        <image name="Wishlist_selected" width="16" height="16"/>
+        <image name="TabBarIcon_wishlist_testnr1" width="32" height="33"/>
         <image name="all_songs" width="34" height="36"/>
         <image name="background_black_white" width="640" height="640"/>
         <image name="forward" width="1200" height="1200"/>
@@ -2008,11 +2007,10 @@
         <image name="profile" width="36" height="35"/>
         <image name="rewind" width="200" height="200"/>
         <image name="shopping_cart" width="512" height="512"/>
-        <image name="wish_list" width="37" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vHY-iE-ELE"/>
-        <segue reference="tpj-gN-ERD"/>
+        <segue reference="bey-pH-39d"/>
         <segue reference="j1g-u1-zEs"/>
+        <segue reference="tpj-gN-ERD"/>
     </inferredMetricsTieBreakers>
 </document>
