@@ -198,13 +198,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     }
     
     
-    @IBAction func goToShoppingCart(_ sender: UIButton) {
-        if let _ = shared.user {
-            
-        }
-    }
-    
-    
     
     // MARK: - Activity Indicator
     
