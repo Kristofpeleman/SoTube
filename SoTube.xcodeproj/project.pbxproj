@@ -8,7 +8,7 @@
 
 /* Begin PBXBuildFile section */
 		00489DC81ED8ADCD00AC32B2 /* AfterLaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00489DC71ED8ADCD00AC32B2 /* AfterLaunchScreenViewController.swift */; };
-		00489DCA1ED8B6FF00AC32B2 /* SoTubeLogoVidFade.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 00489DC91ED8B6FF00AC32B2 /* SoTubeLogoVidFade.mp4 */; };
+		00D14E891ED9A5B4006D5475 /* SoTubeLogoVidFade.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 00D14E881ED9A5B4006D5475 /* SoTubeLogoVidFade.mp4 */; };
 		2F2FD28B1EC1E0BD00628995 /* AllSongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2FD28A1EC1E0BD00628995 /* AllSongsViewController.swift */; };
 		2F2FD28F1EC1E65200628995 /* MySongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2FD28E1EC1E65200628995 /* MySongsViewController.swift */; };
 		2F2FD2911EC1E67500628995 /* FavoriteSongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2FD2901EC1E67500628995 /* FavoriteSongsViewController.swift */; };
@@ -45,7 +45,7 @@
 
 /* Begin PBXFileReference section */
 		00489DC71ED8ADCD00AC32B2 /* AfterLaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterLaunchScreenViewController.swift; sourceTree = "<group>"; };
-		00489DC91ED8B6FF00AC32B2 /* SoTubeLogoVidFade.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SoTubeLogoVidFade.mp4; sourceTree = "<group>"; };
+		00D14E881ED9A5B4006D5475 /* SoTubeLogoVidFade.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SoTubeLogoVidFade.mp4; sourceTree = "<group>"; };
 		0ABDEAD415BACF5138757979 /* Pods-SoTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.debug.xcconfig"; sourceTree = "<group>"; };
 		2F2FD28A1EC1E0BD00628995 /* AllSongsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllSongsViewController.swift; sourceTree = "<group>"; };
 		2F2FD28E1EC1E65200628995 /* MySongsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySongsViewController.swift; sourceTree = "<group>"; };
@@ -186,7 +186,7 @@
 				6D24D3AC1ECB8B350087024D /* BridgeViewController.h */,
 				6D24D3AD1ECB8B350087024D /* BridgeViewController.m */,
 				6D24D3AB1ECB8B350087024D /* SoTube-Bridging-Header.h */,
-				00489DC91ED8B6FF00AC32B2 /* SoTubeLogoVidFade.mp4 */,
+				00D14E881ED9A5B4006D5475 /* SoTubeLogoVidFade.mp4 */,
 			);
 			path = SoTube;
 			sourceTree = "<group>";
@@ -279,8 +279,8 @@
 			files = (
 				2F91E9421EC0571E004A2E99 /* LaunchScreen.storyboard in Resources */,
 				2FE813BD1EC450FC00F418E7 /* GoogleService-Info.plist in Resources */,
-				00489DCA1ED8B6FF00AC32B2 /* SoTubeLogoVidFade.mp4 in Resources */,
 				2F91E93F1EC0571E004A2E99 /* Assets.xcassets in Resources */,
+				00D14E891ED9A5B4006D5475 /* SoTubeLogoVidFade.mp4 in Resources */,
 				2F91E93D1EC0571E004A2E99 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
