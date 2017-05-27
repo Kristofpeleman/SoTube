@@ -835,30 +835,40 @@
                                 <view key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" id="YLY-oV-Vev">
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+                                    <subviews>
+                                        <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0a-i1-Lvr">
+                                            <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
+                                            <constraints>
+                                                <constraint firstAttribute="height" constant="55" id="VXa-c4-O5a"/>
+                                            </constraints>
+                                            <items>
+                                                <navigationItem title="Shopping Cart" id="iW0-mV-mDl">
+                                                    <barButtonItem key="backBarButtonItem" title="Back" id="Db0-s3-YCs"/>
+                                                    <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="aNs-hN-vVi">
+                                                        <connections>
+                                                            <action selector="cancel:" destination="x9N-ly-E92" id="MnW-ha-Ox0"/>
+                                                        </connections>
+                                                    </barButtonItem>
+                                                    <barButtonItem key="rightBarButtonItem" systemItem="trash" id="Mi7-b6-eTr">
+                                                        <connections>
+                                                            <action selector="emptyShoppingCart:" destination="x9N-ly-E92" id="s5b-tJ-NmZ"/>
+                                                        </connections>
+                                                    </barButtonItem>
+                                                </navigationItem>
+                                            </items>
+                                        </navigationBar>
+                                    </subviews>
+                                    <constraints>
+                                        <constraint firstItem="B0a-i1-Lvr" firstAttribute="leading" secondItem="YLY-oV-Vev" secondAttribute="leading" id="IvR-wN-Cl3"/>
+                                        <constraint firstItem="B0a-i1-Lvr" firstAttribute="top" secondItem="YLY-oV-Vev" secondAttribute="top" id="Ysd-dy-a0Z"/>
+                                        <constraint firstAttribute="trailing" secondItem="B0a-i1-Lvr" secondAttribute="trailing" id="qhb-MX-tNI"/>
+                                    </constraints>
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
-                            <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="B0a-i1-Lvr">
-                                <rect key="frame" x="0.0" y="20" width="320" height="44"/>
-                                <items>
-                                    <navigationItem title="Shopping Cart" id="iW0-mV-mDl">
-                                        <barButtonItem key="backBarButtonItem" title="Back" id="Db0-s3-YCs"/>
-                                        <barButtonItem key="leftBarButtonItem" systemItem="cancel" id="aNs-hN-vVi">
-                                            <connections>
-                                                <action selector="cancel:" destination="x9N-ly-E92" id="MnW-ha-Ox0"/>
-                                            </connections>
-                                        </barButtonItem>
-                                        <barButtonItem key="rightBarButtonItem" systemItem="trash" id="Mi7-b6-eTr">
-                                            <connections>
-                                                <action selector="emptyShoppingCart:" destination="x9N-ly-E92" id="s5b-tJ-NmZ"/>
-                                            </connections>
-                                        </barButtonItem>
-                                    </navigationItem>
-                                </items>
-                            </navigationBar>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v5m-Z4-3Lt">
-                                <rect key="frame" x="16" y="69" width="288" height="370"/>
-                                <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <rect key="frame" x="16" y="70" width="288" height="370"/>
+                                <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="SongCell" id="tAI-5O-pyb" customClass="SongTableViewCell" customModule="SoTube" customModuleProvider="target">
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
@@ -940,20 +950,20 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lk7-H5-q5P">
-                                <rect key="frame" x="16" y="485" width="74" height="30"/>
+                                <rect key="frame" x="16" y="486" width="74" height="30"/>
                                 <state key="normal" title="Buy Songs"/>
                                 <connections>
                                     <action selector="buySongs:" destination="x9N-ly-E92" eventType="touchUpInside" id="RDq-ab-MlM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost: 0 Points" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTZ-xV-6VG">
-                                <rect key="frame" x="176" y="485" width="128" height="30"/>
+                                <rect key="frame" x="176" y="486" width="128" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your points: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ted-Kd-SSL">
-                                <rect key="frame" x="16" y="454" width="160" height="21"/>
+                                <rect key="frame" x="16" y="455" width="160" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -961,6 +971,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
+                            <constraint firstItem="v5m-Z4-3Lt" firstAttribute="top" secondItem="B0a-i1-Lvr" secondAttribute="bottom" constant="15" id="1Er-Pk-6TY"/>
                             <constraint firstItem="lYy-us-Azo" firstAttribute="height" secondItem="E5P-bs-iws" secondAttribute="height" id="4bt-Kw-znl"/>
                             <constraint firstItem="lYy-us-Azo" firstAttribute="centerY" secondItem="E5P-bs-iws" secondAttribute="centerY" id="5jg-hY-KSn"/>
                             <constraint firstItem="ted-Kd-SSL" firstAttribute="top" secondItem="v5m-Z4-3Lt" secondAttribute="bottom" constant="15" id="7iB-WJ-Hiy"/>
@@ -970,9 +981,7 @@
                             <constraint firstItem="ted-Kd-SSL" firstAttribute="leading" secondItem="E5P-bs-iws" secondAttribute="leadingMargin" id="E4S-cI-Hqp"/>
                             <constraint firstItem="ted-Kd-SSL" firstAttribute="width" secondItem="E5P-bs-iws" secondAttribute="width" multiplier="0.5" id="GZm-Qo-A3S"/>
                             <constraint firstItem="lYy-us-Azo" firstAttribute="width" secondItem="E5P-bs-iws" secondAttribute="width" id="KNB-yG-Pwg"/>
-                            <constraint firstItem="v5m-Z4-3Lt" firstAttribute="top" secondItem="B0a-i1-Lvr" secondAttribute="bottom" constant="5" id="Od3-Du-ccJ"/>
                             <constraint firstItem="OK4-f6-kE2" firstAttribute="centerY" secondItem="E5P-bs-iws" secondAttribute="centerY" id="Q5v-nk-Gwu"/>
-                            <constraint firstItem="B0a-i1-Lvr" firstAttribute="top" secondItem="KiN-xf-Z5I" secondAttribute="bottom" id="XeK-Z3-U5p"/>
                             <constraint firstItem="lk7-H5-q5P" firstAttribute="centerY" secondItem="qTZ-xV-6VG" secondAttribute="centerY" id="elL-qt-6hX"/>
                             <constraint firstAttribute="leadingMargin" secondItem="v5m-Z4-3Lt" secondAttribute="leading" id="g7I-ww-8UO"/>
                             <constraint firstItem="v5m-Z4-3Lt" firstAttribute="height" secondItem="E5P-bs-iws" secondAttribute="height" multiplier="0.65" id="jRM-l3-XRu"/>
@@ -982,9 +991,7 @@
                             <constraint firstItem="v5m-Z4-3Lt" firstAttribute="centerX" secondItem="E5P-bs-iws" secondAttribute="centerX" id="one-3k-jFF"/>
                             <constraint firstItem="lk7-H5-q5P" firstAttribute="top" secondItem="ted-Kd-SSL" secondAttribute="bottom" constant="10" id="q0J-vw-3cS"/>
                             <constraint firstAttribute="leadingMargin" secondItem="lk7-H5-q5P" secondAttribute="leading" id="r05-NY-ey0"/>
-                            <constraint firstItem="B0a-i1-Lvr" firstAttribute="leading" secondItem="E5P-bs-iws" secondAttribute="leading" id="rkw-Oq-dqY"/>
                             <constraint firstItem="OK4-f6-kE2" firstAttribute="height" secondItem="E5P-bs-iws" secondAttribute="height" id="s7v-od-qAm"/>
-                            <constraint firstAttribute="trailing" secondItem="B0a-i1-Lvr" secondAttribute="trailing" id="txH-mE-UrP"/>
                         </constraints>
                     </view>
                     <toolbarItems/>
