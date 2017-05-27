@@ -19,7 +19,7 @@ class AfterLaunchScreenViewController: UIViewController {
         
         loadVideo()
 
-        self.perform(#selector(self.performSegueToStart), with: nil, afterDelay: 8)
+        self.perform(#selector(self.performSegueToStart), with: nil, afterDelay: 5)
         // Do any additional setup after loading the view.
     }
 
