@@ -70,6 +70,25 @@
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="bAz-rO-cIW">
+                                <rect key="frame" x="249" y="99" width="55" height="38.5"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="bAz-rO-cIW" secondAttribute="height" multiplier="1:0.7" id="itT-o8-BhL"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kik-JP-ME9">
+                                <rect key="frame" x="265.5" y="111" width="22" height="15.5"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cq4-f8-6on">
+                                <rect key="frame" x="249" y="99" width="55" height="38.5"/>
+                                <connections>
+                                    <action selector="goToShoppingCart:" destination="uS8-Hq-Lct" eventType="touchUpInside" id="28N-a4-dRq"/>
+                                    <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="7yt-ZZ-pH2"/>
+                                </connections>
+                            </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5cm-du-jW8">
                                 <rect key="frame" x="16" y="142.5" width="288" height="366.5"/>
                                 <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
@@ -78,7 +97,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fN2-l4-Q9r" id="V7S-lR-i2x">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="Fnr-YE-ZG7">
@@ -197,14 +216,22 @@
                         <constraints>
                             <constraint firstItem="id9-Xv-COs" firstAttribute="top" secondItem="pj7-ZH-o6R" secondAttribute="top" id="0EW-vB-GUW"/>
                             <constraint firstAttribute="trailing" secondItem="id9-Xv-COs" secondAttribute="trailing" id="0RR-Nb-w3R"/>
+                            <constraint firstItem="cq4-f8-6on" firstAttribute="centerX" secondItem="bAz-rO-cIW" secondAttribute="centerX" id="15Q-4W-0R1"/>
                             <constraint firstItem="D3Z-jY-RCg" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leading" id="3uh-U2-TOn"/>
+                            <constraint firstItem="cq4-f8-6on" firstAttribute="height" secondItem="bAz-rO-cIW" secondAttribute="height" id="684-yf-A13"/>
+                            <constraint firstItem="cq4-f8-6on" firstAttribute="centerY" secondItem="bAz-rO-cIW" secondAttribute="centerY" id="6K1-II-BZN"/>
                             <constraint firstItem="6AI-ei-ZiZ" firstAttribute="height" secondItem="pj7-ZH-o6R" secondAttribute="height" id="6ve-7Z-gzL"/>
                             <constraint firstItem="8tG-DK-Rpe" firstAttribute="leading" secondItem="lMR-6X-fhy" secondAttribute="trailing" constant="5" id="7SJ-s0-eVc"/>
+                            <constraint firstItem="Kik-JP-ME9" firstAttribute="height" secondItem="bAz-rO-cIW" secondAttribute="height" multiplier="0.4" id="8z7-ZV-hwQ"/>
+                            <constraint firstAttribute="trailingMargin" secondItem="bAz-rO-cIW" secondAttribute="trailing" id="9Pa-iw-jun"/>
                             <constraint firstItem="lMR-6X-fhy" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leadingMargin" id="9vB-L5-cFF"/>
                             <constraint firstItem="6AI-ei-ZiZ" firstAttribute="width" secondItem="pj7-ZH-o6R" secondAttribute="width" id="AS8-m8-ECn"/>
+                            <constraint firstItem="Kik-JP-ME9" firstAttribute="width" secondItem="bAz-rO-cIW" secondAttribute="width" multiplier="0.4" id="Bzx-Un-whm"/>
+                            <constraint firstItem="cq4-f8-6on" firstAttribute="width" secondItem="bAz-rO-cIW" secondAttribute="width" id="FaG-4G-NPG"/>
                             <constraint firstItem="8tG-DK-Rpe" firstAttribute="width" secondItem="pj7-ZH-o6R" secondAttribute="width" multiplier="1:3.6" id="IhZ-04-7Rp"/>
                             <constraint firstItem="6AI-ei-ZiZ" firstAttribute="centerX" secondItem="pj7-ZH-o6R" secondAttribute="centerX" id="Jp7-zl-Dft"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5cm-du-jW8" secondAttribute="trailing" id="QoO-uy-Tsy"/>
+                            <constraint firstItem="Kik-JP-ME9" firstAttribute="centerX" secondItem="bAz-rO-cIW" secondAttribute="centerX" id="TDz-CU-urH"/>
                             <constraint firstItem="id9-Xv-COs" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leading" id="ViJ-vK-mh4"/>
                             <constraint firstItem="yTh-NN-ReA" firstAttribute="width" secondItem="pj7-ZH-o6R" secondAttribute="width" id="ZiE-fS-oFq"/>
                             <constraint firstAttribute="trailing" secondItem="D3Z-jY-RCg" secondAttribute="trailing" id="aeX-yB-Ik4"/>
@@ -212,12 +239,15 @@
                             <constraint firstItem="D3Z-jY-RCg" firstAttribute="top" secondItem="id9-Xv-COs" secondAttribute="bottom" id="dSk-dI-SWV"/>
                             <constraint firstItem="6AI-ei-ZiZ" firstAttribute="centerY" secondItem="pj7-ZH-o6R" secondAttribute="centerY" id="fnM-kW-Yl3"/>
                             <constraint firstItem="5cm-du-jW8" firstAttribute="top" secondItem="8tG-DK-Rpe" secondAttribute="bottom" constant="5" id="jhT-wm-iKy"/>
+                            <constraint firstItem="bAz-rO-cIW" firstAttribute="bottom" secondItem="8tG-DK-Rpe" secondAttribute="bottom" id="lVy-cw-LGn"/>
+                            <constraint firstItem="Kik-JP-ME9" firstAttribute="centerY" secondItem="bAz-rO-cIW" secondAttribute="centerY" id="nIe-TW-Ass"/>
                             <constraint firstItem="8tG-DK-Rpe" firstAttribute="top" secondItem="D3Z-jY-RCg" secondAttribute="bottom" id="nPK-Su-J8a"/>
                             <constraint firstItem="lMR-6X-fhy" firstAttribute="centerY" secondItem="8tG-DK-Rpe" secondAttribute="centerY" id="pDy-lT-Xp5"/>
                             <constraint firstItem="yTh-NN-ReA" firstAttribute="height" secondItem="pj7-ZH-o6R" secondAttribute="height" id="vHR-6c-wdd"/>
                             <constraint firstItem="yTh-NN-ReA" firstAttribute="centerX" secondItem="pj7-ZH-o6R" secondAttribute="centerX" id="vWp-ND-lAk"/>
                             <constraint firstItem="yTh-NN-ReA" firstAttribute="centerY" secondItem="pj7-ZH-o6R" secondAttribute="centerY" id="yFK-3J-bex"/>
                             <constraint firstItem="TY1-4m-eLT" firstAttribute="top" secondItem="5cm-du-jW8" secondAttribute="bottom" constant="10" id="ykj-oN-JwI"/>
+                            <constraint firstItem="bAz-rO-cIW" firstAttribute="top" secondItem="8tG-DK-Rpe" secondAttribute="top" id="zBh-gw-dL8"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="All Songs" image="all_songs" selectedImage="all_songs" id="wgn-mS-7Z6"/>
@@ -225,6 +255,7 @@
                         <outlet property="goToMusicPlayerButton" destination="59z-5K-80b" id="rW3-vG-G7b"/>
                         <outlet property="logInButton" destination="lw8-bn-E9Q" id="ezC-iT-Hkp"/>
                         <outlet property="searchBar" destination="D3Z-jY-RCg" id="i7w-PN-PFW"/>
+                        <outlet property="shoppingCartAmountLabel" destination="Kik-JP-ME9" id="Gsi-Qc-ZBR"/>
                         <outlet property="songVCBackGroundImage" destination="6AI-ei-ZiZ" id="CoI-XF-1pR"/>
                         <outlet property="sortingOptions" destination="HZt-CG-Cfh" id="uVD-eT-FEh"/>
                         <outlet property="sortingPickerView" destination="8tG-DK-Rpe" id="vPF-Tf-1KF"/>
@@ -1859,10 +1890,12 @@
         <image name="play" width="256" height="256"/>
         <image name="profile" width="36" height="35"/>
         <image name="rewind" width="200" height="200"/>
+        <image name="shopping_cart" width="512" height="512"/>
         <image name="wish_list" width="37" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="bey-pH-39d"/>
-        <segue reference="Def-eb-XHu"/>
+        <segue reference="tpj-gN-ERD"/>
+        <segue reference="vHY-iE-ELE"/>
+        <segue reference="mvg-35-U1u"/>
     </inferredMetricsTieBreakers>
 </document>

@@ -211,6 +211,7 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                                             
                                             // Remove currentUser.shoppingCart/give it value "nil"
                                             self.currentUser?.shoppingCart = nil
+                                            Shared.current.user?.shoppingCart = nil
             
                                             // Create a reference tou the shoppingCart in our firebase
                                             let userShoppingCartReference = self.userReference?.child("shoppingCart")

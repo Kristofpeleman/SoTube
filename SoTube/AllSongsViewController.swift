@@ -104,6 +104,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     @IBOutlet weak var goToMusicPlayerButton: UIBarButtonItem!
     
+    @IBOutlet weak var shoppingCartAmountLabel: UILabel!
     
     
     // MARK: - Standard Functions
@@ -151,9 +152,17 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         
         self.songVCBackGroundImage.image = UIImage(named: self.shared.backGroundImage)
         
-        if let _ = shared.user {
+        if let user = shared.user {
             
             logInButton.title = "Log out"
+            
+            if let amountOfItemsInCart = user.shoppingCart?.count {
+                shoppingCartAmountLabel.backgroundColor = UIColor.red
+                shoppingCartAmountLabel.text = "\(amountOfItemsInCart)"
+            } else {
+                shoppingCartAmountLabel.backgroundColor = nil
+                shoppingCartAmountLabel.text = ""
+            }
             
             print(self.shared.user?.fireBaseID ?? "NO FIREBASE ID")
             print(self.shared.user?.userName ?? "NO USERNAME")
@@ -189,6 +198,15 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     }
     
     
+    @IBAction func goToShoppingCart(_ sender: UIButton) {
+        if let _ = shared.user {
+            
+        }
+    }
+    
+    
+    
+    // MARK: - Activity Indicator
     
     func stopIndicator(){
         activityIndicator.stopAnimating()
@@ -443,6 +461,18 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 destinationVC.delegate = self
             }
         }
+        
+        if segue.identifier == "shoppingCartSegue" {
+            if let destinationVC = segue.destination as? ShoppingCartViewController {
+                
+                destinationVC.auth = self.auth
+                destinationVC.session = self.session
+                destinationVC.currentUser = self.shared.user
+                
+                let usersReference = rootReference?.child("Users")
+                destinationVC.userReference = usersReference?.child(self.shared.user!.fireBaseID)
+            }
+        }
     }
     
     // An override function when performing a segue
@@ -485,6 +515,12 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 return false
                 
             } else {return true}
+            
+        case "shoppingCartSegue":
+            
+            if let _ = shared.user {
+                return true
+            } else {return false}
             
         // If the identifier's value isn't any of the above: perform Segue
         default: return true
