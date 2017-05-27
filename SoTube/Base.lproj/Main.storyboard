@@ -59,7 +59,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="6AI-ei-ZiZ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="6AI-ei-ZiZ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTh-NN-ReA">
@@ -310,7 +310,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="NxR-G9-sq9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="NxR-G9-sq9">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44S-ky-1cZ">
@@ -751,7 +751,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="OK4-f6-kE2">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="OK4-f6-kE2">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="lYy-us-Azo">
@@ -911,7 +911,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-Wa-Zx7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-Wa-Zx7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1zS-9z-DKq">
@@ -1416,7 +1416,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="k2t-KH-8nu">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="k2t-KH-8nu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="at0-CC-3xd">
@@ -1578,7 +1578,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_orange" translatesAutoresizingMaskIntoConstraints="NO" id="Sqn-Cm-6hK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="Sqn-Cm-6hK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hot-Xq-Kax">
@@ -1674,7 +1674,7 @@
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="dfR-WY-78I">
                                 <rect key="frame" x="0.0" y="394" width="320" height="114"/>
                                 <connections>
-                                    <outlet property="dataSource" destination="cZS-6q-uLo" id="XEV-uU-mtW"/>
+                                    <outlet property="dataSource" destination="Tak-Xu-hk4" id="1br-KQ-Cr1"/>
                                     <outlet property="delegate" destination="cZS-6q-uLo" id="fjN-6m-Wc9"/>
                                 </connections>
                             </pickerView>
@@ -1711,6 +1711,7 @@
                     <tabBarItem key="tabBarItem" title="Account" image="profile" selectedImage="profile" id="CPx-xf-d5l"/>
                     <simulatedTabBarMetrics key="simulatedBottomBarMetrics"/>
                     <connections>
+                        <outlet property="backGroundPickerDataSource" destination="Tak-Xu-hk4" id="y5u-Jq-GL1"/>
                         <outlet property="backGroundPickerView" destination="dfR-WY-78I" id="3Zt-5v-eiE"/>
                         <outlet property="buyPointsButton" destination="jl4-I9-4qc" id="5Tn-Ge-FMF"/>
                         <outlet property="emailAddressLabel" destination="i0O-zj-bMi" id="xyH-gz-aFi"/>
@@ -1723,6 +1724,7 @@
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="NFv-Mq-aXh" userLabel="First Responder" sceneMemberID="firstResponder"/>
+                <customObject id="Tak-Xu-hk4" customClass="BackGroundColors" customModule="SoTube" customModuleProvider="target"/>
             </objects>
             <point key="canvasLocation" x="-1230" y="2559.5070422535214"/>
         </scene>
@@ -1736,14 +1738,14 @@
         <image name="SoTube_Logo" width="890" height="769"/>
         <image name="TabBarIcon_me_selected" width="164" height="158"/>
         <image name="Wishlist_selected" width="16" height="16"/>
-        <image name="background_orange" width="640" height="640"/>
+        <image name="background_black_white" width="640" height="640"/>
         <image name="forward" width="1200" height="1200"/>
         <image name="play" width="256" height="256"/>
         <image name="profile" width="36" height="35"/>
         <image name="rewind" width="200" height="200"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Yyy-cB-Q5z"/>
-        <segue reference="bK6-a7-b2h"/>
+        <segue reference="Uvf-Jz-1dC"/>
+        <segue reference="ViR-ba-d3c"/>
     </inferredMetricsTieBreakers>
 </document>

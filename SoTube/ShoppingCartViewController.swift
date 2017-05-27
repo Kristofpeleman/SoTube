@@ -44,6 +44,10 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.songVCBackGroundImage.image = UIImage(named: Shared.current.backGroundImage)
+    }
+    
     
     // When the view has appeared
     override func viewDidAppear(_ animated: Bool) {

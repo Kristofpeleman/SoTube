@@ -38,6 +38,7 @@
 		6D24D3AA1ECB8AF00087024D /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D24D3A71ECB8AF00087024D /* SpotifyMetadata.framework */; };
 		6D24D3AE1ECB8B350087024D /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D24D3AD1ECB8B350087024D /* BridgeViewController.m */; };
 		6D24D3B01ECBAC410087024D /* TopMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D24D3AF1ECBAC410087024D /* TopMediaViewController.swift */; };
+		6D51013A1ED900860032A579 /* BackgroundColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5101391ED900860032A579 /* BackgroundColors.swift */; };
 		6D57E5561ED79A20009423F1 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D57E5551ED79A20009423F1 /* AccountViewController.swift */; };
 		6DC7B3CA1ED34DDE00D4B342 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC7B3C91ED34DDE00D4B342 /* ShoppingCartViewController.swift */; };
 /* End PBXBuildFile section */
@@ -79,6 +80,7 @@
 		6D24D3AC1ECB8B350087024D /* BridgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeViewController.h; sourceTree = "<group>"; };
 		6D24D3AD1ECB8B350087024D /* BridgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeViewController.m; sourceTree = "<group>"; };
 		6D24D3AF1ECBAC410087024D /* TopMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMediaViewController.swift; sourceTree = "<group>"; };
+		6D5101391ED900860032A579 /* BackgroundColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundColors.swift; sourceTree = "<group>"; };
 		6D57E5551ED79A20009423F1 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		6DC7B3C91ED34DDE00D4B342 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		FF68D940F44C872C8192EC57 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
@@ -137,6 +139,7 @@
 		2F7F292B1EC5C40000D2B03A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				6D5101391ED900860032A579 /* BackgroundColors.swift */,
 				2F7F29291EC5C3FB00D2B03A /* ViewModel.swift */,
 				2F72F00F1ECC3EE200EF70FB /* TopMediaViewModel.swift */,
 			);
@@ -344,6 +347,7 @@
 				6D24D3B01ECBAC410087024D /* TopMediaViewController.swift in Sources */,
 				2F2FD2931EC1E68200628995 /* WishlistViewController.swift in Sources */,
 				6D24D3A41ECB85750087024D /* SpotifyConnectViewController.swift in Sources */,
+				6D51013A1ED900860032A579 /* BackgroundColors.swift in Sources */,
 				2F72F0121ECC513A00EF70FB /* PlayerViewController.swift in Sources */,
 				6DC7B3CA1ED34DDE00D4B342 /* ShoppingCartViewController.swift in Sources */,
 				2FDDA7B81ECEF3BF004BB880 /* User.swift in Sources */,

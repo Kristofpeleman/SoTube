@@ -9,20 +9,11 @@
 import UIKit
 import Firebase
 
-class AccountViewController: TopMediaViewController, LoginViewControllerDelegate, MusicPlayerViewControllerDelegate, UIPickerViewDataSource, UIPickerViewDelegate {
+class AccountViewController: TopMediaViewController, LoginViewControllerDelegate, MusicPlayerViewControllerDelegate, UIPickerViewDelegate {
     
     // MARK: - Global variables and constants
     
     var shared = Shared.current
-    
-    let backGroundKeys = ["Black & White","Purple","Yellow","Orange","Blue"]
-    let backGroundColorData: [String : String] = [
-        "Black & White" : "",
-        "Purple" : "",
-        "Yellow" : "",
-        "Orange" : "songVCBackground",
-        "Blue" : ""
-        ]
     
     
     // MARK: - IBOutlets
@@ -38,6 +29,8 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
     @IBOutlet weak var goToMusicPlayerButton: UIBarButtonItem!
     
     @IBOutlet weak var backGroundPickerView: UIPickerView!
+    
+    @IBOutlet var backGroundPickerDataSource: BackGroundColors!
     
     
     // MARK: - UIViewController functions
@@ -62,6 +55,11 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
     override func viewWillAppear(_ animated: Bool) {
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
+        
+        self.songVCBackGroundImage.image = UIImage(named: self.shared.backGroundImage)
+        // Set initial background value in pickerview
+        let initialRowForBackGroundPickerView = backGroundPickerDataSource.defaultValue
+        backGroundPickerView.selectRow(initialRowForBackGroundPickerView, inComponent: 0, animated: false)
         
         if let _ = shared.user {
             loginButton.title = "Log out"
@@ -240,17 +238,17 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
         }
     }
  
-    // MARK: - (Background) PickerView Methods
-    
-    func numberOfComponents(in: UIPickerView) -> Int {
-        return 1
-    }
-    func pickerView(_ pickerView: UIPickerView, numberOfRowsInComponent component: Int) -> Int {
-        return backGroundColorData.count
-    }
+    // MARK: - UIPickerViewDelegate Methods
     
     func pickerView(_ pickerView: UIPickerView, titleForRow row: Int, forComponent component: Int) -> String? {
-        return backGroundKeys[row]
+        return backGroundPickerDataSource.getBackGroundDescriptionFor(row)
+    }
+    
+    func pickerView(_ pickerView: UIPickerView, didSelectRow row: Int,
+                    inComponent component: Int) {
+        let imageName = backGroundPickerDataSource.getImageNameForSelected(row)
+        self.songVCBackGroundImage.image = UIImage(named: imageName)
+        shared.backGroundImage = imageName
     }
     
     

@@ -59,9 +59,10 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
         
-//        self.sharedUser = shared.user
+        self.songVCBackGroundImage.image = UIImage(named: self.shared.backGroundImage)
         
         if let _ = shared.user {
+            
             logInButton.title = "Log out"
             
             print(self.shared.user?.fireBaseID ?? "NO FIREBASE ID")
