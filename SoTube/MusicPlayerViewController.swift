@@ -62,6 +62,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     @IBOutlet weak var previousAlbumImageView: UIImageView!
     @IBOutlet weak var albumImageView: UIImageView!
     @IBOutlet weak var nextAlbumImageView: UIImageView!
+    @IBOutlet weak var favoriteButtonImage: UIImageView!
     
     // TextOutlets
     @IBOutlet weak var navigationSongTitle: UINavigationItem!
@@ -115,7 +116,24 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 shoppingCartAmountLabel.backgroundColor = nil
                 shoppingCartAmountLabel.text = ""
             }
+            
+            
+            if let userSongs = user.mySongs{
+                if userSongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
+                    let oneSongArray = userSongs.filter{$0.spotify_ID == currentSong.spotify_ID}
+                    let song = oneSongArray[0]
+                    
+                    if song.favorite {
+                        favoriteButtonImage.image = UIImage(named: "favorites_full")
+                    } else {
+                        favoriteButtonImage.image = UIImage(named: "favorites_empty")
+                    }
+                }
+            }
+            
         }
+        
+
     }
     
     
@@ -276,12 +294,18 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 switch newFavoriteSetting {
                     
                 case true:
+                    
+                    self.favoriteButtonImage.image = UIImage(named: "favorites_full")
+                    
                     let alertController = UIAlertController(title: "Confirmation", message: "Song added to favorites", preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(okAction)
                     present(alertController, animated: true, completion: nil)
                     
                 case false:
+                    
+                    self.favoriteButtonImage.image = UIImage(named: "favorites_empty")
+                    
                     let alertController = UIAlertController(title: "Confirmation", message: "Song removed from favorites", preferredStyle: .alert)
                     let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
                     alertController.addAction(okAction)
