@@ -67,6 +67,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     @IBOutlet weak var navigationSongTitle: UINavigationItem!
     @IBOutlet weak var artistLabel: UILabel!
     @IBOutlet weak var productionAndYearLabel: UILabel!
+    @IBOutlet weak var shoppingCartAmountLabel: UILabel!
+    
     
     // TimeLabelOutlets
     @IBOutlet weak var currentTimeLabel: UILabel!
@@ -103,6 +105,20 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        
+        if let user = Shared.current.user {
+            if let amountOfItemsInCart = user.shoppingCart?.count {
+                shoppingCartAmountLabel.backgroundColor = UIColor.red
+                shoppingCartAmountLabel.text = "\(amountOfItemsInCart)"
+            } else {
+                shoppingCartAmountLabel.backgroundColor = nil
+                shoppingCartAmountLabel.text = ""
+            }
+        }
+    }
+    
+    
     override func viewDidAppear(_ animated: Bool) {
         // A timer repeating musicSliderUpdate every few seconds (or less depending on timeInterval) to update the musicSlider
 
@@ -137,6 +153,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 currentUser.addToShoppingCart(currentSong)
                 print(currentSong.spotify_ID!)
                 print(currentSong.spotifyJSONFeed)
+                
+                self.shoppingCartAmountLabel.backgroundColor = UIColor.red
+                self.shoppingCartAmountLabel.text = "\(currentUser.shoppingCart?.count ?? 0)"
                 
                 let userShoppingCartReference = self.userReference!.child("shoppingCart")
                 
@@ -771,17 +790,38 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // In a storyboard-based application, you will often want to do a little preparation before navigation
     override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
         
-        if segue.identifier == "shoppingCartVCSegue" {
+        if segue.identifier == "shoppingCartSegue" {
             if let destinationVC = segue.destination as? ShoppingCartViewController {
                 
                 destinationVC.auth = self.auth
                 destinationVC.session = self.session
-                destinationVC.currentUser = self.currentUser
-                destinationVC.userReference = self.userReference
+                
+                if let _ = currentUser {
+                    destinationVC.currentUser = Shared.current.user
+                    
+                    let usersReference = rootReference?.child("Users")
+                    destinationVC.userReference = usersReference?.child(Shared.current.user!.fireBaseID)
+                }
             }
         }
+        
         pausePlayer()
         timer?.invalidate()
+    }
+    
+    // An override function when performing a segue
+    override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool
+    {
+        switch identifier {
+        case "shoppingCartSegue":
+            
+            if let _ = currentUser {
+                return true
+            } else {return false}
+            
+        // If the identifier's value isn't any of the above: perform Segue
+        default: return true
+        }
     }
     
     

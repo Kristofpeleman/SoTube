@@ -579,6 +579,19 @@
                                 </view>
                                 <blurEffect style="light"/>
                             </visualEffectView>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="Wvs-O1-43y">
+                                <rect key="frame" x="265.5" y="65" width="54.5" height="38"/>
+                                <constraints>
+                                    <constraint firstAttribute="width" secondItem="Wvs-O1-43y" secondAttribute="height" multiplier="1:0.7" id="6ig-q5-7DF"/>
+                                    <constraint firstAttribute="height" constant="38" id="EmO-me-pMc"/>
+                                </constraints>
+                            </imageView>
+                            <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJM-Dy-R7E">
+                                <rect key="frame" x="282" y="76.5" width="21.5" height="15"/>
+                                <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
+                                <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                                <nil key="highlightedColor"/>
+                            </label>
                             <navigationBar contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="sbw-oP-2tT">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
                                 <constraints>
@@ -606,11 +619,10 @@
                                     <outletCollection property="gestureRecognizers" destination="F74-52-w6E" appends="YES" id="keb-dv-ZFx"/>
                                 </connections>
                             </view>
-                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lNH-Fz-Gmo">
-                                <rect key="frame" x="260" y="280.5" width="55" height="30"/>
-                                <state key="normal" title="My Cart"/>
+                            <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxZ-DE-9kX">
+                                <rect key="frame" x="265" y="65" width="54.5" height="38"/>
                                 <connections>
-                                    <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartVCSegue" id="mvg-35-U1u"/>
+                                    <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="j1g-u1-zEs"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="ArtistLabel" textAlignment="center" lineBreakMode="tailTruncation" numberOfLines="3" baselineAdjustment="alignBaselines" minimumFontSize="12" translatesAutoresizingMaskIntoConstraints="NO" id="1st-yf-WT8">
@@ -741,15 +753,18 @@
                             <constraint firstItem="fDU-Cd-hS5" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" id="11J-MH-D8O"/>
                             <constraint firstItem="rf3-ne-yDb" firstAttribute="top" secondItem="fRL-mb-Erf" secondAttribute="bottom" constant="18" id="1Sl-Up-qtt"/>
                             <constraint firstItem="fRL-mb-Erf" firstAttribute="top" secondItem="O19-jx-HLe" secondAttribute="bottom" constant="25" id="32R-sd-jKc"/>
+                            <constraint firstItem="gJM-Dy-R7E" firstAttribute="height" secondItem="Wvs-O1-43y" secondAttribute="height" multiplier="0.4" id="3A9-Gq-bnA"/>
                             <constraint firstItem="zKD-bu-nQP" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" id="3V2-AC-BV9"/>
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="top" secondItem="sbw-oP-2tT" secondAttribute="bottom" constant="50" id="4CI-pV-9Ka"/>
                             <constraint firstItem="O19-jx-HLe" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="trailing" constant="8" id="6WJ-pg-77g"/>
                             <constraint firstItem="zKD-bu-nQP" firstAttribute="centerY" secondItem="Od7-6S-ieB" secondAttribute="centerY" id="8EH-KF-VR4"/>
-                            <constraint firstItem="lNH-Fz-Gmo" firstAttribute="bottom" secondItem="YZX-aq-vUR" secondAttribute="bottom" id="8Kg-dQ-QvK"/>
+                            <constraint firstItem="Wvs-O1-43y" firstAttribute="trailing" secondItem="YZX-aq-vUR" secondAttribute="trailing" id="917-4g-OOn"/>
                             <constraint firstItem="3f7-FR-f8I" firstAttribute="leading" secondItem="Od7-6S-ieB" secondAttribute="leadingMargin" constant="8" id="9Gt-9I-C1k"/>
                             <constraint firstItem="84f-Fb-3eK" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="0.2" id="A9t-vJ-aT7"/>
                             <constraint firstItem="SAy-8Q-GnH" firstAttribute="height" secondItem="Ay1-XV-1Ge" secondAttribute="height" id="APn-zI-SO8"/>
                             <constraint firstItem="zKD-bu-nQP" firstAttribute="centerX" secondItem="Od7-6S-ieB" secondAttribute="centerX" id="Ahk-Vp-TXZ"/>
+                            <constraint firstItem="gJM-Dy-R7E" firstAttribute="centerY" secondItem="Wvs-O1-43y" secondAttribute="centerY" id="ChY-IV-xa2"/>
+                            <constraint firstItem="NxZ-DE-9kX" firstAttribute="width" secondItem="Wvs-O1-43y" secondAttribute="width" id="CjZ-Lh-rnB"/>
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="centerY" secondItem="fRL-mb-Erf" secondAttribute="centerY" id="D9U-qQ-qBK"/>
                             <constraint firstItem="fDU-Cd-hS5" firstAttribute="centerY" secondItem="Od7-6S-ieB" secondAttribute="centerY" id="FEQ-Me-9Zy"/>
                             <constraint firstItem="zKD-bu-nQP" firstAttribute="height" secondItem="Od7-6S-ieB" secondAttribute="height" id="FfA-ew-8Cr"/>
@@ -762,7 +777,6 @@
                             <constraint firstItem="rf3-ne-yDb" firstAttribute="trailing" secondItem="zZG-Jg-unL" secondAttribute="trailing" id="RLK-Xh-k9L"/>
                             <constraint firstItem="SAy-8Q-GnH" firstAttribute="trailing" secondItem="rf3-ne-yDb" secondAttribute="trailing" id="U3Z-F9-X3A"/>
                             <constraint firstItem="WNM-Ca-Iur" firstAttribute="leading" secondItem="rf3-ne-yDb" secondAttribute="leading" id="UAJ-us-Mh4"/>
-                            <constraint firstItem="lNH-Fz-Gmo" firstAttribute="trailing" secondItem="YZX-aq-vUR" secondAttribute="trailing" constant="-5" id="USA-HM-BPg"/>
                             <constraint firstItem="WNM-Ca-Iur" firstAttribute="top" secondItem="rf3-ne-yDb" secondAttribute="bottom" constant="10" id="Ub9-PB-JIW"/>
                             <constraint firstItem="GCd-0Z-GKm" firstAttribute="centerX" secondItem="1st-yf-WT8" secondAttribute="centerX" id="Usb-4c-Zyd"/>
                             <constraint firstItem="mbO-FT-hWy" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="0.45" id="Vqm-u3-f37"/>
@@ -776,7 +790,9 @@
                             <constraint firstItem="sbw-oP-2tT" firstAttribute="leading" secondItem="Od7-6S-ieB" secondAttribute="leading" id="hZs-ap-n63"/>
                             <constraint firstItem="Ay1-XV-1Ge" firstAttribute="top" secondItem="rf3-ne-yDb" secondAttribute="bottom" constant="10" id="hyS-PY-htf"/>
                             <constraint firstItem="fRL-mb-Erf" firstAttribute="centerX" secondItem="mbO-FT-hWy" secondAttribute="centerX" id="ihG-0t-8dc"/>
+                            <constraint firstItem="gJM-Dy-R7E" firstAttribute="width" secondItem="Wvs-O1-43y" secondAttribute="width" multiplier="0.4" id="j1Y-6f-4vl"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="centerY" secondItem="fRL-mb-Erf" secondAttribute="centerY" id="jKW-e9-6hb"/>
+                            <constraint firstItem="gJM-Dy-R7E" firstAttribute="centerX" secondItem="Wvs-O1-43y" secondAttribute="centerX" id="lna-9D-lS3"/>
                             <constraint firstItem="O19-jx-HLe" firstAttribute="centerY" secondItem="3f7-FR-f8I" secondAttribute="centerY" id="ls6-XL-sD1"/>
                             <constraint firstItem="sbw-oP-2tT" firstAttribute="top" secondItem="Od7-6S-ieB" secondAttribute="top" id="mZ8-hg-kCF"/>
                             <constraint firstItem="rf3-ne-yDb" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="leading" id="mmD-b6-Mtg"/>
@@ -786,11 +802,15 @@
                             <constraint firstItem="aco-gw-pxO" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="0.2" id="rvv-30-ntz"/>
                             <constraint firstItem="zZG-Jg-unL" firstAttribute="centerY" secondItem="3f7-FR-f8I" secondAttribute="centerY" id="rxc-LS-tdU"/>
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="trailing" secondItem="zZG-Jg-unL" secondAttribute="trailing" id="sGU-fj-oei"/>
+                            <constraint firstItem="NxZ-DE-9kX" firstAttribute="centerX" secondItem="Wvs-O1-43y" secondAttribute="centerX" id="sux-iS-XW9"/>
                             <constraint firstItem="zZG-Jg-unL" firstAttribute="leading" secondItem="O19-jx-HLe" secondAttribute="trailing" constant="8" id="tRo-Qw-Pbd"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="uA5-w9-Azq"/>
+                            <constraint firstItem="NxZ-DE-9kX" firstAttribute="centerY" secondItem="Wvs-O1-43y" secondAttribute="centerY" id="uTG-8v-EuJ"/>
                             <constraint firstItem="SAy-8Q-GnH" firstAttribute="top" secondItem="rf3-ne-yDb" secondAttribute="bottom" constant="10" id="uTo-Iq-uF3"/>
                             <constraint firstItem="YZX-aq-vUR" firstAttribute="height" secondItem="zKD-bu-nQP" secondAttribute="height" multiplier="0.45" id="uhH-fS-UYq"/>
                             <constraint firstItem="aco-gw-pxO" firstAttribute="centerY" secondItem="mbO-FT-hWy" secondAttribute="centerY" id="v7Z-6k-jzR"/>
+                            <constraint firstItem="NxZ-DE-9kX" firstAttribute="height" secondItem="Wvs-O1-43y" secondAttribute="height" id="vSe-KF-S0E"/>
+                            <constraint firstItem="Wvs-O1-43y" firstAttribute="top" secondItem="YZX-aq-vUR" secondAttribute="top" constant="10" id="wNy-FZ-uoe"/>
                             <constraint firstItem="fDU-Cd-hS5" firstAttribute="centerX" secondItem="Od7-6S-ieB" secondAttribute="centerX" id="wpG-GX-pVJ"/>
                             <constraint firstItem="Ay1-XV-1Ge" firstAttribute="centerX" secondItem="rf3-ne-yDb" secondAttribute="centerX" id="xH3-H0-EQL"/>
                             <constraint firstItem="1st-yf-WT8" firstAttribute="top" secondItem="mbO-FT-hWy" secondAttribute="bottom" constant="8" id="xeG-Ho-gHu"/>
@@ -815,6 +835,7 @@
                         <outlet property="previousAlbumImageView" destination="aco-gw-pxO" id="NKn-om-Gji"/>
                         <outlet property="productionAndYearLabel" destination="GCd-0Z-GKm" id="uxj-Uw-TQa"/>
                         <outlet property="repeatButton" destination="Ay1-XV-1Ge" id="Dmy-fl-dSg"/>
+                        <outlet property="shoppingCartAmountLabel" destination="gJM-Dy-R7E" id="eQE-A6-sjp"/>
                         <outlet property="volumeSlider" destination="rf3-ne-yDb" id="VcA-Bd-jJb"/>
                         <outlet property="wishListButton" destination="SAy-8Q-GnH" id="klt-ze-L61"/>
                         <segue destination="BYZ-38-t0r" kind="show" identifier="loginSegue" id="tpj-gN-ERD"/>
@@ -1990,8 +2011,8 @@
         <image name="wish_list" width="37" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="Def-eb-XHu"/>
-        <segue reference="bey-pH-39d"/>
-        <segue reference="ebZ-Xv-MAE"/>
+        <segue reference="vHY-iE-ELE"/>
+        <segue reference="tpj-gN-ERD"/>
+        <segue reference="j1g-u1-zEs"/>
     </inferredMetricsTieBreakers>
 </document>
