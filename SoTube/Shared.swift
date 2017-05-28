@@ -24,5 +24,5 @@ final class Shared {
     var user : User?
     var songList: [Song]?
     var currentPositionInList: Int?
-    var backGroundImage: String = "background_black_white"
+    var backGroundImage: String = "black_white_background"
 }

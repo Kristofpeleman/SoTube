@@ -12,11 +12,13 @@ class BackGroundColors: NSObject, UIPickerViewDataSource {
     
 
     let backGroundColorData: [String : String] = [
-        "Black & White" : "background_black_white",
-        "Purple" : "background_purple",
-        "Yellow" : "background_yellow",
-        "Orange" : "background_orange",
-        "Blue" : "background_blue"
+        "Neutral" : "black_white_background",
+        "Purple" : "purple_background",
+        "Yellow" : "yellow_background",
+        "Orange" : "orange_background",
+        "Blue" : "blue_background",
+        "Pink" : "red_background",
+        "Green" : "green_background"
     ]
     
     var backGroundKeys: [String] {

@@ -59,7 +59,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="6AI-ei-ZiZ">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="black_white_background" translatesAutoresizingMaskIntoConstraints="NO" id="6AI-ei-ZiZ">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="yTh-NN-ReA">
@@ -68,7 +68,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="light"/>
+                                <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="bAz-rO-cIW">
                                 <rect key="frame" x="249" y="99" width="55" height="38.5"/>
@@ -366,7 +366,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="NxR-G9-sq9">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="black_white_background" translatesAutoresizingMaskIntoConstraints="NO" id="NxR-G9-sq9">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="44S-ky-1cZ">
@@ -375,7 +375,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="light"/>
+                                <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-HW-YGr">
                                 <rect key="frame" x="249" y="99" width="55" height="38.5"/>
@@ -577,7 +577,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="light"/>
+                                <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="Wvs-O1-43y">
                                 <rect key="frame" x="265.5" y="65" width="54.5" height="38"/>
@@ -923,7 +923,7 @@
                                         <constraint firstAttribute="trailing" secondItem="B0a-i1-Lvr" secondAttribute="trailing" id="qhb-MX-tNI"/>
                                     </constraints>
                                 </view>
-                                <blurEffect style="light"/>
+                                <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v5m-Z4-3Lt">
                                 <rect key="frame" x="16" y="70" width="288" height="370"/>
@@ -1078,7 +1078,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-Wa-Zx7">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="black_white_background" translatesAutoresizingMaskIntoConstraints="NO" id="vBi-Wa-Zx7">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="1zS-9z-DKq">
@@ -1087,7 +1087,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="light"/>
+                                <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="xJh-G9-pIf">
                                 <rect key="frame" x="249" y="99" width="55" height="38.5"/>
@@ -1632,7 +1632,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="k2t-KH-8nu">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="black_white_background" translatesAutoresizingMaskIntoConstraints="NO" id="k2t-KH-8nu">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="at0-CC-3xd">
@@ -1641,7 +1641,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="light"/>
+                                <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="E6t-Ud-Zcy">
                                 <rect key="frame" x="249" y="99" width="55" height="38.5"/>
@@ -1820,7 +1820,7 @@
                             <constraint firstItem="at0-CC-3xd" firstAttribute="height" secondItem="KT0-o7-5dD" secondAttribute="height" id="wqm-zH-Sn7"/>
                         </constraints>
                     </view>
-                    <tabBarItem key="tabBarItem" title="Wishlist" image="wishlist_blue_" selectedImage="wishlist_blue_" id="vs5-j2-JdJ"/>
+                    <tabBarItem key="tabBarItem" title="Wishlist" image="TabBarIcon_wishlist_blue (35" selectedImage="TabBarIcon_wishlist_blue (35" id="vs5-j2-JdJ"/>
                     <connections>
                         <outlet property="goToMusicPlayerButton" destination="eeq-vX-QEY" id="Vea-A6-wtS"/>
                         <outlet property="logInButton" destination="isI-v4-E5s" id="xv5-pb-3Em"/>
@@ -1850,7 +1850,7 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="background_black_white" translatesAutoresizingMaskIntoConstraints="NO" id="Sqn-Cm-6hK">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="black_white_background" translatesAutoresizingMaskIntoConstraints="NO" id="Sqn-Cm-6hK">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                             </imageView>
                             <visualEffectView opaque="NO" contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="hot-Xq-Kax">
@@ -1859,7 +1859,7 @@
                                     <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                                     <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                                 </view>
-                                <blurEffect style="light"/>
+                                <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <navigationBar contentMode="scaleToFill" fixedFrame="YES" translatesAutoresizingMaskIntoConstraints="NO" id="FBI-He-7wW">
                                 <rect key="frame" x="0.0" y="0.0" width="320" height="55"/>
@@ -2007,8 +2007,10 @@
         <image name="SoTube_Logo" width="890" height="769"/>
         <image name="TabBarIcon_me_selected" width="164" height="158"/>
         <image name="TabBarIcon_points2_selected" width="51" height="53"/>
+        <image name="TabBarIcon_wishlist_blue (35" width="32" height="32"/>
         <image name="all_songs" width="34" height="36"/>
         <image name="background_black_white" width="640" height="640"/>
+        <image name="black_white_background" width="1920" height="1080"/>
         <image name="favorites_empty" width="35" height="35"/>
         <image name="forward" width="1200" height="1200"/>
         <image name="my_songs" width="36" height="36"/>
@@ -2019,8 +2021,8 @@
         <image name="wishlist_blue_" width="35" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="dH2-8a-Myi"/>
-        <segue reference="j1g-u1-zEs"/>
+        <segue reference="vHY-iE-ELE"/>
         <segue reference="tpj-gN-ERD"/>
+        <segue reference="j1g-u1-zEs"/>
     </inferredMetricsTieBreakers>
 </document>

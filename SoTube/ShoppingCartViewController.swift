@@ -32,6 +32,7 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     override func viewDidLoad() {
         super.viewDidLoad()
 
+        self.currentUser = Shared.current.user
         // Hides the standard navigationBar (our custom bar will still show)
         navigationController?.isNavigationBarHidden = true
         
@@ -45,12 +46,18 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     }
     
     override func viewWillAppear(_ animated: Bool) {
+        
         self.songVCBackGroundImage.image = UIImage(named: Shared.current.backGroundImage)
+        
+        
     }
     
     
     // When the view has appeared
     override func viewDidAppear(_ animated: Bool) {
+        
+        self.currentUser = Shared.current.user
+        
         // Reload the tableView's design and cells
         self.tableView.reloadData()
         
