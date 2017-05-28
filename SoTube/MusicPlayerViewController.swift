@@ -152,18 +152,36 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             
             if let mySongs = currentUser.mySongs, mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                 
-                let alertController = UIAlertController(title: "Duplicate Purchase", message: "You already purchased this song...", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                let alertController = UIAlertController(title: "Duplicate Purchase",
+                                                        message: "You already purchased this song...",
+                                                        preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "OK",
+                                             style: .cancel,
+                                             handler: nil
+                )
+                
                 alertController.addAction(okAction)
+                
                 present(alertController, animated: true, completion: nil)
                 
             }
                 
             else if let shoppingCart = currentUser.shoppingCart, shoppingCart.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                 
-                let alertController = UIAlertController(title: "Song is already in cart", message: "You already added this song to your shopping cart...", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                let alertController = UIAlertController(title: "Song is already in cart",
+                                                        message: "You already added this song to your shopping cart...",
+                                                        preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "OK",
+                                             style: .cancel,
+                                             handler: nil
+                )
+                
                 alertController.addAction(okAction)
+                
                 present(alertController, animated: true, completion: nil)
                 
             }
@@ -195,17 +213,35 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 
                 print(currentUser)
                 
-                let alertController = UIAlertController(title: "Confirmation", message: "Song added to shopping cart.", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                let alertController = UIAlertController(title: "Confirmation",
+                                                        message: "Song added to shopping cart.",
+                                                        preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "OK",
+                                             style: .cancel,
+                                             handler: nil
+                )
+                
                 alertController.addAction(okAction)
+                
                 present(alertController, animated: true, completion: nil)
             }
             
         }
         else {
-            let alertController = UIAlertController(title: "Log in", message: "You need to be logged in to add songs to your shopping cart.", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            let alertController = UIAlertController(title: "Log in",
+                                                    message: "You need to be logged in to add songs to your shopping cart.",
+                                                    preferredStyle: .alert
+            )
+            
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .cancel,
+                                         handler: nil
+            )
+            
             alertController.addAction(okAction)
+            
             present(alertController, animated: true, completion: nil)
             return
         }
@@ -218,18 +254,36 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             
             if let mySongs = currentUser.mySongs, mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                 
-                let alertController = UIAlertController(title: "Song exists in your songs", message: "You already purchased this song...", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                let alertController = UIAlertController(title: "Song exists in your songs",
+                                                        message: "You already purchased this song...",
+                                                        preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "OK",
+                                             style: .cancel,
+                                             handler: nil
+                )
+                
                 alertController.addAction(okAction)
+                
                 present(alertController, animated: true, completion: nil)
                 
             }
                 
             else if let wishList = currentUser.wishList, wishList.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                 
-                let alertController = UIAlertController(title: "Song exists in your wishlist", message: "You already added this song to your wishlist...", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                let alertController = UIAlertController(title: "Song exists in your wishlist",
+                                                        message: "You already added this song to your wishlist...",
+                                                        preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "OK",
+                                             style: .cancel,
+                                             handler: nil
+                )
+                
                 alertController.addAction(okAction)
+                
                 present(alertController, animated: true, completion: nil)
                 
             }
@@ -253,9 +307,18 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 
                 songInWishListReference.setValue(songValues)
                 
-                let alertController = UIAlertController(title: "Confirmation", message: "Song added to your wishlist", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                let alertController = UIAlertController(title: "Confirmation",
+                                                        message: "Song added to your wishlist",
+                                                        preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "OK",
+                                             style: .cancel,
+                                             handler: nil
+                )
+                
                 alertController.addAction(okAction)
+                
                 present(alertController, animated: true, completion: nil)
             }
             
@@ -297,36 +360,72 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     
                     self.favoriteButtonImage.image = UIImage(named: "favorites_full")
                     
-                    let alertController = UIAlertController(title: "Confirmation", message: "Song added to favorites", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    let alertController = UIAlertController(title: "Confirmation",
+                                                            message: "Song added to favorites",
+                                                            preferredStyle: .alert
+                    )
+                    
+                    let okAction = UIAlertAction(title: "OK",
+                                                 style: .cancel,
+                                                 handler: nil
+                    )
+                    
                     alertController.addAction(okAction)
+                    
                     present(alertController, animated: true, completion: nil)
                     
                 case false:
                     
                     self.favoriteButtonImage.image = UIImage(named: "favorites_empty")
                     
-                    let alertController = UIAlertController(title: "Confirmation", message: "Song removed from favorites", preferredStyle: .alert)
-                    let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                    let alertController = UIAlertController(title: "Confirmation",
+                                                            message: "Song removed from favorites",
+                                                            preferredStyle: .alert
+                    )
+                    
+                    let okAction = UIAlertAction(title: "OK",
+                                                 style: .cancel,
+                                                 handler: nil
+                    )
+                    
                     alertController.addAction(okAction)
+                    
                     present(alertController, animated: true, completion: nil)
                 }
                 
             }
             
             else {
-                let alertController = UIAlertController(title: "Notification", message: "You can only favorite songs you own", preferredStyle: .alert)
-                let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+                let alertController = UIAlertController(title: "Notification",
+                                                        message: "You can only favorite songs you own",
+                                                        preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "OK",
+                                             style: .cancel,
+                                             handler: nil
+                )
+                
                 alertController.addAction(okAction)
+                
                 present(alertController, animated: true, completion: nil)
             }
             
         }
         
         else {
-            let alertController = UIAlertController(title: "Notification", message: "You need to log in before you can favorite any of your songs", preferredStyle: .alert)
-            let okAction = UIAlertAction(title: "OK", style: .cancel, handler: nil)
+            let alertController = UIAlertController(title: "Notification",
+                                                    message: "You need to log in before you can favorite any of your songs",
+                                                    preferredStyle: .alert
+            )
+            
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .cancel,
+                                         handler: nil
+            )
+            
             alertController.addAction(okAction)
+            
             present(alertController, animated: true, completion: nil)
         }
         

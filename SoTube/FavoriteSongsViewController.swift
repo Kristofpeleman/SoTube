@@ -99,6 +99,23 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
         self.tableView.reloadData()
         print(shared.user?.mySongs ?? "SHARED INSTANCE NOT FOUND")
         print(self.myFavoriteSongs ?? "FAVORITE SONGS NOT FOUND")
+        
+        if shared.user == nil {
+            let alertController = UIAlertController(title: "Log In",
+                                                    message: "You need to log in before you can view your favorite songs.",
+                                                    preferredStyle: .alert
+            )
+            
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .cancel,
+                                         handler: nil
+            )
+            
+            alertController.addAction(okAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        }
     }
     
     // MARK: - IBActions
@@ -360,13 +377,35 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
                 }
                 return false
                 
-            } else {return true}
+            }
+            else {
+                return true
+            }
             
         case "shoppingCartSegue":
             
             if let _ = shared.user {
                 return true
-            } else {return false}
+            }
+            else {
+                
+                let alertController = UIAlertController(title: "Log In",
+                                                        message: "You can not have a shoppingcart without being logged in.",
+                                                        preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "OK",
+                                             style: .cancel,
+                                             handler: nil
+                )
+                
+                alertController.addAction(okAction)
+                
+                present(alertController, animated: true, completion: nil)
+
+                
+                return false
+            }
             
         // If the identifier's value isn't any of the above: perform Segue
         default: return true
