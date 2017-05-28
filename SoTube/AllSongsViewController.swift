@@ -15,15 +15,21 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
 
     var shared = Shared.current
 
-    // Created a constant containing the feed-urls (as Strings) from ViewModel()
-    let feedURLs = ViewModel().feeds
     // Created a constant containing the feed-urls (as Strings) from TopMediaViewModel()
-    let newReleasesFeed = TopMediaViewModel().newReleasesURLAsString
+    var offset = 0
+    var newReleasesFeed: String?
     
     
     
-    // Variable to lessen the amount of "magic" numbers in the app
-    let tableViewSongLimit = 50
+    // Constant to lessen the amount of "magic" numbers in the app
+    let tableViewInitialSongLimit = 50
+    
+    // calculated property to limit the absolute total number of songs the Tableview will display
+    
+    var tableViewTotalSongLimit: Int {
+        return self.tableViewInitialSongLimit * 10
+    }
+    
     // Created an optional variable "songs"-array containing elements of class "Song"
     var songs: [Song]? {
         // When the value changes
@@ -31,13 +37,14 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             if songs != nil {
                 // !!!! REMEMBER: Count starts at 1, an array-positioning/index starts at 0
                 // If there are 50 items in the array
-                if songs!.count == tableViewSongLimit {
+                if songs!.count % tableViewInitialSongLimit == 0 {
                     // print the 49th position in the array (= item 50)
                     //print(songs![49])
                     
                     print(String(songs!.count) + " SONGS")
                     
                     // reload the tableView to show all the new items
+                    sleep(1)
                     self.tableView.reloadData()
                     
                     self.stopIndicator()
@@ -67,7 +74,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // When value changes
         didSet {
             // If there are 50 items in the array
-            if trackIDs!.count == tableViewSongLimit {
+            if trackIDs!.count % tableViewInitialSongLimit == 0 && trackIDs!.count != 0 {
                 // Print our array
                 print(trackIDs!)
                 // local constant is a temporary array that puts the values in our trackIDs between these strings
@@ -240,7 +247,14 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         if let songs = self.songs {
             // Call "alterTableViewLabels" with "songs" as parameter
             alterTableViewLabels(forSongList: songs, inCell: cell, atRow: indexPath.row)
+            
+            if indexPath.row == self.songs!.count - 1 && self.songs!.count <= self.tableViewTotalSongLimit {
+                self.offset = songs.count
+                self.getAlbumIDs()
+            }
         }
+        
+
         
         return cell
     }
@@ -587,7 +601,9 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     func getAlbumIDs() {
         
-        let request = try? SPTRequest.createRequest(for: URL(string: newReleasesFeed)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+        self.newReleasesFeed = TopMediaViewModel().getNewReleasesWith(offset: offset)
+        
+        let request = try? SPTRequest.createRequest(for: URL(string: newReleasesFeed!)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         
         print(request!.allHTTPHeaderFields ?? "NO HTTP HEADER FIELDS")
         print(request?.url ?? "MISSING URL")
@@ -606,7 +622,13 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                     albumIDArray.append((dictionary as! NSDictionary).value(forKey: "id") as! String? ?? "NOT FOUND")
                     
                 }
-                self.albumIDs = albumIDArray
+                
+                if let _ = self.albumIDs {
+//                    self.albumIDs = albums + albumIDArray
+                    self.albumIDs = albumIDArray
+                } else {
+                    self.albumIDs = albumIDArray
+                }
                 
             }
         }
@@ -615,6 +637,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     }
     
     func getTrackIDs() {
+        
+        self.trackIDs = []
         
         for feed in self.albumFeeds! {
         
