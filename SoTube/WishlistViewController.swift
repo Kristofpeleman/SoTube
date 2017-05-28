@@ -15,7 +15,12 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     var shared = Shared.current
     
-    var wishList: [Song]?
+    var wishList: [Song]? {
+        didSet {
+            self.tableView.reloadData()
+        }
+    
+    }
     var filteredSongs: [Song] = []
     var currentPickerViewRow = 0
     
@@ -86,6 +91,10 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
         
         if shared.user?.wishList != nil {
             wishList = shared.user?.wishList
+            self.tableView.reloadData()
+        } else {
+            wishList = nil
+            self.tableView.reloadData()
         }
         
         if shared.currentPositionInList != nil {

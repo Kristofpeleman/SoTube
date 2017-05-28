@@ -158,14 +158,27 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                     
                     if wishListSongIDs.count > 0 {
                         
-                        for index in 1...wishListSongIDs.count {
-                            let songInWishListReference = userWishListReference?.child(wishListSongIDs[index - 1]!)
+                        for i in 1...wishListSongIDs.count {
+                            
+                            var locationInWishList: Int?
+                            
+                            for index in 1...Shared.current.user!.wishList!.count {
+                                if Shared.current.user!.wishList![index - 1].spotify_ID == wishListSongIDs[i - 1] {
+                                    locationInWishList = index - 1
+                                }
+                            }
+                            
+                            Shared.current.user!.wishList!.remove(at: locationInWishList!)
+                            
+                            
+                            let songInWishListReference = userWishListReference?.child(wishListSongIDs[i - 1]!)
                             songInWishListReference?.removeValue()
+                            
                         }
                     }
                 }
                 
-                // Helper function for the filter closure above
+                // Nested Helper function for the filter closure above
                 func songIsInWishList(_ song: Song) -> Bool {
                     return self.currentUser!.wishList!.contains(where: {song.spotify_ID == $0.spotify_ID})
                 }
@@ -185,7 +198,7 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                 self.tableView.reloadData()
                 
                 // Go back to the ViewController you were in before you came to this one
-                self.dismiss(animated: true, completion: nil)
+//                self.dismiss(animated: true, completion: nil)
             }
         }
         updatePointLabels()
@@ -220,7 +233,9 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                                             userShoppingCartReference?.removeValue()
                                             
                                             // Go back to the ViewController you were in before you came to this one
-                                            self.dismiss(animated: true, completion: nil)
+//                                            self.dismiss(animated: true, completion: nil)
+                                            self.tableView.reloadData()
+                                            self.updatePointLabels()
         })
         
         // Create a UIAlertAction that does nothing but make the alert go away
