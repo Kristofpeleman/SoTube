@@ -58,8 +58,27 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
         
         self.songVCBackGroundImage.image = UIImage(named: self.shared.backGroundImage)
         // Set initial background value in pickerview
-        let initialRowForBackGroundPickerView = backGroundPickerDataSource.defaultValue
-        backGroundPickerView.selectRow(initialRowForBackGroundPickerView, inComponent: 0, animated: false)
+        if shared.backGroundImage != backGroundPickerDataSource.defaultColorDescription {
+            switch shared.backGroundImage {
+            case "yellow_background":
+                backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Yellow"), inComponent: 0, animated: false)
+            case "purple_background":
+                backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Purple"), inComponent: 0, animated: false)
+            case "orange_background":
+                backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Orange"), inComponent: 0, animated: false)
+            case "red_background":
+                backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Pink"), inComponent: 0, animated: false)
+            case "green_background":
+                backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Green"), inComponent: 0, animated: false)
+            case "blue_background":
+                backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Blue"), inComponent: 0, animated: false)
+            default:
+                backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Neutral"), inComponent: 0, animated: false)
+            }
+        } else {
+            let initialRowForBackGroundPickerView = backGroundPickerDataSource.defaultValue
+            backGroundPickerView.selectRow(initialRowForBackGroundPickerView, inComponent: 0, animated: false)
+        }
         
         if let _ = shared.user {
             loginButton.title = "Log out"
