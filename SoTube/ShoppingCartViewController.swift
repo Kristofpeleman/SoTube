@@ -288,6 +288,22 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
         
         // NOTE: AMOUNT of rows starts at 1, but when USING/CALLING a row it starts at 0 (just like an array/dictionary
         
+        
+        let border = CALayer()
+        let width = CGFloat(0.3)
+        border.borderColor = UIColor.gray.cgColor
+        
+        border.frame = CGRect(x: 0,
+                              y: cell.frame.size.height - width,
+                              width: cell.frame.size.width,
+                              height: cell.frame.size.height
+        )
+        
+        border.borderWidth = width
+        cell.layer.addSublayer(border)
+        cell.layer.masksToBounds = true
+        
+        
         return cell
     }
     
