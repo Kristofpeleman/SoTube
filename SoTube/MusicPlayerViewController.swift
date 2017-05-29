@@ -94,9 +94,6 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         
         updateOutlets()
         changeVolume(volumeSlider)
-        NotificationCenter.default.removeObserver(self)
-        
-        NotificationCenter.default.addObserver(self, selector: #selector(pausePlayer), name: NSNotification.Name(rawValue: "Pause player"), object: nil)
         
         musicSlider.setThumbImage(#imageLiteral(resourceName: "musicNote"), for: .normal)
         musicSlider.setThumbImage(#imageLiteral(resourceName: "musicNote"), for: .highlighted)
