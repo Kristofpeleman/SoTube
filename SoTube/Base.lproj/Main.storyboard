@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hGK-qc-P1j">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16A323" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hGK-qc-P1j">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -267,7 +267,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="vnE-1c-72W" kind="show" identifier="initialSegue" id="pxG-ub-oIB"/>
+                        <segue destination="vnE-1c-72W" kind="presentation" identifier="initialSegue" modalTransitionStyle="crossDissolve" id="pxG-ub-oIB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Z6-9x-Vna" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -286,11 +286,11 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SoTube_Logo" translatesAutoresizingMaskIntoConstraints="NO" id="ayw-Iq-cva">
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SoTubeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ayw-Iq-cva">
                                 <rect key="frame" x="0.0" y="20" width="320" height="548"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cV-01-xOd">
-                                <rect key="frame" x="16" y="269" width="288" height="30"/>
+                                <rect key="frame" x="16" y="411" width="288" height="30"/>
                                 <state key="normal" title="Connect with Spotify"/>
                                 <connections>
                                     <action selector="connectToSpotify:" destination="vnE-1c-72W" eventType="touchUpInside" id="OjX-pa-BOu"/>
@@ -307,7 +307,7 @@
                             <constraint firstItem="P3o-XQ-dmV" firstAttribute="top" secondItem="ayw-Iq-cva" secondAttribute="bottom" id="Opf-Oy-jyL"/>
                             <constraint firstItem="6cV-01-xOd" firstAttribute="centerX" secondItem="8Td-Gh-oyh" secondAttribute="centerX" id="PZA-G3-L3d"/>
                             <constraint firstItem="6cV-01-xOd" firstAttribute="leading" secondItem="8Td-Gh-oyh" secondAttribute="leadingMargin" id="hiQ-y4-Ts9"/>
-                            <constraint firstItem="6cV-01-xOd" firstAttribute="centerY" secondItem="8Td-Gh-oyh" secondAttribute="centerY" id="iog-8i-Z5n"/>
+                            <constraint firstItem="6cV-01-xOd" firstAttribute="centerY" secondItem="8Td-Gh-oyh" secondAttribute="centerY" multiplier="1.5" id="iog-8i-Z5n"/>
                         </constraints>
                     </view>
                     <connections>
@@ -903,7 +903,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAI-5O-pyb" id="br8-1O-eM6">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JzE-WR-qW1">
@@ -1921,7 +1921,7 @@
     <resources>
         <image name="SoTubeIconBottom" width="1000" height="508"/>
         <image name="SoTubeIconTop" width="1000" height="497"/>
-        <image name="SoTube_Logo" width="890" height="769"/>
+        <image name="SoTubeLogo" width="1670" height="696"/>
         <image name="TabBarIcon_me_selected" width="164" height="158"/>
         <image name="TabBarIcon_points2_selected" width="51" height="53"/>
         <image name="TabBarIcon_shoppingBasket_blue" width="158" height="162"/>
