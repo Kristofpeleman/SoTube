@@ -21,24 +21,13 @@ class BackGroundColors: NSObject, UIPickerViewDataSource {
         "Green" : "green_background"
     ]
     
-    let backGroundColorOrder: [String: Int] = [
-        "Yellow" : 0,
-        "Purple" : 1,
-        "Orange" : 2,
-        "Pink" : 3,
-        "Neutral" : 4,
-        "Green" : 5,
-        "Blue" : 6
-    ]
+    let backGroundsArray = ["Yellow","Purple","Orange","Pink","Neutral","Green","Blue"]
     
     let defaultColorDescription: String = "black_white_background"
     
     var backGroundKeys: [String] {
-        return backGroundColorData.map{$0.key}
-    }
-    
-    var defaultValue: Int {
-        return backGroundColorData.count - 3
+        
+        return backGroundsArray.map{backGroundColorData[$0]!}
     }
     
     func numberOfComponents(in: UIPickerView) -> Int {
@@ -50,16 +39,16 @@ class BackGroundColors: NSObject, UIPickerViewDataSource {
     }
     
     func getBackGroundDescriptionFor(_ row: Int) -> String {
-        return backGroundKeys[row]
+        return backGroundsArray[row]
     }
     
     func getImageNameForSelected(_ row: Int) -> String {
-        let key = self.backGroundKeys[row]
+        let key = self.backGroundsArray[row]
         return self.backGroundColorData[key]!
     }
     
     func getRowForBackGroundColor(_ color: String) -> Int {
-        return backGroundColorOrder[color]!
+        return backGroundsArray.index(of: color)!
     }
     
 }

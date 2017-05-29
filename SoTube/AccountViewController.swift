@@ -75,10 +75,7 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
             default:
                 backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Neutral"), inComponent: 0, animated: false)
             }
-        } else {
-            let initialRowForBackGroundPickerView = backGroundPickerDataSource.defaultValue
-            backGroundPickerView.selectRow(initialRowForBackGroundPickerView, inComponent: 0, animated: false)
-        }
+        } 
         
         if let _ = shared.user {
             loginButton.title = "Log out"
