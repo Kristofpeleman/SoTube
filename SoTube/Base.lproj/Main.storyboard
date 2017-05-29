@@ -1,11 +1,11 @@
 <?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11542" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hGK-qc-P1j">
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hGK-qc-P1j">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11524"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -70,20 +70,20 @@
                                 </view>
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="bAz-rO-cIW">
-                                <rect key="frame" x="249" y="99" width="55" height="38.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBarIcon_shoppingBasket_blue" translatesAutoresizingMaskIntoConstraints="NO" id="bAz-rO-cIW">
+                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bAz-rO-cIW" secondAttribute="height" multiplier="1:0.7" id="itT-o8-BhL"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kik-JP-ME9">
-                                <rect key="frame" x="265.5" y="111" width="22" height="15.5"/>
+                                <rect key="frame" x="275.5" y="112.5" width="16.5" height="11.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cq4-f8-6on">
-                                <rect key="frame" x="249" y="99" width="55" height="38.5"/>
+                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
                                 <connections>
                                     <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="7yt-ZZ-pH2"/>
                                 </connections>
@@ -217,13 +217,14 @@
                             <constraint firstAttribute="trailingMargin" secondItem="5cm-du-jW8" secondAttribute="trailing" id="QoO-uy-Tsy"/>
                             <constraint firstItem="Kik-JP-ME9" firstAttribute="centerX" secondItem="bAz-rO-cIW" secondAttribute="centerX" id="TDz-CU-urH"/>
                             <constraint firstItem="id9-Xv-COs" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leading" id="ViJ-vK-mh4"/>
+                            <constraint firstItem="bAz-rO-cIW" firstAttribute="centerY" secondItem="8tG-DK-Rpe" secondAttribute="centerY" id="Vjw-qI-pBI"/>
                             <constraint firstItem="yTh-NN-ReA" firstAttribute="width" secondItem="pj7-ZH-o6R" secondAttribute="width" id="ZiE-fS-oFq"/>
                             <constraint firstAttribute="trailing" secondItem="D3Z-jY-RCg" secondAttribute="trailing" id="aeX-yB-Ik4"/>
                             <constraint firstItem="5cm-du-jW8" firstAttribute="leading" secondItem="pj7-ZH-o6R" secondAttribute="leadingMargin" id="cpL-4V-W7k"/>
                             <constraint firstItem="D3Z-jY-RCg" firstAttribute="top" secondItem="id9-Xv-COs" secondAttribute="bottom" id="dSk-dI-SWV"/>
+                            <constraint firstItem="bAz-rO-cIW" firstAttribute="height" secondItem="pj7-ZH-o6R" secondAttribute="height" multiplier="0.05" id="eXL-68-UIp"/>
                             <constraint firstItem="6AI-ei-ZiZ" firstAttribute="centerY" secondItem="pj7-ZH-o6R" secondAttribute="centerY" id="fnM-kW-Yl3"/>
                             <constraint firstItem="5cm-du-jW8" firstAttribute="top" secondItem="8tG-DK-Rpe" secondAttribute="bottom" constant="5" id="jhT-wm-iKy"/>
-                            <constraint firstItem="bAz-rO-cIW" firstAttribute="bottom" secondItem="8tG-DK-Rpe" secondAttribute="bottom" id="lVy-cw-LGn"/>
                             <constraint firstItem="Kik-JP-ME9" firstAttribute="centerY" secondItem="bAz-rO-cIW" secondAttribute="centerY" id="nIe-TW-Ass"/>
                             <constraint firstItem="8tG-DK-Rpe" firstAttribute="top" secondItem="D3Z-jY-RCg" secondAttribute="bottom" id="nPK-Su-J8a"/>
                             <constraint firstItem="lMR-6X-fhy" firstAttribute="centerY" secondItem="8tG-DK-Rpe" secondAttribute="centerY" id="pDy-lT-Xp5"/>
@@ -231,7 +232,6 @@
                             <constraint firstItem="yTh-NN-ReA" firstAttribute="centerX" secondItem="pj7-ZH-o6R" secondAttribute="centerX" id="vWp-ND-lAk"/>
                             <constraint firstItem="yTh-NN-ReA" firstAttribute="centerY" secondItem="pj7-ZH-o6R" secondAttribute="centerY" id="yFK-3J-bex"/>
                             <constraint firstItem="TY1-4m-eLT" firstAttribute="top" secondItem="5cm-du-jW8" secondAttribute="bottom" constant="10" id="ykj-oN-JwI"/>
-                            <constraint firstItem="bAz-rO-cIW" firstAttribute="top" secondItem="8tG-DK-Rpe" secondAttribute="top" id="zBh-gw-dL8"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" title="All Songs" image="all_songs" selectedImage="all_songs" id="wgn-mS-7Z6"/>
@@ -362,20 +362,20 @@
                                 </view>
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-HW-YGr">
-                                <rect key="frame" x="249" y="99" width="55" height="38.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBarIcon_shoppingBasket_blue" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-HW-YGr">
+                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="nv6-HW-YGr" secondAttribute="height" multiplier="1:0.7" id="ytJ-3Q-SYY"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t05-ME-O1r">
-                                <rect key="frame" x="265.5" y="110.5" width="22" height="15.5"/>
+                                <rect key="frame" x="275.5" y="112.5" width="16.5" height="11.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRY-KT-xK5">
-                                <rect key="frame" x="249" y="99" width="55" height="38.5"/>
+                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
                                 <connections>
                                     <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="7be-mX-KQC"/>
                                 </connections>
@@ -471,7 +471,6 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="6lY-oU-XF9" firstAttribute="width" secondItem="Z8k-Kt-VWr" secondAttribute="width" multiplier="1:3.6" id="2Rs-AX-hNF"/>
-                            <constraint firstItem="nv6-HW-YGr" firstAttribute="bottom" secondItem="6lY-oU-XF9" secondAttribute="bottom" id="3no-Qe-Q5e"/>
                             <constraint firstItem="44S-ky-1cZ" firstAttribute="centerY" secondItem="Z8k-Kt-VWr" secondAttribute="centerY" id="46C-pI-7zl"/>
                             <constraint firstItem="SRY-KT-xK5" firstAttribute="height" secondItem="nv6-HW-YGr" secondAttribute="height" id="55L-pt-cCh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nv6-HW-YGr" secondAttribute="trailing" id="6PM-hY-7Vp"/>
@@ -490,11 +489,12 @@
                             <constraint firstItem="rnf-7E-gZs" firstAttribute="top" secondItem="6F7-My-Tlo" secondAttribute="bottom" id="V4l-ZU-YUV"/>
                             <constraint firstItem="t05-ME-O1r" firstAttribute="centerY" secondItem="nv6-HW-YGr" secondAttribute="centerY" id="Vf0-lJ-o2P"/>
                             <constraint firstAttribute="trailing" secondItem="rnf-7E-gZs" secondAttribute="trailing" id="a0I-Aa-E2m"/>
+                            <constraint firstItem="nv6-HW-YGr" firstAttribute="centerY" secondItem="6lY-oU-XF9" secondAttribute="centerY" id="a2H-XE-UXL"/>
                             <constraint firstItem="SRY-KT-xK5" firstAttribute="centerX" secondItem="nv6-HW-YGr" secondAttribute="centerX" id="cZK-8b-FeN"/>
                             <constraint firstItem="SRY-KT-xK5" firstAttribute="width" secondItem="nv6-HW-YGr" secondAttribute="width" id="ejD-5A-PfY"/>
                             <constraint firstItem="t05-ME-O1r" firstAttribute="width" secondItem="nv6-HW-YGr" secondAttribute="width" multiplier="0.4" id="jA7-it-Bay"/>
+                            <constraint firstItem="nv6-HW-YGr" firstAttribute="height" secondItem="Z8k-Kt-VWr" secondAttribute="height" multiplier="0.05" id="jTv-aS-Wyr"/>
                             <constraint firstItem="HOf-fO-nEH" firstAttribute="trailing" secondItem="Z8k-Kt-VWr" secondAttribute="trailingMargin" id="jta-a0-TOO"/>
-                            <constraint firstItem="nv6-HW-YGr" firstAttribute="top" secondItem="6lY-oU-XF9" secondAttribute="top" id="kK0-en-tpx"/>
                             <constraint firstItem="WcI-Bz-fJ7" firstAttribute="leading" secondItem="Z8k-Kt-VWr" secondAttribute="leadingMargin" id="lia-CQ-0d9"/>
                             <constraint firstItem="t05-ME-O1r" firstAttribute="centerX" secondItem="nv6-HW-YGr" secondAttribute="centerX" id="oAD-rN-HME"/>
                             <constraint firstItem="6lY-oU-XF9" firstAttribute="leading" secondItem="WcI-Bz-fJ7" secondAttribute="trailing" constant="5" id="oHC-zY-FnE"/>
@@ -547,15 +547,14 @@
                                 </view>
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="Wvs-O1-43y">
-                                <rect key="frame" x="261" y="65" width="54.5" height="38"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBarIcon_shoppingBasket_blue" translatesAutoresizingMaskIntoConstraints="NO" id="Wvs-O1-43y">
+                                <rect key="frame" x="275" y="65" width="40.5" height="28.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Wvs-O1-43y" secondAttribute="height" multiplier="1:0.7" id="6ig-q5-7DF"/>
-                                    <constraint firstAttribute="height" constant="38" id="EmO-me-pMc"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJM-Dy-R7E">
-                                <rect key="frame" x="277.5" y="76.5" width="21.5" height="15"/>
+                                <rect key="frame" x="287" y="73.5" width="16.5" height="11.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -588,7 +587,7 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxZ-DE-9kX">
-                                <rect key="frame" x="260.5" y="65" width="54.5" height="38"/>
+                                <rect key="frame" x="274.5" y="65" width="40.5" height="28.5"/>
                                 <connections>
                                     <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="j1g-u1-zEs"/>
                                 </connections>
@@ -771,6 +770,7 @@
                             <constraint firstItem="O19-jx-HLe" firstAttribute="centerY" secondItem="3f7-FR-f8I" secondAttribute="centerY" id="ls6-XL-sD1"/>
                             <constraint firstItem="sbw-oP-2tT" firstAttribute="top" secondItem="Od7-6S-ieB" secondAttribute="top" id="mZ8-hg-kCF"/>
                             <constraint firstItem="rf3-ne-yDb" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="leading" id="mmD-b6-Mtg"/>
+                            <constraint firstItem="Wvs-O1-43y" firstAttribute="height" secondItem="Od7-6S-ieB" secondAttribute="height" multiplier="0.05" id="n3U-Tb-v93"/>
                             <constraint firstAttribute="trailing" secondItem="sbw-oP-2tT" secondAttribute="trailing" id="pCX-4Z-Tzn"/>
                             <constraint firstItem="aco-gw-pxO" firstAttribute="leading" secondItem="Od7-6S-ieB" secondAttribute="leading" id="qHk-pn-UA0"/>
                             <constraint firstItem="O19-jx-HLe" firstAttribute="centerX" secondItem="Od7-6S-ieB" secondAttribute="centerX" id="qfO-Z8-Be7"/>
@@ -894,7 +894,7 @@
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v5m-Z4-3Lt">
-                                <rect key="frame" x="16" y="70" width="288" height="358"/>
+                                <rect key="frame" x="16" y="70" width="288" height="363"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -962,20 +962,20 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lk7-H5-q5P">
-                                <rect key="frame" x="16" y="474" width="74" height="30"/>
+                                <rect key="frame" x="16" y="479" width="74" height="30"/>
                                 <state key="normal" title="Buy Songs"/>
                                 <connections>
                                     <action selector="buySongs:" destination="x9N-ly-E92" eventType="touchUpInside" id="RDq-ab-MlM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost: 0 Points" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTZ-xV-6VG">
-                                <rect key="frame" x="176" y="474" width="128" height="30"/>
+                                <rect key="frame" x="176" y="479" width="128" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your points: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ted-Kd-SSL">
-                                <rect key="frame" x="16" y="443" width="160" height="21"/>
+                                <rect key="frame" x="16" y="448" width="160" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1042,20 +1042,20 @@
                                 </view>
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="xJh-G9-pIf">
-                                <rect key="frame" x="249" y="99" width="55" height="38.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBarIcon_shoppingBasket_blue" translatesAutoresizingMaskIntoConstraints="NO" id="xJh-G9-pIf">
+                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xJh-G9-pIf" secondAttribute="height" multiplier="1:0.7" id="vsn-VS-AxB"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwX-iQ-Jxb">
-                                <rect key="frame" x="265.5" y="110.5" width="22" height="15.5"/>
+                                <rect key="frame" x="275.5" y="112.5" width="16.5" height="11.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1P9-Ry-u6C">
-                                <rect key="frame" x="249" y="99" width="55" height="38.5"/>
+                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
                                 <connections>
                                     <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="baH-RZ-WvV"/>
                                 </connections>
@@ -1151,6 +1151,7 @@
                             <constraint firstItem="1P9-Ry-u6C" firstAttribute="width" secondItem="xJh-G9-pIf" secondAttribute="width" id="64i-Ud-i65"/>
                             <constraint firstItem="vBi-Wa-Zx7" firstAttribute="centerY" secondItem="lDU-uJ-hZb" secondAttribute="centerY" id="6Yt-NA-6Hm"/>
                             <constraint firstItem="CVU-ku-Mm3" firstAttribute="leading" secondItem="lDU-uJ-hZb" secondAttribute="leadingMargin" id="7K0-Fr-gjV"/>
+                            <constraint firstItem="xJh-G9-pIf" firstAttribute="height" secondItem="lDU-uJ-hZb" secondAttribute="height" multiplier="0.05" id="97m-Rs-8ZV"/>
                             <constraint firstItem="1zS-9z-DKq" firstAttribute="height" secondItem="lDU-uJ-hZb" secondAttribute="height" id="AIL-xh-PTb"/>
                             <constraint firstItem="1zS-9z-DKq" firstAttribute="centerY" secondItem="lDU-uJ-hZb" secondAttribute="centerY" id="Agv-zN-HJP"/>
                             <constraint firstItem="iwO-MW-MpT" firstAttribute="top" secondItem="QGx-6D-bzq" secondAttribute="bottom" constant="10" id="BdJ-U6-LUK"/>
@@ -1162,7 +1163,7 @@
                             <constraint firstItem="PRR-QU-8eX" firstAttribute="leading" secondItem="lDU-uJ-hZb" secondAttribute="leading" id="SYh-tQ-fqL"/>
                             <constraint firstItem="QGx-6D-bzq" firstAttribute="top" secondItem="t6U-LK-0Cu" secondAttribute="bottom" constant="5" id="Sc1-ES-CAa"/>
                             <constraint firstItem="1zS-9z-DKq" firstAttribute="width" secondItem="lDU-uJ-hZb" secondAttribute="width" id="Tn8-rt-ptG"/>
-                            <constraint firstItem="xJh-G9-pIf" firstAttribute="bottom" secondItem="t6U-LK-0Cu" secondAttribute="bottom" id="V2a-X7-BaH"/>
+                            <constraint firstItem="xJh-G9-pIf" firstAttribute="centerY" secondItem="t6U-LK-0Cu" secondAttribute="centerY" id="XVN-bi-nmm"/>
                             <constraint firstItem="t6U-LK-0Cu" firstAttribute="width" secondItem="lDU-uJ-hZb" secondAttribute="width" multiplier="1:3.6" id="Y4b-gg-UVt"/>
                             <constraint firstItem="J1Q-Lf-jKs" firstAttribute="top" secondItem="lDU-uJ-hZb" secondAttribute="top" id="bkc-QC-8jB"/>
                             <constraint firstItem="vBi-Wa-Zx7" firstAttribute="width" secondItem="lDU-uJ-hZb" secondAttribute="width" id="blI-wZ-114"/>
@@ -1180,7 +1181,6 @@
                             <constraint firstItem="QwX-iQ-Jxb" firstAttribute="centerY" secondItem="xJh-G9-pIf" secondAttribute="centerY" id="ttR-Ad-UJX"/>
                             <constraint firstAttribute="trailing" secondItem="PRR-QU-8eX" secondAttribute="trailing" id="uJ7-tn-1vB"/>
                             <constraint firstItem="QGx-6D-bzq" firstAttribute="leading" secondItem="lDU-uJ-hZb" secondAttribute="leadingMargin" id="yxV-SE-42l"/>
-                            <constraint firstItem="xJh-G9-pIf" firstAttribute="top" secondItem="t6U-LK-0Cu" secondAttribute="top" id="zot-vg-XnD"/>
                         </constraints>
                     </view>
                     <tabBarItem key="tabBarItem" systemItem="favorites" id="rzs-mu-L2r"/>
@@ -1578,20 +1578,20 @@
                                 </view>
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="E6t-Ud-Zcy">
-                                <rect key="frame" x="249" y="99" width="55" height="38.5"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBarIcon_shoppingBasket_blue" translatesAutoresizingMaskIntoConstraints="NO" id="E6t-Ud-Zcy">
+                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="E6t-Ud-Zcy" secondAttribute="height" multiplier="1:0.7" id="0R7-bz-x9e"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tT3-4x-EOl">
-                                <rect key="frame" x="265.5" y="110.5" width="22" height="15.5"/>
+                                <rect key="frame" x="275.5" y="112.5" width="16.5" height="11.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0o-WH-yRm">
-                                <rect key="frame" x="249" y="99" width="55" height="38.5"/>
+                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
                                 <connections>
                                     <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="ebZ-Xv-MAE"/>
                                 </connections>
@@ -1701,9 +1701,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
                             <constraint firstItem="k2t-KH-8nu" firstAttribute="height" secondItem="KT0-o7-5dD" secondAttribute="height" id="1w0-1E-bnV"/>
-                            <constraint firstItem="E6t-Ud-Zcy" firstAttribute="top" secondItem="Wug-yA-JbP" secondAttribute="top" id="64f-gn-b0D"/>
                             <constraint firstItem="K0o-WH-yRm" firstAttribute="height" secondItem="E6t-Ud-Zcy" secondAttribute="height" id="66P-8t-Sbh"/>
-                            <constraint firstItem="E6t-Ud-Zcy" firstAttribute="bottom" secondItem="Wug-yA-JbP" secondAttribute="bottom" id="6sE-FA-kPE"/>
                             <constraint firstAttribute="trailingMargin" secondItem="E6t-Ud-Zcy" secondAttribute="trailing" id="6tz-6n-ocx"/>
                             <constraint firstItem="K0o-WH-yRm" firstAttribute="centerX" secondItem="E6t-Ud-Zcy" secondAttribute="centerX" id="Aa0-ZQ-K5V"/>
                             <constraint firstItem="sMQ-IR-ybh" firstAttribute="leading" secondItem="KT0-o7-5dD" secondAttribute="leadingMargin" id="Ach-ly-tgP"/>
@@ -1722,6 +1720,7 @@
                             <constraint firstItem="jNN-4Q-blB" firstAttribute="centerY" secondItem="Wug-yA-JbP" secondAttribute="centerY" id="Vhv-u9-fgC"/>
                             <constraint firstItem="X2e-ct-uIF" firstAttribute="leading" secondItem="KT0-o7-5dD" secondAttribute="leading" id="XLi-mo-7EI"/>
                             <constraint firstItem="Wug-yA-JbP" firstAttribute="leading" secondItem="jNN-4Q-blB" secondAttribute="trailing" constant="5" id="Xil-0e-PHg"/>
+                            <constraint firstItem="E6t-Ud-Zcy" firstAttribute="centerY" secondItem="Wug-yA-JbP" secondAttribute="centerY" id="a87-PL-co2"/>
                             <constraint firstAttribute="trailing" secondItem="xu0-Fb-g9Y" secondAttribute="trailing" id="d0l-hO-Uop"/>
                             <constraint firstItem="sMQ-IR-ybh" firstAttribute="trailing" secondItem="KT0-o7-5dD" secondAttribute="trailingMargin" id="dDv-Wz-1tT"/>
                             <constraint firstItem="at0-CC-3xd" firstAttribute="width" secondItem="KT0-o7-5dD" secondAttribute="width" id="eZK-Rk-U9e"/>
@@ -1734,6 +1733,7 @@
                             <constraint firstItem="Wug-yA-JbP" firstAttribute="width" secondItem="Wug-yA-JbP" secondAttribute="height" multiplier="2.3:1" id="uqg-T0-Wo7"/>
                             <constraint firstItem="tT3-4x-EOl" firstAttribute="width" secondItem="E6t-Ud-Zcy" secondAttribute="width" multiplier="0.4" id="vEt-C5-CEv"/>
                             <constraint firstItem="Wug-yA-JbP" firstAttribute="top" secondItem="X2e-ct-uIF" secondAttribute="bottom" id="wKr-Kg-hHV"/>
+                            <constraint firstItem="E6t-Ud-Zcy" firstAttribute="height" secondItem="KT0-o7-5dD" secondAttribute="height" multiplier="0.05" id="wc4-tf-Yz1"/>
                             <constraint firstItem="at0-CC-3xd" firstAttribute="height" secondItem="KT0-o7-5dD" secondAttribute="height" id="wqm-zH-Sn7"/>
                         </constraints>
                     </view>
@@ -1924,6 +1924,7 @@
         <image name="SoTube_Logo" width="890" height="769"/>
         <image name="TabBarIcon_me_selected" width="164" height="158"/>
         <image name="TabBarIcon_points2_selected" width="51" height="53"/>
+        <image name="TabBarIcon_shoppingBasket_blue" width="158" height="162"/>
         <image name="TabBarIcon_wishlist_blue (35" width="32" height="32"/>
         <image name="all_songs" width="34" height="36"/>
         <image name="background_black_white" width="640" height="640"/>
@@ -1934,12 +1935,11 @@
         <image name="play" width="256" height="256"/>
         <image name="profile" width="36" height="35"/>
         <image name="rewind" width="200" height="200"/>
-        <image name="shopping_cart" width="512" height="512"/>
         <image name="wishlist_blue_" width="35" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="bey-pH-39d"/>
-        <segue reference="tpj-gN-ERD"/>
         <segue reference="j1g-u1-zEs"/>
+        <segue reference="tpj-gN-ERD"/>
     </inferredMetricsTieBreakers>
 </document>
