@@ -313,8 +313,7 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
             let userShoppingCartReference = self.userReference?.child("shoppingCart")
             userShoppingCartReference?.child(song.spotify_ID!).removeValue()
             
-            sleep(2)
-            self.currentUser?.shoppingCart = Shared.current.user?.shoppingCart
+            self.currentUser?.shoppingCart = currentUser?.shoppingCart?.filter{$0.spotify_ID != song.spotify_ID}
             self.tableView.reloadData()
             updatePointLabels()
         }
