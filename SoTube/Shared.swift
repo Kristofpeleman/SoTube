@@ -19,8 +19,10 @@ final class Shared {
     
     static let current = Shared()
     
-    // MARK: Local Variable
+    // MARK: Local Variables
     
     var user : User?
-    
+    var songList: [Song]?
+    var currentPositionInList: Int?
+    var backGroundImage: String = "black_white_background"
 }

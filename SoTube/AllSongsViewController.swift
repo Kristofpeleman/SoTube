@@ -9,37 +9,27 @@
 import UIKit
 import Firebase
 
-class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate, LoginViewControllerDelegate {
+class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITableViewDataSource, UIPickerViewDelegate, UISearchBarDelegate, LoginViewControllerDelegate, MusicPlayerViewControllerDelegate {
     
     // MARK: - Variables and constants
-    
-    // Created private vars for logged in User
-//    private var onlineUsersReference: FIRDatabaseReference?
-    private var userReference: FIRDatabaseReference?
-    private var userID: String?
 
+    var shared = Shared.current
+
+    // Created a constant containing the feed-urls (as Strings) from TopMediaViewModel()
+    var offset = 0
+    var newReleasesFeed: String?
     
-    var shared = Shared.current {
-        didSet {
-            if shared.user == nil {
-                self.userReference = nil
-                self.userID = nil
-            }
-        }
+    
+    
+    // Constant to lessen the amount of "magic" numbers in the app
+    let tableViewInitialSongLimit = 50
+    
+    // calculated property to limit the absolute total number of songs the Tableview will display
+    
+    var tableViewTotalSongLimit: Int {
+        return self.tableViewInitialSongLimit * 10
     }
     
-    
-    // Created a constant containing the feed-urls (as Strings) from ViewModel()
-    let feedURLs = ViewModel().feeds
-    // Created a constant containing the feed-urls (as Strings) from TopMediaViewModel()
-    let newReleasesFeed = TopMediaViewModel().newReleasesURLAsString
-    
-    // Created a variable for the position of the song in the list we are currently using
-    var currentSongPositionInList = 0
-    
-    
-    // Variable to lessen the amount of "magic" numbers in the app
-    let tableViewSongLimit = 50
     // Created an optional variable "songs"-array containing elements of class "Song"
     var songs: [Song]? {
         // When the value changes
@@ -47,17 +37,17 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             if songs != nil {
                 // !!!! REMEMBER: Count starts at 1, an array-positioning/index starts at 0
                 // If there are 50 items in the array
-                if songs!.count == tableViewSongLimit {
+                if songs!.count % tableViewInitialSongLimit == 0 {
                     // print the 49th position in the array (= item 50)
                     //print(songs![49])
                     
                     print(String(songs!.count) + " SONGS")
                     
                     // reload the tableView to show all the new items
+                    sleep(1)
                     self.tableView.reloadData()
                     
-                    activityIndicator.stopAnimating()
-                    tableView.isUserInteractionEnabled = true
+                    self.stopIndicator()
                 }
             }
         }
@@ -84,7 +74,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // When value changes
         didSet {
             // If there are 50 items in the array
-            if trackIDs!.count == tableViewSongLimit {
+            if trackIDs!.count % tableViewInitialSongLimit == 0 && trackIDs!.count != 0 {
                 // Print our array
                 print(trackIDs!)
                 // local constant is a temporary array that puts the values in our trackIDs between these strings
@@ -113,10 +103,15 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     // PickerView and its parts
     @IBOutlet weak var sortingPickerView: UIPickerView!
     @IBOutlet var sortingOptions: SortingOptions!
+    
     // TableView
     @IBOutlet weak var tableView: UITableView!
     // SearchBar
     @IBOutlet weak var searchBar: UISearchBar!
+    
+    @IBOutlet weak var goToMusicPlayerButton: UIBarButtonItem!
+    
+    @IBOutlet weak var shoppingCartAmountLabel: UILabel!
     
     
     // MARK: - Standard Functions
@@ -162,43 +157,61 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
         
-        if let _ = shared.user {
+        self.songVCBackGroundImage.image = UIImage(named: self.shared.backGroundImage)
+        
+        if let user = shared.user {
+            
             logInButton.title = "Log out"
+            
+            if let amountOfItemsInCart = user.shoppingCart?.count {
+                shoppingCartAmountLabel.backgroundColor = UIColor.red
+                shoppingCartAmountLabel.text = "\(amountOfItemsInCart)"
+            } else {
+                shoppingCartAmountLabel.backgroundColor = nil
+                shoppingCartAmountLabel.text = ""
+            }
+            
+            print(self.shared.user?.fireBaseID ?? "NO FIREBASE ID")
+            print(self.shared.user?.userName ?? "NO USERNAME")
+            print(self.shared.user?.emailAddress ?? "NO EMAIL")
+            print(self.shared.user?.points ?? "NO POINTS")
+            
         } else {
             logInButton.title = "Log in"
         }
         
-        // If userReference (from FireBase) exists/isn't nil
-        if let reference = self.userReference {
-            // The title of logInButton has to change
-            logInButton.title = "Log out"
-
-            // The user that's logged into fireBase's values will be copied into our "currentUser" variable
-            reference.observe(.value, with: {snapshot in
-
-                self.shared.user = User(with: snapshot)
-                
-                print(self.shared.user?.fireBaseID ?? "NO FIREBASE ID")
-                print(self.shared.user?.userName ?? "NO USERNAME")
-                print(self.shared.user?.emailAddress ?? "NO EMAIL")
-                print(self.shared.user?.points ?? "NO POINTS")
-            })
-            
+        
+        if shared.currentPositionInList != nil {
+            goToMusicPlayerButton.isEnabled = true
         }
+        else {
+            goToMusicPlayerButton.isEnabled = false
+        }
+        
     }
     
     // When the View just showed itself
     override func viewDidAppear(_ animated: Bool) {
         sleep(1)
-        self.tableView.reloadData()
-        activityIndicator.stopAnimating()
-        tableView.isUserInteractionEnabled = true
+        tableView.reloadData()
+        stopIndicator()
+    }
+    
+    
+    // MARK: - IBActions
+    
+    @IBAction func goToMusicPlayer(_ sender: UIBarButtonItem) {
+        performSegue(withIdentifier: "musicPlayerSegue", sender: sender)
     }
     
     
     
+    // MARK: - Activity Indicator
     
-    
+    func stopIndicator(){
+        activityIndicator.stopAnimating()
+        tableView.isUserInteractionEnabled = true
+    }
     
     func longLoadingAlert(){
         if activityIndicator.isAnimating{
@@ -206,8 +219,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             let yesAction = UIAlertAction(title: "Yes", style: .default, handler: nil)
             let noAction = UIAlertAction(title: "No", style: .default, handler: { (action) in
                 self.tableView.reloadData()
-                self.activityIndicator.stopAnimating()
-                self.tableView.isUserInteractionEnabled = true
+                self.stopIndicator()
             })
             alertController.addAction(noAction)
             alertController.addAction(yesAction)
@@ -235,7 +247,14 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         if let songs = self.songs {
             // Call "alterTableViewLabels" with "songs" as parameter
             alterTableViewLabels(forSongList: songs, inCell: cell, atRow: indexPath.row)
+            
+            if indexPath.row == self.songs!.count - 1 && self.songs!.count <= self.tableViewTotalSongLimit {
+                self.offset = songs.count
+                self.getAlbumIDs()
+            }
         }
+        
+
         
         return cell
     }
@@ -246,19 +265,19 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         activityIndicator.startAnimating()
         tableView.isUserInteractionEnabled = false
-            // The current position in our array is the row we just clicked on
-            currentSongPositionInList = indexPath.row
-            
-            /*
-             let song = self.songs?[currentSongPositionInList]
-             
-             if let _ = song?.fullSongURLAssString {
-             performSegue(withIdentifier: "playerSegue", sender: nil)
-             }*/
-            
-            //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
-            // Perform the following segue to a new ViewController
-            performSegue(withIdentifier: "musicPlayerSegue", sender: nil)
+        // The current position in our array is the row we just clicked on
+        shared.currentPositionInList = indexPath.row
+        
+        /*
+         let song = self.songs?[currentSongPositionInList]
+         
+         if let _ = song?.fullSongURLAssString {
+         performSegue(withIdentifier: "playerSegue", sender: nil)
+         }*/
+        
+        //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
+        // Perform the following segue to a new ViewController
+        performSegue(withIdentifier: "musicPlayerSegue", sender: self.tableView)
         
     }
     
@@ -350,38 +369,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     // MARK: - SearchBar
     
-    // Delete after implemantation into "mySongs"
-    /*
-    func searchBar(_ searchBar: UISearchBar, textDidChange searchText: String) {
-        if searchText == "" || songs == nil {
-            filteredSongs = []
-        }
-        else {
-            filteredSongs = songs!.filter(({ (song) -> Bool in
-                return song.artistNames[0].lowercased().contains(searchText.lowercased())
-            }))
-            filteredSongs += songs!.filter(({ (song) -> Bool in
-                if song.artistNames.count > 1 {
-                    if !filteredSongs.contains(where: {$0.spotify_ID == song.spotify_ID}) {
-                        return song.artistNames[1].lowercased().contains(searchText.lowercased())
-                    }
-                }
-                return false
-            }))
-            filteredSongs += songs!.filter(({ (song) -> Bool in
-                if !filteredSongs.contains(where: {$0.spotify_ID == song.spotify_ID}){
-                    return song.songTitle.lowercased().contains(searchText.lowercased())
-                }
-                return false
-            }))
-            
-        }
-        pickerView(sortingPickerView, didSelectRow: currentPickerViewRow, inComponent: 0)
-        tableView.reloadData()
-    }
-    */
-
-    
     // When you press "enter"/"return" in the searchBar
     func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
         activityIndicator.startAnimating()
@@ -420,19 +407,34 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 // Set the FireBase authentication and session
                 destinationVC.auth = self.auth
                 destinationVC.session = self.session
+                destinationVC.delegate = self
                 
-                // If this VC's "songs" exists/isn't nil
-                if songs != nil {
-                    // Give the "songList" in our destination the value of this VC's "songs"
-                    destinationVC.songList = songs
+                if sender is UIBarButtonItem {
+                    destinationVC.songList = self.shared.songList
+                    destinationVC.currentSongPositionInList = self.shared.currentPositionInList
+
+                } else {
+                    
+                    // If this VC's "songs" exists/isn't nil
+                    if songs != nil {
+                        // Give the "songList" in our destination the value of this VC's "songs"
+                        destinationVC.songList = songs
+                    }
+                    
+                    // Give the "currentSongPositionInList" in our destination the value of this VC's "currentSongPositionInList"
+                    destinationVC.currentSongPositionInList = self.shared.currentPositionInList
                 }
-                
-                // Give the "currentSongPositionInList" in our destination the value of this VC's "currentSongPositionInList"
-                destinationVC.currentSongPositionInList = self.currentSongPositionInList
                 
                 // Same as above for these 2
                 destinationVC.currentUser = self.shared.user
-                destinationVC.userReference = self.userReference
+                
+                if let _ = self.shared.user {
+                
+                let usersReference: FIRDatabaseReference = rootReference!.child("Users")
+                let thisUserReference = usersReference.child(self.shared.user!.fireBaseID)
+                
+                destinationVC.userReference = thisUserReference
+                }
                 
             }
         }
@@ -454,7 +456,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 }
                 
                 // Give the "currentSongPositionInList" in our destination the value of this VC's "currentSongPositionInList"
-                destinationVC.currentSongPositionInList = self.currentSongPositionInList
+                destinationVC.currentSongPositionInList = self.shared.currentPositionInList
             }
         }
         
@@ -466,11 +468,23 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 destinationVC.delegate = self
             }
         }
+        
+        if segue.identifier == "shoppingCartSegue" {
+            if let destinationVC = segue.destination as? ShoppingCartViewController {
+                
+                destinationVC.auth = self.auth
+                destinationVC.session = self.session
+                destinationVC.currentUser = self.shared.user
+                
+                let usersReference = rootReference?.child("Users")
+                destinationVC.userReference = usersReference?.child(self.shared.user!.fireBaseID)
+            }
+        }
     }
     
     // An override function when performing a segue
     override func shouldPerformSegue(withIdentifier identifier: String, sender: Any?) -> Bool {
-       
+        
         // Check the value of "identifier"
         switch identifier {
         // If the value is "loginSegue"
@@ -485,8 +499,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 
                 // Since the value isn't in FireBase anymore, we must delete it localy
                 self.shared.user = nil
-                self.userReference = nil
-                self.userID = nil
+                //                self.userReference = nil
+                //                self.userID = nil
                 
                 // Change "logInButton"'s title to "Log in"
                 logInButton.title = "Log in"
@@ -494,13 +508,55 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 // Leave the function with the return and don't perform the segue
                 return false
             }
-            // If "logInButton"'s title isn't "Log out"
+                // If "logInButton"'s title isn't "Log out"
             else {
                 // Perform the segue
                 return true
             }
+        case "musicPlayerSegue":
+            
+            if sender is UIBarButtonItem {
+                if let _ = self.shared.songList, let _ = self.shared.currentPositionInList {
+                    return true
+                }
+                return false
+                
+            }
+            else {
+                return true
+            }
+            
+            
+        case "shoppingCartSegue":
+            
+            if let _ = shared.user {
+                return true
+            }
+            else {
+                if shared.user == nil {
+                    let alertController = UIAlertController(title: "Log In",
+                                                            message: "You need to log in before you can have a shoppingcart.",
+                                                            preferredStyle: .alert
+                    )
+                    
+                    let okAction = UIAlertAction(title: "OK",
+                                                 style: .cancel,
+                                                 handler: nil
+                    )
+                    
+                    alertController.addAction(okAction)
+                    
+                    present(alertController, animated: true, completion: nil)
+                    
+                }
+                
+                return false
+            }
+            
         // If the identifier's value isn't any of the above: perform Segue
         default: return true
+            
+            
         }
     }
     
@@ -508,14 +564,18 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     // MARK: - LoginViewControllerDelegate methods
     
-    func setUserID(_ id: String) {
-        // Give "userID" the value of "id"
-        self.userID = id
+    func setUser(_ user: User) {
+        self.shared.user = user
     }
     
-    func setUserReference(_ ref: FIRDatabaseReference) {
-        // Give "userReference" the value of "ref"
-        self.userReference = ref
+    // MARK: - MusicPlayerViewControllerDelegate methods
+    
+    func setSongList(_ songList: [Song]) {
+        self.shared.songList = songList
+    }
+    
+    func setCurrentPositionInList(_ position: Int) {
+        self.shared.currentPositionInList = position
     }
     
     
@@ -565,7 +625,9 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     func getAlbumIDs() {
         
-        let request = try? SPTRequest.createRequest(for: URL(string: newReleasesFeed)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
+        self.newReleasesFeed = TopMediaViewModel().getNewReleasesWith(offset: offset)
+        
+        let request = try? SPTRequest.createRequest(for: URL(string: newReleasesFeed!)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         
         print(request!.allHTTPHeaderFields ?? "NO HTTP HEADER FIELDS")
         print(request?.url ?? "MISSING URL")
@@ -584,7 +646,13 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                     albumIDArray.append((dictionary as! NSDictionary).value(forKey: "id") as! String? ?? "NOT FOUND")
                     
                 }
-                self.albumIDs = albumIDArray
+                
+                if let _ = self.albumIDs {
+//                    self.albumIDs = albums + albumIDArray
+                    self.albumIDs = albumIDArray
+                } else {
+                    self.albumIDs = albumIDArray
+                }
                 
             }
         }
@@ -593,6 +661,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     }
     
     func getTrackIDs() {
+        
+        self.trackIDs = []
         
         for feed in self.albumFeeds! {
         

@@ -7,6 +7,8 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		00489DC81ED8ADCD00AC32B2 /* AfterLaunchScreenViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 00489DC71ED8ADCD00AC32B2 /* AfterLaunchScreenViewController.swift */; };
+		00D14E891ED9A5B4006D5475 /* SoTubeLogoVidFade.mp4 in Resources */ = {isa = PBXBuildFile; fileRef = 00D14E881ED9A5B4006D5475 /* SoTubeLogoVidFade.mp4 */; };
 		2F2FD28B1EC1E0BD00628995 /* AllSongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2FD28A1EC1E0BD00628995 /* AllSongsViewController.swift */; };
 		2F2FD28F1EC1E65200628995 /* MySongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2FD28E1EC1E65200628995 /* MySongsViewController.swift */; };
 		2F2FD2911EC1E67500628995 /* FavoriteSongsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 2F2FD2901EC1E67500628995 /* FavoriteSongsViewController.swift */; };
@@ -36,10 +38,14 @@
 		6D24D3AA1ECB8AF00087024D /* SpotifyMetadata.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 6D24D3A71ECB8AF00087024D /* SpotifyMetadata.framework */; };
 		6D24D3AE1ECB8B350087024D /* BridgeViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 6D24D3AD1ECB8B350087024D /* BridgeViewController.m */; };
 		6D24D3B01ECBAC410087024D /* TopMediaViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D24D3AF1ECBAC410087024D /* TopMediaViewController.swift */; };
+		6D51013A1ED900860032A579 /* BackgroundColors.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D5101391ED900860032A579 /* BackgroundColors.swift */; };
+		6D57E5561ED79A20009423F1 /* AccountViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6D57E5551ED79A20009423F1 /* AccountViewController.swift */; };
 		6DC7B3CA1ED34DDE00D4B342 /* ShoppingCartViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 6DC7B3C91ED34DDE00D4B342 /* ShoppingCartViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		00489DC71ED8ADCD00AC32B2 /* AfterLaunchScreenViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AfterLaunchScreenViewController.swift; sourceTree = "<group>"; };
+		00D14E881ED9A5B4006D5475 /* SoTubeLogoVidFade.mp4 */ = {isa = PBXFileReference; lastKnownFileType = file; path = SoTubeLogoVidFade.mp4; sourceTree = "<group>"; };
 		0ABDEAD415BACF5138757979 /* Pods-SoTube.debug.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.debug.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.debug.xcconfig"; sourceTree = "<group>"; };
 		2F2FD28A1EC1E0BD00628995 /* AllSongsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AllSongsViewController.swift; sourceTree = "<group>"; };
 		2F2FD28E1EC1E65200628995 /* MySongsViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MySongsViewController.swift; sourceTree = "<group>"; };
@@ -74,6 +80,8 @@
 		6D24D3AC1ECB8B350087024D /* BridgeViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = BridgeViewController.h; sourceTree = "<group>"; };
 		6D24D3AD1ECB8B350087024D /* BridgeViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = BridgeViewController.m; sourceTree = "<group>"; };
 		6D24D3AF1ECBAC410087024D /* TopMediaViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TopMediaViewController.swift; sourceTree = "<group>"; };
+		6D5101391ED900860032A579 /* BackgroundColors.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = BackgroundColors.swift; sourceTree = "<group>"; };
+		6D57E5551ED79A20009423F1 /* AccountViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = AccountViewController.swift; sourceTree = "<group>"; };
 		6DC7B3C91ED34DDE00D4B342 /* ShoppingCartViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ShoppingCartViewController.swift; sourceTree = "<group>"; };
 		FF68D940F44C872C8192EC57 /* Pods-SoTube.release.xcconfig */ = {isa = PBXFileReference; includeInIndex = 1; lastKnownFileType = text.xcconfig; name = "Pods-SoTube.release.xcconfig"; path = "Pods/Target Support Files/Pods-SoTube/Pods-SoTube.release.xcconfig"; sourceTree = "<group>"; };
 /* End PBXFileReference section */
@@ -101,6 +109,7 @@
 				2F2FD28E1EC1E65200628995 /* MySongsViewController.swift */,
 				2F2FD2901EC1E67500628995 /* FavoriteSongsViewController.swift */,
 				2F2FD2921EC1E68200628995 /* WishlistViewController.swift */,
+				6D57E5551ED79A20009423F1 /* AccountViewController.swift */,
 				2FE813BA1EC449DD00F418E7 /* SongTableViewCell.swift */,
 			);
 			name = SongsViewControllers;
@@ -130,6 +139,7 @@
 		2F7F292B1EC5C40000D2B03A /* ViewModel */ = {
 			isa = PBXGroup;
 			children = (
+				6D5101391ED900860032A579 /* BackgroundColors.swift */,
 				2F7F29291EC5C3FB00D2B03A /* ViewModel.swift */,
 				2F72F00F1ECC3EE200EF70FB /* TopMediaViewModel.swift */,
 			);
@@ -161,6 +171,7 @@
 				2F91E9371EC0571E004A2E99 /* AppDelegate.swift */,
 				2F91E9391EC0571E004A2E99 /* ViewController.swift */,
 				2F91E93B1EC0571E004A2E99 /* Main.storyboard */,
+				00489DC71ED8ADCD00AC32B2 /* AfterLaunchScreenViewController.swift */,
 				6DC7B3C91ED34DDE00D4B342 /* ShoppingCartViewController.swift */,
 				6D24D3A31ECB85750087024D /* SpotifyConnectViewController.swift */,
 				2FBEF7F71EC5D42C000398CC /* MusicPlayerViewController.swift */,
@@ -175,6 +186,7 @@
 				6D24D3AC1ECB8B350087024D /* BridgeViewController.h */,
 				6D24D3AD1ECB8B350087024D /* BridgeViewController.m */,
 				6D24D3AB1ECB8B350087024D /* SoTube-Bridging-Header.h */,
+				00D14E881ED9A5B4006D5475 /* SoTubeLogoVidFade.mp4 */,
 			);
 			path = SoTube;
 			sourceTree = "<group>";
@@ -228,6 +240,9 @@
 		2F91E92C1EC0571D004A2E99 /* Project object */ = {
 			isa = PBXProject;
 			attributes = {
+				KnownAssetTags = (
+					Video,
+				);
 				LastSwiftUpdateCheck = 0820;
 				LastUpgradeCheck = 0820;
 				ORGANIZATIONNAME = "VDAB Cursist";
@@ -270,6 +285,7 @@
 				2F91E9421EC0571E004A2E99 /* LaunchScreen.storyboard in Resources */,
 				2FE813BD1EC450FC00F418E7 /* GoogleService-Info.plist in Resources */,
 				2F91E93F1EC0571E004A2E99 /* Assets.xcassets in Resources */,
+				00D14E891ED9A5B4006D5475 /* SoTubeLogoVidFade.mp4 in Resources */,
 				2F91E93D1EC0571E004A2E99 /* Main.storyboard in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -336,15 +352,18 @@
 				6D24D3B01ECBAC410087024D /* TopMediaViewController.swift in Sources */,
 				2F2FD2931EC1E68200628995 /* WishlistViewController.swift in Sources */,
 				6D24D3A41ECB85750087024D /* SpotifyConnectViewController.swift in Sources */,
+				6D51013A1ED900860032A579 /* BackgroundColors.swift in Sources */,
 				2F72F0121ECC513A00EF70FB /* PlayerViewController.swift in Sources */,
 				6DC7B3CA1ED34DDE00D4B342 /* ShoppingCartViewController.swift in Sources */,
 				2FDDA7B81ECEF3BF004BB880 /* User.swift in Sources */,
+				00489DC81ED8ADCD00AC32B2 /* AfterLaunchScreenViewController.swift in Sources */,
 				2FE813BB1EC449DD00F418E7 /* SongTableViewCell.swift in Sources */,
 				2F7F292A1EC5C3FB00D2B03A /* ViewModel.swift in Sources */,
 				2F49BF781EC32ECE0031F5E4 /* LogInViewController.swift in Sources */,
 				2F2FD2911EC1E67500628995 /* FavoriteSongsViewController.swift in Sources */,
 				2F49BF7C1EC32FB70031F5E4 /* ForgotPasswordViewController.swift in Sources */,
 				2F36DDD41EC9A942003ABD64 /* SortingOptions.swift in Sources */,
+				6D57E5561ED79A20009423F1 /* AccountViewController.swift in Sources */,
 				2F49BF7A1EC32FA70031F5E4 /* CreateAccountViewController.swift in Sources */,
 				2F2FD28F1EC1E65200628995 /* MySongsViewController.swift in Sources */,
 				6D24D3AE1ECB8B350087024D /* BridgeViewController.m in Sources */,
@@ -486,7 +505,7 @@
 				SWIFT_OBJC_BRIDGING_HEADER = "SoTube/SoTube-Bridging-Header.h";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Debug;
 		};
@@ -508,7 +527,7 @@
 				PRODUCT_NAME = "$(TARGET_NAME)";
 				SWIFT_OBJC_BRIDGING_HEADER = "SoTube/SoTube-Bridging-Header.h";
 				SWIFT_VERSION = 3.0;
-				TARGETED_DEVICE_FAMILY = 1;
+				TARGETED_DEVICE_FAMILY = "1,2";
 			};
 			name = Release;
 		};

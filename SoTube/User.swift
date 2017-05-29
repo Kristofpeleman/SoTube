@@ -62,22 +62,33 @@ class User {
             }
         }
         
+        // If "snapshotValue["mySongs"] as? [String : Any]" exists/isn't nil
         if let snapshotMySongs = snapshotValue["mySongs"] as? [String : Any] {
             
             print(snapshotMySongs)
             
+            // for each item/tuple in snapshotMySongs
             for (_ , value) in snapshotMySongs {
+                // Create a constant of the value of the tuple (not including the key) and put it in the constant as a dictionary of [String : Any]
                 let dictionary = value as! Dictionary<String, AnyObject>
                 
-                let song = Song(songTitle: dictionary["songTitle"] as! String, artistNames: [dictionary["artists"] as! String], spotify_ID: dictionary["spotify_ID"] as! String, duration: dictionary["duration"] as! Int, imageURLAssString: dictionary["imageURL"] as! String, previewURLAssString: dictionary["previewURL"] as! String)
+
+                // Create a constant of type "Song" where it's parameters for the init are the values of the dictionary we just created above
+                // NOTE: Values in a dictionary are called by using their key (in this case a String)
+                let song = Song(favorite: dictionary["favorite"] as! Bool, songTitle: dictionary["songTitle"] as! String, artistNames: [dictionary["artists"] as! String], spotify_ID: dictionary["spotify_ID"] as! String, duration: dictionary["duration"] as! Int, imageURLAssString: dictionary["imageURL"] as! String, previewURLAssString: dictionary["previewURL"] as! String)
+
                 
+                // Call function to add newly created song to mySongs
                 addToMySongs(song)
             }
         }
         
+        // If "snapshotValue["wishList"] as? [String : Any]" exists/isn't nil
         if let snapshotWishList = snapshotValue["wishList"] as? [String : Any] {
             
+            // Same "for"-loop as above, except for "wishList" instead of "mySongs"
             for (_ , value) in snapshotWishList {
+                
                 let dictionary = value as! Dictionary<String, AnyObject>
                 
                 let song = Song(songTitle: dictionary["songTitle"] as! String, artistNames: [dictionary["artists"] as! String], spotify_ID: dictionary["spotify_ID"] as! String, duration: dictionary["duration"] as! Int, imageURLAssString: dictionary["imageURL"] as! String, previewURLAssString: dictionary["previewURL"] as! String)
@@ -91,16 +102,26 @@ class User {
     
     // Function to add an item of class "Song" to our shoppingCart
     func addToShoppingCart(_ song: Song) {
+        
+        // If shoppingCart exists/isn't nil
         if let _ = self.shoppingCart {
+            
+            // Add song to the array
             self.shoppingCart?.append(song)
         }
+            
+        // If shoppingCart has value nil
         else {
+            
+            // Give shoppingCart [song] as a value
             self.shoppingCart = [song]
         }
     }
     
     // Function to add an item of class "Song" to our wishList
     func addToWishList(_ song: Song) {
+        
+        // Same as with shoppingCart, except it is for wishList
         if let _ = self.wishList {
             self.wishList?.append(song)
         }
@@ -111,6 +132,8 @@ class User {
     
     // Function to add an item of class "Song" to our songs ("mySongs")
     func addToMySongs(_ song: Song) {
+        
+        // Same as with shoppingCart, except it is for mySongs
         if let _ = self.mySongs {
             self.mySongs?.append(song)
         }
@@ -121,7 +144,11 @@ class User {
     
     // Function to add an array of "Song" objects to our songs ("mySongs")
     func addToMySongs(_ songs: [Song]) {
+        
+        // Same as with mySongs, except parameter isn't of type "Song", but of type "[Song]" (an array containing items of type "Song")
         if let _ = self.mySongs {
+            
+            // When adding a array to another array, we can't use ".append", so we use "+="
             self.mySongs! += songs
         }
         else {
