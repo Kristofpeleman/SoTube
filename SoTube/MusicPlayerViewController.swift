@@ -23,7 +23,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     // MARK: - Global Variables
     var auth: SPTAuth?
     var session: SPTSession?
-    var player: SPTAudioStreamingController?
+    var player = Shared.current.player
     
     // Variable which is nil if no user is logged into the app, but which is a User object when a user has logged in successfully
     var currentUser: User?
@@ -94,7 +94,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         
         updateOutlets()
         changeVolume(volumeSlider)
+        NotificationCenter.default.removeObserver(self)
         
+        NotificationCenter.default.addObserver(self, selector: #selector(pausePlayer), name: NSNotification.Name(rawValue: "Pause player"), object: nil)
         
         musicSlider.setThumbImage(#imageLiteral(resourceName: "musicNote"), for: .normal)
         musicSlider.setThumbImage(#imageLiteral(resourceName: "musicNote"), for: .highlighted)
@@ -139,7 +141,9 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     override func viewDidAppear(_ animated: Bool) {
         // A timer repeating musicSliderUpdate every few seconds (or less depending on timeInterval) to update the musicSlider
-
+        
+            playSound(startingAt: 0)
+        
             timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
         
     }
@@ -467,7 +471,6 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             
             // Continue playing
             continuePlaying()
-            
         }
         
     }
@@ -644,6 +647,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             pausePlayer()
         }
         
+        Shared.current.player = player
         
         dismiss(animated: true, completion: nil)
     }

@@ -25,4 +25,7 @@ final class Shared {
     var songList: [Song]?
     var currentPositionInList: Int?
     var backGroundImage: String = "black_white_background"
+    
+    var player: SPTAudioStreamingController?
+    
 }

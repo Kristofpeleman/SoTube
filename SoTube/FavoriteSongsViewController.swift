@@ -375,6 +375,14 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
                 // Change "logInButton"'s title to "Log in"
                 logInButton.title = "Log in"
                 
+                shared.player?.setIsPlaying(false,
+                                            callback: {
+                                                (error) in
+                                                if error != nil {
+                                                    print("Not pausing")
+                                                }
+                })
+                
                 // Leave the function with the return and don't perform the segue
                 return false
             }

@@ -64,7 +64,7 @@ class LogInViewController: UIViewController {
     }
     
     deinit {
-        NotificationCenter.default.removeObserver(self);
+        NotificationCenter.default.removeObserver(self)
     }
 
     override func didReceiveMemoryWarning() {
