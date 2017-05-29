@@ -157,6 +157,10 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                     songInMySongsReference?.setValue(returnDictionaryFor(songs[index - 1]))
                 }
                 
+                // Nested Helper function for the filter closure above
+                func songIsInWishList(_ song: Song) -> Bool {
+                    return self.currentUser!.wishList!.contains(where: {song.spotify_ID == $0.spotify_ID})
+                }
                 
                 // Check for existence of purchased songs in Wishlist and remove them from Firebase wishList
                 if let _ = self.currentUser?.wishList {
@@ -185,10 +189,7 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                     }
                 }
                 
-                // Nested Helper function for the filter closure above
-                func songIsInWishList(_ song: Song) -> Bool {
-                    return self.currentUser!.wishList!.contains(where: {song.spotify_ID == $0.spotify_ID})
-                }
+
 
                 
                 // Adapt ShoppingCart
