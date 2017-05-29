@@ -548,14 +548,14 @@
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="shopping_cart" translatesAutoresizingMaskIntoConstraints="NO" id="Wvs-O1-43y">
-                                <rect key="frame" x="265.5" y="65" width="54.5" height="38"/>
+                                <rect key="frame" x="261" y="65" width="54.5" height="38"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="Wvs-O1-43y" secondAttribute="height" multiplier="1:0.7" id="6ig-q5-7DF"/>
                                     <constraint firstAttribute="height" constant="38" id="EmO-me-pMc"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="gJM-Dy-R7E">
-                                <rect key="frame" x="282" y="76.5" width="21.5" height="15"/>
+                                <rect key="frame" x="277.5" y="76.5" width="21.5" height="15"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
@@ -588,7 +588,7 @@
                                 </connections>
                             </view>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="NxZ-DE-9kX">
-                                <rect key="frame" x="265" y="65" width="54.5" height="38"/>
+                                <rect key="frame" x="260.5" y="65" width="54.5" height="38"/>
                                 <connections>
                                     <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="j1g-u1-zEs"/>
                                 </connections>
@@ -729,7 +729,6 @@
                             <constraint firstItem="lW5-t7-53p" firstAttribute="width" secondItem="WNM-Ca-Iur" secondAttribute="width" id="5ds-1m-UkU"/>
                             <constraint firstItem="O19-jx-HLe" firstAttribute="leading" secondItem="3f7-FR-f8I" secondAttribute="trailing" constant="8" id="6WJ-pg-77g"/>
                             <constraint firstItem="zKD-bu-nQP" firstAttribute="centerY" secondItem="Od7-6S-ieB" secondAttribute="centerY" id="8EH-KF-VR4"/>
-                            <constraint firstItem="Wvs-O1-43y" firstAttribute="trailing" secondItem="YZX-aq-vUR" secondAttribute="trailing" id="917-4g-OOn"/>
                             <constraint firstItem="3f7-FR-f8I" firstAttribute="leading" secondItem="Od7-6S-ieB" secondAttribute="leadingMargin" constant="8" id="9Gt-9I-C1k"/>
                             <constraint firstItem="84f-Fb-3eK" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="0.2" id="A9t-vJ-aT7"/>
                             <constraint firstItem="SAy-8Q-GnH" firstAttribute="height" secondItem="Ay1-XV-1Ge" secondAttribute="height" id="APn-zI-SO8"/>
@@ -780,6 +779,7 @@
                             <constraint firstItem="aKl-Fi-x8c" firstAttribute="trailing" secondItem="zZG-Jg-unL" secondAttribute="trailing" id="sGU-fj-oei"/>
                             <constraint firstItem="NxZ-DE-9kX" firstAttribute="centerX" secondItem="Wvs-O1-43y" secondAttribute="centerX" id="sux-iS-XW9"/>
                             <constraint firstItem="zZG-Jg-unL" firstAttribute="leading" secondItem="O19-jx-HLe" secondAttribute="trailing" constant="8" id="tRo-Qw-Pbd"/>
+                            <constraint firstAttribute="trailing" secondItem="NxZ-DE-9kX" secondAttribute="trailing" constant="5" id="tey-aT-TXP"/>
                             <constraint firstItem="7eb-92-zob" firstAttribute="width" secondItem="Od7-6S-ieB" secondAttribute="width" multiplier="1:7" id="uA5-w9-Azq"/>
                             <constraint firstItem="NxZ-DE-9kX" firstAttribute="centerY" secondItem="Wvs-O1-43y" secondAttribute="centerY" id="uTG-8v-EuJ"/>
                             <constraint firstItem="SAy-8Q-GnH" firstAttribute="top" secondItem="rf3-ne-yDb" secondAttribute="bottom" constant="10" id="uTo-Iq-uF3"/>
@@ -840,7 +840,7 @@
                     </connections>
                 </tapGestureRecognizer>
             </objects>
-            <point key="canvasLocation" x="2623" y="1079"/>
+            <point key="canvasLocation" x="2621.25" y="1078.5211267605634"/>
         </scene>
         <!--Shopping Cart View Controller-->
         <scene sceneID="vP2-tQ-ryd">
@@ -894,7 +894,7 @@
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="v5m-Z4-3Lt">
-                                <rect key="frame" x="16" y="70" width="288" height="370"/>
+                                <rect key="frame" x="16" y="70" width="288" height="358"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -962,20 +962,20 @@
                                 </connections>
                             </tableView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="lk7-H5-q5P">
-                                <rect key="frame" x="16" y="486" width="74" height="30"/>
+                                <rect key="frame" x="16" y="474" width="74" height="30"/>
                                 <state key="normal" title="Buy Songs"/>
                                 <connections>
                                     <action selector="buySongs:" destination="x9N-ly-E92" eventType="touchUpInside" id="RDq-ab-MlM"/>
                                 </connections>
                             </button>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Cost: 0 Points" textAlignment="right" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="qTZ-xV-6VG">
-                                <rect key="frame" x="176" y="486" width="128" height="30"/>
+                                <rect key="frame" x="176" y="474" width="128" height="30"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Your points: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="ted-Kd-SSL">
-                                <rect key="frame" x="16" y="455" width="160" height="21"/>
+                                <rect key="frame" x="16" y="443" width="160" height="21"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="17"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -986,6 +986,7 @@
                             <constraint firstItem="v5m-Z4-3Lt" firstAttribute="top" secondItem="B0a-i1-Lvr" secondAttribute="bottom" constant="15" id="1Er-Pk-6TY"/>
                             <constraint firstItem="lYy-us-Azo" firstAttribute="height" secondItem="E5P-bs-iws" secondAttribute="height" id="4bt-Kw-znl"/>
                             <constraint firstItem="lYy-us-Azo" firstAttribute="centerY" secondItem="E5P-bs-iws" secondAttribute="centerY" id="5jg-hY-KSn"/>
+                            <constraint firstItem="lel-A7-DWQ" firstAttribute="top" secondItem="lk7-H5-q5P" secondAttribute="bottom" constant="15" id="7AW-eu-UUI"/>
                             <constraint firstItem="ted-Kd-SSL" firstAttribute="top" secondItem="v5m-Z4-3Lt" secondAttribute="bottom" constant="15" id="7iB-WJ-Hiy"/>
                             <constraint firstItem="qTZ-xV-6VG" firstAttribute="height" secondItem="lk7-H5-q5P" secondAttribute="height" id="7mI-cf-QkE"/>
                             <constraint firstItem="OK4-f6-kE2" firstAttribute="centerX" secondItem="E5P-bs-iws" secondAttribute="centerX" id="AFC-TV-r5A"/>
@@ -996,7 +997,6 @@
                             <constraint firstItem="OK4-f6-kE2" firstAttribute="centerY" secondItem="E5P-bs-iws" secondAttribute="centerY" id="Q5v-nk-Gwu"/>
                             <constraint firstItem="lk7-H5-q5P" firstAttribute="centerY" secondItem="qTZ-xV-6VG" secondAttribute="centerY" id="elL-qt-6hX"/>
                             <constraint firstAttribute="leadingMargin" secondItem="v5m-Z4-3Lt" secondAttribute="leading" id="g7I-ww-8UO"/>
-                            <constraint firstItem="v5m-Z4-3Lt" firstAttribute="height" secondItem="E5P-bs-iws" secondAttribute="height" multiplier="0.65" id="jRM-l3-XRu"/>
                             <constraint firstItem="qTZ-xV-6VG" firstAttribute="width" secondItem="E5P-bs-iws" secondAttribute="width" multiplier="0.4" id="kXg-GW-UbM"/>
                             <constraint firstItem="lYy-us-Azo" firstAttribute="centerX" secondItem="E5P-bs-iws" secondAttribute="centerX" id="l5X-sw-M2O"/>
                             <constraint firstItem="OK4-f6-kE2" firstAttribute="width" secondItem="E5P-bs-iws" secondAttribute="width" id="mrB-xo-NIH"/>
@@ -1938,8 +1938,8 @@
         <image name="wishlist_blue_" width="35" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="ebZ-Xv-MAE"/>
-        <segue reference="Def-eb-XHu"/>
         <segue reference="bey-pH-39d"/>
+        <segue reference="tpj-gN-ERD"/>
+        <segue reference="j1g-u1-zEs"/>
     </inferredMetricsTieBreakers>
 </document>

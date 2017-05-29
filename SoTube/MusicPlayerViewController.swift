@@ -640,16 +640,6 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     @IBAction func back(_ sender: UIBarButtonItem) {
         timer?.invalidate()
         
-//        if musicSlider.maximumValue == previewDuration {
-//            pausePlayer()
-//        }
-//        else if player?.playbackState?.position != nil {
-//            timer = Timer(timeInterval: TimeInterval(musicSlider.maximumValue) - player!.playbackState.position - 1, target: self, selector: #selector(self.pausePlayer), userInfo: nil, repeats: false)
-//        }
-        
-        if player?.playbackState?.position != nil {
-            timer = Timer(timeInterval: TimeInterval(musicSlider.maximumValue) - player!.playbackState.position - 1, target: self, selector: #selector(self.pausePlayer), userInfo: nil, repeats: false)
-        }
         if musicSlider.maximumValue == previewDuration {
             pausePlayer()
         }
