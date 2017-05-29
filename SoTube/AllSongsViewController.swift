@@ -403,6 +403,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // Call function "getSearchResponse" with our "searchFeed" as a parameter
         getSearchResponse(searchFeed: searchFeed)
         
+        self.view.endEditing(false)
     }
     
     

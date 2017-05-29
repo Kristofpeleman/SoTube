@@ -297,6 +297,9 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
         tableView.reloadData()
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
+    }
     
     
     // MARK: - Navigation

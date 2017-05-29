@@ -289,6 +289,9 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
         tableView.reloadData()
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
+    }
 
     
     // MARK: - Navigation

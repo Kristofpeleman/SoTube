@@ -281,8 +281,13 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
         }
         pickerView(sortingPickerView, didSelectRow: currentPickerViewRow, inComponent: 0)
         tableView.reloadData()
+        
+        
     }
     
+    func searchBarSearchButtonClicked(_ searchBar: UISearchBar) {
+        self.view.endEditing(true)
+    }
     
     // MARK: - Navigation
 
