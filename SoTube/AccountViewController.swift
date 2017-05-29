@@ -56,9 +56,11 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
         print(FIRAuth.auth()?.currentUser ?? "NO FIRUser")
         print(FIRAuth.auth()?.currentUser?.displayName ?? "NO FIRUser displayName")
         
-        self.songVCBackGroundImage.image = UIImage(named: self.shared.backGroundImage)
-        // Set initial background value in pickerview
-        if shared.backGroundImage != backGroundPickerDataSource.defaultColorDescription {
+        self.songVCBackGroundImage.image = UIImage(named: Shared.current.backGroundImage)
+        
+        if shared.backGroundImage == backGroundPickerDataSource.defaultColorDescription {
+        backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Neutral"), inComponent: 0, animated: false)
+        } else {
             switch shared.backGroundImage {
             case "yellow_background":
                 backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Yellow"), inComponent: 0, animated: false)
@@ -75,7 +77,7 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
             default:
                 backGroundPickerView.selectRow(backGroundPickerDataSource.getRowForBackGroundColor("Neutral"), inComponent: 0, animated: false)
             }
-        } 
+        }
         
         if let _ = shared.user {
             loginButton.title = "Log out"

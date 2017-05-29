@@ -21,7 +21,7 @@ class BackGroundColors: NSObject, UIPickerViewDataSource {
         "Green" : "green_background"
     ]
     
-    let backGroundsArray = ["Yellow","Purple","Orange","Pink","Neutral","Green","Blue"]
+    let backGroundsArray = ["Neutral","Purple","Orange","Pink","Yellow","Green","Blue"]
     
     let defaultColorDescription: String = "black_white_background"
     
