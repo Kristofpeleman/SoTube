@@ -108,6 +108,23 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
     override func viewDidAppear(_ animated: Bool) {
         self.tableView.reloadData()
         print(wishList ?? "SHARED INSTANCE NOT FOUND")
+        if shared.user == nil {
+            let alertController = UIAlertController(title: "Log In",
+                                                    message: "You need to log in before you can view your wishlist songs.",
+                                                    preferredStyle: .alert
+            )
+            
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .cancel,
+                                         handler: nil
+            )
+            
+            alertController.addAction(okAction)
+            
+            present(alertController, animated: true, completion: nil)
+            
+        }
+
     }
     
     
@@ -141,6 +158,20 @@ class WishlistViewController: TopMediaViewController, UITableViewDelegate, UITab
             cell.costLabel.text = String(describing: wishList[indexPath.row].cost)
         }
         
+        let border = CALayer()
+        let width = CGFloat(0.3)
+        border.borderColor = UIColor.gray.cgColor
+        
+        border.frame = CGRect(x: 0,
+                              y: cell.frame.size.height - width,
+                              width: cell.frame.size.width,
+                              height: cell.frame.size.height
+        )
+        
+        border.borderWidth = width
+        cell.layer.addSublayer(border)
+        cell.layer.masksToBounds = true
+
         return cell
     }
     

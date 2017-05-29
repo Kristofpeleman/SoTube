@@ -46,8 +46,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                     // reload the tableView to show all the new items
                     sleep(1)
                     self.tableView.reloadData()
-                    
-                    self.stopIndicator()
+    
+                    perform(#selector(self.stopIndicator), with: nil, afterDelay: 1)
                 }
             }
         }
@@ -254,6 +254,19 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             }
         }
         
+        let border = CALayer()
+        let width = CGFloat(0.3)
+        border.borderColor = UIColor.gray.cgColor
+        
+        border.frame = CGRect(x: 0,
+                              y: cell.frame.size.height - width,
+                              width: cell.frame.size.width,
+                              height: cell.frame.size.height
+        )
+        
+        border.borderWidth = width
+        cell.layer.addSublayer(border)
+        cell.layer.masksToBounds = true
 
         
         return cell

@@ -144,6 +144,20 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
             cell.artistNameLabel.text = mySongs[indexPath.row].artists
         }
         
+        let border = CALayer()
+        let width = CGFloat(0.3)
+        border.borderColor = UIColor.gray.cgColor
+        
+        border.frame = CGRect(x: 0,
+                              y: cell.frame.size.height - width,
+                              width: cell.frame.size.width,
+                              height: cell.frame.size.height
+        )
+        
+        border.borderWidth = width
+        cell.layer.addSublayer(border)
+        cell.layer.masksToBounds = true
+
         return cell
     }
     
