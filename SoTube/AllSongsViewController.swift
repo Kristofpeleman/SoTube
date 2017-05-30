@@ -517,6 +517,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                                                 }
                 })
                 
+                shared.backGroundImage = "black_white_background"
+                
                 // Leave the function with the return and don't perform the segue
                 return false
             }

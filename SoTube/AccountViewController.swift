@@ -232,11 +232,15 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
                 self.emailAddressLabel.text = "NO USER"
                 self.pointsLabel.text = "NO USER"
                 
+                
                 // Leave the function with the return and don't perform the segue
                 return false
             }
                 // If "logInButton"'s title isn't "Log out"
             else {
+                
+                shared.backGroundImage = "black_white_background"
+                
                 // Perform the segue
                 return true
             }
