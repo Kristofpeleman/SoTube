@@ -38,6 +38,8 @@ class LogInViewController: UIViewController {
     // Create an optional variable that contains either "nil" or something corresponding with our "LoginViewControllerDelegate"-protocol
     var delegate: LoginViewControllerDelegate?
     
+    var newUser: Bool = false
+    
     // Created a variable that contains a UIActivityIndicatorView
     let activityIndicator = UIActivityIndicatorView()
     
