@@ -112,7 +112,9 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                                                         
                                                         // Add 20 points to the shared.user's points-total
                                                         self.shared.user?.points += 20
-                    
+                                                        
+                                                        self.updatePointLabels()
+                                                        
                                                         // Make a reference from our firebase's shared.user's points-total
                                                         let userShoppingCartReference = self.userReference?.child("points")
                     
