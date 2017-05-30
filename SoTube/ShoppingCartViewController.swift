@@ -15,8 +15,9 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     // Variables to access spotify database and our Firebase
 //    var auth: SPTAuth?
 //    var session: SPTSession?
-    var currentUser: User?
     var userReference: FIRDatabaseReference?
+    
+    var shared = Shared.current
     
     
     // MARK: - IBOutlets
@@ -26,17 +27,18 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     @IBOutlet weak var availablePointsLabel: UILabel!
     
     @IBOutlet weak var buySongsButton: UIButton!
+    @IBOutlet weak var emptyShoppingCartButton: UIBarButtonItem!
     
     //MARK: - UIViewController Functions
     
     override func viewDidLoad() {
         super.viewDidLoad()
 
-        self.currentUser = Shared.current.user
+        self.shared.user = Shared.current.user
         // Hides the standard navigationBar (our custom bar will still show)
         navigationController?.isNavigationBarHidden = true
         
-        print(currentUser?.shoppingCart?[0] ?? "NO SONG IN SHOPPING CART")
+        print(shared.user?.shoppingCart?[0] ?? "NO SONG IN SHOPPING CART")
 
     }
 
@@ -56,7 +58,7 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     // When the view has appeared
     override func viewDidAppear(_ animated: Bool) {
         
-        self.currentUser = Shared.current.user
+        self.shared.user = Shared.current.user
         
         // Reload the tableView's design and cells
         self.tableView.reloadData()
@@ -64,12 +66,24 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
         // Update the pointsLabel
         updatePointLabels()
         
-        if currentUser == nil {
+        if shared.user == nil {
             buySongsButton.isEnabled = false
             self.availablePointsLabel.text = "0"
         }
         else {
             buySongsButton.isEnabled = true
+        }
+        
+        enableOfDisableTrashButton()
+    }
+    
+    
+    func enableOfDisableTrashButton(){
+        if shared.user?.shoppingCart != nil {
+            emptyShoppingCartButton.isEnabled = true
+        }
+        else {
+            emptyShoppingCartButton.isEnabled = false
         }
     }
     
@@ -79,11 +93,11 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     // Function to buy the songs in our shoppingCart
     @IBAction func buySongs(_ sender: UIButton) {
         
-        // Check if we have a currentUser and if that currentUser has a shoppingCart
-        if let _ = self.currentUser?.shoppingCart {
+        // Check if we have a shared.user and if that shared.user has a shoppingCart
+        if let _ = self.shared.user?.shoppingCart {
             
             // Can't use a funciton-call in an "if"-statement during calculations, so created a constant containing the calculation
-            let newPoints = self.currentUser!.points - calculatePoints()
+            let newPoints = self.shared.user!.points - calculatePoints()
             
             // If our new point-total would be lower than 0
             if newPoints < 0 {
@@ -96,14 +110,14 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                                                     // "handler" defines what has to happen when we press it, but it needs "(action) in" as first part (unless we input nil, but then it won't do anything)
                                                     handler: { (action) in
                                                         
-                                                        // Add 20 points to the currentUser's points-total
-                                                        self.currentUser?.points += 20
+                                                        // Add 20 points to the shared.user's points-total
+                                                        self.shared.user?.points += 20
                     
-                                                        // Make a reference from our firebase's currentUser's points-total
+                                                        // Make a reference from our firebase's shared.user's points-total
                                                         let userShoppingCartReference = self.userReference?.child("points")
                     
-                                                        // Use the reference to give a new value to that part of our firebase (e.g.: we had 4 points in firebase, but 16 in currentUser.points --> our firebase is now 16 aswell)
-                                                        userShoppingCartReference?.setValue(self.currentUser?.points)
+                                                        // Use the reference to give a new value to that part of our firebase (e.g.: we had 4 points in firebase, but 16 in shared.user.points --> our firebase is now 16 aswell)
+                                                        userShoppingCartReference?.setValue(self.shared.user?.points)
                 })
                 
                 // Create another UIAlertAction
@@ -124,13 +138,13 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
             else {
                 
                 // Adapt "points"
-                // Lower our currentUser.points by the total cost of all the songs in the shoppingCart
-                self.currentUser!.points -= calculatePoints()
+                // Lower our shared.user.points by the total cost of all the songs in the shoppingCart
+                self.shared.user!.points -= calculatePoints()
                 
                 // Create a constant for easier access to said points
-                let points = self.currentUser!.points
+                let points = self.shared.user!.points
                 
-                // Make a reference from our firebase's currentUser's points-total
+                // Make a reference from our firebase's shared.user's points-total
                 let pointsReference = userReference?.child("points")
                 // Change the value of where our reference points in our firebase
                 pointsReference?.setValue(points)
@@ -138,14 +152,14 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                 // Adapt "mySongs"
                 
                 // Create a constant for easier access to the songs in our shoppingCart
-                let songs = self.currentUser!.shoppingCart!
+                let songs = self.shared.user!.shoppingCart!
                 
 
                 
-                // Add the songs from our shoppingCart to currentUser.mySongs
-                self.currentUser?.addToMySongs(songs)
+                // Add the songs from our shoppingCart to shared.user.mySongs
+                self.shared.user?.addToMySongs(songs)
                 
-                // Make a reference from our firebase's currentUser's "mySongs"
+                // Make a reference from our firebase's shared.user's "mySongs"
                 let userMySongsReference = self.userReference?.child("mySongs")
                 
                 // For each number between 1 and the total amount in our shoppingCart (if it's 0 we won't have a shoppingCart (see first "if"-statement in this funcition) and if there is only 1, then it will perform our "for" once.
@@ -159,11 +173,11 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                 
                 // Nested Helper function for the filter closure above
                 func songIsInWishList(_ song: Song) -> Bool {
-                    return self.currentUser!.wishList!.contains(where: {song.spotify_ID == $0.spotify_ID})
+                    return self.shared.user!.wishList!.contains(where: {song.spotify_ID == $0.spotify_ID})
                 }
                 
                 // Check for existence of purchased songs in Wishlist and remove them from Firebase wishList
-                if let _ = self.currentUser?.wishList {
+                if let _ = self.shared.user?.wishList {
                     let wishListSongIDs = songs.filter{songIsInWishList($0)}.map{$0.spotify_ID}
                     let userWishListReference = self.userReference?.child("wishList")
                     
@@ -194,13 +208,13 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                 
                 // Adapt ShoppingCart
                 
-                // Make a reference from our firebase's currentUser's shoppiongCart
+                // Make a reference from our firebase's shared.user's shoppiongCart
                 let shoppingCartReference = userReference?.child("shoppingCart")
                 // Remove shoppingCart from our firebase
                 shoppingCartReference?.removeValue()
                 
-                // Remove our shoppingCart in our currentUser/give it "nil" as value
-                self.currentUser?.shoppingCart = nil
+                // Remove our shoppingCart in our shared.user/give it "nil" as value
+                self.shared.user?.shoppingCart = nil
                 
                 // Reload our tableView
                 self.tableView.reloadData()
@@ -222,7 +236,7 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     @IBAction func emptyShoppingCart(_ sender: UIBarButtonItem) {
         
         // Create a UIAlertAction
-        let alertController = UIAlertController(title: "Empty Cart", message: "Are you certain you want to remove all the songs from your shopping cart?", preferredStyle: .alert)
+        let alertController = UIAlertController(title: "Empty Cart?", message: "Are you certain you want to remove all the songs from your shopping cart?", preferredStyle: .alert)
         
         // Create a UIAlertAction
         let removeAction = UIAlertAction(title: "Yes",
@@ -230,8 +244,8 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
                                          style: .destructive,
                                          handler: { (action) in
                                             
-                                            // Remove currentUser.shoppingCart/give it value "nil"
-                                            self.currentUser?.shoppingCart = nil
+                                            // Remove shared.user.shoppingCart/give it value "nil"
+                                            self.shared.user?.shoppingCart = nil
                                             Shared.current.user?.shoppingCart = nil
             
                                             // Create a reference tou the shoppingCart in our firebase
@@ -266,10 +280,10 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     // MARK: - TableView Datasource Methods
     // Defines the amount of rows in our tableview
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        // If there is a currentUser and a shoppingCart for said user
-        if let _ = currentUser?.shoppingCart {
+        // If there is a shared.user and a shoppingCart for said user
+        if let _ = shared.user?.shoppingCart {
             // Use the amount of items in our shoppingCart
-            return (currentUser?.shoppingCart?.count)!
+            return (shared.user?.shoppingCart?.count)!
         }
         // Otherwise there are 0 rows (we could have used an "else", but since our "if" has a "return" this wasn't needed)
         return 0
@@ -282,9 +296,9 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
         
         // The cell's songTitleLabel, artistNameLabel and costLabel are defined by the item in our shoppingCart that is in the same position as the number of row we are on in our tableView (e.g.: row 5 --> item 5 in shoppingCart; row 2 --> item 2)
         
-        cell.songTitleLabel.text = currentUser!.shoppingCart![indexPath.row].songTitle
-        cell.artistNameLabel.text = currentUser!.shoppingCart![indexPath.row].artists
-        cell.costLabel.text = String(describing: currentUser!.shoppingCart![indexPath.row].cost)
+        cell.songTitleLabel.text = shared.user!.shoppingCart![indexPath.row].songTitle
+        cell.artistNameLabel.text = shared.user!.shoppingCart![indexPath.row].artists
+        cell.costLabel.text = String(describing: shared.user!.shoppingCart![indexPath.row].cost)
         
         // NOTE: AMOUNT of rows starts at 1, but when USING/CALLING a row it starts at 0 (just like an array/dictionary
         
@@ -309,13 +323,18 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     
     func tableView(_ tableView: UITableView, commit editingStyle: UITableViewCellEditingStyle, forRowAt indexPath: IndexPath) {
         if editingStyle == .delete {
-            let song = currentUser!.shoppingCart![indexPath.row]
+            let song = shared.user!.shoppingCart![indexPath.row]
             let userShoppingCartReference = self.userReference?.child("shoppingCart")
             userShoppingCartReference?.child(song.spotify_ID!).removeValue()
             
-            self.currentUser?.shoppingCart = currentUser?.shoppingCart?.filter{$0.spotify_ID != song.spotify_ID}
+            self.shared.user?.shoppingCart = shared.user?.shoppingCart?.filter{$0.spotify_ID != song.spotify_ID}
             self.tableView.reloadData()
             updatePointLabels()
+            
+            if shared.user!.shoppingCart!.isEmpty {
+                shared.user?.shoppingCart = nil
+            }
+            enableOfDisableTrashButton()
         }
     }
     
@@ -323,10 +342,10 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     
     // Function returning an Integer
     func calculatePoints() -> Int {
-        // If we have a currentUser and (s)he has a shoppingCart (has shoppingCart if shoppingCart's value isn't nil)
-        if let _ = self.currentUser?.shoppingCart {
+        // If we have a shared.user and (s)he has a shoppingCart (has shoppingCart if shoppingCart's value isn't nil)
+        if let _ = self.shared.user?.shoppingCart {
             // The amount of items in our shoppingCart multiplied by 2 (cost per song is always 2)
-            let total = self.currentUser!.shoppingCart!.count * 2
+            let total = self.shared.user!.shoppingCart!.count * 2
             return total
         }
         
@@ -338,7 +357,7 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
         
         // ALTERNATIVE for our "if"-statement in case songs' cost aren't always 2 in the future
         /*
-        if let shoppingCart = self.currentUser?.shoppingCart {
+        if let shoppingCart = self.shared.user?.shoppingCart {
             var total = 0
             for song in shoppingCart {
                 total += song.cost
@@ -372,9 +391,9 @@ class ShoppingCartViewController: TopMediaViewController, UITableViewDelegate, U
     
     
     func updatePointLabels(){
-        if currentUser != nil {
+        if shared.user != nil {
             self.pointsLabel.text = "Cost: \(calculatePoints()) Points"
-            self.availablePointsLabel.text = "Your points: \(currentUser!.points)"
+            self.availablePointsLabel.text = "Your points: \(shared.user!.points)"
         }
     }
     
