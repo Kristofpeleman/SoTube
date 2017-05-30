@@ -22,7 +22,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     
     // Constant to lessen the amount of "magic" numbers in the app
-    let tableViewInitialSongLimit = 50
+    let tableViewInitialSongLimit = 20
     
     // calculated property to limit the absolute total number of songs the Tableview will display
     
@@ -36,10 +36,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         didSet {
             if songs != nil {
                 // !!!! REMEMBER: Count starts at 1, an array-positioning/index starts at 0
-                // If there are 50 items in the array
                 if songs!.count % tableViewInitialSongLimit == 0 {
-                    // print the 49th position in the array (= item 50)
-                    //print(songs![49])
                     
                     print(String(songs!.count) + " SONGS")
                     
@@ -73,7 +70,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         {
         // When value changes
         didSet {
-            // If there are 50 items in the array
+            
             if trackIDs!.count % tableViewInitialSongLimit == 0 && trackIDs!.count != 0 {
                 // Print our array
                 print(trackIDs!)
@@ -215,7 +212,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     func longLoadingAlert(){
         if activityIndicator.isAnimating{
-            let alertController = UIAlertController(title: "Long Loading Time", message: "The app can't seem to find 50+ results for your search.\nWould you like to keep waiting for results?", preferredStyle: .alert)
+            let alertController = UIAlertController(title: "Long Loading Time", message: "The app can't seem to find enough results for your search.\nWould you like to keep waiting for results?", preferredStyle: .alert)
             let yesAction = UIAlertAction(title: "Yes", style: .default, handler: nil)
             let noAction = UIAlertAction(title: "No", style: .default, handler: { (action) in
                 self.tableView.reloadData()
@@ -248,9 +245,14 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             // Call "alterTableViewLabels" with "songs" as parameter
             alterTableViewLabels(forSongList: songs, inCell: cell, atRow: indexPath.row)
             
-            if indexPath.row == self.songs!.count - 1 && self.songs!.count <= self.tableViewTotalSongLimit {
+            if indexPath.row >= self.songs!.count - 1 && self.songs!.count <= self.tableViewTotalSongLimit {
                 self.offset = songs.count
                 self.getAlbumIDs()
+                if songs.count % (2 * tableViewInitialSongLimit) == 0 {
+                    tableView.reloadData()
+                    stopIndicator()
+                    print("\n\n\n\n\n\(songs.count) SONGS\n\n\n\n\n")
+                }
             }
         }
         
@@ -397,7 +399,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // Local constant containging the one above, but every empty space turns into a "+"
         let query = keywords?.replacingOccurrences(of: " ", with: "+")
         // Local constant containing a url (containing our query) as a string
-        let searchFeed = "https://api.spotify.com/v1/search?q=\(query!)&type=track&limit=50"
+        let searchFeed = "https://api.spotify.com/v1/search?q=\(query!)&type=track&limit=\(tableViewInitialSongLimit)"
         // Set songs to nil
         self.songs = nil
         // Call function "getSearchResponse" with our "searchFeed" as a parameter
@@ -440,7 +442,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 }
                 
                 // Same as above for these 2
-                destinationVC.currentUser = self.shared.user
                 
                 if let _ = self.shared.user {
                 
@@ -488,7 +489,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 
                 destinationVC.auth = self.auth
                 destinationVC.session = self.session
-                destinationVC.currentUser = self.shared.user
                 
                 let usersReference = rootReference?.child("Users")
                 destinationVC.userReference = usersReference?.child(self.shared.user!.fireBaseID)
@@ -648,8 +648,9 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     }
     
     func getAlbumIDs() {
+        activityIndicator.startAnimating()
         
-        self.newReleasesFeed = TopMediaViewModel().getNewReleasesWith(offset: offset)
+        self.newReleasesFeed = TopMediaViewModel().getNewReleasesWith(offset: offset, limit: tableViewInitialSongLimit)
         
         let request = try? SPTRequest.createRequest(for: URL(string: newReleasesFeed!)!, withAccessToken: session?.accessToken, httpMethod: "get", values: nil, valueBodyIsJSON: true, sendDataAsQueryString: true)
         
