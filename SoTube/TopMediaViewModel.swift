@@ -12,8 +12,8 @@ class TopMediaViewModel {
 
     let newReleasesURLAsString = "https://api.spotify.com/v1/browse/new-releases?country=US&offset=0&limit=50"
     
-    func getNewReleasesWith(offset: Int) -> String {
-        return "https://api.spotify.com/v1/browse/new-releases?country=US&offset=\(offset)&limit=50"
+    func getNewReleasesWith(offset: Int, limit: Int) -> String {
+        return "https://api.spotify.com/v1/browse/new-releases?country=US&offset=\(offset)&limit=\(limit)"
     }
 
 }
