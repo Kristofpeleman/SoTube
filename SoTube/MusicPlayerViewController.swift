@@ -933,10 +933,10 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     destinationVC.userReference = usersReference?.child(Shared.current.user!.fireBaseID)
                 }
             }
-        }
-        
         pausePlayer()
         timer?.invalidate()
+        }
+        
     }
     
     // An override function when performing a segue
