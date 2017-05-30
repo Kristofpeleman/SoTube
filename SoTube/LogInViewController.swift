@@ -74,6 +74,10 @@ class LogInViewController: UIViewController {
         // Dispose of any resources that can be recreated.
     }
     
+    override func viewWillAppear(_ animated: Bool) {
+        self.newUser = false
+    }
+    
     
     override func viewDidAppear(_ animated: Bool) {
         self.view.endEditing(true)
@@ -215,11 +219,13 @@ class LogInViewController: UIViewController {
                                     
                                     if !snapshot.hasChild(currentUser.uid) {
                                         
+                                        self.newUser = true
+                                        
                                         let user: [String : Any] = ["userName": currentUser.displayName!, "emailAddress": currentUser.email!, "points": 20]
                                         let thisUserReference = existingUsersReference.child(currentUser.uid)
                                         thisUserReference.setValue(user)
                                         
-                                        sleep(2)
+                                        sleep(1)
                                         
                                         thisUserReference.observe(.value, with: {snapshot in
                                             
@@ -232,6 +238,23 @@ class LogInViewController: UIViewController {
                                 })
                                 
                                 sleep(1)
+                                
+                                // Setting userID and userReference in the delegate
+                                
+                                let thisUserReference = existingUsersReference.child(currentUser.uid)
+                                
+                                thisUserReference.observe(.value, with: {snapshot in
+                                    
+                                    if self.newUser == false {
+                                    
+                                    let user = User(with: snapshot)
+                                    self.delegate?.setUser(user)
+                                        
+                                    }
+                                    
+                                })
+                                
+                                
                                 sleep(1)
                                 
                                 

@@ -76,9 +76,9 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
             self.filteredSongs = []
         }
         
-        if shared.user?.mySongs != nil {
+//        if shared.user?.mySongs != nil {
             mySongs = shared.user?.mySongs
-        }
+//        }
         
         if shared.currentPositionInList != nil {
             goToMusicPlayerBarButton.isEnabled = true
