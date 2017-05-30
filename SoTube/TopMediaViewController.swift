@@ -11,15 +11,21 @@ import Firebase
 
 class TopMediaViewController: UIViewController {
     
+    // GLobal variables
+    
     var auth: SPTAuth?
     var session: SPTSession?
     var rootReference: FIRDatabaseReference?
-//    var currentUser: User?
+    
+    
+    // IBOutlets
+    
+    @IBOutlet weak var songVCBackGroundImage: UIImageView!
+    
 
     override func viewDidLoad() {
         super.viewDidLoad()
-
-        // Do any additional setup after loading the view.
+        
     }
 
     override func didReceiveMemoryWarning() {

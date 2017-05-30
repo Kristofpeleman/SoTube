@@ -9,7 +9,11 @@
 import Foundation
 
 class TopMediaViewModel {
-    let audioFileNames = ["6I9VzXrHxO9rA9A5euc8Ak", "1pKeFVVUOPjFsOABub0OaV", "3TCauNPqFiniaYHBvEVoHG"]
+
     let newReleasesURLAsString = "https://api.spotify.com/v1/browse/new-releases?country=US&offset=0&limit=50"
+    
+    func getNewReleasesWith(offset: Int, limit: Int) -> String {
+        return "https://api.spotify.com/v1/browse/new-releases?country=US&offset=\(offset)&limit=\(limit)"
+    }
 
 }
