@@ -309,7 +309,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 songInWishListReference.setValue(songValues)
                 
                 let alertController = UIAlertController(title: "Confirmation",
-                                                        message: "Song added to your wishlist",
+                                                        message: "Song added to your wishlist.",
                                                         preferredStyle: .alert
                 )
                 
@@ -325,7 +325,19 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             
         }
         else {
-            print("COULDN'T PRINT USER")
+            let alertController = UIAlertController(title: "Log in",
+                                                      message: "You need to log in before you can add a song to your wishlist.",
+                                                      preferredStyle: .alert
+            )
+            
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .cancel,
+                                         handler: nil
+            )
+            
+            alertController.addAction(okAction)
+            
+            present(alertController, animated: true, completion: nil)
             return
         }
     }
@@ -362,7 +374,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     self.favoriteButtonImage.image = UIImage(named: "favorites_full")
                     
                     let alertController = UIAlertController(title: "Confirmation",
-                                                            message: "Song added to favorites",
+                                                            message: "Song added to favorites.",
                                                             preferredStyle: .alert
                     )
                     
@@ -380,7 +392,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     self.favoriteButtonImage.image = UIImage(named: "favorites_empty")
                     
                     let alertController = UIAlertController(title: "Confirmation",
-                                                            message: "Song removed from favorites",
+                                                            message: "Song removed from favorites.",
                                                             preferredStyle: .alert
                     )
                     
@@ -398,7 +410,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             
             else {
                 let alertController = UIAlertController(title: "Notification",
-                                                        message: "You can only favorite songs you own",
+                                                        message: "You can only favorite songs you own.",
                                                         preferredStyle: .alert
                 )
                 
@@ -415,8 +427,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         }
         
         else {
-            let alertController = UIAlertController(title: "Notification",
-                                                    message: "You need to log in before you can favorite any of your songs",
+            let alertController = UIAlertController(title: "Log in",
+                                                    message: "You need to log in before you can favorite any of your songs.",
                                                     preferredStyle: .alert
             )
             
