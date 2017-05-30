@@ -194,7 +194,6 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
                     destinationVC.currentSongPositionInList = self.shared.currentPositionInList
                 }
 
-                destinationVC.currentUser = self.shared.user
                 
                 if let _ = self.shared.user {
                     

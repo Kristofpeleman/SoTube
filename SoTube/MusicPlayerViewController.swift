@@ -26,7 +26,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     var player = Shared.current.player
     
     // Variable which is nil if no user is logged into the app, but which is a User object when a user has logged in successfully
-    var currentUser: User?
+    var shared = Shared.current
     
     // Variable to define how long they can listen to the song if it's a preview
     var previewDuration: Float = 30
@@ -149,7 +149,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     @IBAction func addCurrentSongToBasket(_ sender: UIBarButtonItem) {
         
-        if let currentUser = currentUser {
+        if let currentUser = shared.user {
             
             if let mySongs = currentUser.mySongs, mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                 
@@ -251,7 +251,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     
     @IBAction func addCurrentSongToWishList(_ sender: UIButton) {
-        if let currentUser = currentUser {
+        if let currentUser = shared.user {
             
             if let mySongs = currentUser.mySongs, mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                 
@@ -332,7 +332,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     
     @IBAction func setSongAsFavorite(_ sender: UIButton) {
-        if let currentUser = currentUser {
+        if let currentUser = shared.user {
             
             if let mySongs = currentUser.mySongs, mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                 
@@ -483,7 +483,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             if let currentPlaybackState = player?.playbackState, let _ = songList {
                 
                 // If nobody is logged in OR the song isn't in the "currentUser"'s "mySongs"
-                if let mySongs = currentUser?.mySongs {
+                if let mySongs = shared.user?.mySongs {
                     if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                         // MaximumValue has to be a Float, duration is a Int
                         print("contains")
@@ -871,10 +871,10 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         // player needs to exist
         if let _ = player {
             var endTime = 0
-            if currentUser == nil {
+            if shared.user == nil {
                 endTime = Int(previewDuration)
             }
-            else if let mySongs = currentUser!.mySongs {
+            else if let mySongs = shared.user?.mySongs {
                 if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                     // The duration of our song that is going to play is given inside the class Song
                     endTime = currentSong.duration
@@ -913,8 +913,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 destinationVC.auth = self.auth
                 destinationVC.session = self.session
                 
-                if let _ = currentUser {
-                    destinationVC.currentUser = Shared.current.user
+                if let _ = shared.user {
                     
                     let usersReference = rootReference?.child("Users")
                     destinationVC.userReference = usersReference?.child(Shared.current.user!.fireBaseID)
@@ -932,7 +931,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         switch identifier {
         case "shoppingCartSegue":
             
-            if let _ = currentUser {
+            if let _ = shared.user {
                 return true
             } else {return false}
             
