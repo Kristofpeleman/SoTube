@@ -508,7 +508,13 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 logInButton.title = "Log in"
                 
                 
-                
+                shared.player?.setRepeat(.off,
+                                         callback: {(
+                                            error) in
+                                            if error != nil {
+                                                print("Resetting repeater")
+                                            }
+                })
                 shared.player?.setIsPlaying(false,
                                             callback: {
                                                 (error) in
@@ -518,6 +524,8 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
                 })
                 
                 shared.backGroundImage = "black_white_background"
+                
+                
                 
                 // Leave the function with the return and don't perform the segue
                 return false

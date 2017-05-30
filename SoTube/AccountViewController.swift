@@ -232,6 +232,20 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
                 self.emailAddressLabel.text = "NO USER"
                 self.pointsLabel.text = "NO USER"
                 
+                shared.player?.setRepeat(.off,
+                                         callback: {(
+                                            error) in
+                                            if error != nil {
+                                                print("Resetting repeater")
+                                            }
+                })
+                shared.player?.setIsPlaying(false,
+                                            callback: {
+                                                (error) in
+                                                if error != nil {
+                                                    print("Not pausing")
+                                                }
+                })
                 
                 // Leave the function with the return and don't perform the segue
                 return false

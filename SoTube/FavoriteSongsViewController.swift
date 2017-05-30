@@ -376,6 +376,13 @@ class FavoriteSongsViewController: TopMediaViewController, UITableViewDelegate, 
                 // Change "logInButton"'s title to "Log in"
                 logInButton.title = "Log in"
                 
+                shared.player?.setRepeat(.off,
+                                         callback: {(
+                                            error) in
+                                            if error != nil {
+                                                print("Resetting repeater")
+                                            }
+                })
                 shared.player?.setIsPlaying(false,
                                             callback: {
                                                 (error) in
