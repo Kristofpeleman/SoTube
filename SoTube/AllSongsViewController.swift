@@ -245,7 +245,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             // Call "alterTableViewLabels" with "songs" as parameter
             alterTableViewLabels(forSongList: songs, inCell: cell, atRow: indexPath.row)
             
-            if indexPath.row >= self.songs!.count - 1 && self.songs!.count <= self.tableViewTotalSongLimit {
+            if indexPath.row >= self.songs!.count - 2 && self.songs!.count <= self.tableViewTotalSongLimit {
                 self.offset = songs.count
                 self.getAlbumIDs()
                 if songs.count % (2 * tableViewInitialSongLimit) == 0 {

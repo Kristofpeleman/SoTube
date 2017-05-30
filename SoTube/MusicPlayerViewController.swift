@@ -733,6 +733,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     print("Pausing")
                 }
             })
+            timer?.invalidate()
             playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
         }
     }
@@ -745,6 +746,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     print("Continue playing")
                 }
             })
+            timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
             playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
         }
     }
@@ -945,7 +947,23 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             
             if let _ = shared.user {
                 return true
-            } else {return false}
+            }
+            else {
+                let alertController = UIAlertController(title: "Log In",
+                                                        message: "You need to log in before you can have a shoppingcart.",
+                                                        preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "OK",
+                                             style: .cancel,
+                                             handler: nil
+                )
+                
+                alertController.addAction(okAction)
+                
+                present(alertController, animated: true, completion: nil)
+                return false
+            }
             
         // If the identifier's value isn't any of the above: perform Segue
         default: return true
