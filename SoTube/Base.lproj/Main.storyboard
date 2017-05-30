@@ -71,25 +71,25 @@
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBarIcon_shoppingBasket_blue" translatesAutoresizingMaskIntoConstraints="NO" id="bAz-rO-cIW">
-                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
+                                <rect key="frame" x="263.5" y="106.5" width="40.5" height="28.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="bAz-rO-cIW" secondAttribute="height" multiplier="1:0.7" id="itT-o8-BhL"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Kik-JP-ME9">
-                                <rect key="frame" x="275.5" y="112.5" width="16.5" height="11.5"/>
+                                <rect key="frame" x="275.5" y="115" width="16.5" height="11.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="cq4-f8-6on">
-                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
+                                <rect key="frame" x="263.5" y="106.5" width="40.5" height="28.5"/>
                                 <connections>
                                     <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="7yt-ZZ-pH2"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="5cm-du-jW8">
-                                <rect key="frame" x="16" y="142.5" width="288" height="366.5"/>
+                                <rect key="frame" x="16" y="146.5" width="288" height="362.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="separatorColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <color key="sectionIndexBackgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
@@ -181,16 +181,16 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="8tG-DK-Rpe">
-                                <rect key="frame" x="73" y="99" width="89" height="38.5"/>
+                                <rect key="frame" x="73" y="99" width="128" height="42.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="8tG-DK-Rpe" secondAttribute="height" multiplier="2.3:1" id="yub-LT-gSq"/>
+                                    <constraint firstAttribute="width" secondItem="8tG-DK-Rpe" secondAttribute="height" multiplier="3:1" id="yub-LT-gSq"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="uS8-Hq-Lct" id="sMu-Ci-pEO"/>
                                 </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="lMR-6X-fhy">
-                                <rect key="frame" x="16" y="110" width="51.5" height="16"/>
+                                <rect key="frame" x="16" y="112.5" width="51.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -212,7 +212,7 @@
                             <constraint firstItem="6AI-ei-ZiZ" firstAttribute="width" secondItem="pj7-ZH-o6R" secondAttribute="width" id="AS8-m8-ECn"/>
                             <constraint firstItem="Kik-JP-ME9" firstAttribute="width" secondItem="bAz-rO-cIW" secondAttribute="width" multiplier="0.4" id="Bzx-Un-whm"/>
                             <constraint firstItem="cq4-f8-6on" firstAttribute="width" secondItem="bAz-rO-cIW" secondAttribute="width" id="FaG-4G-NPG"/>
-                            <constraint firstItem="8tG-DK-Rpe" firstAttribute="width" secondItem="pj7-ZH-o6R" secondAttribute="width" multiplier="1:3.6" id="IhZ-04-7Rp"/>
+                            <constraint firstItem="8tG-DK-Rpe" firstAttribute="width" secondItem="pj7-ZH-o6R" secondAttribute="width" multiplier="1:2.5" id="IhZ-04-7Rp"/>
                             <constraint firstItem="6AI-ei-ZiZ" firstAttribute="centerX" secondItem="pj7-ZH-o6R" secondAttribute="centerX" id="Jp7-zl-Dft"/>
                             <constraint firstAttribute="trailingMargin" secondItem="5cm-du-jW8" secondAttribute="trailing" id="QoO-uy-Tsy"/>
                             <constraint firstItem="Kik-JP-ME9" firstAttribute="centerX" secondItem="bAz-rO-cIW" secondAttribute="centerX" id="TDz-CU-urH"/>
@@ -363,25 +363,25 @@
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBarIcon_shoppingBasket_blue" translatesAutoresizingMaskIntoConstraints="NO" id="nv6-HW-YGr">
-                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
+                                <rect key="frame" x="263.5" y="106" width="40.5" height="28.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="nv6-HW-YGr" secondAttribute="height" multiplier="1:0.7" id="ytJ-3Q-SYY"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="t05-ME-O1r">
-                                <rect key="frame" x="275.5" y="112.5" width="16.5" height="11.5"/>
+                                <rect key="frame" x="275.5" y="114.5" width="16.5" height="11.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="SRY-KT-xK5">
-                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
+                                <rect key="frame" x="263.5" y="106" width="40.5" height="28.5"/>
                                 <connections>
                                     <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="7be-mX-KQC"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="HOf-fO-nEH">
-                                <rect key="frame" x="16" y="142.5" width="288" height="366.5"/>
+                                <rect key="frame" x="16" y="146.5" width="288" height="362.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SongCell" id="ynV-sX-mn4" customClass="SongTableViewCell" customModule="SoTube" customModuleProvider="target">
@@ -391,13 +391,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPZ-gL-WLX">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPZ-gL-WLX">
                                                     <rect key="frame" x="8" y="11" width="144" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMm-wV-4vU">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="fMm-wV-4vU">
                                                     <rect key="frame" x="157" y="11" width="123" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -453,16 +453,16 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="6lY-oU-XF9">
-                                <rect key="frame" x="73" y="99" width="89" height="38.5"/>
+                                <rect key="frame" x="73" y="99" width="128" height="42.5"/>
                                 <constraints>
-                                    <constraint firstAttribute="width" secondItem="6lY-oU-XF9" secondAttribute="height" multiplier="2.3:1" id="AfW-RX-WJH"/>
+                                    <constraint firstAttribute="width" secondItem="6lY-oU-XF9" secondAttribute="height" multiplier="3:1" id="AfW-RX-WJH"/>
                                 </constraints>
                                 <connections>
                                     <outlet property="delegate" destination="uS8-Hq-Lct" id="iVd-Cw-B9V"/>
                                 </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="WcI-Bz-fJ7">
-                                <rect key="frame" x="16" y="110" width="51.5" height="16"/>
+                                <rect key="frame" x="16" y="112" width="51.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -470,7 +470,7 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstItem="6lY-oU-XF9" firstAttribute="width" secondItem="Z8k-Kt-VWr" secondAttribute="width" multiplier="1:3.6" id="2Rs-AX-hNF"/>
+                            <constraint firstItem="6lY-oU-XF9" firstAttribute="width" secondItem="Z8k-Kt-VWr" secondAttribute="width" multiplier="1:2.5" id="2Rs-AX-hNF"/>
                             <constraint firstItem="44S-ky-1cZ" firstAttribute="centerY" secondItem="Z8k-Kt-VWr" secondAttribute="centerY" id="46C-pI-7zl"/>
                             <constraint firstItem="SRY-KT-xK5" firstAttribute="height" secondItem="nv6-HW-YGr" secondAttribute="height" id="55L-pt-cCh"/>
                             <constraint firstAttribute="trailingMargin" secondItem="nv6-HW-YGr" secondAttribute="trailing" id="6PM-hY-7Vp"/>
@@ -1047,25 +1047,25 @@
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBarIcon_shoppingBasket_blue" translatesAutoresizingMaskIntoConstraints="NO" id="xJh-G9-pIf">
-                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
+                                <rect key="frame" x="263.5" y="106" width="40.5" height="28.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="xJh-G9-pIf" secondAttribute="height" multiplier="1:0.7" id="vsn-VS-AxB"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="QwX-iQ-Jxb">
-                                <rect key="frame" x="275.5" y="112.5" width="16.5" height="11.5"/>
+                                <rect key="frame" x="275.5" y="114.5" width="16.5" height="11.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="1P9-Ry-u6C">
-                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
+                                <rect key="frame" x="263.5" y="106" width="40.5" height="28.5"/>
                                 <connections>
                                     <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="baH-RZ-WvV"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="QGx-6D-bzq">
-                                <rect key="frame" x="16" y="142.5" width="288" height="366.5"/>
+                                <rect key="frame" x="16" y="146.5" width="288" height="362.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SongCell" id="A51-ff-tFC" customClass="SongTableViewCell" customModule="SoTube" customModuleProvider="target">
@@ -1075,13 +1075,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9v-AI-ve2">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9v-AI-ve2">
                                                     <rect key="frame" x="8" y="11" width="144" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1j-ku-foo">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="K1j-ku-foo">
                                                     <rect key="frame" x="157" y="11" width="123" height="21"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -1136,13 +1136,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="t6U-LK-0Cu">
-                                <rect key="frame" x="73" y="99" width="89" height="38.5"/>
+                                <rect key="frame" x="73" y="99" width="128" height="42.5"/>
                                 <connections>
                                     <outlet property="delegate" destination="uS8-Hq-Lct" id="xB6-gB-xWw"/>
                                 </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="CVU-ku-Mm3">
-                                <rect key="frame" x="16" y="110" width="51.5" height="16"/>
+                                <rect key="frame" x="16" y="112" width="51.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1168,10 +1168,10 @@
                             <constraint firstItem="QGx-6D-bzq" firstAttribute="top" secondItem="t6U-LK-0Cu" secondAttribute="bottom" constant="5" id="Sc1-ES-CAa"/>
                             <constraint firstItem="1zS-9z-DKq" firstAttribute="width" secondItem="lDU-uJ-hZb" secondAttribute="width" id="Tn8-rt-ptG"/>
                             <constraint firstItem="xJh-G9-pIf" firstAttribute="centerY" secondItem="t6U-LK-0Cu" secondAttribute="centerY" id="XVN-bi-nmm"/>
-                            <constraint firstItem="t6U-LK-0Cu" firstAttribute="width" secondItem="lDU-uJ-hZb" secondAttribute="width" multiplier="1:3.6" id="Y4b-gg-UVt"/>
+                            <constraint firstItem="t6U-LK-0Cu" firstAttribute="width" secondItem="lDU-uJ-hZb" secondAttribute="width" multiplier="1:2.5" id="Y4b-gg-UVt"/>
                             <constraint firstItem="J1Q-Lf-jKs" firstAttribute="top" secondItem="lDU-uJ-hZb" secondAttribute="top" id="bkc-QC-8jB"/>
                             <constraint firstItem="vBi-Wa-Zx7" firstAttribute="width" secondItem="lDU-uJ-hZb" secondAttribute="width" id="blI-wZ-114"/>
-                            <constraint firstItem="t6U-LK-0Cu" firstAttribute="width" secondItem="t6U-LK-0Cu" secondAttribute="height" multiplier="2.3:1" id="dM5-eI-0Qd"/>
+                            <constraint firstItem="t6U-LK-0Cu" firstAttribute="width" secondItem="t6U-LK-0Cu" secondAttribute="height" multiplier="3:1" id="dM5-eI-0Qd"/>
                             <constraint firstAttribute="trailing" secondItem="J1Q-Lf-jKs" secondAttribute="trailing" id="dN9-fu-igJ"/>
                             <constraint firstItem="QwX-iQ-Jxb" firstAttribute="width" secondItem="xJh-G9-pIf" secondAttribute="width" multiplier="0.4" id="eB4-ri-ceS"/>
                             <constraint firstItem="1P9-Ry-u6C" firstAttribute="height" secondItem="xJh-G9-pIf" secondAttribute="height" id="hIh-bh-t1U"/>
@@ -1583,25 +1583,25 @@
                                 <blurEffect style="extraLight"/>
                             </visualEffectView>
                             <imageView userInteractionEnabled="NO" contentMode="scaleToFill" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="TabBarIcon_shoppingBasket_blue" translatesAutoresizingMaskIntoConstraints="NO" id="E6t-Ud-Zcy">
-                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
+                                <rect key="frame" x="263.5" y="106" width="40.5" height="28.5"/>
                                 <constraints>
                                     <constraint firstAttribute="width" secondItem="E6t-Ud-Zcy" secondAttribute="height" multiplier="1:0.7" id="0R7-bz-x9e"/>
                                 </constraints>
                             </imageView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="" textAlignment="center" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="tT3-4x-EOl">
-                                <rect key="frame" x="275.5" y="112.5" width="16.5" height="11.5"/>
+                                <rect key="frame" x="275.5" y="114.5" width="16.5" height="11.5"/>
                                 <fontDescription key="fontDescription" type="system" weight="semibold" pointSize="15"/>
                                 <color key="textColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                                 <nil key="highlightedColor"/>
                             </label>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="K0o-WH-yRm">
-                                <rect key="frame" x="263.5" y="104" width="40.5" height="28.5"/>
+                                <rect key="frame" x="263.5" y="106" width="40.5" height="28.5"/>
                                 <connections>
                                     <segue destination="x9N-ly-E92" kind="show" identifier="shoppingCartSegue" id="ebZ-Xv-MAE"/>
                                 </connections>
                             </button>
                             <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" dataMode="prototypes" style="plain" separatorStyle="default" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="sMQ-IR-ybh">
-                                <rect key="frame" x="16" y="142.5" width="288" height="366.5"/>
+                                <rect key="frame" x="16" y="146.5" width="288" height="362.5"/>
                                 <color key="backgroundColor" white="0.0" alpha="0.0" colorSpace="calibratedWhite"/>
                                 <prototypes>
                                     <tableViewCell clipsSubviews="YES" contentMode="scaleToFill" selectionStyle="blue" hidesAccessoryWhenEditing="NO" indentationLevel="1" indentationWidth="0.0" reuseIdentifier="SongCell" id="WVl-oU-WBb" customClass="SongTableViewCell" customModule="SoTube" customModuleProvider="target">
@@ -1611,13 +1611,13 @@
                                             <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGA-3g-Jim">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGA-3g-Jim">
                                                     <rect key="frame" x="8" y="8" width="131" height="27.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
                                                     <nil key="highlightedColor"/>
                                                 </label>
-                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pzb-sP-JiY">
+                                                <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Artist" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="Pzb-sP-JiY">
                                                     <rect key="frame" x="149" y="8" width="85" height="27.5"/>
                                                     <fontDescription key="fontDescription" type="system" pointSize="14"/>
                                                     <nil key="textColor"/>
@@ -1690,13 +1690,13 @@
                                 <textInputTraits key="textInputTraits"/>
                             </searchBar>
                             <pickerView contentMode="scaleToFill" translatesAutoresizingMaskIntoConstraints="NO" id="Wug-yA-JbP">
-                                <rect key="frame" x="73" y="99" width="89" height="38.5"/>
+                                <rect key="frame" x="73" y="99" width="128" height="42.5"/>
                                 <connections>
                                     <outlet property="delegate" destination="uS8-Hq-Lct" id="N0Z-ez-56K"/>
                                 </connections>
                             </pickerView>
                             <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Sort by: " textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="jNN-4Q-blB">
-                                <rect key="frame" x="16" y="110" width="51.5" height="16"/>
+                                <rect key="frame" x="16" y="112" width="51.5" height="16"/>
                                 <fontDescription key="fontDescription" type="system" pointSize="13"/>
                                 <nil key="textColor"/>
                                 <nil key="highlightedColor"/>
@@ -1715,7 +1715,7 @@
                             <constraint firstItem="K0o-WH-yRm" firstAttribute="width" secondItem="E6t-Ud-Zcy" secondAttribute="width" id="G2K-CI-gGe"/>
                             <constraint firstItem="tT3-4x-EOl" firstAttribute="centerX" secondItem="E6t-Ud-Zcy" secondAttribute="centerX" id="GaD-gP-My8"/>
                             <constraint firstItem="tT3-4x-EOl" firstAttribute="centerY" secondItem="E6t-Ud-Zcy" secondAttribute="centerY" id="IQG-ya-TL3"/>
-                            <constraint firstItem="Wug-yA-JbP" firstAttribute="width" secondItem="KT0-o7-5dD" secondAttribute="width" multiplier="1:3.6" id="J9K-Fu-31Z"/>
+                            <constraint firstItem="Wug-yA-JbP" firstAttribute="width" secondItem="KT0-o7-5dD" secondAttribute="width" multiplier="1:2.5" id="J9K-Fu-31Z"/>
                             <constraint firstItem="tT3-4x-EOl" firstAttribute="height" secondItem="E6t-Ud-Zcy" secondAttribute="height" multiplier="0.4" id="Nul-st-1z1"/>
                             <constraint firstItem="at0-CC-3xd" firstAttribute="centerY" secondItem="KT0-o7-5dD" secondAttribute="centerY" id="PBE-aU-IEY"/>
                             <constraint firstItem="Qas-Hh-KfM" firstAttribute="top" secondItem="sMQ-IR-ybh" secondAttribute="bottom" constant="10" id="SVc-rw-678"/>
@@ -1734,7 +1734,7 @@
                             <constraint firstItem="xu0-Fb-g9Y" firstAttribute="leading" secondItem="KT0-o7-5dD" secondAttribute="leading" id="mee-x0-EmE"/>
                             <constraint firstItem="xu0-Fb-g9Y" firstAttribute="top" secondItem="KT0-o7-5dD" secondAttribute="top" id="scA-dh-RNS"/>
                             <constraint firstItem="X2e-ct-uIF" firstAttribute="top" secondItem="xu0-Fb-g9Y" secondAttribute="bottom" id="uFk-OD-0f4"/>
-                            <constraint firstItem="Wug-yA-JbP" firstAttribute="width" secondItem="Wug-yA-JbP" secondAttribute="height" multiplier="2.3:1" id="uqg-T0-Wo7"/>
+                            <constraint firstItem="Wug-yA-JbP" firstAttribute="width" secondItem="Wug-yA-JbP" secondAttribute="height" multiplier="3:1" id="uqg-T0-Wo7"/>
                             <constraint firstItem="tT3-4x-EOl" firstAttribute="width" secondItem="E6t-Ud-Zcy" secondAttribute="width" multiplier="0.4" id="vEt-C5-CEv"/>
                             <constraint firstItem="Wug-yA-JbP" firstAttribute="top" secondItem="X2e-ct-uIF" secondAttribute="bottom" id="wKr-Kg-hHV"/>
                             <constraint firstItem="E6t-Ud-Zcy" firstAttribute="height" secondItem="KT0-o7-5dD" secondAttribute="height" multiplier="0.05" id="wc4-tf-Yz1"/>
@@ -1942,8 +1942,8 @@
         <image name="wishlist_blue_" width="35" height="36"/>
     </resources>
     <inferredMetricsTieBreakers>
-        <segue reference="vHY-iE-ELE"/>
-        <segue reference="j1g-u1-zEs"/>
-        <segue reference="tpj-gN-ERD"/>
+        <segue reference="ebZ-Xv-MAE"/>
+        <segue reference="Def-eb-XHu"/>
+        <segue reference="bey-pH-39d"/>
     </inferredMetricsTieBreakers>
 </document>
