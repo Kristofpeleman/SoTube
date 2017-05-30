@@ -288,8 +288,8 @@ class LogInViewController: UIViewController {
     
     func seperateImages(){
         UIView.animate(withDuration: 1, animations: {
-            self.iconTopImageView.center.y -= 150
-            self.iconBottomImageView.center.y += 150
+            self.iconTopImageView.center.y -= self.view.frame.width / 2
+            self.iconBottomImageView.center.y += self.view.frame.width / 2
             print("in animate")
         }
         )
