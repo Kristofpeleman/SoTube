@@ -369,21 +369,22 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
                 // Change "logInButton"'s title to "Log in"
                 logInButton.title = "Log in"
                 
-                shared.player?.setRepeat(.off,
-                                         callback: {(
-                                            error) in
-                                            if error != nil {
-                                                print("Resetting repeater")
-                                            }
-                })
-                shared.player?.setIsPlaying(false,
-                                            callback: {
-                                                (error) in
+                if shared.player != nil {
+                    shared.player?.setRepeat(.off,
+                                             callback: {(
+                                                error) in
                                                 if error != nil {
-                                                    print("Not pausing")
+                                                    print("Resetting repeater")
                                                 }
-                })
-                
+                    })
+                    shared.player?.setIsPlaying(false,
+                                                callback: {
+                                                    (error) in
+                                                    if error != nil {
+                                                        print("Not pausing")
+                                                    }
+                    })
+                }
                 shared.backGroundImage = "black_white_background"
                 
                 // Leave the function with the return and don't perform the segue

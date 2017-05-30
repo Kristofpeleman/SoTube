@@ -225,28 +225,29 @@ class AccountViewController: TopMediaViewController, LoginViewControllerDelegate
                 
                 // Since the value isn't in FireBase anymore, we must delete it localy
                 self.shared.user = nil
-
+                
                 // Change "logInButton"'s title to "Log in"
                 loginButton.title = "Log in"
                 self.userNameLabel.text = "NO USER"
                 self.emailAddressLabel.text = "NO USER"
                 self.pointsLabel.text = "NO USER"
                 
-                shared.player?.setRepeat(.off,
-                                         callback: {(
-                                            error) in
-                                            if error != nil {
-                                                print("Resetting repeater")
-                                            }
-                })
-                shared.player?.setIsPlaying(false,
-                                            callback: {
-                                                (error) in
+                if shared.player != nil {
+                    shared.player?.setRepeat(.off,
+                                             callback: {(
+                                                error) in
                                                 if error != nil {
-                                                    print("Not pausing")
+                                                    print("Resetting repeater")
                                                 }
-                })
-                
+                    })
+                    shared.player?.setIsPlaying(false,
+                                                callback: {
+                                                    (error) in
+                                                    if error != nil {
+                                                        print("Not pausing")
+                                                    }
+                    })
+                }
                 // Leave the function with the return and don't perform the segue
                 return false
             }
