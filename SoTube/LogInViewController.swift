@@ -207,30 +207,29 @@ class LogInViewController: UIViewController {
                                 // Update FireBase Users IN CASE OF A NEW USER
                                 // Create reference to "Users" in firebase
                                 let existingUsersReference = FIRDatabase.database().reference(withPath: "Users")
+
                                 
-                                existingUsersReference.observe(.value, with: {snapshot in
+                                existingUsersReference.observe(.value , with: {snapshot in
                                     
                                     if !snapshot.hasChild(currentUser.uid) {
                                         
                                         let user: [String : Any] = ["userName": currentUser.displayName!, "emailAddress": currentUser.email!, "points": 20]
                                         let thisUserReference = existingUsersReference.child(currentUser.uid)
                                         thisUserReference.setValue(user)
+                                        
+                                        sleep(2)
+                                        
+                                        thisUserReference.observe(.value, with: {snapshot in
+                                            
+                                            let user = User(with: snapshot)
+                                            self.delegate?.setUser(user)
+                                            
+                                        })
                                     }
                                     self.activityIndicator.stopAnimating()
                                 })
                                 
                                 sleep(1)
-
-                                // Setting userID and userReference in the delegate
-                                
-                                let thisUserReference = existingUsersReference.child(currentUser.uid)
-                                
-                                thisUserReference.observe(.value, with: {snapshot in
-                                    
-                                        let user = User(with: snapshot)
-                                        self.delegate?.setUser(user)
-
-                                })
                                 sleep(1)
                                 
                                 
