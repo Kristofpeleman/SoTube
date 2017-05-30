@@ -1,11 +1,11 @@
-<?xml version="1.0" encoding="UTF-8" standalone="no"?>
-<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="11761" systemVersion="15F34" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hGK-qc-P1j">
+<?xml version="1.0" encoding="UTF-8"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.Storyboard.XIB" version="3.0" toolsVersion="12120" systemVersion="16F73" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES" colorMatched="YES" initialViewController="hGK-qc-P1j">
     <device id="retina4_0" orientation="portrait">
         <adaptation id="fullscreen"/>
     </device>
     <dependencies>
         <deployment identifier="iOS"/>
-        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="11757"/>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="12088"/>
         <capability name="Aspect ratio constraints" minToolsVersion="5.1"/>
         <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
         <capability name="Constraints with non-1.0 multipliers" minToolsVersion="5.1"/>
@@ -98,7 +98,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="fN2-l4-Q9r" id="V7S-lR-i2x">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" minimumFontSize="8" translatesAutoresizingMaskIntoConstraints="NO" id="WJq-kR-GEi">
@@ -267,7 +267,7 @@
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                     </view>
                     <connections>
-                        <segue destination="vnE-1c-72W" kind="presentation" identifier="initialSegue" modalTransitionStyle="crossDissolve" id="pxG-ub-oIB"/>
+                        <segue destination="vnE-1c-72W" kind="presentation" identifier="initialSegue" animates="NO" modalTransitionStyle="crossDissolve" id="pxG-ub-oIB"/>
                     </connections>
                 </viewController>
                 <placeholder placeholderIdentifier="IBFirstResponder" id="5Z6-9x-Vna" userLabel="First Responder" sceneMemberID="firstResponder"/>
@@ -286,8 +286,8 @@
                         <rect key="frame" x="0.0" y="0.0" width="320" height="568"/>
                         <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
                         <subviews>
-                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SoTubeLogo" translatesAutoresizingMaskIntoConstraints="NO" id="ayw-Iq-cva">
-                                <rect key="frame" x="0.0" y="20" width="320" height="548"/>
+                            <imageView userInteractionEnabled="NO" contentMode="scaleAspectFit" horizontalHuggingPriority="251" verticalHuggingPriority="251" image="SoTubeLogoTest" translatesAutoresizingMaskIntoConstraints="NO" id="ayw-Iq-cva">
+                                <rect key="frame" x="-1.5" y="0.0" width="323" height="568"/>
                             </imageView>
                             <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" buttonType="roundedRect" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="6cV-01-xOd">
                                 <rect key="frame" x="16" y="411" width="288" height="30"/>
@@ -300,14 +300,14 @@
                         </subviews>
                         <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
                         <constraints>
-                            <constraint firstAttribute="trailingMargin" secondItem="ayw-Iq-cva" secondAttribute="trailing" constant="-16" id="48J-I0-5tz"/>
-                            <constraint firstItem="ayw-Iq-cva" firstAttribute="top" secondItem="XLQ-rv-E3d" secondAttribute="bottom" id="Ccd-Fw-KuL"/>
-                            <constraint firstItem="ayw-Iq-cva" firstAttribute="leading" secondItem="8Td-Gh-oyh" secondAttribute="leadingMargin" constant="-16" id="DWm-m9-8XT"/>
+                            <constraint firstItem="ayw-Iq-cva" firstAttribute="centerX" secondItem="8Td-Gh-oyh" secondAttribute="centerX" id="BUi-3c-A5J"/>
                             <constraint firstItem="6cV-01-xOd" firstAttribute="trailing" secondItem="8Td-Gh-oyh" secondAttribute="trailingMargin" id="NrP-To-15Z"/>
-                            <constraint firstItem="P3o-XQ-dmV" firstAttribute="top" secondItem="ayw-Iq-cva" secondAttribute="bottom" id="Opf-Oy-jyL"/>
                             <constraint firstItem="6cV-01-xOd" firstAttribute="centerX" secondItem="8Td-Gh-oyh" secondAttribute="centerX" id="PZA-G3-L3d"/>
+                            <constraint firstItem="ayw-Iq-cva" firstAttribute="centerY" secondItem="8Td-Gh-oyh" secondAttribute="centerY" id="c9z-xc-7na"/>
+                            <constraint firstItem="ayw-Iq-cva" firstAttribute="width" secondItem="8Td-Gh-oyh" secondAttribute="width" constant="3" id="haL-9M-uWs"/>
                             <constraint firstItem="6cV-01-xOd" firstAttribute="leading" secondItem="8Td-Gh-oyh" secondAttribute="leadingMargin" id="hiQ-y4-Ts9"/>
                             <constraint firstItem="6cV-01-xOd" firstAttribute="centerY" secondItem="8Td-Gh-oyh" secondAttribute="centerY" multiplier="1.5" id="iog-8i-Z5n"/>
+                            <constraint firstItem="ayw-Iq-cva" firstAttribute="height" secondItem="8Td-Gh-oyh" secondAttribute="height" id="psw-62-224"/>
                         </constraints>
                     </view>
                     <connections>
@@ -388,7 +388,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="ynV-sX-mn4" id="Bai-XG-1cN">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="oPZ-gL-WLX">
@@ -906,7 +906,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="tAI-5O-pyb" id="br8-1O-eM6">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="44"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="Song Title" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="JzE-WR-qW1">
@@ -1072,7 +1072,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="A51-ff-tFC" id="ISE-75-wfI">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="E9v-AI-ve2">
@@ -1607,7 +1607,7 @@
                                         <rect key="frame" x="0.0" y="28" width="288" height="44"/>
                                         <autoresizingMask key="autoresizingMask"/>
                                         <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="WVl-oU-WBb" id="Aax-UO-TYm">
-                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43.5"/>
+                                            <rect key="frame" x="0.0" y="0.0" width="288" height="43"/>
                                             <autoresizingMask key="autoresizingMask"/>
                                             <subviews>
                                                 <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" text="SongTitle" textAlignment="natural" lineBreakMode="tailTruncation" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="XGA-3g-Jim">
@@ -1924,7 +1924,7 @@
     <resources>
         <image name="SoTubeIconBottom" width="1000" height="508"/>
         <image name="SoTubeIconTop" width="1000" height="497"/>
-        <image name="SoTubeLogo" width="1670" height="696"/>
+        <image name="SoTubeLogoTest" width="644" height="1136"/>
         <image name="TabBarIcon_me_selected" width="164" height="158"/>
         <image name="TabBarIcon_points2_selected" width="51" height="53"/>
         <image name="TabBarIcon_shoppingBasket_blue" width="158" height="162"/>
@@ -1942,7 +1942,7 @@
     </resources>
     <inferredMetricsTieBreakers>
         <segue reference="ebZ-Xv-MAE"/>
-        <segue reference="Def-eb-XHu"/>
         <segue reference="bey-pH-39d"/>
+        <segue reference="Def-eb-XHu"/>
     </inferredMetricsTieBreakers>
 </document>
