@@ -27,7 +27,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     // calculated property to limit the absolute total number of songs the Tableview will display
     
     var tableViewTotalSongLimit: Int {
-        return self.tableViewInitialSongLimit * 10
+        return self.tableViewInitialSongLimit * 5
     }
     
     // Created an optional variable "songs"-array containing elements of class "Song"
@@ -248,11 +248,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
             if indexPath.row >= self.songs!.count - 2 && self.songs!.count <= self.tableViewTotalSongLimit {
                 self.offset = songs.count
                 self.getAlbumIDs()
-                if songs.count % (2 * tableViewInitialSongLimit) == 0 {
-                    tableView.reloadData()
-                    stopIndicator()
-                    print("\n\n\n\n\n\(songs.count) SONGS\n\n\n\n\n")
-                }
+                stopIndicator()
             }
         }
         
@@ -283,14 +279,6 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
         // The current position in our array is the row we just clicked on
         shared.currentPositionInList = indexPath.row
         
-        /*
-         let song = self.songs?[currentSongPositionInList]
-         
-         if let _ = song?.fullSongURLAssString {
-         performSegue(withIdentifier: "playerSegue", sender: nil)
-         }*/
-        
-        //playSound(withURL: URL(string: (self.songs?[indexPath.row].previewURLAssString)!)!)
         // Perform the following segue to a new ViewController
         performSegue(withIdentifier: "musicPlayerSegue", sender: self.tableView)
         
@@ -649,6 +637,7 @@ class AllSongsViewController: TopMediaViewController, UITableViewDelegate, UITab
     
     func getAlbumIDs() {
         activityIndicator.startAnimating()
+        tableView.isUserInteractionEnabled = false
         
         self.newReleasesFeed = TopMediaViewModel().getNewReleasesWith(offset: offset, limit: tableViewInitialSongLimit)
         
