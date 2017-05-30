@@ -320,7 +320,6 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
                     destinationVC.currentSongPositionInList = self.shared.currentPositionInList
 
                 }
-                destinationVC.currentUser = self.shared.user
                 
                 if let _ = self.shared.user {
                     
@@ -338,7 +337,6 @@ class MySongsViewController: TopMediaViewController, UITableViewDelegate, UITabl
                 
                 destinationVC.auth = self.auth
                 destinationVC.session = self.session
-                destinationVC.currentUser = self.shared.user
                 
                 let usersReference = rootReference?.child("Users")
                 destinationVC.userReference = usersReference?.child(self.shared.user!.fireBaseID)

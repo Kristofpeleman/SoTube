@@ -26,7 +26,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     var player = Shared.current.player
     
     // Variable which is nil if no user is logged into the app, but which is a User object when a user has logged in successfully
-    var currentUser: User?
+    var shared = Shared.current
     
     // Variable to define how long they can listen to the song if it's a preview
     var previewDuration: Float = 30
@@ -149,7 +149,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     @IBAction func addCurrentSongToBasket(_ sender: UIBarButtonItem) {
         
-        if let currentUser = currentUser {
+        if let currentUser = shared.user {
             
             if let mySongs = currentUser.mySongs, mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                 
@@ -251,7 +251,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
     
     
     @IBAction func addCurrentSongToWishList(_ sender: UIButton) {
-        if let currentUser = currentUser {
+        if let currentUser = shared.user {
             
             if let mySongs = currentUser.mySongs, mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                 
@@ -309,7 +309,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 songInWishListReference.setValue(songValues)
                 
                 let alertController = UIAlertController(title: "Confirmation",
-                                                        message: "Song added to your wishlist",
+                                                        message: "Song added to your wishlist.",
                                                         preferredStyle: .alert
                 )
                 
@@ -325,14 +325,26 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             
         }
         else {
-            print("COULDN'T PRINT USER")
+            let alertController = UIAlertController(title: "Log in",
+                                                      message: "You need to log in before you can add a song to your wishlist.",
+                                                      preferredStyle: .alert
+            )
+            
+            let okAction = UIAlertAction(title: "OK",
+                                         style: .cancel,
+                                         handler: nil
+            )
+            
+            alertController.addAction(okAction)
+            
+            present(alertController, animated: true, completion: nil)
             return
         }
     }
     
     
     @IBAction func setSongAsFavorite(_ sender: UIButton) {
-        if let currentUser = currentUser {
+        if let currentUser = shared.user {
             
             if let mySongs = currentUser.mySongs, mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                 
@@ -362,7 +374,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     self.favoriteButtonImage.image = UIImage(named: "favorites_full")
                     
                     let alertController = UIAlertController(title: "Confirmation",
-                                                            message: "Song added to favorites",
+                                                            message: "Song added to favorites.",
                                                             preferredStyle: .alert
                     )
                     
@@ -380,7 +392,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     self.favoriteButtonImage.image = UIImage(named: "favorites_empty")
                     
                     let alertController = UIAlertController(title: "Confirmation",
-                                                            message: "Song removed from favorites",
+                                                            message: "Song removed from favorites.",
                                                             preferredStyle: .alert
                     )
                     
@@ -398,7 +410,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             
             else {
                 let alertController = UIAlertController(title: "Notification",
-                                                        message: "You can only favorite songs you own",
+                                                        message: "You can only favorite songs you own.",
                                                         preferredStyle: .alert
                 )
                 
@@ -415,8 +427,8 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         }
         
         else {
-            let alertController = UIAlertController(title: "Notification",
-                                                    message: "You need to log in before you can favorite any of your songs",
+            let alertController = UIAlertController(title: "Log in",
+                                                    message: "You need to log in before you can favorite any of your songs.",
                                                     preferredStyle: .alert
             )
             
@@ -483,7 +495,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
             if let currentPlaybackState = player?.playbackState, let _ = songList {
                 
                 // If nobody is logged in OR the song isn't in the "currentUser"'s "mySongs"
-                if let mySongs = currentUser?.mySongs {
+                if let mySongs = shared.user?.mySongs {
                     if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                         // MaximumValue has to be a Float, duration is a Int
                         print("contains")
@@ -721,6 +733,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     print("Pausing")
                 }
             })
+            timer?.invalidate()
             playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
         }
     }
@@ -733,6 +746,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     print("Continue playing")
                 }
             })
+            timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
             playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
         }
     }
@@ -871,10 +885,10 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         // player needs to exist
         if let _ = player {
             var endTime = 0
-            if currentUser == nil {
+            if shared.user == nil {
                 endTime = Int(previewDuration)
             }
-            else if let mySongs = currentUser!.mySongs {
+            else if let mySongs = shared.user?.mySongs {
                 if mySongs.contains(where: {$0.spotify_ID == currentSong.spotify_ID}) {
                     // The duration of our song that is going to play is given inside the class Song
                     endTime = currentSong.duration
@@ -913,8 +927,7 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                 destinationVC.auth = self.auth
                 destinationVC.session = self.session
                 
-                if let _ = currentUser {
-                    destinationVC.currentUser = Shared.current.user
+                if let _ = shared.user {
                     
                     let usersReference = rootReference?.child("Users")
                     destinationVC.userReference = usersReference?.child(Shared.current.user!.fireBaseID)
@@ -932,9 +945,25 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
         switch identifier {
         case "shoppingCartSegue":
             
-            if let _ = currentUser {
+            if let _ = shared.user {
                 return true
-            } else {return false}
+            }
+            else {
+                let alertController = UIAlertController(title: "Log In",
+                                                        message: "You need to log in before you can have a shoppingcart.",
+                                                        preferredStyle: .alert
+                )
+                
+                let okAction = UIAlertAction(title: "OK",
+                                             style: .cancel,
+                                             handler: nil
+                )
+                
+                alertController.addAction(okAction)
+                
+                present(alertController, animated: true, completion: nil)
+                return false
+            }
             
         // If the identifier's value isn't any of the above: perform Segue
         default: return true
