@@ -733,7 +733,6 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     print("Pausing")
                 }
             })
-            timer?.invalidate()
             playOrPauseButton.setImage(#imageLiteral(resourceName: "play"), for: .normal)
         }
     }
@@ -746,7 +745,6 @@ class MusicPlayerViewController: UIViewController, SPTAudioStreamingDelegate, SP
                     print("Continue playing")
                 }
             })
-            timer = Timer.scheduledTimer(timeInterval: 0.5, target: self, selector: #selector(self.musicSliderUpdate), userInfo: nil, repeats: true)
             playOrPauseButton.setImage(#imageLiteral(resourceName: "pause"), for: .normal)
         }
     }
